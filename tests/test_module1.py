@@ -1,6 +1,6 @@
 import unittest
 
-from a9x-webstatistics.module1 import Number
+from a9x_webstatistics.module1 import Number
 
 
 class TestSimple(unittest.TestCase):
