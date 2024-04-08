@@ -28,3 +28,18 @@ jobs:
       - name: Run Tox
         # Run tox using the version of Python in `PATH`
         run: tox -e py
+
+        # .github/workflows/ci-cd.yml
+  pypi-publish:
+    name: Upload release to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/a9x-webstatistics
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+    steps:
+    # retrieve your distributions here
+
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
