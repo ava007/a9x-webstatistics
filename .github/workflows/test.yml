@@ -20,16 +20,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-      - name: Install Tox and any other packages
-        run: pip install tox
-      - name: Run Tox
-        # Run tox using the version of Python in `PATH`
-        run: tox -e py
+
+      - name: Install pypa/build
+        run: >-
+          python3 -m
+          pip install
+          build
+          --user
+      - name: Build a binary wheel and a source tarball
+        run: python3 -m build
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+      # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+      #- name: Install Tox and any other packages
+      #  run: pip install tox
+      #- name: Run Tox
+      # Run tox using the version of Python in `PATH`
+      #  run: tox -e py
 
         # .github/workflows/ci-cd.yml
+
+        
   pypi-publish:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
