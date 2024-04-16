@@ -2,14 +2,12 @@
 
 This package produces web statics and analytical output based on nginx access log files.
 
-[![PyPI package](https://img.shields.io/badge/pip%20install-a9x-webstatistics--pypi--package-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/github/license/ava007/a9x-webstatistics)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
+[![PyPI package](https://img.shields.io/badge/pip%20install-a9x-webstatistics--pypi--package-brightgreen)](https://pypi.org/project/a9x-webstatistics-package/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/github/license/ava007/a9x-webstatistics)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
 
 
 
 ----------------
-
-
-# Example PyPI (Python Package Index) Package & Tutorial / Instruction / Workflow for 2021
+## old content from template starts here
 
 [![PyPI package](https://img.shields.io/badge/pip%20install-example--pypi--package-brightgreen)](https://pypi.org/project/example-pypi-package/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/tomchen/example_pypi_package/releases) [![Actions Status](https://github.com/tomchen/example_pypi_package/workflows/Test/badge.svg)](https://github.com/tomchen/example_pypi_package/actions) [![License](https://img.shields.io/github/license/tomchen/example_pypi_package)](https://github.com/tomchen/example_pypi_package/blob/main/LICENSE)
 
