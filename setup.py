@@ -30,14 +30,12 @@ setuptools.setup(
         'Topic :: Software Development :: Build Tools',
 
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.9',
     # install_requires=['Pillow'],
     extras_require={
         'dev': ['check-manifest'],
