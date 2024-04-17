@@ -7,7 +7,7 @@ import a9x_webstatistics.main
 class TestMain(unittest.TestCase):
 
     def test_main(self):
-        file = pathlib.Path("webstat.json")  
+        file = Path("webstat.json")  
         print("home: " + Path.home() )
         with open(file) as f:  
             input_data = f.read()  
