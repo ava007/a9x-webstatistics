@@ -8,7 +8,7 @@ class TestMain(unittest.TestCase):
 
     def test_main(self):
         file = Path("webstat.json")  
-        print("home: " + Path.home() )
+        print("home: " + str(Path.home()) )
         with open(file) as f:  
             input_data = f.read()  
         #expected = "Jerry was born in 1968"  
