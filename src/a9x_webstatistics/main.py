@@ -46,6 +46,11 @@ def main():
     except json.JSONDecodeError:
         print("-s Json File not valid")
 
+    # write updated statistic file:
+    with open(args.statfile, "w") as sf:
+       json.dump(d,sf)  
+
+
 
 
 if __name__ == "__main__":
