@@ -1,5 +1,5 @@
 import unittest
-import pathlib
+from pathlib import Path
 
 import a9x_webstatistics.main
 
