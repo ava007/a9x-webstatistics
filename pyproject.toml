@@ -4,4 +4,5 @@ build-backend = "setuptools.build_meta"
 # https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
 [project]
+name = "a9x-webstatistics"
 requires-python = ">= 3.9"
