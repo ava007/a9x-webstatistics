@@ -1,8 +1,7 @@
 import unittest
 from pathlib import Path
 
-import a9x_webstatistics
-
+from a9x_webstatistics import main
 
 class TestMain(unittest.TestCase):
 
