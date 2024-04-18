@@ -8,8 +8,8 @@ class TestMain(unittest.TestCase):
 
     def test_main(self):
         print("home: " + str(Path.home()) )
-        # calling main expecting return 0
-        assert main() == 0
+        # calling runws expecting return 0
+        assert runws() == 0
         file = Path("webstat.json")  
         with open(file) as f:  
             input_data = f.read()  
