@@ -2,5 +2,6 @@
 requires = ["setuptools>=46.4.0", "wheel"]
 build-backend = "setuptools.build_meta"
 # https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
-[tool.poetry.dependencies]
-python = "^3.9"
+
+[project]
+requires-python = ">= 3.9"
