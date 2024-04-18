@@ -49,6 +49,7 @@ def main():
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
        json.dump(d,sf)  
+    return 0
 
 
 
