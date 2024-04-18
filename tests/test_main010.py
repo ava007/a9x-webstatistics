@@ -7,7 +7,8 @@ class TestMain010(unittest.TestCase):
 
     def test_main010(self):
         print("home: " + str(Path.home()) )
-        print(str(list(Path.iterdir())))
+        flist = [file.name for file in Path.iterdir()]
+        print(str(flist) )
         # calling runws expecting return 0
         #assert runws() == 0
         #file = Path("webstat.json")  
