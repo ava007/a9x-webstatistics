@@ -25,7 +25,7 @@ def runws():
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="/var/log/nginx-access.json")
     args, unknown = parser.parse_known_args()
 
-    # init statistic file:
+    # init statistic file if it does not exists:
     d = {}
     d['timelastrec'] = '19991231235959'
     d['days'] = {}
@@ -35,9 +35,9 @@ def runws():
         f = open(args.statfile) 
         d = json.load(f) 
     except FileNotFoundError:   # first call: file does not exists
-        print("-s Statisticfile not found, it will be created")
+        print("-s statistic file not found, it will be automatically created")
     except json.JSONDecodeError:
-        print("-s Json File not valid")
+        print("-s json file is not valid")
 
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
