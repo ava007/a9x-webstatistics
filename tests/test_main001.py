@@ -14,7 +14,7 @@ class TestMain(unittest.TestCase):
             file_data = f.read()  
         print(str(file_data))
         contents = json.loads(file_data)
-        assert any('timelastrec' == '19991231235959' for i in contents)
+        assert '19991231235959' in contents['timelastrec']
 
 if __name__ == '__main__':
     unittest.main()
