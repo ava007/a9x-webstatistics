@@ -11,8 +11,10 @@ class TestMain(unittest.TestCase):
         assert runws() == 0
         file = Path("webstat.json")  
         with open(file) as f:  
-            input_data = f.read()  
-        assert timelastrec(input_data) == '19991231235959'
+            file_data = f.read()  
+        print(str(file_data))
+        contents = json.loads(file_data)
+        assert any('timelastrec' == '19991231235959' for i in contents)
 
 if __name__ == '__main__':
     unittest.main()
