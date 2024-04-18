@@ -25,13 +25,6 @@ def runws():
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="/var/log/nginx-access.json")
     args, unknown = parser.parse_known_args()
 
-    if args.cmd == "crtstats":
-        parser.print_help()
-    elif args.cmd == "crtissues":
-        parser.print_help()
-    else:
-        parser.print_help()
-
     # init statistic file:
     d = {}
     d['timelastrec'] = '19991231235959'
@@ -50,9 +43,6 @@ def runws():
     with open(args.statfile, "w") as sf:
        json.dump(d,sf)  
     return 0
-
-
-
 
 if __name__ == "__main__":
     runws()
