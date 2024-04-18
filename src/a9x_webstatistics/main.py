@@ -19,7 +19,7 @@ def detectDeviceClass(ua):
      return 'tablet'
   return 'desktop'
 
-def main():
+def runws():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="/var/log/nginx-access.json")
@@ -55,4 +55,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    runws()
