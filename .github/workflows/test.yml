@@ -51,8 +51,10 @@ jobs:
       - name: Run Tox
       # Run tox using the version of Python in `PATH`
         run: |
-          echo "HOME"
+          echo "HOME is:"
           echo $HOME
+          ls -latr
+          cp .github/tests/test_access.log $HOME/nginx_access.log
           tox -e py
         
 
