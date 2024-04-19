@@ -5,13 +5,16 @@ def parseRec(rec):
     print(str(rec))
 
     r = {}
+    if r[0:1] == '#':
+        return r
     # find ipv4 address:
-    ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', s )
+    ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', rec )
     # find ipv6 address:
     if ip is None:
-      ip = re.findall(r'((([0-9a-fA-F]){1,4})\\:){7}([0-9a-fA-F]){1,4}', s)
+      ip = re.findall(r'((([0-9a-fA-F]){1,4})\\:){7}([0-9a-fA-F]){1,4}', rec)
     print(str(ip))
     r['ip'] = ip[0]
+    return r
 
 
 def detectDeviceClass(ua):
@@ -56,7 +59,7 @@ def runws():
     # process infile:
     with open(args.infile,'r') as infile:
         for rec in infile:
-            parseRec(rec)
+            rs = parseRec(rec)
 
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
