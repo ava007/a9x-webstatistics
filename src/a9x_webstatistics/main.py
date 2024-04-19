@@ -5,7 +5,7 @@ def parseRec(rec):
     print(str(rec))
 
     r = {}
-    if r[0:1] == '#':
+    if rec[0:1] == '#':
         return r
     # find ipv4 address:
     ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', rec )
