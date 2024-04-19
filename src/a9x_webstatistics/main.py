@@ -1,5 +1,9 @@
 import io, sys, argparse, json, ast
 
+def parseRec(rec):
+    print(str(rec))
+
+
 def detectDeviceClass(ua):
   if ua is None:
      return 'desktop'
@@ -38,6 +42,11 @@ def runws():
         print("-s statistic file not found, it will be automatically created")
     except json.JSONDecodeError:
         print("-s json file is not valid")
+
+    # process infile:
+    with open(args.infile,'r') as infile:
+        for rec in infile:
+            parseRec(rec)
 
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
