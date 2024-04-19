@@ -6,6 +6,7 @@ from a9x_webstatistics.main import *
 class TestMain010(unittest.TestCase):
 
     def test_main010(self):
+        print("current dir: " + Path.cwd()) 
         print("home: " + str(Path.home()) )
         p = Path('.')
         [x for x in p.iterdir() if x.is_dir()]
