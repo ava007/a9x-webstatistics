@@ -1,6 +1,6 @@
 import io, sys, argparse, json
 import re
-from dateutil import parser
+
 
 def parseRec(rec):
     print(str(rec))
@@ -10,9 +10,9 @@ def parseRec(rec):
     if rec[0:1] == '#':
         return r
 
-    # get date and time
-    dattim = parser.parse(rec, fuzzy=True)
-    print("Date and Time is: " + str(dattim))
+    # get date and time:  19/Apr/2024:14:49:22 +0000
+    dt = re.match('(\d{2})[/.-](\d{3})[/.-](\d{4})[:][\d{2}][:](\d{2})', rec)
+    print("Date and Time is: " + str(dt))
     
 
     # get ip address:
