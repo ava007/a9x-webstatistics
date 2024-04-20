@@ -5,6 +5,7 @@ def parseRec(rec):
     print(str(rec))
 
     r = {}
+    # skip comments recs
     if rec[0:1] == '#':
         return r
 
@@ -28,7 +29,8 @@ def parseRec(rec):
     '''
     ip4 =   '(?:[12]?\\d?\\d\\.){3}[12]?\\d?\\d'
      
-    ip = re.findall(ip4 + '|' + ip6, rec)
+    #ip = re.findall(ip4 + '|' + ip6, rec)
+    ip = re.findall(ip6, rec)
     print(str(ip))
     r['ip'] = ip[0]
     return r
