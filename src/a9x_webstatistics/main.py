@@ -11,7 +11,8 @@ def parseRec(rec):
         return r
 
     # get date and time:  19/Apr/2024:14:49:22 +0000
-    dt = re.search('(\d{2})[/.-](\d{3})[/.-](\d{4})[:](\d{2})[:](\d{2})[:](\d{2})$', rec)
+    dtcomp = re.compile('(\d{2})[/.-](\d{3})[/.-](\d{4})[:](\d{2})[:](\d{2})[:](\d{2})$')
+    dt = dtcomp.match(rec)
     print("Date and Time is: " + str(dt))
     
 
