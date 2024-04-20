@@ -1,5 +1,6 @@
 import io, sys, argparse, json
 import re
+from datetime import datetime
 
 
 def parseRec(rec):
@@ -11,10 +12,10 @@ def parseRec(rec):
         return r
 
     # get date and time:  19/Apr/2024:14:49:22 +0000
-    dtcomp = re.compile('\d{2}[/.-]\d{3}[/.-]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
+    dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
-    print("Date and Time is: " + str(dt))
-    
+    dto = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S %z')
+    print("Date and Time is: " + str(dt2))
 
     # get ip address:
     ip6 =   '''(?:(?x)(?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,6})|
