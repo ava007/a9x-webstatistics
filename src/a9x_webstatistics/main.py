@@ -15,7 +15,7 @@ def parseRec(rec):
     dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
     dto = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
-    print("Date and Time is: " + str(dt2))
+    print("Date and Time is: " + str(dto))
 
     # get ip address:
     ip6 =   '''(?:(?x)(?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,6})|
