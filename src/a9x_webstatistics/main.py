@@ -31,8 +31,11 @@ def parseRec(rec):
      
     #ip = re.findall(ip4 + '|' + ip6, rec)
     ip = re.findall(ip6, rec)
-    print(str(ip))
-    r['ip'] = ip[0]
+    if ip is None:
+        print("IP not detected in: " + rec")
+    else:
+        print(str(ip))
+        r['ip'] = ip[0]
     return r
 
 
