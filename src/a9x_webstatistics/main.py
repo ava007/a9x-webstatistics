@@ -14,7 +14,7 @@ def parseRec(rec):
     # get date and time:  19/Apr/2024:14:49:22 +0000
     dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
-    dto = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S %z')
+    dto = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
     print("Date and Time is: " + str(dt2))
 
     # get ip address:
