@@ -1,5 +1,8 @@
-import io, sys, argparse, json
+import argparse
+import io
+import json
 import re
+import sys
 from datetime import datetime
 
 def parseRec(rec):
@@ -70,7 +73,7 @@ def runws():
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
     args, unknown = parser.parse_known_args()
 
-    # init statistic file if it does not exists:
+    # init statistic file if it does not exist:
     d = {}
     d['timelastrec'] = '19991231235959'
     d['days'] = {}
@@ -97,8 +100,8 @@ def runws():
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
                 continue
-            d['timelastrec'] = recparsed['dt'].strftime("%Y%m%d%H%M%S")
-
+            d = upd(d, recparsed)
+            
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
        json.dump(d,sf)  
