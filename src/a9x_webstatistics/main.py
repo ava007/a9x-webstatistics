@@ -100,7 +100,7 @@ def runws():
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
                 continue
-            d = upd(d, recparsed)
+            d = updatestatistics.upd(d, recparsed)
             
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
