@@ -2,6 +2,8 @@ import unittest
 from pathlib import Path
 
 from a9x_webstatistics.main import *
+from a9x_webstatistics.updatestatistics import *
+
 
 class TestMain010(unittest.TestCase):
 
