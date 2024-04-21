@@ -14,5 +14,6 @@ def upd(
 
     # update statistics
     d['days'][dt]['hits'] = d['days'][dt]['hits'] + 1
+    d['timelastrec'] = i['dt'].strftime("%Y%m%d%H%M%S")
         
     return d
