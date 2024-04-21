@@ -91,6 +91,7 @@ def runws():
     except json.JSONDecodeError:
         print("-s json file is not valid")
 
+    visitIP = {}
     # process infile:
     with open(args.infile,'r') as infile:
         for rec in infile:
@@ -101,7 +102,7 @@ def runws():
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
                 continue
-            d = upd(d, recparsed)
+            d = upd(d, recparsed, visitIP)
             
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
