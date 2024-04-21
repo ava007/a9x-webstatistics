@@ -14,8 +14,7 @@ def parseRec(rec):
     # get date and time:  19/Apr/2024:14:49:22 +0000
     dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
-    dto = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
-    print("Date and Time is: " + str(dto))
+    r['dt'] = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
 
     # get ip address:
     ip6 =   '''(?:(?x)(?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,6})|
@@ -78,6 +77,9 @@ def runws():
     d['timelastrec'] = '19991231235959'
     d['days'] = {}
 
+    lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
+    print("lasttimerecobj: " + str(lasttimerecobj))
+
     # load statistic file if it exists
     try:
         f = open(args.statfile) 
@@ -91,6 +93,13 @@ def runws():
     with open(args.infile,'r') as infile:
         for rec in infile:
             recparsed = parseRec(rec)
+            # skip unrecognized records:
+            if recparsed['dt'] is None or recparsed['ip'] is None:
+                continue
+            # skip already processed data:
+            if recparsed['dt']  <=  lasttimerecobj:
+                continue
+            d['timelastrec'] = recparsed['dt'].strftime("%Y%m%d%H%M%S")
 
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
