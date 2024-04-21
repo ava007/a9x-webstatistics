@@ -51,7 +51,7 @@ jobs:
       - name: Run Tox
       # Run tox using the version of Python in `PATH`
         run: |
-          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access.log -o nginx_access.log
+          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month01.log -o nginx_access.log
           ls -latr
           tox -e py
         # .github/workflows/ci-cd.yml
