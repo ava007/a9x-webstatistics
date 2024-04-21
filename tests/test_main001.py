@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from a9x_webstatistics.main import *
-from a9x_webstatistics.updatestatistics import *
+from a9x_webstatistics.updatestatistics import upd
 
 class TestMain(unittest.TestCase):
 
