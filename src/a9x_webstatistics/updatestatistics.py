@@ -1,6 +1,6 @@
 def upd(
     d,
-    i
+    i,
     visitIP):
         
     dt = i['dt'].strftime("%Y%m%d")
