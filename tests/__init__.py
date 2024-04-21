@@ -1,2 +1,1 @@
-from .main import *
-from .updatestatistics import upc
+from webstatistics.updatestatistics import upc
