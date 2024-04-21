@@ -94,7 +94,7 @@ def runws():
         for rec in infile:
             recparsed = parseRec(rec)
             # skip unrecognized records:
-            if recparsed['dt'] is None or recparsed['ip'] is None:
+            if not recparsed or recparsed['dt'] is None or recparsed['ip'] is None:
                 continue
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
