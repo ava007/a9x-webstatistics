@@ -1,7 +1,7 @@
 import io, sys, argparse, json
 import re
 from datetime import datetime
-import update_statistics
+import updatestatistics
 
 
 def parseRec(rec):
