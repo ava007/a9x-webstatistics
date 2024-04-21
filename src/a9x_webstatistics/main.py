@@ -4,7 +4,6 @@ import json
 import re
 import sys
 from datetime import datetime
-from updatestatistics import upd
 
 def parseRec(rec):
     print(str(rec))
