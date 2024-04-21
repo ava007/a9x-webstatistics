@@ -4,6 +4,7 @@ import json
 import re
 import sys
 from datetime import datetime
+from updatestatistics import upd
 
 def parseRec(rec):
     print(str(rec))
@@ -100,7 +101,7 @@ def runws():
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
                 continue
-            d = updatestatistics.upd(d, recparsed)
+            d = upd(d, recparsed)
             
     # write updated statistic file:
     with open(args.statfile, "w") as sf:
