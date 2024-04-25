@@ -40,7 +40,7 @@ def parseRec(rec, log_pattern):
     # get date and time:  19/Apr/2024:14:49:22 +0000
     dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
-    r['dt'] = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
+    r['timestamp'] = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
 
     # get ip address:
     ip6 =   '''(?:(?x)(?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,6})|
@@ -128,7 +128,7 @@ def runws():
             if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
                 continue
             # skip already processed data:
-            if recparsed['dt']  <=  lasttimerecobj:
+            if recparsed['timestamp']  <=  lasttimerecobj:
                 continue
             d = upd(d, recparsed, visitIP)
             
