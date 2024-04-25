@@ -15,6 +15,13 @@ def upd(
 
     # update statistics
     d['days'][dt]['hits'] = d['days'][dt]['hits'] + 1
+    d['days'][dt]['size'] = d['days'][dt]['size'] + i['bytes_sent']
+
+    if i['status'] in d['days'][dt]['serverResponseCode']:
+        d['days'][dt]['serverResponseCode'][i['status']] += 1
+    else:
+        d['days'][dt]['serverResponseCode'][i['status']] = 1
+        
     d['timelastrec'] = i['timestamp']
 
     if i['ip'] not in visitIP:
