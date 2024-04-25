@@ -24,7 +24,7 @@ def parseRec(rec, log_pattern):
         referer = match.group(6)
         user_agent = match.group(7)
 
-        dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z'),  # 07/Jan/2024:14:06:24 +0000
+        dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
         r = {
             'ip': ip_address,
