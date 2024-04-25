@@ -2,3 +2,5 @@
 2a02:6b8:c10:379e:0:492c:e041:0 - - [09/Jan/2024:05:00:11 +0000] "GET /knowledge/view/7faaafbc-f289-4155-acc7-ff8413b98631/ HTTP/1.1" 200 3018 "-" "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"
 # IPv6  Mobile client
 2001:4860:4801:37::5 - - [30/Jan/2024:14:49:22 +0000] "GET /kl/view/f9d3f8c6-bd68-4f52-a8b3-58cc0087c82e/ HTTP/1.1" 200 3058 "-" "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.94 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+# IPv4
+192.168.0.164 - - [27/May/2023:11:12:51 +0200] "GET /andre HTTP/1.1" 401 1229 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0"
