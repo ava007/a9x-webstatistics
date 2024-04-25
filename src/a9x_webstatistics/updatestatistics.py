@@ -10,12 +10,12 @@ def upd(
         d['days'][dt] = {}
         d['days'][dt]['hits']    = 0;
         d['days'][dt]['visits']  = 0;
-        d['days'][dt]['size']    = 0;
+        d['days'][dt]['bytes_sent'] = 0;
         d['days'][dt]['serverResponseCode'] = {}
 
     # update statistics
     d['days'][dt]['hits'] = d['days'][dt]['hits'] + 1
-    d['days'][dt]['size'] = d['days'][dt]['size'] + i['bytes_sent']
+    d['days'][dt]['bytes_sent'] = str(int(d['days'][dt]['bytes_sent']) + int(i['bytes_sent']))
 
     if i['status'] in d['days'][dt]['serverResponseCode']:
         d['days'][dt]['serverResponseCode'][i['status']] += 1
