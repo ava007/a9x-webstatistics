@@ -19,7 +19,7 @@ def parseRec(rec, log_pattern):
         ip_address = match.group(1)
         timestamp = match.group(2)
         request = match.group(3)
-        status_code = match.group(4)
+        status = match.group(4)
         bytes_sent = match.group(5)
         referer = match.group(6)
         user_agent = match.group(7)
@@ -31,7 +31,7 @@ def parseRec(rec, log_pattern):
             'ymd': dto.strftime("%Y%m%d"),
             'timestamp': dto.strftime("%Y%m%d%H%M%S") ,
             'request': request,
-            'status_code': status_code,
+            'status': status,
             'bytes_sent': bytes_sent,
             'referer': referer,
             'user_agent': user_agent
