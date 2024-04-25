@@ -28,7 +28,7 @@ def parseRec(rec, log_pattern):
                 
         r = {
             'ip': ip_address,
-            'timestamp': datetime.strptime(dt,"%Y%m%d%H%M%S")
+            'timestamp': datetime.strptime(dt,"%Y%m%d%H%M%S"),
             'request': request,
             'status_code': status_code,
             'bytes_sent': bytes_sent,
