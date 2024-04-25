@@ -128,7 +128,7 @@ def runws():
             if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
                 continue
             # skip already processed data:
-            if recparsed['timestamp']  <=  lasttimerecobj:
+            if recparsed['timestamp']  <=  d['timelastrec']:
                 continue
             d = upd(d, recparsed, visitIP)
             
