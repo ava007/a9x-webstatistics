@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 
-def parseRec(rec):
+def parseRec(rec, log_pattern):
     print(str(rec))
 
     r = {}
