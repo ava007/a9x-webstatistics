@@ -3,7 +3,7 @@ def upd(
     i,
     visitIP):
         
-    dt = i['timestamp'].strftime("%Y%m%d")
+    dt = i['ymd']
 
     # init a new day with minimal attributes:
     if dt not in d['days']:
@@ -15,7 +15,7 @@ def upd(
 
     # update statistics
     d['days'][dt]['hits'] = d['days'][dt]['hits'] + 1
-    d['timelastrec'] = i['timestamp'].strftime("%Y%m%d%H%M%S")
+    d['timelastrec'] = i['timestamp']
 
     if i['ip'] not in visitIP:
         d['days'][dt]['visits'] = d['days'][dt]['visits'] + 1;
