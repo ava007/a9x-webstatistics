@@ -14,6 +14,29 @@ def parseRec(rec):
     if rec[0:1] == '#':
         return r
 
+    match = log_pattern.match(rec)
+    if match:
+        ip_address = match.group(1)
+        timestamp = match.group(2)
+        request = match.group(3)
+        status_code = match.group(4)
+        bytes_sent = match.group(5)
+        referer = match.group(6)
+        user_agent = match.group(7)
+                
+        r = {
+            'ip': ip_address,
+            'timestamp': timestamp,
+            'request': request,
+            'status_code': status_code,
+            'bytes_sent': bytes_sent,
+            'referer': referer,
+            'user_agent': user_agent
+        }
+                
+        return r
+    
+
     # get date and time:  19/Apr/2024:14:49:22 +0000
     dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
     dt = dtcomp.search(rec)  # scan for first match in rec
@@ -93,10 +116,14 @@ def runws():
         print("-s json file is not valid")
 
     visitIP = {}
+
+    ip_pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|[0-9a-fA-F:]+'
+    log_pattern = re.compile(r'({}) - - \[([^\]]+)\] "([^"]+)" (\d+) (\d+) "([^"]+)" "([^"]+)"'.format(ip_pattern))
+    
     # process infile:
     with open(args.infile,'r') as infile:
         for rec in infile:
-            recparsed = parseRec(rec)
+            recparsed = parseRec(rec, log_pattern)
             # skip unrecognized records:
             if not recparsed or recparsed['dt'] is None or recparsed['ip'] is None:
                 continue
