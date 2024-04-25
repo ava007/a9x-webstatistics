@@ -125,7 +125,7 @@ def runws():
         for rec in infile:
             recparsed = parseRec(rec, log_pattern)
             # skip unrecognized records:
-            if not recparsed or recparsed['dt'] is None or recparsed['ip'] is None:
+            if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
                 continue
             # skip already processed data:
             if recparsed['dt']  <=  lasttimerecobj:
