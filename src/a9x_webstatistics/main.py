@@ -109,6 +109,14 @@ def runws():
     lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
     print("lasttimerecobj: " + str(lasttimerecobj))
 
+    # init job results
+    j = {
+        'records_read_total': 0,
+        'records_skipped_comment': 0,
+        'records_already_processed': 0,
+        'records_processed_for_statistic': 0,
+    }
+    
     # load statistic file if it exists
     try:
         f = open(args.statfile) 
