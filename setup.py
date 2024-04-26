@@ -4,7 +4,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='a9x_webstatistics_package',
+    name='a9x_webstatistics',
     author='André von Arx',
     author_email='andrevonarx@bluewin.ch',
     description='Web Statistics and Analytics Package',
