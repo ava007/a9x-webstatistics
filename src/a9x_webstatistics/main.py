@@ -22,7 +22,7 @@ def parseRec(rec, log_pattern):
         timestamp = datadict["dateandtime"]
         request = datadict["url"]
         bytes_sent = datadict["bytessent"]
-        referer = datadict["refferer"]
+        referer = datadict["referer"]
         user_agent = datadict["useragent"]
         status = datadict["statuscode"]
         method = datadict["method"]
