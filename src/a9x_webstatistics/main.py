@@ -15,6 +15,7 @@ def parseRec(rec, log_pattern):
         return r
 
     data = re.search(log_pattern, rec)
+    print("Data: " + str(data))
     if data:
         datadict = data.groupdict()
         ip_address = datadict["ipaddress"]
@@ -24,7 +25,7 @@ def parseRec(rec, log_pattern):
         referer = datadict["refferer"]
         user_agent = datadict["useragent"]
         status = datadict["statuscode"]
-        method = data.group(6)
+        method = datadict["method"]
         
         dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
