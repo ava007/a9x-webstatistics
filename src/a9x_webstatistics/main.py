@@ -14,7 +14,7 @@ def parseRec(rec, log_pattern):
     if rec[0:1] == '#':
         return r
 
-    data = re.search(log_pattern, 1)
+    data = re.search(log_pattern, rec)
     if data:
         datadict = data.groupdict()
         ip_address = datadict["ipaddress"]
