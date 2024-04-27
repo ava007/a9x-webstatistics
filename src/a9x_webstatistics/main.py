@@ -14,16 +14,18 @@ def parseRec(rec, log_pattern):
     if rec[0:1] == '#':
         return r
 
-    match = log_pattern.match(rec)
-    if match:
-        ip_address = match.group(1)
-        timestamp = match.group(2)
-        request = match.group(3)
-        status = match.group(4)
-        bytes_sent = match.group(5)
-        referer = match.group(6)
-        user_agent = match.group(7)
-
+    data = re.search(log_pattern, 1)
+    if data:
+        datadict = data.groupdict()
+        ip_address = datadict["ipaddress"]
+        timestamp = datadict["dateandtime"]
+        request = datadict["url"]
+        bytes_sent = datadict["bytessent"]
+        referer = datadict["refferer"]
+        user_agent = datadict["useragent"]
+        status = datadict["statuscode"]
+        method = data.group(6)
+        
         dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
         r = {
