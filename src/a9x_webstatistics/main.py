@@ -151,7 +151,7 @@ def runws():
              (2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|
              (2[0-4]|1{0,1}[0-9]){0,1}[0-9]))) - - \[(?P<dateandtime>\d{2}\/[a-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2} (\+|\-)\d{4})\] ((\"(GET|POST|HEAD|PUT|DELETE) )
              (?P<url>.+)(http\/(1\.1|2\.0)")) (?P<statuscode>\d{3}) (?P<bytessent>\d+) (?P<referer>-|"([^"]+)") (["](?P<useragent>[^"]+)["])""",
-        re.IGNORECASE
+        re.X
     )
     
     # process infile:
