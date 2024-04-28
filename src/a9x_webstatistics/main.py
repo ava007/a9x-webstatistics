@@ -141,7 +141,10 @@ def runws():
         ([0-9a-fA-F]{1,4}:){1,7}:|                        # ipv6 1::              1:2:3:4:5:6:7::
         ([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|        # ipv6 1::8             1:2:3:4:5:6::8  1:2:3:4:5:6::8
         )
-        ) - - \[(?P<dateandtime>\d{2}\/[a-zA-Z]{3}\/\d{4}:\d{2}:\d{2}:\d{2} (\+|\-)\d{4})\] ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE)) (?P<url>.+)(http\/(1\.1|2\.0)")) (?P<statuscode>\d{3}) (?P<bytessent>\d+) (?P<referer>-|"([^"]+)") (["](?P<useragent>[^"]+)["])
+        )[ ]-[ ]-[ ]\[(?P<dateandtime>\d{2}\/[a-zA-Z]{3}\/\d{4}:\d{2}:\d{2}:\d{2} (\+|\-)\d{4})\][ ]
+        ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE))[ ](?P<url>.+)(http\/(1\.1|2\.0)"))[ ](?P<statuscode>\d{3})[ ]
+        (?P<bytessent>\d+)[ ](?P<referer>-|"([^"]+)")[ ]
+        (["](?P<useragent>[^"]+)["])
         """,
         flags=re.VERBOSE
     )
