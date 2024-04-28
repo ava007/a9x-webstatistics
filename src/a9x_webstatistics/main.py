@@ -121,7 +121,7 @@ def runws():
         (25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])           # 2001:db8:3:4::192.0.2.33  64:ff9b::192.0.2.33 (IPv4-Embedded IPv6 Address)
         )
         )[ ]-[ ]-[ ]\[(?P<dateandtime>\d{2}\/[a-zA-Z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}[ ](\+|\-)\d{4})\][ ]
-        ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE))[ ]
+        ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE|OPTIONS|PROPFIND))[ ]
         (?P<url>.+)[ ](HTTP\/(1\.1|2\.0)"))[ ]
         (?P<statuscode>\d{3})[ ]
         (?P<bytessent>\d+)[ ]
