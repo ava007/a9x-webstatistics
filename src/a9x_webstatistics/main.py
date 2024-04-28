@@ -6,13 +6,15 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 
-def parseRec(rec, log_pattern):
+def parseRec(rec, log_pattern, j):
     print(str(rec))
+    j['records_read_total'] += 1
 
     r = {}
     # skip comments recs
     if rec[0:1] == '#':
-        return r
+        j['records_skipped_comment'] += 1
+        return r,j
 
     data = re.search(log_pattern, rec)
     print("Data: " + str(data))
@@ -26,6 +28,7 @@ def parseRec(rec, log_pattern):
         user_agent = datadict["useragent"]
         status = datadict["statuscode"]
         method = datadict["method"]
+        j['records_processed_for_statistic'] += 1
         
         dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
@@ -40,43 +43,7 @@ def parseRec(rec, log_pattern):
             'user_agent': user_agent
         }
 
-    return r
-
-    # get date and time:  19/Apr/2024:14:49:22 +0000
-    dtcomp = re.compile('\d{2}[/][A-Za-z]{3}[/]\d{4}[:]\d{2}[:]\d{2}[:]\d{2}')
-    dt = dtcomp.search(rec)  # scan for first match in rec
-    r['timestamp'] = datetime.strptime(dt[0],'%d/%b/%Y:%H:%M:%S')
-
-    # get ip address:
-    ip6 =   '''(?:(?x)(?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,6})|
-    (?:(?:[0-9a-f]{1,4}:){1,2}(?::[0-9a-f]{1,4}){1,5})|
-    (?:(?:[0-9a-f]{1,4}:){1,3}(?::[0-9a-f]{1,4}){1,4})|
-    (?:(?:[0-9a-f]{1,4}:){1,4}(?::[0-9a-f]{1,4}){1,3})|
-    (?:(?:[0-9a-f]{1,4}:){1,5}(?::[0-9a-f]{1,4}){1,2})|
-    (?:(?:[0-9a-f]{1,4}:){1,6}(?::[0-9a-f]{1,4}){1,1})|
-    (?:(?:(?:[0-9a-f]{1,4}:){1,7}|:):)|
-    (?::(?::[0-9a-f]{1,4}){1,7})|
-    (?:(?:(?:(?:[0-9a-f]{1,4}:){6})(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}))|
-    (?:(?:(?:[0-9a-f]{1,4}:){5}[0-9a-f]{1,4}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}))|
-    (?:(?:[0-9a-f]{1,4}:){5}:[0-9a-f]{1,4}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?:(?:[0-9a-f]{1,4}:){1,1}(?::[0-9a-f]{1,4}){1,4}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?:(?:[0-9a-f]{1,4}:){1,2}(?::[0-9a-f]{1,4}){1,3}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?:(?:[0-9a-f]{1,4}:){1,3}(?::[0-9a-f]{1,4}){1,2}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?:(?:[0-9a-f]{1,4}:){1,4}(?::[0-9a-f]{1,4}){1,1}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?:(?:(?:[0-9a-f]{1,4}:){1,5}|:):(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3})|
-    (?::(?::[0-9a-f]{1,4}){1,5}:(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}))
-    '''
-    #ip4 =   '(?:[12]?\\d?\\d\\.){3}[12]?\\d?\\d'
-    ip4 = '^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$'
-     
-    ip = re.findall(ip4 + '|' + ip6, rec)
-    if not ip:
-        r['ip'] = ''
-        print("IP not detected in: " + rec)
-    else:
-        r['ip'] = ip[0]
-    return r
-
+    return r,j
 
 def detectDeviceClass(ua):
   if ua is None:
@@ -130,8 +97,7 @@ def runws():
 
     visitIP = {}
 
-    ip_pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|[0-9a-fA-F:]+'
-    #log_pattern = re.compile(r'({}) - - \[([^\]]+)\] "([^"]+)" (\d+) (\d+) "([^"]+)" "([^"]+)"'.format(ip_pattern))
+    #ip_pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|[0-9a-fA-F:]+'
     log_pattern = re.compile(
         r"""
         (?P<ipaddress>
@@ -168,7 +134,7 @@ def runws():
     # process infile:
     with open(args.infile,'r') as infile:
         for rec in infile:
-            recparsed = parseRec(rec, log_pattern)
+            recparsed, j = parseRec(rec, log_pattern, j)
             # skip unrecognized records:
             if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
                 continue
