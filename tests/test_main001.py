@@ -9,6 +9,10 @@ class TestMain(unittest.TestCase):
 
     def test_main(self):
         print("home: " + str(Path.home()) )
+        cmddata = run("ls -altr", capture_output=True, shell=True, text=True)
+        print(cmddata.stdout) 
+        print(cmddata.stderr) 
+
         # calling runws expecting return 0
         assert runws() == 0
         file = Path("webstat.json")  
@@ -17,10 +21,6 @@ class TestMain(unittest.TestCase):
         print(str(file_data))
         contents = json.loads(file_data)
         assert '20240130144922' in contents['timelastrec']
-
-        cmddata = run("ls -altr", capture_output=True, shell=True, text=True)
-        print(cmddata.stdout) 
-        print(cmddata.stderr) 
 
 if __name__ == '__main__':
     unittest.main()
