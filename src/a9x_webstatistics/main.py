@@ -68,14 +68,7 @@ def detectDeviceClass(ua):
 def runws():
     parser = argparse.ArgumentParser(allow_abbrev=False,
         prog='a9x_webstatistics',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=textwrap.dedent('''\
-            additional information:
-             I have indented it
-             exactly the way
-             I want it
-         ''') + version('a9x-webstatistics')
-                                                                         
+        epilog="Version: "+ version('a9x-webstatistics')
     )
     parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
