@@ -6,6 +6,7 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 from importlib.metadata import version
+import geoip2.database
 
 def parseRec(rec, log_pattern, j):
     print(str(rec))
@@ -73,6 +74,8 @@ def runws():
     parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
     args, unknown = parser.parse_known_args()
+
+    geo = geoip2.database.Reader('GeoLite2-City.mmdb')
 
     # init statistic file if it does not exist:
     d = {}
