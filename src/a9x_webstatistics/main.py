@@ -75,7 +75,7 @@ def runws():
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
     args, unknown = parser.parse_known_args()
 
-    georeader = maxminddb.open_database('GeoIP2-City.mmdb')
+    georeader = maxminddb.open_database('tests/data/test-data/GeoIP2-City.mmdb')
 
     # init statistic file if it does not exist:
     d = {}
