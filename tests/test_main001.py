@@ -9,7 +9,7 @@ class TestMain(unittest.TestCase):
 
     def test_main(self):
         print("home: " + str(Path.home()) )
-        cmddata = run("ls -altr tests", capture_output=True, shell=True, text=True)
+        cmddata = run("ls -altr ../", capture_output=True, shell=True, text=True)
         print(cmddata.stdout) 
         print(cmddata.stderr) 
 
