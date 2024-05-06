@@ -9,9 +9,9 @@ class TestMain(unittest.TestCase):
 
     def test_main(self):
         print("home: " + str(Path.home()) )
-        cmddata = run('find / -name "Geo*" -print', capture_output=True, shell=True, text=True)
-        print(cmddata.stdout) 
-        print(cmddata.stderr) 
+        #cmddata = run('find / -name "Geo*" -print', capture_output=True, shell=True, text=True)
+        #print(cmddata.stdout) 
+        #print(cmddata.stderr) 
 
         # calling runws expecting return 0
         assert runws() == 0
