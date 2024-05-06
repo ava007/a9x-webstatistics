@@ -35,8 +35,8 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.7',
-    install_requires=['maxminddb'],
+    python_requires='>=3.8',
+    install_requires=['geoip2'],
     extras_require={
         'dev': ['check-manifest'],
         # 'test': ['coverage'],
