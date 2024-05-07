@@ -75,7 +75,7 @@ def runws():
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
     args, unknown = parser.parse_known_args()
 
-    georeader = geoip2.database.Reader('GeoIP2-Country.mmdb')
+    georeader = geoip2.database.Reader('GeoIP2-City.mmdb')
 
     # init statistic file if it does not exist:
     d = {}
