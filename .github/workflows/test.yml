@@ -52,8 +52,7 @@ jobs:
       # Run tox using the version of Python in `PATH`
         run: |
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month01.log -o nginx_access.log
-          curl -o GeoIP2-Country.mmdb https://github.com/maxmind/MaxMind-DB/raw/main/test-data/GeoIP2-Country-Test.mmdb 
-          ls -latr
+          curl -o GeoIP2-City.mmdb https://github.com/maxmind/MaxMind-DB/raw/main/test-data/GeoIP2-City-Test.mmdb
           tox -e py
         # .github/workflows/ci-cd.yml
 
