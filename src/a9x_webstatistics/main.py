@@ -18,7 +18,7 @@ def parseRec(rec, log_pattern, j):
         j['records_skipped_comment'] += 1
         return r,j
 
-    data = re.search(log_pattern, rec)
+    data = re.search(log_pattern, rec, georeader)
     print("Data: " + str(data))
     if data:
         datadict = data.groupdict()
