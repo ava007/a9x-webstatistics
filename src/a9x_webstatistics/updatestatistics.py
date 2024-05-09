@@ -22,14 +22,12 @@ def upd(
     else:
         d['days'][dt]['serverResponseCode'][i['status']] = 1
 
-    if i['country']:
-        if not d['days'][dt]['countries']:
+    # process country if available:
+    if 'country' in i:
+        if 'countries' not in d['days'][dt]:
             d['days'][dt]['countries'] = {}
             d['days'][dt]['countries'][i['country']] = 0;
-        if i['country'] in d['days'][dt]['countries']:
-            d['days'][dt]['countries'][['country']] = d['days'][dt]['countries'][['country']] + 1;
-        else:
-            d['days'][dt]['countries'][i['country']] = 1;
+        d['days'][dt]['countries'][i['country']] = d['days'][dt]['countries'][i['country']] + 1;
         
     d['timelastrec'] = i['timestamp']
 
