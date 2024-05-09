@@ -31,8 +31,11 @@ def parseRec(rec, log_pattern, j, georeader):
         status = datadict["statuscode"]
         method = datadict["method"]
         j['records_processed_for_statistic'] += 1
-        grrsp = georeader.country(ip_address)
-        country = grrsp.country.name
+        try:
+            grrsp = georeader.country(ip_address)
+            country = grrsp.country.name
+        except AddressNotFoundError:
+            country = None
         
         dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
