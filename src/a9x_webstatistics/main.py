@@ -78,9 +78,13 @@ def runws():
     )
     parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
+    parser.add_argument("-g", "--geoip2", help="path to mmdb file", default="GeoIP2-Country.mmdb")
     args, unknown = parser.parse_known_args()
 
-    georeader = geoip2.database.Reader('GeoIP2-Country.mmdb')
+    try: 
+        georeader = geoip2.database.Reader(args.geoip2)
+    except FileNotFoundError:
+        print("geoip2 file not found, continue processing")
 
     # init statistic file if it does not exist:
     d = {}
