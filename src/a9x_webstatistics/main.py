@@ -8,7 +8,7 @@ from .updatestatistics import upd
 from importlib.metadata import version
 import geoip2.database
 
-def parseRec(rec, log_pattern, j):
+def parseRec(rec, log_pattern, j, georeader):
     print(str(rec))
     j['records_read_total'] += 1
 
@@ -18,7 +18,7 @@ def parseRec(rec, log_pattern, j):
         j['records_skipped_comment'] += 1
         return r,j
 
-    data = re.search(log_pattern, rec, georeader)
+    data = re.search(log_pattern, rec)
     print("Data: " + str(data))
     if data:
         datadict = data.groupdict()
@@ -31,6 +31,8 @@ def parseRec(rec, log_pattern, j):
         status = datadict["statuscode"]
         method = datadict["method"]
         j['records_processed_for_statistic'] += 1
+        grrsp = georeader.city(ip_address)
+        country = grrsp.country.name
         
         dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
                 
