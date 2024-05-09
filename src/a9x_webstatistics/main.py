@@ -141,7 +141,7 @@ def runws():
     # process infile:
     with open(args.infile,'r') as infile:
         for rec in infile:
-            recparsed, j = parseRec(rec, log_pattern, j)
+            recparsed, j = parseRec(rec, log_pattern, j, georeader)
             # skip unrecognized records:
             if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
                 continue
