@@ -22,5 +22,7 @@ class TestMain(unittest.TestCase):
         contents = json.loads(file_data)
         assert '20240130144922' in contents['timelastrec']
 
+        assert runws(['i', 'test_access_month02.log']) == 0
+
 if __name__ == '__main__':
     unittest.main()
