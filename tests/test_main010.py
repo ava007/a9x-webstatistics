@@ -10,6 +10,8 @@ class TestMain010(unittest.TestCase):
     def test_main010(self):
         # calling runws expecting return 0
         print("sys.argv: " + str(sys.argv))
+        sys.argv[1:] = ["infile","test_access_monthly02.log"]
+        print("sys.argv 2: " + str(sys.argv))
         assert runws() == 0
         file = Path("webstat.json")  
         with open(file) as f:  
