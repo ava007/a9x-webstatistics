@@ -9,6 +9,7 @@ class TestMain010(unittest.TestCase):
 
     def test_main010(self):
         # calling runws expecting return 0
+        print("sys.argv: " + str(sys.argv))
         assert runws() == 0
         file = Path("webstat.json")  
         with open(file) as f:  
