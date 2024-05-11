@@ -1,4 +1,5 @@
 import unittest
+import sys
 from pathlib import Path
 
 from a9x_webstatistics.main import *
@@ -17,4 +18,8 @@ class TestMain010(unittest.TestCase):
         assert '20240130144922' in contents['timelastrec']
 
 if __name__ == '__main__':
+
+    print("sys.argv: " + str(sys.argv))
+    sys.argv[1:] = ["infile","test_access_monthly02.log"]
+    print("sys.argv 2: " + str(sys.argv))
     unittest.main()
