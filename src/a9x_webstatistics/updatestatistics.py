@@ -36,7 +36,7 @@ def upd(
         d['days'][dt]['countries'][i['country']] = d['days'][dt]['countries'][i['country']] + 1;
 
     # update hits for device types:
-    devCla = detectDeviceClass(r['http_user_agent']) 
+    devCla = detectDeviceClass(i['user_agent']) 
     if devCla not in d['days'][dt]['device_hits']:
         d['days'][dt]['device_hits'][devCla] = 0 
     d['days'][dt]['device_hits'][devCla] = d['days'][dt]['device_hits'][devCla] + 1 
