@@ -12,7 +12,7 @@ class TestMain010(unittest.TestCase):
         print("sys.argv: " + str(sys.argv))
         sys.argv[1:] = ["infile","test_access_monthly02.log"]
         print("sys.argv 2: " + str(sys.argv))
-        assert runws(infile="test_access_monthloy02.log") == 0
+        assert runws(["infile","test_access_monthloy02.log"]) == 0
         file = Path("webstat.json")  
         with open(file) as f:  
             file_data = f.read()  
