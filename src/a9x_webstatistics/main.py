@@ -49,7 +49,9 @@ def parseRec(rec, log_pattern, j, georeader):
             'referer': referer,
             'user_agent': user_agent
         }
-
+        if country:
+            r['country'] = country
+    
     return r,j
 
 
