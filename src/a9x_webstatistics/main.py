@@ -71,18 +71,10 @@ def detectDeviceClass(ua):
      return 'tablet'
   return 'desktop'
 
-def runws():
-    parser = argparse.ArgumentParser(allow_abbrev=False,
-        prog='a9x_webstatistics',
-        epilog="Version: "+ version('a9x-webstatistics')
-    )
-    parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
-    parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
-    parser.add_argument("-g", "--geoip2", help="path to mmdb file", default="GeoIP2-Country.mmdb")
-    args, unknown = parser.parse_known_args()
+def runws(statfile, infile, geoip):
 
     try: 
-        georeader = geoip2.database.Reader(args.geoip2)
+        georeader = geoip2.database.Reader(geoip)
     except FileNotFoundError:
         print("geoip2 file not found, continue processing")
 
@@ -104,7 +96,7 @@ def runws():
     
     # load statistic file if it exists
     try:
-        f = open(args.statfile) 
+        f = open(statfile) 
         d = json.load(f) 
     except FileNotFoundError:   # first call: file does not exists
         print("-s statistic file not found, it will be automatically created")
@@ -113,7 +105,6 @@ def runws():
 
     visitIP = {}
 
-    #ip_pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|[0-9a-fA-F:]+'
     log_pattern = re.compile(
         r"""
         (?P<ipaddress>
@@ -148,7 +139,7 @@ def runws():
     )
     
     # process infile:
-    with open(args.infile,'r') as infile:
+    with open(infile,'r') as infile:
         for rec in infile:
             recparsed, j = parseRec(rec, log_pattern, j, georeader)
             # skip unrecognized records:
@@ -160,9 +151,18 @@ def runws():
             d = upd(d, recparsed, visitIP)
             
     # write updated statistic file:
-    with open(args.statfile, "w") as sf:
+    with open(statfile, "w") as sf:
        json.dump(d,sf)  
     return 0
 
 if __name__ == "__main__":
-    runws()
+    parser = argparse.ArgumentParser(allow_abbrev=False,
+        prog='a9x_webstatistics',
+        epilog="Version: "+ version('a9x-webstatistics')
+    )
+    parser.add_argument("-s", "--statfile", help="json file that contains calculated statistics", default="webstat.json")
+    parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="nginx_access.log")
+    parser.add_argument("-g", "--geoip", help="path to GeoIP2-Country.mmdb file", default="GeoIP2-Country.mmdb")
+    args, unknown = parser.parse_known_args()
+
+    runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip)
