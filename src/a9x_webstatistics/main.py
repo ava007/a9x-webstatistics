@@ -148,7 +148,7 @@ def runws(statfile, infile, geoip):
             # skip already processed data:
             if recparsed['timestamp']  <=  d['timelastrec']:
                 continue
-            d = upd(d, recparsed, visitIP)
+            d, visitIP = upd(d, recparsed, visitIP)
             
     # write updated statistic file:
     with open(statfile, "w") as sf:
