@@ -52,24 +52,6 @@ def parseRec(rec, log_pattern, j, georeader):
 
     return r,j
 
-def detectDeviceClass(ua):
-  if ua is None:
-     return 'desktop'
-  if (ua.lower().find('bot') > 0):
-     return 'bots'
-  if (ua.lower().find('python') > 0):
-     return 'bots'
-  if (ua.lower().find('mediapartner') > 0):
-     return 'others'
-  if (ua.lower().find('curl') > 0):
-     return 'others'
-  if (ua.lower().find('ipad') > 0):
-     return 'tablet'
-  if (ua.lower().find('mobile') > 0):
-     return 'mobile'
-  if (ua.lower().find('android') > 0):
-     return 'tablet'
-  return 'desktop'
 
 def runws(statfile, infile, geoip):
 
