@@ -23,6 +23,6 @@ class TestMain010(unittest.TestCase):
 if __name__ == '__main__':
 
     print("sys.argv: " + str(sys.argv))
-    sys.argv[1:] = ["infile","test_access_monthly02.log"]
+    sys.argv[4:] = ["-infile","/test_access_monthly02.log"]
     print("sys.argv 2: " + str(sys.argv))
     unittest.main()
