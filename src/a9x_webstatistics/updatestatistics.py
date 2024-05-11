@@ -35,4 +35,4 @@ def upd(
         d['days'][dt]['visits'] = d['days'][dt]['visits'] + 1;
         visitIP[i['ip']] = 1
         
-    return d
+    return d, visitIP
