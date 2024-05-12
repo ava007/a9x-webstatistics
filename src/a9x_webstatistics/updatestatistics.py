@@ -32,7 +32,7 @@ def upd(
     if 'country' in i:
         if 'countries' not in d['days'][dt]:
             d['days'][dt]['countries'] = {}
-        if i['country'] not in d['days'][dt]['countries']
+        if i['country'] not in d['days'][dt]['countries']:
             d['days'][dt]['countries'][i['country']] = 0;
         d['days'][dt]['countries'][i['country']] = d['days'][dt]['countries'][i['country']] + 1;
 
