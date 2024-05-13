@@ -47,7 +47,7 @@ def upd(
     if 'referer' in i:
         if 'externalSource' not in d['days'][dt]:
             d['days'][dt]['externalSource'] = {}
-        domain = urlparse(referer).netloc
+        domain = urlparse(i['referer']).netloc
         if domain not in d['days'][dt]['externalSource']:
             d['days'][dt]['externalSource'][domain] = 0;
         d['days'][dt]['externalSource'][domain] += 1;
