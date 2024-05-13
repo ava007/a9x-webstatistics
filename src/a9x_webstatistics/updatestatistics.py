@@ -44,7 +44,7 @@ def upd(
     d['days'][dt]['device_hits'][devCla] = d['days'][dt]['device_hits'][devCla] + 1 
 
     # update external source:
-    if 'referer' in i:
+    if 'referer' in i and i['referer'] != "-":
         if 'externalSource' not in d['days'][dt]:
             d['days'][dt]['externalSource'] = {}
         o = urlparse(i['referer'])
