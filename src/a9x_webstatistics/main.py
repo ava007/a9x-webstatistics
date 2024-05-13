@@ -116,7 +116,7 @@ def runws(statfile, infile, geoip):
         (?P<url>.+)[ ](HTTP\/(1\.1|2\.0)"))[ ]
         (?P<statuscode>\d{3})[ ]
         (?P<bytessent>\d+)[ ]
-        (?P<referer>-|"([^"]+)")[ ]
+        (["](?P<referer>[^"]+)["])[ ]
         (["](?P<useragent>[^"]+)["])
         """,
         flags=re.VERBOSE
