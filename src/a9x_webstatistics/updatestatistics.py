@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 def upd(
     d,
     i,
@@ -41,7 +42,16 @@ def upd(
     if devCla not in d['days'][dt]['device_hits']:
         d['days'][dt]['device_hits'][devCla] = 0 
     d['days'][dt]['device_hits'][devCla] = d['days'][dt]['device_hits'][devCla] + 1 
-        
+
+    # update external source:
+    if 'referer' in i:
+        if 'externalSource' not in d['days'][dt]:
+            d['days'][dt]['externalSource'] = {}
+        domain = urlparse(referer).netloc
+        if domain not in d['days'][dt]['externalSource']:
+            d['days'][dt]['externalSource'][domain] = 0;
+        d['days'][dt]['externalSource'][domain] += 1;
+                    
     d['timelastrec'] = i['timestamp']
 
     # update visits
