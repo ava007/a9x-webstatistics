@@ -45,13 +45,13 @@ def upd(
 
     # update external source:
     if 'referer' in i and i['referer'] != "-":
-        if 'externalSource' not in d['days'][dt]:
-            d['days'][dt]['externalSource'] = {}
+        if 'source' not in d['days'][dt]:
+            d['days'][dt]['source'] = {}
         o = urlparse(i['referer'])
         print("host: " + o.hostname)
-        if o.hostname not in d['days'][dt]['externalSource']:
-            d['days'][dt]['externalSource'][o.hostname] = 0;
-        d['days'][dt]['externalSource'][o.hostname] += 1;
+        if o.hostname not in d['days'][dt]['source']:
+            d['days'][dt]['source'][o.hostname] = 0;
+        d['days'][dt]['source'][o.hostname] += 1;
                     
     d['timelastrec'] = i['timestamp']
 
@@ -59,6 +59,19 @@ def upd(
     if i['ip'] not in visitIP:
         d['days'][dt]['visits'] = d['days'][dt]['visits'] + 1;
         visitIP[i['ip']] = 1
+
+    # update quality
+    if i['status'] == '500':
+        if 'quality' not in d['days'][dt]:
+            d['days'][dt]['quality'] = {}
+        if i['request'] not in d['days'][dt]['quality']:
+            d['days'][dt]['quality'][i['request']] = {}
+            d['days'][dt]['quality'][i['request']]['from'] = i['referer']
+            d['days'][dt]['quality'][i['request']]['status'] = i['status']
+            d['days'][dt]['quality'][i['request']]['count'] = 1
+            d['days'][dt]['quality'][i['request']]['comment'] = 'internal server error'
+        else:
+            d['days'][dt]['quality'][i['request']]['count'] += 1
         
     return d, visitIP
 
