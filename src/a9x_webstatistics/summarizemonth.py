@@ -1,3 +1,6 @@
+from copy import deepcopy
+from datetime import datetime, timedelta
+
 def summonth(d):
     
     # accumulate previous months:
