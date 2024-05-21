@@ -41,7 +41,7 @@ def summonth(d):
                     d['days'][currMonth]['visits'] += dtmp['days'][x]['visits']
                     d['days'][currMonth]['bytes_sent']   += int(dtmp['days'][x]['bytes_sent'])
 
-                    if dtmp['days'][x]['countries']:
+                    if 'countries' in dtmp['days'][x]:
                         for ck,cv in dtmp['days'][x]['countries'].items():
                             print("country: " + ck + ": " + str(cv) )
                             print("countries" + str(d['days'][currMonth]['countries']))
@@ -57,14 +57,15 @@ def summonth(d):
                     d['days'][currMonth]['device_hits']['others']  += d['days'][x]['device_hits']['others']
 
                     # external sources:
-                    for ck,cv in dtmp['days'][x]['source'].items():
-                        print("extermal Source: " + ck + ": " + str(cv) )
+                    if 'source' in dtmp['days'][x]:
+                        for ck,cv in dtmp['days'][x]['source'].items():
+                            print("external Source: " + ck + ": " + str(cv) )
 
-                        print("eS" + str(d['days'][currMonth]['source']))
-                        if ck in d['days'][currMonth]['source']:
-                            d['days'][currMonth]['source'][ck] += cv
-                        else:
-                            d['days'][currMonth]['source'][ck] = cv;
+                            print("eS" + str(d['days'][currMonth]['source']))
+                            if ck in d['days'][currMonth]['source']:
+                                d['days'][currMonth]['source'][ck] += cv
+                            else:
+                                d['days'][currMonth]['source'][ck] = cv;
 
                     # Server Response Code:
                     for ck,cv in dtmp['days'][x]['serverResponseCode'].items():
