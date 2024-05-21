@@ -74,9 +74,9 @@ def summonth(d):
 
                     del d['days'][x]
 
-         # sort accumulated
-         for x in d['days']:
-             if len(x) == 6:
-                 d['days'][x]['countries'] = dict(sorted(d['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
+        # sort accumulated countries
+        for x in d['days']:
+            if len(x) == 6:
+                d['days'][x]['countries'] = dict(sorted(d['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
 
     return d
