@@ -41,13 +41,14 @@ def summonth(d):
                     d['days'][currMonth]['visits'] += dtmp['days'][x]['visits']
                     d['days'][currMonth]['bytes_sent']   += int(dtmp['days'][x]['bytes_sent'])
 
-                    for ck,cv in dtmp['days'][x]['countries'].items():
-                        print("country: " + ck + ": " + str(cv) )
-                        print("countries" + str(d['days'][currMonth]['countries']))
-                        if ck in d['days'][currMonth]['countries']:
-                            d['days'][currMonth]['countries'][ck] += cv
-                        else:
-                            d['days'][currMonth]['countries'][ck] = cv;
+                    if dtmp['days'][x]['countries']:
+                        for ck,cv in dtmp['days'][x]['countries'].items():
+                            print("country: " + ck + ": " + str(cv) )
+                            print("countries" + str(d['days'][currMonth]['countries']))
+                            if ck in d['days'][currMonth]['countries']:
+                                d['days'][currMonth]['countries'][ck] += cv
+                            else:
+                                d['days'][currMonth]['countries'][ck] = cv;
                     
                     d['days'][currMonth]['device_hits']['mobile']  += d['days'][x]['device_hits']['mobile']
                     d['days'][currMonth]['device_hits']['tablet']  += d['days'][x]['device_hits']['tablet']
