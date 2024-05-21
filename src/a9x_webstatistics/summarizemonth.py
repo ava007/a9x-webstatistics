@@ -18,6 +18,7 @@ def summonth(d):
                 if currMonth <= sumTill:
                     print("CurrMonth: " + currMonth + "  day x: " + x)
                     if currMonth not in d['days']:
+                            
                         d['days'][currMonth] = {}
                         d['days'][currMonth]['hits']    = 0;
                         d['days'][currMonth]['visits'] = 0;
@@ -25,15 +26,14 @@ def summonth(d):
                         d['days'][currMonth]['countries'] = {}
                         d['days'][currMonth]['source'] = {}
                         d['days'][currMonth]['serverResponseCode'] = {}
-
+                        
                         d['days'][currMonth]['device_hits'] = {} 
                         d['days'][currMonth]['device_hits']['mobile']  = 0 
                         d['days'][currMonth]['device_hits']['tablet']  = 0 
                         d['days'][currMonth]['device_hits']['desktop'] = 0 
                         d['days'][currMonth]['device_hits']['bots']    = 0 
                         d['days'][currMonth]['device_hits']['others']  = 0 
-
-             
+                                               
                     d['days'][currMonth]['hits'] += dtmp['days'][x]['hits']
                     d['days'][currMonth]['visits'] += dtmp['days'][x]['visits']
                     d['days'][currMonth]['bytes_sent']   += int(dtmp['days'][x]['bytes_sent'])
@@ -45,7 +45,7 @@ def summonth(d):
                             d['days'][currMonth]['countries'][ck] += cv
                         else:
                             d['days'][currMonth]['countries'][ck] = cv;
-
+                    
                     d['days'][currMonth]['device_hits']['mobile']  += d['days'][x]['device_hits']['mobile']
                     d['days'][currMonth]['device_hits']['tablet']  += d['days'][x]['device_hits']['tablet']
                     d['days'][currMonth]['device_hits']['bots']    += d['days'][x]['device_hits']['bots']
@@ -73,7 +73,7 @@ def summonth(d):
                             d['days'][currMonth]['serverResponseCode'][ck] = cv;
 
                     del d['days'][x]
-
+        
         # sort accumulated countries
         for x in d['days']:
             if len(x) == 6:
