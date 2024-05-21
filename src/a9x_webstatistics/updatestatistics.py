@@ -61,11 +61,12 @@ def upd(
         visitIP[i['ip']] = 1
 
     # update hits per url
-    if 'topurl' not in d['days'][dt]:
-        d['days'][dt]['topurl'] = {}
-    if i['request'] not in d['days'][dt]['topurl']:
-        d['days'][dt]['topurl'][i['request']] = 0;
-    d['days'][dt]['topurl'][i['request']] += 1;
+    if i['status'] == '200':
+        if 'topurl' not in d['days'][dt]:
+            d['days'][dt]['topurl'] = {}
+        if i['request'] not in d['days'][dt]['topurl']:
+            d['days'][dt]['topurl'][i['request']] = 0;
+        d['days'][dt]['topurl'][i['request']] += 1;
         
     # update quality
     if i['status'] == '500':
