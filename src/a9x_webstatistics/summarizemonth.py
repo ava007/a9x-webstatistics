@@ -4,7 +4,7 @@ def summonth(d):
     # beginning with the 15th day of the month: the previous month can be summarized:
     # 2024.02.15 => 2023.12
     # 2024.02.16 => 2024.01
-
+    
     sumUntilDay = datetime.now() - timedelta(days=46)
     sumTill = sumUntilDay.strftime("%Y%m")
     print("accumulate until month: "  + sumTill)   # 202312
@@ -78,5 +78,5 @@ def summonth(d):
         for x in d['days']:
             if len(x) == 6:
                 d['days'][x]['countries'] = dict(sorted(d['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
-
+    
     return d
