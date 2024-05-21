@@ -5,6 +5,7 @@ import re
 import sys
 from datetime import datetime
 from .updatestatistics import upd
+from .summarizemonth import summonth
 from importlib.metadata import version
 import geoip2.database
 
@@ -133,7 +134,10 @@ def runws(statfile, infile, geoip):
             if recparsed['timestamp']  <=  d['timelastrec']:
                 continue
             d, visitIP = upd(d, recparsed, visitIP)
-            
+
+    # summarize previous months
+    d = summonth(d)
+    
     # write updated statistic file:
     with open(statfile, "w") as sf:
        json.dump(d,sf)  
