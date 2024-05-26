@@ -32,7 +32,7 @@ def runGenCockpit(infile):
 
         print(h)
 
-        exit()
+        return
 
 
 if __name__ == "__main__":
