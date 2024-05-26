@@ -11,7 +11,7 @@ def genHeader():
     h += '<script> const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
 
-def runGenCockpit(infile)
+def runGenCockpit(infile):
 
   try:
     f = open(infile) 
