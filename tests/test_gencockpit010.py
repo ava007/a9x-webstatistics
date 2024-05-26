@@ -8,7 +8,7 @@ class TestGencockpit010(unittest.TestCase):
 
     def test_gencockpit010(self):
         # calling runws expecting return 0
-        assert runws(infile="webstat.json") == 0
+        assert runGenCockpit(infile="webstat.json") == 0
         #file = Path("webstat.json")  
         #with open(file) as f:  
         #    file_data = f.read()  
