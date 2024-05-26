@@ -11,35 +11,28 @@ def genHeader():
     h += '<script> const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
 def runGenCockpit(infile):
-    try:
-        f = open(infile) 
-    except FileNotFoundError: 
-        print("-i file not found")
-    try:
-        d = json.load(f) 
-    except json.JSONDecodeError:
-        print("-i json file is not valid")
+    with open(infile) as json_file:
+        d = json.load(json_file) 
 
-    lbl = []
-    dta = []
+        lbl = []
+        dta = []
 
-    for e in d['days']:
-        lbl.append(e)
-        dta.append(d['days'][e]['device_hits']['desktop'])
+        for e in d['days']:
+            lbl.append(e)
+            dta.append(d['days'][e]['device_hits']['desktop'])
 
+        h = genHeader()
+        h += 'new Chart(ctx, {'  + "\n"
+        h += ' type: \'bar\',' 
+        h += 'data: { ' + "\n" +  'labels: ' + str(lbl) + ',' + "\n"
+        h += ' datasets: [{ label: \'User Visits\',  data: ' + str(dta) + ','
+        h += '}]' + "\n"
+        h += '}, });' + "\n"
+        h += '</script></body></html>'
 
-    h = genHeader()
-    h += 'new Chart(ctx, {'  + "\n"
-    h += ' type: \'bar\',' 
-    h += 'data: { ' + "\n" +  'labels: ' + str(lbl) + ',' + "\n"
-    h += ' datasets: [{ label: \'User Visits\',  data: ' + str(dta) + ','
-    h += '}]' + "\n"
-    h += '}, });' + "\n"
-    h += '</script></body></html>'
+        print(h)
 
-    print(h)
-
-    exit()
+        exit()
 
 
 if __name__ == "__main__":
