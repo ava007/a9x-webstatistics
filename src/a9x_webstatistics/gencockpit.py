@@ -10,7 +10,7 @@ def genHeader():
     h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
     h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
-def runGenCockpit(infile):
+def runGenCockpit(infile, outfile):
     with open(infile) as json_file:
         d = json.load(json_file) 
 
@@ -47,4 +47,4 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     args, unknown = parser.parse_known_args()
 
-    runGenCockpit(infile=args.infile)
+    runGenCockpit(infile=args.infile, outfile=args.outfile)
