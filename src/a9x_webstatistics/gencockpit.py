@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import io, sys, argparse, json, ast
 from copy import deepcopy
+from importlib.metadata import version
 from datetime import datetime
 
 def genHeader():
