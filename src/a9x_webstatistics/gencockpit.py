@@ -24,15 +24,15 @@ def runGenCockpit(infile):
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
         h += ' type: \'bar\','   + "\n"
-        h += 'data: { ' + "\n" +  'labels: ' + str(lbl) + ',' + "\n"
+        h += '  data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [{ label: \'User Visits\',  data: ' + str(dta) + ','
         h += '}]' + "\n"
-        h += '},' + "\n" + '});' + "\n"
+        h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
 
         print(h)
 
-        return
+        return 0
 
 
 if __name__ == "__main__":
