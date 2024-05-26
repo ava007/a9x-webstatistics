@@ -4,11 +4,11 @@ from copy import deepcopy
 from datetime import datetime
 
 def genHeader():
-    h = '<hmtl>' + "\n"
+    h = '<html>' + "\n"
     h += '<body>' + "\n"
     h += '<div> <canvas id="myChart"></canvas> </div>' + "\n"
     h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
-    h += '<script> const ctx = document.getElementById(\'myChart\');' + "\n"
+    h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
 def runGenCockpit(infile):
     with open(infile) as json_file:
@@ -23,11 +23,11 @@ def runGenCockpit(infile):
 
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
-        h += ' type: \'bar\',' 
+        h += ' type: \'bar\','   + "\n"
         h += 'data: { ' + "\n" +  'labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [{ label: \'User Visits\',  data: ' + str(dta) + ','
         h += '}]' + "\n"
-        h += '}, });' + "\n"
+        h += '},' + "\n" + '});' + "\n"
         h += '</script></body></html>'
 
         print(h)
