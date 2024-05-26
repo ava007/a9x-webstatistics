@@ -12,7 +12,7 @@ class TestGencockpit010(unittest.TestCase):
         print(cmddata.stdout) 
         
         # calling runws expecting return 0
-        assert runGenCockpit(infile="webstat.json") == 0
+        assert runGenCockpit(infile="webstat.json",outfile="webstat.html") == 0
         #file = Path("webstat.json")  
         #with open(file) as f:  
         #    file_data = f.read()  
