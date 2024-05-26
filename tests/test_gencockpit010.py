@@ -7,6 +7,9 @@ from a9x_webstatistics.gencockpit import *
 class TestGencockpit010(unittest.TestCase):
 
     def test_gencockpit010(self):
+        cmddata = run('ls -altr', capture_output=True, shell=True, text=True)
+        print(cmddata.stdout) 
+        
         # calling runws expecting return 0
         assert runGenCockpit(infile="webstat.json") == 0
         #file = Path("webstat.json")  
