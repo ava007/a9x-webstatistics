@@ -10,14 +10,11 @@ def genHeader():
     h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
     h += '<script> const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
-  
-if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
-  parser.add_argument("-i", "--infile", help="filename including path to web server access log that contains input data", default="webstat.json")
-  args = parser.parse_args()
+
+def runGenCockpit(infile)
 
   try:
-    f = open(args.infile) 
+    f = open(infile) 
     d = json.load(f) 
   except FileNotFoundError: 
     print("-i file not found")
@@ -44,3 +41,14 @@ if __name__ == '__main__':
   print(h)
 
   exit()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(allow_abbrev=False,
+        prog='a9x_webstatistics',
+        epilog="Version: "+ version('a9x-webstatistics')
+    )
+    parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
+    args, unknown = parser.parse_known_args()
+
+    runGenCockpit(infile=args.infile)
