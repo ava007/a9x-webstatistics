@@ -30,7 +30,10 @@ def runGenCockpit(infile):
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
 
-        print(h)
+        # write html to file:
+        outfile = open(outfile, "w")
+        outfile.write(h)
+        outfile.close()
 
         return 0
 
@@ -41,6 +44,7 @@ if __name__ == "__main__":
         epilog="Version: "+ version('a9x-webstatistics')
     )
     parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
+    parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     args, unknown = parser.parse_known_args()
 
     runGenCockpit(infile=args.infile)
