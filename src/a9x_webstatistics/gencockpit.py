@@ -18,12 +18,16 @@ def runGenCockpit(infile, outfile):
         lbl = []
         dta = []
 
-        for e in d['days']:
-            lbl.append(e)
-            if 'desktop' in d['days'][e]['device_hits']:
-                dta.append(d['days'][e]['device_hits']['desktop'])
-            else:
-                dta.append(0)
+        try:
+            for e in d['days']:
+                lbl.append(e)
+                if 'desktop' in d['days'][e]['device_hits']:
+                    dta.append(d['days'][e]['device_hits']['desktop'])
+                else:
+                    dta.append(0)
+        except KeyError:
+            print('KeyError occured!' + str(d['days'][e]) )
+            raise
               
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
