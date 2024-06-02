@@ -20,8 +20,8 @@ def runGenCockpit(infile, outfile):
 
         for e in d['days']:
             lbl.append(e)
-            if 'desktop' in d['days'][e]['deviceclass_hits']:
-                dta.append(d['days'][e]['deviceclass_hits']['desktop'])
+            if 'desktop' in d['days'][e]['device_hits']:
+                dta.append(d['days'][e]['device_hits']['desktop'])
             else:
                 dta.append(0)
               
