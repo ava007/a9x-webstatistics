@@ -20,8 +20,11 @@ def runGenCockpit(infile, outfile):
 
         for e in d['days']:
             lbl.append(e)
-            dta.append(d['days'][e]['device_hits']['desktop'])
-
+            if d['days'][e]['device_hits']['desktop']:
+              dta.append(d['days'][e]['device_hits']['desktop'])
+            else:
+              dta.append(0)
+              
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
         h += ' type: \'bar\','   + "\n"
