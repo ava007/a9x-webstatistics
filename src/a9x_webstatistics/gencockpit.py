@@ -39,11 +39,11 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' type: \'bar\','   + "\n"
         h += ' responsive: true,' + "\n"
-        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true }}} ' + "\n"
-        h += '  data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
+        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true }}},' + "\n"
+        h += ' data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [' + "\n"
-        h += '{ label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: Utils.CHART_COLORS.blue, }'
-        h += ',{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: Utils.CHART_COLORS.green, }'
+        h += '{ label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: #404244, }'
+        h += ',{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: #230344, }'
         h += ']' + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
