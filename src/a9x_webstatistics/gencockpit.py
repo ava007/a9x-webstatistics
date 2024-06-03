@@ -42,8 +42,8 @@ def runGenCockpit(infile, outfile):
         h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true }}},' + "\n"
         h += ' data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [' + "\n"
-        h += '   { label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#404244\', }'
-        h += '  ,{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: \'#230344\', }'
+        h += '   { label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\', }'
+        h += '  ,{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\', }'
         h += ']' + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
