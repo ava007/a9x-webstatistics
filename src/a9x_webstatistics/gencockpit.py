@@ -17,6 +17,7 @@ def runGenCockpit(infile, outfile):
 
         lbl = []
         dta = []
+        dta_mobile = []
 
         try:
             for e in d['days']:
@@ -25,6 +26,11 @@ def runGenCockpit(infile, outfile):
                     dta.append(d['days'][e]['device_hits']['desktop'])
                 else:
                     dta.append(0)
+                if 'mobile' in d['days'][e]['device_hits']:
+                    dta_mobile.append(d['days'][e]['device_hits']['mobile'])
+                else:
+                    dta_mobile.append(0)
+
         except KeyError:
             print('KeyError occured!' + str(d['days'][e]) )
             raise
@@ -32,9 +38,13 @@ def runGenCockpit(infile, outfile):
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
         h += ' type: \'bar\','   + "\n"
+        h += ' responsive: true,' + "\n"
+        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true }}} ' + "\n"
         h += '  data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
-        h += ' datasets: [{ label: \'User Visits\',  data: ' + str(dta) + ','
-        h += '}]' + "\n"
+        h += ' datasets: [' + "\n"
+        h += '{ label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: Utils.CHART_COLORS.blue, }'
+        h += ',{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: Utils.CHART_COLORS.green, }'
+        h += ']' + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
 
