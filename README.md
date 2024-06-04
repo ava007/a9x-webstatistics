@@ -1,6 +1,6 @@
 # Web Statistics and Analytics
 
-This package produces web statics and analytical output based on nginx access log files.
+This package produces web statistics and analytical output based on nginx access log files.
 
 [![PyPI package](https://img.shields.io/badge/pip%20install-example--pypi--package-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/github/license/ava007/a9x-webstatistics)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
 
@@ -10,6 +10,29 @@ This package produces web statics and analytical output based on nginx access lo
 pip install a9x-webstatistics
 ```
 
+
+## Requirements
+nginx standard access log file
+python3.9 onwards
+
+
+## Deployment
+
+```bash
+#!/bin/sh
+
+export LOG=/usr/local/www/webstats.log
+export PATH=/usr/local/www/django5/envpy311/bin:$PATH
+
+python3.11 -m a9x_webstatistics.main \
+   --infile /var/log/nginx-access.log \
+   --geoip /usr/local/share/GeoIP/GeoLite2-Country.mmdb \
+   --statfile /usr/local/www/lf_static/webstatsLF24.json &> $LOG
+
+python3.11 -m a9x_webstatistics.gencockpit \
+   --infile /usr/local/www/lf_static/webstatsLF24.json \
+   --outfile /usr/local/www/lf_static/webstatsLF24.html &>> $LOG
+```
 
 <details>
 ----------------
