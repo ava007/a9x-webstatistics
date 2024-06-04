@@ -18,6 +18,7 @@ def runGenCockpit(infile, outfile):
         lbl = []
         dta = []
         dta_mobile = []
+        dta_bots = []
 
         try:
             for e in d['days']:
@@ -30,7 +31,14 @@ def runGenCockpit(infile, outfile):
                     dta_mobile.append(d['days'][e]['device_hits']['mobile'])
                 else:
                     dta_mobile.append(0)
-
+                if 'bots' in d['days'][e]['device_hits']:
+                    dta_bots.append(d['days'][e]['device_hits']['bots'])
+                else:
+                    dta_bots.append(0)
+                # add others to bots:
+                if 'others' in d['days'][e]['device_hits']:
+                    dta_bots[d['days'][e]]  += d['days'][e]['device_hits']['others']
+  
         except KeyError:
             print('KeyError occured!' + str(d['days'][e]) )
             raise
