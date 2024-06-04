@@ -60,9 +60,9 @@ def runGenCockpit(infile, outfile):
 
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
-        h += ' responsive: true,' + "\n"
-        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
+        h += ' responsive: true' + "\n"
+        h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
         h+=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
