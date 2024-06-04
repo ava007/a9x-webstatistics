@@ -5,7 +5,7 @@ from importlib.metadata import version
 from datetime import datetime
 
 def genHeader():
-    h = '<html>' + "\n"
+    h  = '<html>' + "\n"
     h += '<body>' + "\n"
     h += '<div> <canvas id="myChart"></canvas> </div>' + "\n"
     h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
@@ -39,7 +39,9 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' type: \'bar\','   + "\n"
         h += ' responsive: true,' + "\n"
-        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true }}},' + "\n"
+        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
+        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
+        h+=  ' },' + "\n"
         h += ' data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [' + "\n"
         h += '   { label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\', }'
