@@ -37,7 +37,7 @@ def runGenCockpit(infile, outfile):
                     dta_bots.append(0)
                 # add others to bots:
                 if 'others' in d['days'][e]['device_hits']:
-                    dta_bots[d['days'][e]]  += d['days'][e]['device_hits']['others']
+                    dta_bots[int(d['days'][e])]  += d['days'][e]['device_hits']['others']
   
         except KeyError:
             print('KeyError occured!' + str(d['days'][e]) )
