@@ -58,6 +58,25 @@ def runGenCockpit(infile, outfile):
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
 
+        h = genHeader()
+        h += 'new Chart(ctx, {'  + "\n"
+        h += ' responsive: true,' + "\n"
+        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
+        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
+        h+=  ' },' + "\n"
+        h += ' data: { ' + "\n" 
+        h += '   datasets: [{' + "\n"
+        h += '      type: \'bar\', label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\',' + "\n"
+        h += '    },{' + "\n"
+        h += '      type: \'bar\', label: \'Mobile Visits\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\',' + "\n"
+        h += '    },{' + "\n"
+        h += '      type: \'line\',label: \'bots and others\',  data: ' + str(dta_bots) + ',' + "\n"
+        h += '}],' + "\n"
+        h += '  labels: ' + str(lbl) + '' + "\n"
+        h += ' },' + "\n" + '});' + "\n"
+        h += '</script></body></html>'
+        
+
         # write html to file:
         outfile = open(outfile, "w")
         outfile.write(h)
