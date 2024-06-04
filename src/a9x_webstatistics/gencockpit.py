@@ -48,7 +48,7 @@ def runGenCockpit(infile, outfile):
         h += ' type: \'bar\','   + "\n"
         h += ' responsive: true,' + "\n"
         h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
+        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'][0:7] + ' ' + d['timelastrec'][8:6] + '\'} }' + "\n"
         h+=  ' },' + "\n"
         h += ' data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
         h += ' datasets: [' + "\n"
