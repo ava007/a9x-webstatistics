@@ -12,8 +12,9 @@ pip install a9x-webstatistics
 
 
 ## Requirements
-nginx standard access log file
-python3.9 onwards
+- nginx standard access log file
+- python3.9 onwards
+- optional: maxmind db which need to be download by end user after registration
 
 
 ## Deployment
