@@ -84,6 +84,23 @@ def runGenCockpit(infile, outfile):
             h += str(v['source'])
         
         h += '</pre></p>' + "\n"
+
+        # Top Countries
+        actualYearMonth = strftime("%Y%m")
+        tcountries = []
+        for y in d['days']:
+            currYearMonth = y[0:6]
+            if currYearMonth = actualYearMonth:
+               for c in d['days'][y]['countries']:
+                   if c not in tcountries:
+                       tcountries[c] = 0
+                   tcountries[c] += c[0]
+        h += '<h2>Top Countries</h2>' + "\n"
+        h += '<p><table>'
+        for k, v in reversed(tcountries.items()):
+            h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+        h += '</table></p>' + "\n"
+      
         
         h += '</body></html>'
 
