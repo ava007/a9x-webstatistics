@@ -9,7 +9,7 @@ def genHeader():
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta name="robots" content="index,follow">'
     h += '<style>'
-    h += '* { font-family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";'
+    h += '* { font-family: "\'Helvetica Neue\', \'Helvetica\', \'Arial\', sans-serif";'
     h += '    font-size: 12px; }'
     h += '</style>'
     h += '</head>' + "\n"
