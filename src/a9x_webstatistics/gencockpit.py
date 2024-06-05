@@ -5,13 +5,17 @@ from importlib.metadata import version
 from datetime import datetime
 
 def genHeader():
-    h  = '<!doctype html><html lang="en"><head>' + "\n"
-    h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' + "\n"
-    h += '<meta name="robots" content="index,follow">' + "\n"
+    h  = '<!doctype html><html lang="en"><head>'
+    h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    h += '<meta name="robots" content="index,follow">'
+    h += '<style>'
+    h += '* { font-family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";'
+    h += '    font-size: 12px; }'
+    h += '</style>'
     h += '</head>' + "\n"
-    h += '<body>' + "\n"
-    h += '<div><canvas id="myChart"></canvas></div>' + "\n"
-    h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
+    h += '<body>'
+    h += '<div><canvas id="myChart"></canvas></div>'
+    h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
     h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
     
