@@ -6,8 +6,8 @@ from datetime import datetime
 
 def genHeader():
     h  = '<!doctype html><html lang="en"><head>' + "\n"
-    h  = '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' + "\n"
-    h  = '<meta name="robots" content="index,follow">' + "\n"
+    h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' + "\n"
+    h += '<meta name="robots" content="index,follow">' + "\n"
     h += '</head>' + "\n"
     h += '<body>' + "\n"
     h += '<div><canvas id="myChart"></canvas></div>' + "\n"
@@ -67,11 +67,11 @@ def runGenCockpit(infile, outfile):
         h += '    ],' + "\n"
         h += '    labels: ' + str(lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
-        h += '</script>'
+        h += '</script>' + "\n"
 
-        h += '<h2>Quality</h2>'
+        h += '<h2>Quality</h2>' + "\n"
         h += '<p>'
-        h += '</p>'
+        h += '</p>' + "\n"
         
         h += '</body></html>'
 
