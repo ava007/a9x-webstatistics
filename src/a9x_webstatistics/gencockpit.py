@@ -18,6 +18,7 @@ def runGenCockpit(infile, outfile):
         lbl = []
         dta = []
         dta_mobile = []
+        dta_tablet = []
         dta_bots = []
 
         try:
@@ -31,6 +32,10 @@ def runGenCockpit(infile, outfile):
                     dta_mobile.append(d['days'][e]['device_hits']['mobile'])
                 else:
                     dta_mobile.append(0)
+                if 'tablet' in d['days'][e]['device_hits']:
+                    dta_tablet.append(d['days'][e]['device_hits']['tablet'])
+                else:
+                    dta_tablet.append(0)
                 if 'bots' in d['days'][e]['device_hits']:
                     dta_bots.append(d['days'][e]['device_hits']['bots'])
                 else:
@@ -42,38 +47,25 @@ def runGenCockpit(infile, outfile):
         except KeyError:
             print('KeyError occured!' + str(d['days'][e]) )
             raise
-              
-        h = genHeader()
-        h += 'new Chart(ctx, {'  + "\n"
-        h += ' type: \'bar\','   + "\n"
-        h += ' responsive: true,' + "\n"
-        h += ' options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += '  plugins: { subtitle: { display: true, text: \'' + d['timelastrec'][0:7] + ' ' + d['timelastrec'][8:6] + '\'} }' + "\n"
-        h+=  ' },' + "\n"
-        h += ' data: { ' + "\n" +  '  labels: ' + str(lbl) + ',' + "\n"
-        h += ' datasets: [' + "\n"
-        h += '   { label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\', }'
-        h += '  ,{ label: \'Mobile Visits\', data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\', }'
-        h += ']' + "\n"
-        h += ' },' + "\n" + '});' + "\n"
-        h += '</script></body></html>'
 
         h = genHeader()
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'' + d['timelastrec'] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][9:6] + '\'} }' + "\n"
         h+=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
-        h += '      { type: \'bar\', label: \'Desktop Visits\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Mobile Visits\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-        h += '     ,{ type: \'line\',label: \'bots and others\',data: ' + str(dta_bots) + '}' + "\n"
+        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(dta_bots) + '}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+
         h += '    ],' + "\n"
         h += '    labels: ' + str(lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script></body></html>'
-        
+      
 
         # write html to file:
         outfile = open(outfile, "w")
