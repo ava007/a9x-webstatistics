@@ -76,6 +76,12 @@ def runGenCockpit(infile, outfile):
         h += '<h2>Quality</h2>' + "\n"
         h += '<p>'
         h += '</p>' + "\n"
+
+        h += '<h2>Top URL</h2>' + "\n"
+        h += '<p><pre>'
+        for key, val in sorted(list(d['days'].items()), key=lambda x:x[0].lower(), reverse=True):
+                 print ("Checking {0} in {1}".format(key, val) + "\n")
+        h += '</pre></p>' + "\n"
         
         h += '</body></html>'
 
