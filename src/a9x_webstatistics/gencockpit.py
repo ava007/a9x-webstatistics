@@ -5,12 +5,16 @@ from importlib.metadata import version
 from datetime import datetime
 
 def genHeader():
-    h  = '<html>' + "\n"
+    h  = '<!doctype html><html lang="en"><head>' + "\n"
+    h  = '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' + "\n"
+    h  = '<meta name="robots" content="index,follow">' + "\n"
+    h += '</head>' + "\n"
     h += '<body>' + "\n"
-    h += '<div> <canvas id="myChart"></canvas> </div>' + "\n"
+    h += '<div><canvas id="myChart"></canvas></div>' + "\n"
     h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>' + "\n"
     h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
+    
 def runGenCockpit(infile, outfile):
     with open(infile) as json_file:
         d = json.load(json_file) 
@@ -52,7 +56,7 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][9:6] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][8:6] + '\'} }' + "\n"
         h+=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
@@ -60,12 +64,18 @@ def runGenCockpit(infile, outfile):
         h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
-
         h += '    ],' + "\n"
         h += '    labels: ' + str(lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
-        h += '</script></body></html>'
-      
+        h += '</script>'
+
+        h += '<h2>Quality</h2>'
+        h += '<p>'
+        h += '</p>'
+        
+        h += '</body></html>'
+
+        
 
         # write html to file:
         outfile = open(outfile, "w")
