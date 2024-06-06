@@ -61,7 +61,7 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][8:6] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][7:6] + '\'} }' + "\n"
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
@@ -74,11 +74,11 @@ def runGenCockpit(infile, outfile):
         h += ' },' + "\n" + '});' + "\n"
         h += '</script>' + "\n"
 
-        h += '<h2>Quality</h2>' + "\n"
+        h += '<h2>Quality</h2>'
         h += '<p>'
         h += '</p>' + "\n"
 
-        h += '<h2>Top URL</h2>' + "\n"
+        h += '<h2>Top URL</h2>'
         h += '<p><pre>'
         for k, v in reversed(d['days'].items()):
             h += str(k) + ": " + str(v) + "\n"
@@ -87,7 +87,9 @@ def runGenCockpit(infile, outfile):
         h += '</pre></p>' + "\n"
 
         # Top Countries
-        actualYearMonth = datetime.today().strftime('%Y%m')
+        lastDate = d['days'].keys()[-1]
+        actualYearMonth = lastDate[0:6]
+        #actualYearMonth = datetime.today().strftime('%Y%m')
         tcountries = []
         for y in d['days']:
             currYearMonth = y[0:6]
