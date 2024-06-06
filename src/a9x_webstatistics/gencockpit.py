@@ -87,7 +87,7 @@ def runGenCockpit(infile, outfile):
         h += '</pre></p>' + "\n"
 
         # Top Countries
-        lastDate = d['days'].keys()[-1]
+        lastDate = list(d['days'].keys())[-1]
         actualYearMonth = lastDate[0:6]
         #actualYearMonth = datetime.today().strftime('%Y%m')
         tcountries = []
