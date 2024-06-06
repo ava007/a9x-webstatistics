@@ -78,15 +78,16 @@ def runGenCockpit(infile, outfile):
         h += '<p>'
         h += '</p>' + "\n"
 
-        h += '<h2>Top URL</h2>'
-        h += '<p><pre>'
+        h += '<h2>Top Sources</h2>'
+        h += '<p><table>'
         for k, v in reversed(d['days'].items()):
             # k = 20240228 v = array
             print("v: " + str(v))
             if 'source' in d['days'][k]:
                 for s in d['days'][k]['source']:
-                    h += str(s) + "\n"
-        h += '</pre></p>' + "\n"
+                    print("s: " + str(d['days'][k]['source']))
+                    h += '<tr><td>' + str(s) + '</td></tr>' 
+        h += '</table></p>' + "\n"
 
         # Top Countries
         lastDate = list(d['days'].keys())[-1]
