@@ -86,7 +86,7 @@ def runGenCockpit(infile, outfile):
             if 'source' in d['days'][k]:
                 for s in d['days'][k]['source']:
                     print("s: " + str(d['days'][k]['source']))
-                    h += '<tr><td>' + str(s) + '</td></tr>' 
+                    h += '<tr><td>' + str(s) +  str(s[1]) + '</td></tr>' 
         h += '</table></p>' + "\n"
 
         # Top Countries
