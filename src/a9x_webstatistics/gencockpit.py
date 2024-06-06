@@ -98,8 +98,12 @@ def runGenCockpit(infile, outfile):
         h += '<h2>Top Countries</h2>' + "\n"
         h += '<p><table>'
         #for k, v in sorted(tcountries.items(), key=lambda x:x[0].lower(), reverse=True):
-        for k, v in reversed(sorted(tcountries.keys())):
-            h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+        #       for k, v in reversed(sorted(tcountries.keys())):
+        
+        # files = {"d":2, "g":1, "a":3, "b":3, "t":2}
+        # print(files.items())
+        for k, v in sorted(list(tcountries.items()), key=lambda x:x[1].lower(), reverse=True):
+             h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
         h += '</table></p>' + "\n"
       
         
