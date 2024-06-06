@@ -105,7 +105,7 @@ def runGenCockpit(infile, outfile):
         #for k, v in sorted(list(tcountries.items()), key=lambda x:x[1].lower(), reverse=True):
 
         print("tcountries: " + str(tcountries))
-        k, v in sorted(tcountries, key=itemgetter(2), reverse=True)
+        k, v in sorted(tcountries, key=itemgetter(2), reverse=True):
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
         h += '</table></p>' + "\n"
       
