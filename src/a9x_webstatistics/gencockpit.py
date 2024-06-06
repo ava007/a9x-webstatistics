@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import io, sys, argparse, json, ast, itemgetter
+import io, sys, argparse, json, ast
+from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime
