@@ -92,7 +92,7 @@ def runGenCockpit(infile, outfile):
         lastDate = list(d['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         #actYearMonth = datetime.today().strftime('%Y%m')
-        tcountries = []
+        tcountries = {}
         for y in d['days']:
             curYearMonth = y[0:6]
             print (curYearMonth + " " + actYearMonth)
