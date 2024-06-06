@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import io, sys, argparse, json, ast
-import operator
+from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime
@@ -112,7 +112,7 @@ def runGenCockpit(infile, outfile):
         #for k, v in sorted(list(tcountries.items()), key=lambda x:x[1].lower(), reverse=True):
 
         print("tcountries: " + str(tcountries))
-        for k, v in sorted(tcountries.iteritems(), key=itemgetter(1), reverse=True):
+        for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
         h += '</table></p>' + "\n"
         
