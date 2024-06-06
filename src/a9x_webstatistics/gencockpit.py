@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import io, sys, argparse, json, ast
-from operator import itemgetter, iteritems
+import operator
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime
