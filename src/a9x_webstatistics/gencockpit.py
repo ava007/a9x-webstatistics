@@ -81,9 +81,10 @@ def runGenCockpit(infile, outfile):
         h += '<h2>Top URL</h2>'
         h += '<p><pre>'
         for k, v in reversed(d['days'].items()):
-            h += str(k) + ": " + str(v) + "\n"
-            h += str(v['source'])
-        
+            # k = 20240228 v = array
+            if source in v:
+                for ks, vs in v['source']:
+                    h += ks + " " + vs + "\n"
         h += '</pre></p>' + "\n"
 
         # Top Countries
