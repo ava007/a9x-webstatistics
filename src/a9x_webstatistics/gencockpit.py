@@ -95,6 +95,7 @@ def runGenCockpit(infile, outfile):
             currYearMonth = y[0:6]
             if currYearMonth == actualYearMonth:
                for c in d['days'][y]['countries']:
+                   print(c)
                    if c not in tcountries:
                        tcountries[c] = 0
                    tcountries[c] += c[0]
