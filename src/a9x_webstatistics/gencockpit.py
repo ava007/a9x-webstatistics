@@ -90,14 +90,15 @@ def runGenCockpit(infile, outfile):
 
         # Top Countries
         lastDate = list(d['days'].keys())[-1]
-        actualYearMonth = lastDate[0:6]
-        #actualYearMonth = datetime.today().strftime('%Y%m')
+        actYearMonth = lastDate[0:6]
+        #actYearMonth = datetime.today().strftime('%Y%m')
         tcountries = []
         for y in d['days']:
-            currYearMonth = y[0:6]
-            print (currYearMonth + " " + actualYearMonth)
-            if currYearMonth == actualYearMonth:
+            curYearMonth = y[0:6]
+            print (curYearMonth + " " + actlYearMonth)
+            if curYearMonth == actYearMonth:
                for co,cv in d['days'][y]['countries'].items():
+                   print('co: ' + str(co) + ' cv: ' + str(cv))
                    if co not in tcountries:
                        tcountries[co] = 0
                    tcountries[co] += cv
