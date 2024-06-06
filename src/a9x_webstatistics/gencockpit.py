@@ -82,7 +82,7 @@ def runGenCockpit(infile, outfile):
         h += '<p><pre>'
         for k, v in reversed(d['days'].items()):
             # k = 20240228 v = array
-            if source in v:
+            if 'source' in v:
                 for ks, vs in v['source']:
                     h += ks + " " + vs + "\n"
         h += '</pre></p>' + "\n"
