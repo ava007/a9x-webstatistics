@@ -84,9 +84,8 @@ def runGenCockpit(infile, outfile):
             # k = 20240228 v = array
             print("v: " + str(v))
             if 'source' in d['days'][k]:
-                for s in d['days'][k]['source']:
-                    print("s: " + str(d['days'][k]['source']))
-                    h += '<tr><td>' + str(s) +  str(s[1]) + '</td></tr>' 
+                for sk, sv in d['days'][k]['source'].items():
+                    h += '<tr><td>' + str(sk) +  '</td><td>' + str(sv) + '</td></tr>' 
         h += '</table></p>' + "\n"
 
         # Top Countries
@@ -98,8 +97,7 @@ def runGenCockpit(infile, outfile):
             currYearMonth = y[0:6]
             print (currYearMonth + " " + actualYearMonth)
             if currYearMonth == actualYearMonth:
-               for co,cv in d['days'][y]['countries']:
-                   print(co)
+               for co,cv in d['days'][y]['countries'].items():
                    if co not in tcountries:
                        tcountries[co] = 0
                    tcountries[co] += cv
@@ -113,14 +111,11 @@ def runGenCockpit(infile, outfile):
         #for k, v in sorted(list(tcountries.items()), key=lambda x:x[1].lower(), reverse=True):
 
         print("tcountries: " + str(tcountries))
-        for k, v in sorted(tcountries, key=itemgetter(2), reverse=True):
+        for k, v in sorted(tcountries, key=itemgetter(2), reverse=True).items():
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
         h += '</table></p>' + "\n"
-      
         
         h += '</body></html>'
-
-        
 
         # write html to file:
         outfile = open(outfile, "w")
