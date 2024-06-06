@@ -95,11 +95,11 @@ def runGenCockpit(infile, outfile):
             currYearMonth = y[0:6]
             print (currYearMonth + " " + actualYearMonth)
             if currYearMonth == actualYearMonth:
-               for c in d['days'][y]['countries']:
-                   print(c)
-                   if c not in tcountries:
-                       tcountries[c] = 0
-                   tcountries[c] += c[0]
+               for co,cv in d['days'][y]['countries']:
+                   print(co)
+                   if co not in tcountries:
+                       tcountries[co] = 0
+                   tcountries[co] += cv
         h += '<h2>Top Countries</h2>' + "\n"
         h += '<p><table>'
         #for k, v in sorted(tcountries.items(), key=lambda x:x[0].lower(), reverse=True):
