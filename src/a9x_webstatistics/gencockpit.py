@@ -91,8 +91,14 @@ def runGenCockpit(infile, outfile):
                             tquality[sk]['count']  += 1
             
         h += '<h2>Quality</h2>'
-        h += '<p>'
-        h += '</p>' + "\n"
+        h += '<table><thead><tr><th scope="col">URL</th><th scope="col">Status</th></tr></thead>'
+        i = 0
+        for k, v in sorted(tquality.items(), key=itemgetter(3), reverse=True):
+             h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td></tr>"
+             i += 1
+             if i == 5:
+                 break
+        h += '</table>' + "\n"
 
         # Top Sources
         tsource = {}
