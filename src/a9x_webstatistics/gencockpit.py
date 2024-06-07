@@ -86,8 +86,9 @@ def runGenCockpit(infile, outfile):
                     for sk,sv in d['days'][k]['quality'].items():
                         print('sk: ' + str(sk) + ' sv: ' + str(sv))
                         if sk not in tquality:
-                            tquality[sk] = 0
-                        tquality[sk] += sv
+                            tquality[sk] = sv
+                        else:
+                            tquality[sk]['count']  += 1
             
         h += '<h2>Quality</h2>'
         h += '<p>'
