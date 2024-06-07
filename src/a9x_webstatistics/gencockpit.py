@@ -74,23 +74,39 @@ def runGenCockpit(infile, outfile):
         h += ' },' + "\n" + '});' + "\n"
         h += '</script>' + "\n"
 
+        lastDate = list(d['days'].keys())[-1]
+        actYearMonth = lastDate[0:6]
+
         h += '<h2>Quality</h2>'
         h += '<p>'
         h += '</p>' + "\n"
 
-        h += '<h2>Top Sources</h2>'
+        # Top Sources
+        tsource = {}
+        for y in d['days']:
+            curYearMonth = y[0:6]
+            if curYearMonth == actYearMonth:
+               for sk,sv in d['days'][y]['source'].items():
+                   print('sk: ' + str(sk) + ' sv: ' + str(sv))
+                   if sk not in tsource:
+                       tsource[sk] = 0
+                   tsource[sk] += sv
+
+        h += '<h2>Top 5 Sources</h2>'
         h += '<p><table>'
-        for k, v in reversed(d['days'].items()):
-            # k = 20240228 v = array
-            print("v: " + str(v))
-            if 'source' in d['days'][k]:
-                for sk, sv in d['days'][k]['source'].items():
-                    h += '<tr><td>' + str(sk) +  '</td><td>' + str(sv) + '</td></tr>' 
+        i = 0
+        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
+             h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+             i++
+             if i == 5:
+                 break
         h += '</table></p>' + "\n"
 
+        #for k, v in reversed(d['days'].items()):
+        #    if 'source' in d['days'][k]:
+        #        for sk, sv in d['days'][k]['source'].items():
+
         # Top Countries
-        lastDate = list(d['days'].keys())[-1]
-        actYearMonth = lastDate[0:6]
         #actYearMonth = datetime.today().strftime('%Y%m')
         tcountries = {}
         for y in d['days']:
