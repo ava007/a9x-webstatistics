@@ -97,7 +97,7 @@ def runGenCockpit(infile, outfile):
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
-             i++
+             i += 1
              if i == 5:
                  break
         h += '</table></p>' + "\n"
@@ -107,7 +107,6 @@ def runGenCockpit(infile, outfile):
         #        for sk, sv in d['days'][k]['source'].items():
 
         # Top Countries
-        #actYearMonth = datetime.today().strftime('%Y%m')
         tcountries = {}
         for y in d['days']:
             curYearMonth = y[0:6]
@@ -120,16 +119,14 @@ def runGenCockpit(infile, outfile):
                    tcountries[co] += cv
         h += '<h2>Top Countries</h2>' + "\n"
         h += '<p><table>'
-        #for k, v in sorted(tcountries.items(), key=lambda x:x[0].lower(), reverse=True):
-        #       for k, v in reversed(sorted(tcountries.keys())):
-        
-        # files = {"d":2, "g":1, "a":3, "b":3, "t":2}
-        # print(files.items())
-        #for k, v in sorted(list(tcountries.items()), key=lambda x:x[1].lower(), reverse=True):
 
-        print("tcountries: " + str(tcountries))
+        i = 0
         for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+             i += 1
+             if i == 5:
+                 break
+
         h += '</table></p>' + "\n"
         
         h += '</body></html>'
