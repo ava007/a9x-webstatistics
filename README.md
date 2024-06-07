@@ -35,6 +35,13 @@ python3.11 -m a9x_webstatistics.gencockpit \
    --outfile /usr/local/www/lf_static/webstatsLF24.html &>> $LOG
 ```
 
+Cron-Job Entry for Linux / FreeBSD:
+```bash
+#minute hour    mday    month   wday    who     command
+13,58   *       *       *       *       dj1     /usr/local/www/cronjobs/cron_webstatistics.sh
+
+```
+
 <details>
 ----------------
 ## old content from template starts here
