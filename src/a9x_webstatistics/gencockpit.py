@@ -78,7 +78,7 @@ def runGenCockpit(infile, outfile):
         lastDate = list(d['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
-        tquality = {}
+        tquality = {}   # nested dictionary!
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
             if curYearMonth == actYearMonth:
@@ -86,19 +86,27 @@ def runGenCockpit(infile, outfile):
                     for sk,sv in d['days'][k]['quality'].items():
                         print('sk: ' + str(sk) + ' sv: ' + str(sv))
                         if sk not in tquality:
-                            tquality[sk] = sv
+                            tquality[sk] = {}
+                            tquality[sk]['count'] = 1
+                            tquality[sk]['status'] = sv['status']
+                            tquality[sk]['from'] = sv['from']
+                            tquality[sk]['comment'] = sv['comment']
                         else:
                             tquality[sk]['count']  += 1
-            
-        h += '<h2>Quality</h2>'
-        h += '<table><thead><tr><th scope="col">URL</th><th scope="col">Status</th></tr></thead>'
-        i = 0
-        for k, v in sorted(tquality.items(), key=itemgetter(3), reverse=True):
-             h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td></tr>"
-             i += 1
-             if i == 5:
-                 break
-        h += '</table>' + "\n"
+
+        if len(tquality) > 0:
+            h += '<h2>Quality</h2>'
+            h += '<table><thead><tr><th scope="col">URL</th><th scope="col">Status</th></tr></thead>'
+            i = 0
+            for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
+                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
+                h += '<td>' + v['from'] + "</td>"
+                h += '<td>' + v['count'] + "</td>"
+                h += '<td>' + v['comment'] + "</td></tr>"
+                i += 1
+                if i == 5:
+                    break
+            h += '</table>' + "\n"
 
         # Top Sources
         tsource = {}
