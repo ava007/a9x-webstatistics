@@ -77,7 +77,18 @@ def runGenCockpit(infile, outfile):
 
         lastDate = list(d['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
-
+        
+        tquality = {}
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            curYearMonth = k[0:6]
+            if curYearMonth == actYearMonth:
+                if 'quality' in d['days'][k]:
+                    for sk,sv in d['days'][k]['quality'].items():
+                        print('sk: ' + str(sk) + ' sv: ' + str(sv))
+                        if sk not in tquality:
+                            tquality[sk] = 0
+                        tquality[sk] += sv
+            
         h += '<h2>Quality</h2>'
         h += '<p>'
         h += '</p>' + "\n"
