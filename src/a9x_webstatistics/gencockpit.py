@@ -7,6 +7,7 @@ from datetime import datetime
 
 def genHeader():
     h  = '<!doctype html><html lang="en"><head>'
+    h += '<title>Web Statistics and Analysis</title>'
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta name="robots" content="index,follow">'
     h += '<style>'
