@@ -113,21 +113,20 @@ def runGenCockpit(infile, outfile):
             print (curYearMonth + " " + actYearMonth)
             if curYearMonth == actYearMonth:
                for co,cv in d['days'][y]['countries'].items():
-                   print('co: ' + str(co) + ' cv: ' + str(cv))
                    if co not in tcountries:
                        tcountries[co] = 0
                    tcountries[co] += cv
-        h += '<h2>Top Countries</h2>' + "\n"
-        h += '<p><table>'
 
-        i = 0
-        for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-             h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
-             i += 1
-             if i == 5:
-                 break
-
-        h += '</table></p>' + "\n"
+        if len(tcountries) > 0:
+            h += '<h2>Top 5 Countries</h2>' + "\n"
+            h += '<p><table>'
+            i = 0
+            for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
+                h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+                i += 1
+                if i == 5:
+                    break
+            h += '</table></p>' + "\n"
         
         h += '</body></html>'
 
