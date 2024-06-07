@@ -94,14 +94,15 @@ def runGenCockpit(infile, outfile):
                    tsource[sk] += sv
 
         h += '<h2>Top 5 Sources</h2>'
-        h += '<p><table>'
+        h += '<table>'
+        h += '<thead><tr><th scope="col">Source Domain</th><th scope="col">Source Hits</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
              i += 1
              if i == 5:
                  break
-        h += '</table></p>' + "\n"
+        h += '</table>' + "\n"
 
         #for k, v in reversed(d['days'].items()):
         #    if 'source' in d['days'][k]:
@@ -120,14 +121,15 @@ def runGenCockpit(infile, outfile):
 
         if len(tcountries) > 0:
             h += '<h2>Top 5 Countries</h2>' + "\n"
-            h += '<p><table>'
+            h += '<table>'
+            h += '<thead><tr><th scope="col">Source Country</th><th scope="col">Source Hits</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
                 i += 1
                 if i == 5:
                     break
-            h += '</table></p>' + "\n"
+            h += '</table>' + "\n"
         
         h += '</body></html>'
 
