@@ -196,26 +196,25 @@ def runGenCockpit(infile, outfile):
                 if 'others' in d['days'][k]['device_hits']:
                     mth_dta_bots[-1] += d['days'][e]['device_hits']['others']
 
-
-        h += '<h1>Webstatistics for the last Months</h1>'
-        h += '<div><canvas id="a9x_ws_months"></canvas></div>'
-        h += '<script>' + "\n" + 'const ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
-        h += 'new Chart(ctx, {'  + "\n"
-        h += ' responsive: true' + "\n"
-        h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + '\'} }' + "\n"
-        h +=  ' },' + "\n"
-        h += ' data: { ' + "\n" 
-        h += '   datasets: [' + "\n"
-        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
-        h += '    ],' + "\n"
-        h += '    labels: ' + str(mth_lbl) + "\n"
-        h += ' },' + "\n" + '});' + "\n"
-        h += '</script>' + "\n"
-
+        if len(mth_lbl) > 0:
+            h += '<h1>Webstatistics for the last Months</h1>'
+            h += '<div><canvas id="a9x_ws_months"></canvas></div>'
+            h += '<script>' + "\n" + 'const mth_ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
+            h += 'new Chart(mth_ctx, {'  + "\n"
+            h += ' responsive: true' + "\n"
+            h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
+            h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + '\'} }' + "\n"
+            h +=  ' },' + "\n"
+            h += ' data: { ' + "\n" 
+            h += '   datasets: [' + "\n"
+            h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+            h += '    ],' + "\n"
+            h += '    labels: ' + str(mth_lbl) + "\n"
+            h += ' },' + "\n" + '});' + "\n"
+            h += '</script>' + "\n"
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
