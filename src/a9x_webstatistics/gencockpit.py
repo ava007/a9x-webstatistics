@@ -161,7 +161,7 @@ def runGenCockpit(infile, outfile):
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
         tlr_first = tlr.replace(day=1)
-        tlr_last_month = tlr_first - datetime.timedelta(days=1)
+        tlr_last_month = tlr_first - timedelta(days=1)
         print("Last month: " + tlr_last_month.strftime("%Y%m"))
 
         prevYearMonth = tlr_last_month.strftime("%Y%m")
