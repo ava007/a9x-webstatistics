@@ -117,7 +117,7 @@ def runGenCockpit(infile, outfile):
                     for sk,sv in d['days'][y]['source'].items():
                         if sk not in tsource:
                             tsource[sk] = 0
-                    tsource[sk] += sv
+                        tsource[sk] += sv
 
         h += '<h2>Top 5 Sources</h2>'
         h += '<table>'
