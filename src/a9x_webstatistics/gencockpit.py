@@ -156,6 +156,11 @@ def runGenCockpit(infile, outfile):
                 if i == 5:
                     break
             h += '</table>' + "\n"
+
+        h += '<footer>'
+        h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
+        h += '</footer>'
+        
         
         h += '</body></html>'
 
