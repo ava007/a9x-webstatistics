@@ -63,7 +63,7 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][:-6] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6] + '\'} }' + "\n"
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
@@ -157,6 +157,28 @@ def runGenCockpit(infile, outfile):
                 if i == 5:
                     break
             h += '</table>' + "\n"
+
+        # Webstatistics for the last months
+
+        h += '<h1>Webstatistics for the last Months</h1>'
+        h += '<div><canvas id="a9x_ws_months"></canvas></div>'
+        h += '<script>' + "\n" + 'const ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
+        h += 'new Chart(ctx, {'  + "\n"
+        h += ' responsive: true' + "\n"
+        h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + '\'} }' + "\n"
+        h +=  ' },' + "\n"
+        h += ' data: { ' + "\n" 
+        h += '   datasets: [' + "\n"
+        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(dta_bots) + '}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+        h += '    ],' + "\n"
+        h += '    labels: ' + str(lbl) + "\n"
+        h += ' },' + "\n" + '});' + "\n"
+        h += '</script>' + "\n"
+
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
