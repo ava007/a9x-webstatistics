@@ -60,13 +60,14 @@ def upd(
         d['days'][dt]['visits'] = d['days'][dt]['visits'] + 1;
         visitIP[i['ip']] = 1
 
-    # update hits per url
-    if i['status'] == '200':
-        if 'topurl' not in d['days'][dt]:
-            d['days'][dt]['topurl'] = {}
-        if i['request'] not in d['days'][dt]['topurl']:
+    # top urls: accumulate top urls on the first day of the month
+    dtTopUrl = dt[0:6] + '01'
+    if i['status'] == '200' and devCla in ('desktop','mobile','tablet'):
+        if 'topurl' not in d['days'][dtTopUrl]:
+            d['days'][dtTopUrl]['topurl'] = {}
+        if i['request'] not in d['days'][dtTopUrl]['topurl']:
             d['days'][dt]['topurl'][i['request']] = 0;
-        d['days'][dt]['topurl'][i['request']] += 1;
+        d['days'][dtTopUrl]['topurl'][i['request']] += 1;
         
     # update quality: internal server error
     if i['status'] == '500':
