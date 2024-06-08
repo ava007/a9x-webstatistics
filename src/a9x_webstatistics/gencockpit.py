@@ -16,9 +16,6 @@ def genHeader():
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
-    h += '<div><canvas id="myChart"></canvas></div>'
-    h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
-    h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
     return h
     
 def runGenCockpit(infile, outfile):
@@ -60,6 +57,9 @@ def runGenCockpit(infile, outfile):
 
         h = genHeader()
         h += '<h1>Analysis and Statistics of the last Days</h1>'
+        h += '<div><canvas id="myChart"></canvas></div>'
+        h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
+        h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
