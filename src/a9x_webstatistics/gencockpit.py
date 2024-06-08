@@ -164,7 +164,8 @@ def runGenCockpit(infile, outfile):
         tlr_last_month = tlr_first - timedelta(days=1)
         print("Last month: " + tlr_last_month.strftime("%Y%m"))
 
-        prevYearMonth = tlr_last_month.strftime("%Y%m")
+        maxYearMonth = tlr_last_month.strftime("%Y%m")
+        prevYearMonth = '999912'
 
         mth_lbl = []
         mth_dta_desktop = []
@@ -174,26 +175,25 @@ def runGenCockpit(infile, outfile):
         
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
-            if curYearMonth <= prevYearMonth:            
-                lbl.append(e)
-                if 'desktop' in d['days'][k]['device_hits']:
-                    mth_dta_desktop.append(d['days'][k]['device_hits']['desktop'])
-                else:
+            if curYearMonth <= maxYearMonth:
+                if  curYearMonth != prevYearMonth:
+                    prevYearMonth = curYearMonth
+                    mth_lbl.append(curYearMonth)
                     mth_dta_desktop.append(0)
-                if 'mobile' in d['days'][e]['device_hits']:
-                    mth_dta_mobile.append(d['days'][e]['device_hits']['mobile'])
-                else:
                     mth_dta_mobile.append(0)
-                if 'tablet' in d['days'][e]['device_hits']:
-                    mth_dta_tablet.append(d['days'][e]['device_hits']['tablet'])
-                else:
                     mth_dta_tablet.append(0)
-                if 'bots' in d['days'][e]['device_hits']:
-                    mth_dta_bots.append(d['days'][e]['device_hits']['bots'])
-                else:
                     mth_dta_bots.append(0)
+                    
+                if 'desktop' in d['days'][k]['device_hits']:
+                    mth_dta_desktop[-1] += d['days'][k]['device_hits']['desktop']
+                if 'mobile' in d['days'][k]['device_hits']:
+                    mth_dta_mobile[-1] += d['days'][k]['device_hits']['mobile']
+                if 'tablet' in d['days'][k]['device_hits']:
+                    mth_dta_tablet[-1] += d['days'][k]['device_hits']['tablet']
+                if 'bots' in d['days'][k]['device_hits']:
+                    mth_dta_bots[-1] += d['days'][k]['device_hits']['bots']
                 # add "others" to "bots" in last element of the list:
-                if 'others' in d['days'][e]['device_hits']:
+                if 'others' in d['days'][k]['device_hits']:
                     mth_dta_bots[-1] += d['days'][e]['device_hits']['others']
 
 
@@ -207,12 +207,12 @@ def runGenCockpit(infile, outfile):
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
-        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(dta_bots) + '}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
         h += '    ],' + "\n"
-        h += '    labels: ' + str(lbl) + "\n"
+        h += '    labels: ' + str(mth_lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script>' + "\n"
 
