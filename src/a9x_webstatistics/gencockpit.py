@@ -59,10 +59,11 @@ def runGenCockpit(infile, outfile):
             raise
 
         h = genHeader()
+        h += '<h1>Analysis and Statistics of the last Days</h1>'
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][7:6] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][:-6] + '\'} }' + "\n"
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
