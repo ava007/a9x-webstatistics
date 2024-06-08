@@ -159,6 +159,43 @@ def runGenCockpit(infile, outfile):
             h += '</table>' + "\n"
 
         # Webstatistics for the last months
+        tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
+        tlr_first = tlr.replace(day=1)
+        tlr_last_month = tlr_first - datetime.timedelta(days=1)
+        print("Last month: " + tlr_last_month.strftime("%Y%m"))
+
+        prevYearMonth = tlr_last_month.strftime("%Y%m")
+
+        mth_lbl = []
+        mth_dta_desktop = []
+        mth_dta_mobile = []
+        mth_dta_tablet = []
+        mth_dta_bots = []
+        
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            curYearMonth = k[0:6]
+            if curYearMonth <= prevYearMonth:            
+                lbl.append(e)
+                if 'desktop' in d['days'][k]['device_hits']:
+                    mth_dta_desktop.append(d['days'][k]['device_hits']['desktop'])
+                else:
+                    mth_dta_desktop.append(0)
+                if 'mobile' in d['days'][e]['device_hits']:
+                    mth_dta_mobile.append(d['days'][e]['device_hits']['mobile'])
+                else:
+                    mth_dta_mobile.append(0)
+                if 'tablet' in d['days'][e]['device_hits']:
+                    mth_dta_tablet.append(d['days'][e]['device_hits']['tablet'])
+                else:
+                    mth_dta_tablet.append(0)
+                if 'bots' in d['days'][e]['device_hits']:
+                    mth_dta_bots.append(d['days'][e]['device_hits']['bots'])
+                else:
+                    mth_dta_bots.append(0)
+                # add "others" to "bots" in last element of the list:
+                if 'others' in d['days'][e]['device_hits']:
+                    mth_dta_bots[-1] += d['days'][e]['device_hits']['others']
+
 
         h += '<h1>Webstatistics for the last Months</h1>'
         h += '<div><canvas id="a9x_ws_months"></canvas></div>'
