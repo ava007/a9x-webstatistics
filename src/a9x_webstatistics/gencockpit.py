@@ -113,7 +113,7 @@ def runGenCockpit(infile, outfile):
         for y in d['days']:
             curYearMonth = y[0:6]
             if curYearMonth == actYearMonth:
-                if 'source' in d['days']['y']:
+                if 'source' in d['days'][y]:
                     for sk,sv in d['days'][y]['source'].items():
                         if sk not in tsource:
                             tsource[sk] = 0
