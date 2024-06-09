@@ -22,43 +22,49 @@ def runGenCockpit(infile, outfile):
     with open(infile) as json_file:
         d = json.load(json_file) 
 
-        lbl = []
-        dta = []
-        dta_mobile = []
-        dta_tablet = []
-        dta_bots = []
+        day_lbl = []
+        day_dta_desktop = []
+        day_dta_mobile = []
+        day_dta_tablet = []
+        day_dta_bots = []
 
-        dta_i = 0
+        day_dta_i = 0
         try:
-            for e, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
-                if dta_i > 30:
+            for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+                if day_dta_i > 30:
                     break
-                dta_i += 1
+                day_dta_i += 1
                 #for e in d['days']:
-                lbl.append(e)
-                if 'desktop' in d['days'][e]['device_hits']:
-                    dta.append(d['days'][e]['device_hits']['desktop'])
+                day_lbl.append(k)
+                if 'desktop' in d['days'][k]['device_hits']:
+                    day_dta_desktop.append(d['days'][k]['device_hits']['desktop'])
                 else:
-                    dta.append(0)
-                if 'mobile' in d['days'][e]['device_hits']:
-                    dta_mobile.append(d['days'][e]['device_hits']['mobile'])
+                    day_dta_desktop.append(0)
+                if 'mobile' in d['days'][k]['device_hits']:
+                    day_dta_mobile.append(d['days'][k]['device_hits']['mobile'])
                 else:
-                    dta_mobile.append(0)
-                if 'tablet' in d['days'][e]['device_hits']:
-                    dta_tablet.append(d['days'][e]['device_hits']['tablet'])
+                    day_dta_mobile.append(0)
+                if 'tablet' in d['days'][k]['device_hits']:
+                    day_dta_tablet.append(d['days'][k]['device_hits']['tablet'])
                 else:
-                    dta_tablet.append(0)
-                if 'bots' in d['days'][e]['device_hits']:
-                    dta_bots.append(d['days'][e]['device_hits']['bots'])
+                    day_dta_tablet.append(0)
+                if 'bots' in d['days'][k]['device_hits']:
+                    day_dta_bots.append(d['days'][k]['device_hits']['bots'])
                 else:
-                    dta_bots.append(0)
+                    day_dta_bots.append(0)
                 # add "others" to "bots" in last element of the list:
                 if 'others' in d['days'][e]['device_hits']:
-                    dta_bots[-1] += d['days'][e]['device_hits']['others']
+                    day_dta_bots[-1] += d['days'][k]['device_hits']['others']
   
         except KeyError:
-            print('KeyError occured!' + str(d['days'][e]) )
+            print('KeyError occured! ' + str(d['days'][k]) )
             raise
+
+        day_lbl.reverse()
+        day_dta_desktop.reverse()
+        day_dta_mobile.reverse()
+        day_dta_tablet.reverse()
+        day_dta_bots.reverse()
 
         h = genHeader()
         h += '<h1>Analysis and Statistics of the last Days</h1>'
@@ -68,16 +74,16 @@ def runGenCockpit(infile, outfile):
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
         h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6] + '\'} }' + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6:] + '\'} }' + "\n"
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
-        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(dta_bots) + '}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(dta) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+        h += '      { type: \'line\',label: \'bots and others\',data: ' + str(day_dta_bots) + '}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+        h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
         h += '    ],' + "\n"
-        h += '    labels: ' + str(lbl) + "\n"
+        h += '    labels: ' + str(day_lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
         h += '</script>' + "\n"
 
