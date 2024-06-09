@@ -34,7 +34,6 @@ def runGenCockpit(infile, outfile):
                 if day_dta_i > 30:
                     break
                 day_dta_i += 1
-                #for e in d['days']:
                 day_lbl.append(k)
                 if 'desktop' in d['days'][k]['device_hits']:
                     day_dta_desktop.append(d['days'][k]['device_hits']['desktop'])
