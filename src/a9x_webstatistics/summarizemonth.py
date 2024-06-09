@@ -10,7 +10,7 @@ def summonth(d):
     
     sumUntilDay = datetime.now() - timedelta(days=46)
     sumTill = sumUntilDay.strftime("%Y%m")
-    print("accumulate until month: "  + sumTill)   # 202312
+    print("sum: accumulate until month: "  + sumTill)   # 202312
     
     # iterate over days to accumulate months:
     dtmp = deepcopy(d)
@@ -19,7 +19,7 @@ def summonth(d):
             if len(x) > 6:
                 currMonth = x[0:6]
                 if currMonth <= sumTill:
-                    print("CurrMonth: " + currMonth + "  day x: " + x)
+                    print("sum: CurrMonth: " + currMonth + "  day x: " + x)
                     if currMonth not in d['days']:
                             
                         d['days'][currMonth] = {}
@@ -43,8 +43,8 @@ def summonth(d):
 
                     if 'countries' in dtmp['days'][x]:
                         for ck,cv in dtmp['days'][x]['countries'].items():
-                            print("country: " + ck + ": " + str(cv) )
-                            print("countries" + str(d['days'][currMonth]['countries']))
+                            print("sum: country: " + ck + ": " + str(cv) )
+                            print("sum: countries" + str(d['days'][currMonth]['countries']))
                             if ck in d['days'][currMonth]['countries']:
                                 d['days'][currMonth]['countries'][ck] += cv
                             else:
@@ -59,9 +59,9 @@ def summonth(d):
                     # external sources:
                     if 'source' in dtmp['days'][x]:
                         for ck,cv in dtmp['days'][x]['source'].items():
-                            print("external Source: " + ck + ": " + str(cv) )
+                            print("sum: external Source: " + ck + ": " + str(cv) )
 
-                            print("eS" + str(d['days'][currMonth]['source']))
+                            print("sum extSource: " + str(d['days'][currMonth]['source']))
                             if ck in d['days'][currMonth]['source']:
                                 d['days'][currMonth]['source'][ck] += cv
                             else:
@@ -69,9 +69,9 @@ def summonth(d):
 
                     # Server Response Code:
                     for ck,cv in dtmp['days'][x]['serverResponseCode'].items():
-                        print("Responsecode: " + ck + ": " + str(cv) )
+                        print("sum:  Responsecode: " + ck + ": " + str(cv) )
 
-                        print("eS" + str(d['days'][currMonth]['serverResponseCode']))
+                        print("sum responseCode: " + str(d['days'][currMonth]['serverResponseCode']))
                         if ck in d['days'][currMonth]['serverResponseCode']:
                             d['days'][currMonth]['serverResponseCode'][ck] += cv
                         else:
