@@ -252,7 +252,7 @@ def runGenCockpit(infile, outfile):
             h += '<thead><tr><th scope="col">Source Country</th><th scope="col">Source Hits</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(k) + '</td><td aling="right">' + str(v) + '</td></tr>'
+                h += '<tr><td>' + str(k) + '</td><td aling="right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
                 if i == 10:
                     break
