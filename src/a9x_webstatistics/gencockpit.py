@@ -28,8 +28,13 @@ def runGenCockpit(infile, outfile):
         dta_tablet = []
         dta_bots = []
 
+        dta_i = 0
         try:
-            for e in d['days']:
+            for e, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+                if dta_i > 30:
+                    break
+                dta_i += 1
+                #for e in d['days']:
                 lbl.append(e)
                 if 'desktop' in d['days'][e]['device_hits']:
                     dta.append(d['days'][e]['device_hits']['desktop'])
