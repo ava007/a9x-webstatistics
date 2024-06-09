@@ -198,6 +198,11 @@ def runGenCockpit(infile, outfile):
                     mth_dta_bots[-1] += d['days'][e]['device_hits']['others']
 
         if len(mth_lbl) > 0:
+            mth_lbl.reverse()
+            mth_dta_desktop.reverse()
+            mth_dta_mobile.reverse()
+            mth_dta_tablet.reverse()
+            mth_dta_bots.reverse()
             h += '<h1>Webstatistics for the last Months</h1>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += '<script>' + "\n" + 'const mth_ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
@@ -208,12 +213,12 @@ def runGenCockpit(infile, outfile):
             h +=  ' },' + "\n"
             h += ' data: { ' + "\n" 
             h += '   datasets: [' + "\n"
-            h += '      { type: \'line\',label: \'bots and others\',data: ' + str(reversed(mth_dta_bots)) + '}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(reversed(mth_dta_desktop)) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(reversed(mth_dta_mobile)) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(reversed(mth_dta_tablet)) + ',backgroundColor: \'#f5a742\'}' + "\n"
+            h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
             h += '    ],' + "\n"
-            h += '    labels: ' + str(reversed(mth_lbl)) + "\n"
+            h += '    labels: ' + str(mth_lbl) + "\n"
             h += ' },' + "\n" + '});' + "\n"
             h += '</script>' + "\n"
 
