@@ -172,7 +172,8 @@ def runGenCockpit(infile, outfile):
         mth_dta_mobile = []
         mth_dta_tablet = []
         mth_dta_bots = []
-        
+
+        # loop through month beginning with highest month:
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
             if curYearMonth <= maxYearMonth:
@@ -207,20 +208,19 @@ def runGenCockpit(infile, outfile):
             h +=  ' },' + "\n"
             h += ' data: { ' + "\n" 
             h += '   datasets: [' + "\n"
-            h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
+            h += '      { type: \'line\',label: \'bots and others\',data: ' + str(reversed(mth_dta_bots)) + '}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(reversed(mth_dta_desktop)) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(reversed(mth_dta_mobile)) + ',backgroundColor: \'#42f5aa\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(reversed(mth_dta_tablet)) + ',backgroundColor: \'#f5a742\'}' + "\n"
             h += '    ],' + "\n"
-            h += '    labels: ' + str(mth_lbl) + "\n"
+            h += '    labels: ' + str(reversed(mth_lbl)) + "\n"
             h += ' },' + "\n" + '});' + "\n"
             h += '</script>' + "\n"
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
         h += '</footer>'
-        
-        
+                
         h += '</body></html>'
 
         # write html to file:
