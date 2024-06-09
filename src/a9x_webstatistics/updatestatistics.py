@@ -66,7 +66,7 @@ def upd(
         if 'topurl' not in d['days'][dtTopUrl]:
             d['days'][dtTopUrl]['topurl'] = {}
         if i['request'] not in d['days'][dtTopUrl]['topurl']:
-            d['days'][dt]['topurl'][i['request']] = 0;
+            d['days'][dtTopUrl]['topurl'][i['request']] = 0;
         d['days'][dtTopUrl]['topurl'][i['request']] += 1;
         
     # update quality: internal server error
