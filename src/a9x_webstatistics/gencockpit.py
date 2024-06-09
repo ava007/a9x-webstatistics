@@ -232,6 +232,32 @@ def runGenCockpit(infile, outfile):
             h += ' },' + "\n" + '});' + "\n"
             h += '</script>' + "\n"
 
+        # Top Countries
+        tcountries = {}
+        tccount = 0
+        # loop through month beginning with highest month:
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            if len(k) == 6:    
+                if tccount > 12:
+                    break
+                tccount += 1
+                for co,cv in d['days'][k]['countries'].items():
+                    if co not in tcountries:
+                        tcountries[co] = 0
+                    tcountries[co] += cv
+
+        if len(tcountries) > 0:
+            h += '<h2>Top 10 Countries</h2>'
+            h += '<table>'
+            h += '<thead><tr><th scope="col">Source Country</th><th scope="col">Source Hits</th></tr></thead>'
+            i = 0
+            for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
+                h += '<tr><td>' + str(k) + '</td><td aling="right">' + str(v) + '</td></tr>'
+                i += 1
+                if i == 10:
+                    break
+            h += '</table>' + "\n"
+
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
         h += '</footer>'
