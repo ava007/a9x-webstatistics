@@ -205,7 +205,7 @@ def runGenCockpit(infile, outfile):
                     mth_dta_bots[-1] += d['days'][k]['device_hits']['bots']
                 # add "others" to "bots" in last element of the list:
                 if 'others' in d['days'][k]['device_hits']:
-                    mth_dta_bots[-1] += d['days'][e]['device_hits']['others']
+                    mth_dta_bots[-1] += d['days'][k]['device_hits']['others']
 
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
