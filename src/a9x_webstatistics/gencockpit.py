@@ -259,6 +259,22 @@ def runGenCockpit(infile, outfile):
                     break
             h += '</table>' + "\n"
 
+        # top urls
+        tuDate = list(d['days'].keys())[-1][0:6] + '01'
+        # loop top urls:
+        i = 0
+        ttu = '<table>'
+        for k, v in sorted(d['days'][tuDate]['topurl'].items(), key=itemgetter(0), reverse=True):
+            i += 1
+            if i > 10:
+                break
+            ttu += '<tr><td>' + k + '</td><td>' + str(v) + '</td></tr>'
+        ttu += '</table>'
+        h += ttu
+            
+
+        
+
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
         h += '</footer>'
