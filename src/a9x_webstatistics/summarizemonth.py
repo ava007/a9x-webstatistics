@@ -77,11 +77,35 @@ def summonth(d):
                         else:
                             d['days'][currMonth]['serverResponseCode'][ck] = cv;
 
+                    # topurl:
+                    if 'topurl' in dtmp['days'][x]:
+                        for ck,cv in dtmp['days'][x]['topurl'].items():
+                            print("sum: topurl: " + ck + ": " + str(cv) )
+
+                            print("sum topurl: " + str(d['days'][currMonth]['topurl']))
+                            if ck in d['days'][currMonth]['topurl']:
+                                d['days'][currMonth]['topurl'][ck] += cv
+                            else:
+                                d['days'][currMonth]['topurl'][ck] = cv;
+
                     del d['days'][x]
         
             # sort accumulated countries              
             for x in d['days']:
                 if len(x) == 6:
                     d['days'][x]['countries'] = dict(sorted(d['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
+
+            # sort accumulated topurl
+            for x in d['days']:
+                if len(x) == 6:
+                     tmpTopUrl = dict(sorted(d['days'][x]['topurl'].items(), key=lambda item: item[1], reverse=True))
+                     i = 0
+                     for k,v in tmpTopUrl:
+                         i += 1
+                         if i >= 24:
+                             break
+                         d['days'][x]['topurl'][k] = v
+                     del tmpTopUrl
+                         
    
     return d
