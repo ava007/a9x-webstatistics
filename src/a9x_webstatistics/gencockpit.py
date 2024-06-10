@@ -268,11 +268,11 @@ def runGenCockpit(infile, outfile):
                 if topurlcnt > 12:
                     break
                 topurlcnt += 1
-                for tk, tv in d['days'][k]['topurl']:
-                    if tk not in ttopurl:
-                        ttopurl[tk] = 0
-                    ttopurl[tk] += tv
-                #ttu += '<tr><td>' + k + '</td><td>' + str(v) + '</td></tr>'
+                if 'topurl' in d['days'][k]:
+                    for tk, tv in d['days'][k]['topurl']:
+                        if tk not in ttopurl:
+                            ttopurl[tk] = 0
+                        ttopurl[tk] += tv
         if len(ttopurl) > 0:
             h += '<h2>Top 10 Urls</h2>'
             h += '<table>'
