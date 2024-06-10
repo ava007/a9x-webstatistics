@@ -260,17 +260,23 @@ def runGenCockpit(infile, outfile):
             h += '</table>' + "\n"
 
         # top urls
+        ttopurl = {}
+        topurlcnt = 0
         tuDate = list(d['days'].keys())[-1][0:6] + '01'
-        # loop top urls:
-        i = 0
-        ttu = '<table>'
-        for k, v in sorted(d['days'][tuDate]['topurl'].items(), key=itemgetter(0), reverse=True):
-            i += 1
-            if i > 10:
-                break
-            ttu += '<tr><td>' + k + '</td><td>' + str(v) + '</td></tr>'
-        ttu += '</table>'
-        h += ttu
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            if len(k) == 6:    
+                if topurlcnt > 12:
+                    break
+                topurlcnt += 1
+                for tk, tv in d['days']['topurl']:
+                    if tk not in ttopurl:
+                        ttopurl[tk] = 0
+                    ttopurl[tk] += tv
+                #ttu += '<tr><td>' + k + '</td><td>' + str(v) + '</td></tr>'
+        if len(ttopurl) > 0:
+            h += '<table>'
+            h += '</table>'
+
             
 
         
