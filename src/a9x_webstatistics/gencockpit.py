@@ -89,36 +89,6 @@ def runGenCockpit(infile, outfile):
         lastDate = list(d['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
-        tquality = {}   # nested dictionary!
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
-            curYearMonth = k[0:6]
-            if curYearMonth == actYearMonth:
-                if 'quality' in d['days'][k]:
-                    for sk,sv in d['days'][k]['quality'].items():
-                        print('sk: ' + str(sk) + ' sv: ' + str(sv))
-                        if sk not in tquality:
-                            tquality[sk] = {}
-                            tquality[sk]['count'] = 1
-                            tquality[sk]['status'] = sv['status']
-                            tquality[sk]['from'] = sv['from']
-                            tquality[sk]['comment'] = sv['comment']
-                        else:
-                            tquality[sk]['count']  += 1
-
-        if len(tquality) > 0:
-            h += '<h2>Quality Improvements</h2>'
-            h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th></tr></thead>'
-            i = 0
-            for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
-                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
-                h += '<td>' + v['from'] + "</td>"
-                h += '<td>' + str(v['count']) + "</td>"
-                h += '<td>' + v['comment'] + "</td></tr>"
-                i += 1
-                if i == 5:
-                    break
-            h += '</table>' + "\n"
-
         # Top Sources
         tsource = {}
         for y in d['days']:
@@ -163,6 +133,37 @@ def runGenCockpit(infile, outfile):
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v) + "</td></tr>"
+                i += 1
+                if i == 5:
+                    break
+            h += '</table>' + "\n"
+
+        
+        tquality = {}   # nested dictionary!
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            curYearMonth = k[0:6]
+            if curYearMonth == actYearMonth:
+                if 'quality' in d['days'][k]:
+                    for sk,sv in d['days'][k]['quality'].items():
+                        print('sk: ' + str(sk) + ' sv: ' + str(sv))
+                        if sk not in tquality:
+                            tquality[sk] = {}
+                            tquality[sk]['count'] = 1
+                            tquality[sk]['status'] = sv['status']
+                            tquality[sk]['from'] = sv['from']
+                            tquality[sk]['comment'] = sv['comment']
+                        else:
+                            tquality[sk]['count']  += 1
+
+        if len(tquality) > 0:
+            h += '<h2>Quality Improvements</h2>'
+            h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th></tr></thead>'
+            i = 0
+            for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
+                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
+                h += '<td>' + v['from'] + "</td>"
+                h += '<td>' + str(v['count']) + "</td>"
+                h += '<td>' + v['comment'] + "</td></tr>"
                 i += 1
                 if i == 5:
                     break
