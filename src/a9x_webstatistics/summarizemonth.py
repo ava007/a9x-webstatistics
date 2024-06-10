@@ -98,14 +98,15 @@ def summonth(d):
             # sort accumulated topurl
             for x in d['days']:
                 if len(x) == 6:
-                     tmpTopUrl = dict(sorted(d['days'][x]['topurl'].items(), key=lambda item: item[1], reverse=True))
-                     i = 0
-                     for k,v in tmpTopUrl:
-                         i += 1
-                         if i >= 24:
-                             break
-                         d['days'][x]['topurl'][k] = v
-                     del tmpTopUrl
+                     if 'topurl' in d['days'][x]:
+                         tmpTopUrl = dict(sorted(d['days'][x]['topurl'].items(), key=lambda item: item[1], reverse=True))
+                         i = 0
+                         for k,v in tmpTopUrl:
+                             i += 1
+                             if i >= 24:
+                                 break
+                             d['days'][x]['topurl'][k] = v
+                         del tmpTopUrl
                          
    
     return d
