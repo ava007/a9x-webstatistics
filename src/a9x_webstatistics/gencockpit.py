@@ -134,6 +134,30 @@ def runGenCockpit(infile, outfile):
                     break
             h += '</table>' + "\n"
 
+        # top urls for the last 31 days:
+        ttopurl = {}
+        topurlcnt = 0
+        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+            if topurlcnt >= 31:
+                break
+            topurlcnt += 1
+            if 'topurl' in d['days'][k]:
+                for tk, tv in d['days'][k]['topurl']:
+                    if tk not in ttopurl:
+                        ttopurl[tk] = 0
+                    ttopurl[tk] += tv
+        if len(ttopurl) > 0:
+            h += '<h2>Top 10 Urls for last ' + str(topurlcnt) + ' days</h2>'
+            h += '<table>'
+            h += '<thead><tr><th scope="col">Url</th><th scope="col">Url Hits</th></tr></thead>'
+            i = 0
+            for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
+                h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                i += 1
+                if i == 10:
+                    break
+            h += '</table>' + "\n"
+
         
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
