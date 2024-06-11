@@ -148,18 +148,20 @@ def runGenCockpit(infile, outfile):
                             tquality[sk]['status'] = sv['status']
                             tquality[sk]['from'] = sv['from']
                             tquality[sk]['comment'] = sv['comment']
+                            tquality[sk]['lastoccured'] = k
                         else:
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
             h += '<h2>Quality Improvements</h2>'
-            h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th></tr></thead>'
+            h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
                 h += '<td>' + v['from'] + "</td>"
                 h += '<td>' + str(format(v['count'],',')) + "</td>"
                 h += '<td>' + v['comment'] + "</td></tr>"
+                h += '<td>' + v['lastoccured'] + "</td></tr>"
                 i += 1
                 if i == 5:
                     break
