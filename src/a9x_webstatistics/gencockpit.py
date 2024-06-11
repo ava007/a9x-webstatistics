@@ -142,7 +142,7 @@ def runGenCockpit(infile, outfile):
                 break
             topurlcnt += 1
             if 'topurl' in d['days'][k]:
-                for tk, tv in d['days'][k]['topurl']:
+                for tk, tv in d['days'][k]['topurl'].items():
                     if tk not in ttopurl:
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
@@ -284,14 +284,13 @@ def runGenCockpit(infile, outfile):
         # top urls
         ttopurl = {}
         topurlcnt = 0
-        #tuDate = list(d['days'].keys())[-1][0:6] + '01'
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
             if len(k) == 6:    
                 if topurlcnt > 12:
                     break
                 topurlcnt += 1
                 if 'topurl' in d['days'][k]:
-                    for tk, tv in d['days'][k]['topurl']:
+                    for tk, tv in d['days'][k]['topurl'].items():
                         if tk not in ttopurl:
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
