@@ -105,7 +105,7 @@ def runGenCockpit(infile, outfile):
         h += '<thead><tr><th scope="col">Source Domain</th><th scope="col">Source Hits</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
-             h += '<tr><td>' + str(k) + "</td><td>" + str(format(v, ',')) + "</td></tr>"
+             h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
              i += 1
              if i == 5:
                  break
@@ -128,7 +128,7 @@ def runGenCockpit(infile, outfile):
             h += '<thead><tr><th scope="col">Source Country</th><th scope="col">Source Hits</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(k) + "</td><td>" + str(format(v, ',')) + "</td></tr>"
+                h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
                 if i == 5:
                     break
@@ -183,7 +183,7 @@ def runGenCockpit(infile, outfile):
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
                 h += '<td>' + v['from'] + "</td>"
-                h += '<td>' + str(format(v['count'],',')) + "</td>"
+                h += '<td style="text-align: right">' + str(format(v['count'],',')) + "</td>"
                 h += '<td>' + v['comment'] + "</td></tr>"
                 h += '<td>' + v['lastoccured'] + "</td></tr>"
                 i += 1
