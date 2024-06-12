@@ -13,6 +13,7 @@ def genHeader():
     h += '<style>'
     h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif";'
     h += '    font-size: 12px; }'
+    h += '.container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
@@ -100,6 +101,7 @@ def runGenCockpit(infile, outfile):
                             tsource[sk] = 0
                         tsource[sk] += sv
 
+        h += '<div class="container">'
         h += '<h2>Top 10 Sources by Domain</h2>'
         h += '<table>'
         h += '<thead><tr><th scope="col">Domain</th><th scope="col">Hits Count</th></tr></thead>'
@@ -110,6 +112,7 @@ def runGenCockpit(infile, outfile):
              if i == 10:
                  break
         h += '</table>' + "\n"
+        h += '</div>'
 
         # Top Countries
         tcountries = {}
@@ -147,6 +150,7 @@ def runGenCockpit(infile, outfile):
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
+            h += '<div class="container">'
             h += '<h2>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h2>'
             h += '<table>'
             h += '<thead><tr><th scope="col">Url</th><th scope="col">Url Hits</th></tr></thead>'
@@ -158,6 +162,7 @@ def runGenCockpit(infile, outfile):
                 if i == 10:
                     break
             h += '</table>' + "\n"
+            h += '</div>'
 
         
         tquality = {}   # nested dictionary!
@@ -178,6 +183,7 @@ def runGenCockpit(infile, outfile):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
+            h += '<div class="container">'
             h += '<h2>Possible Quality Improvements</h2>'
             h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
@@ -191,7 +197,7 @@ def runGenCockpit(infile, outfile):
                 i += 1
                 if i == 10:
                     break
-            h += '</table>' + "\n"
+            h += '</table></div>' + "\n"
 
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
@@ -272,6 +278,7 @@ def runGenCockpit(infile, outfile):
                     tcountries[co] += cv
 
         if len(tcountries) > 0:
+            h += '<div class="container">'
             h += '<h2>Top 10 Countries</h2>'
             h += '<table>'
             h += '<thead><tr><th scope="col">Country</th><th scope="col">Hits count</th></tr></thead>'
@@ -281,7 +288,7 @@ def runGenCockpit(infile, outfile):
                 i += 1
                 if i == 10:
                     break
-            h += '</table>' + "\n"
+            h += '</table></div>' + "\n"
 
         # top urls
         ttopurl = {}
@@ -297,6 +304,7 @@ def runGenCockpit(infile, outfile):
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
+            h += '<div class="container">'
             h += '<h2>Top 10 URL</h2>'
             h += '<table>'
             h += '<thead><tr><th scope="col">URL</th><th scope="col">Hits count</th></tr></thead>'
@@ -307,7 +315,7 @@ def runGenCockpit(infile, outfile):
                     i += 1
                 if i == 10:
                     break
-            h += '</table>' + "\n"
+            h += '</table></div>' + "\n"
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
