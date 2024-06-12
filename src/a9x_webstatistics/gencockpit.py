@@ -13,7 +13,7 @@ def genHeader():
     h += '<style>'
     h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
     h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
-    h += '.flex-item { background: tomato; padding: 15px; margin-top: 10px; margin-right: 10px; line-height: 150px; color: white; }'
+    h += '.flex-item { background: tomato; padding: 1px; margin-top: 10px; margin-right: 10px;  color: white; }'
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
@@ -105,7 +105,7 @@ def runGenCockpit(infile, outfile):
         h += '<div class="flex-item">'
         h += '<h2>Top 10 Sources by Domain</h2>'
         h += '<table>'
-        h += '<thead><tr><th scope="col">Domain</th><th scope="col">Hits Count</th></tr></thead>'
+        h += '<thead><tr><th scope="col">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
@@ -129,7 +129,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 Countries</h2>' + "\n"
             h += '<table>'
-            h += '<thead><tr><th scope="col">Country</th><th scope="col">Hits Count</th></tr></thead>'
+            h += '<thead><tr><th scope="col">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
@@ -308,7 +308,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 URL</h2>'
             h += '<table>'
-            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hits count</th></tr></thead>'
+            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
