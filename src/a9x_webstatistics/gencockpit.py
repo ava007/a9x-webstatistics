@@ -113,8 +113,7 @@ def runGenCockpit(infile, outfile):
              i += 1
              if i == 10:
                  break
-        h += '</table>' + "\n"
-        h += '</div>'
+        h += '</table></div>'  + "\n"
 
         # Top Countries
         tcountries = {}
@@ -199,7 +198,7 @@ def runGenCockpit(infile, outfile):
                 if i == 10:
                     break
             h += '</table></div>' + "\n"
-            h += '</div>' + "\n"
+        h += '</div>' + "\n"
 
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
@@ -319,7 +318,7 @@ def runGenCockpit(infile, outfile):
                 if i == 10:
                     break
             h += '</table></div>' + "\n"
-            h += '</div>' + "\n"
+        h += '</div>' + "\n"
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
