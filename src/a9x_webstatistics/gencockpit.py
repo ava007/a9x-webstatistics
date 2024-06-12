@@ -295,19 +295,21 @@ def runGenCockpit(infile, outfile):
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<h2>Top 10 Urls</h2>'
+            h += '<h2>Top 10 URL</h2>'
             h += '<table>'
-            h += '<thead><tr><th scope="col">Url</th><th scope="col">Url Hits</th></tr></thead>'
+            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hits</th></tr></thead>'
             i = 0
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-                i += 1
+                if not k.endswith('.css') and not k.endswith('.json'):
+                    h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                    i += 1
                 if i == 10:
                     break
             h += '</table>' + "\n"
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
+        h += '<pre>URL: Uniform Resource Locator</pre>'
         h += '</footer>'
                 
         h += '</body></html>'
