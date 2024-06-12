@@ -11,10 +11,9 @@ def genHeader():
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta name="robots" content="index,follow">'
     h += '<style>'
-    h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif";'
-    h += '    font-size: 12px; }'
+    h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
     h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
-    h += '.flex-item { background: tomato; padding: 5px; margin-top: 10px;line-height: 150px; color: white; }'
+    h += '.flex-item { background: tomato; padding: 15px; margin-top: 10px; margin-right: 10px; line-height: 150px; color: white; }'
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
@@ -155,7 +154,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h2>'
             h += '<table>'
-            h += '<thead><tr><th scope="col">Url</th><th scope="col">Url Hits</th></tr></thead>'
+            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
