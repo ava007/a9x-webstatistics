@@ -82,8 +82,8 @@ def upd(
         else:
             d['days'][dt]['quality'][i['request']]['count'] += 1
 
-    # update quality: internal redirects    
-    if len(i['referer']) > 1 and (i['status'] == '301' or i['status'] == '302'):
+    # update quality: internal permanently redirects: 301
+    if len(i['referer']) > 1 and (i['status'] == '301'):
         if 'quality' not in d['days'][dt]:
             d['days'][dt]['quality'] = {}
         if i['request'] not in d['days'][dt]['quality']:
@@ -91,7 +91,7 @@ def upd(
             d['days'][dt]['quality'][i['request']]['from'] = i['referer']
             d['days'][dt]['quality'][i['request']]['status'] = i['status']
             d['days'][dt]['quality'][i['request']]['count'] = 1
-            d['days'][dt]['quality'][i['request']]['comment'] = 'internal redirect'
+            d['days'][dt]['quality'][i['request']]['comment'] = 'internal permanent redirect'
         else:
             d['days'][dt]['quality'][i['request']]['count'] += 1
 
