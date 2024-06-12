@@ -181,11 +181,12 @@ def runGenCockpit(infile, outfile):
             h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
-                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + "</td>"
-                h += '<td>' + v['from'] + "</td>"
-                h += '<td style="text-align: right">' + str(format(v['count'],',')) + "</td>"
-                h += '<td>' + v['comment'] + "</td></tr>"
-                h += '<td>' + v['lastoccured'] + "</td></tr>"
+                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
+                h += '<td>' + v['from'] + '</td>'
+                h += '<td style="text-align: right">' + str(format(v['count'],',')) + '</td>'
+                h += '<td>' + v['comment'] + '</td>'
+                h += '<td>' + v['lastoccured'] + '</td>'
+                h += '</tr>'
                 i += 1
                 if i == 5:
                     break
