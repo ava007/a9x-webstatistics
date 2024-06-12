@@ -13,7 +13,7 @@ def genHeader():
     h += '<style>'
     h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
     h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
-    h += '.flex-item { background: tomato; padding: 1px; margin-top: 10px; margin-right: 10px;  color: white; }'
+    h += '.flex-item { background: tomato; padding: 1px; margin-top: 10px; margin-right: 10px; color: white; }'
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
