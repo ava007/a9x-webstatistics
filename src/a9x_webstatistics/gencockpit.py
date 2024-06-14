@@ -28,6 +28,7 @@ def runGenCockpit(infile, outfile):
         day_dta_mobile = []
         day_dta_tablet = []
         day_dta_bots = []
+        day_dta_visits = []
 
         day_dta_i = 0
         try:
@@ -55,6 +56,12 @@ def runGenCockpit(infile, outfile):
                 # add "others" to "bots" in last element of the list:
                 if 'others' in d['days'][k]['device_hits']:
                     day_dta_bots[-1] += d['days'][k]['device_hits']['others']
+                    
+                # visits:
+                if 'visits' in d['days'][k]:
+                    day_dta_visits.append(d['days'][k]['visits'])
+                else:
+                    day_dta_visits.append(0)
   
         except KeyError:
             print('KeyError occured! ' + str(d['days'][k]) )
@@ -79,6 +86,7 @@ def runGenCockpit(infile, outfile):
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
         h += '      { type: \'line\',label: \'bots and others\',data: ' + str(day_dta_bots) + '}' + "\n"
+        h += '      { type: \'line\',label: \'Visits\', data: '  + str(day_dta_visits)  + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
