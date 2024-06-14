@@ -86,7 +86,7 @@ def runGenCockpit(infile, outfile):
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
         h += '      { type: \'line\',label: \'bots and others\',data: ' + str(day_dta_bots) + '}' + "\n"
-        h += '      { type: \'line\',label: \'Visits\', data: '  + str(day_dta_visits)  + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'line\',label: \'Visits\',  data: ' + str(day_dta_visits)  + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
