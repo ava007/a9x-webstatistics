@@ -56,7 +56,7 @@ def upd(
     d['timelastrec'] = i['timestamp']
 
     # update visits
-    if i['ip'] not in visitIP:
+    if i['ip'] not in visitIP and devCla in ('desktop','mobile','tablet'):
         d['days'][dt]['visits'] = d['days'][dt]['visits'] + 1;
         visitIP[i['ip']] = 1
 
