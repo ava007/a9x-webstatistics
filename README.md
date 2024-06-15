@@ -2,7 +2,7 @@
 
 This package produces web statistics and analytical output based on nginx access log files.
 
-[![PyPI package](https://img.shields.io/badge/pip%20install-example--pypi--package-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/github/license/ava007/a9x-webstatistics)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
+[![PyPI package](https://img.shields.io/badge/pip%20install-a9x_webstaticstics-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/github/license/ava007/a9x-webstatistics)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
 
 ## Installation
 
