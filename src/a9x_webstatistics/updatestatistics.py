@@ -81,6 +81,7 @@ def upd(
         if i['request'] not in d['days'][dtFriends]['friends'][rdomain]['target']:
             d['days'][dtFriends]['friends'][rdomain]['target'][i['request']] = 0
         d['days'][dtFriends]['friends'][rdomain]['target'][i['request']] += 1
+        d['days'][dtFriends]['friends'][rdomain]['cnt'] += 1
          
     # update quality: internal server error
     if i['status'] == '500':
