@@ -72,15 +72,15 @@ def upd(
     # update friends on the first day of the month:
     dtFriends = dt[0:6] + '01'
     if i['status'] == '200' and devCla in ('desktop','mobile','tablet') and len(i['referer']) > 1 and i['referer'][0:4] == 'http':
-        refurl = urlparse(i['referer'])
+        refurl = urlparse(i['referer']).netloc
         rdomain = refurl.removeprefix('www.')
         if 'friends' not in d['days'][dtFriends]:
             d['days'][dtFriends]['friends'] = {}
         if rdomain not in d['days'][dtFriends]['friends']:
             d['days'][dtFriends]['friends'][rdomain] = {'cnt': 0, 'target': {} };
-        if r['request'] not in d['days'][dtFriends]['friends'][rdomain]['target']:
-            d['days'][dtFriends]['friends'][rdomain]['target'][r['request']] = 0
-        d['days'][dtFriends]['friends'][rdomain]['target'][r['request']] += 1
+        if i['request'] not in d['days'][dtFriends]['friends'][rdomain]['target']:
+            d['days'][dtFriends]['friends'][rdomain]['target'][i['request']] = 0
+        d['days'][dtFriends]['friends'][rdomain]['target'][i['request']] += 1
          
     # update quality: internal server error
     if i['status'] == '500':
