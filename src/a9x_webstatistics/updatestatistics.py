@@ -129,6 +129,8 @@ def detectDeviceClass(ua):
      return 'others'
   if (ua.lower().find('bot') > 0):
      return 'bots'
+  if (ua.lower().find('crawler') > 0):
+     return 'others'
   if (ua.lower().find('python') > 0):
      return 'bots'
   if (ua.lower().find('mediapartner') > 0):
