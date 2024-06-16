@@ -47,11 +47,11 @@ def upd(
     if 'referer' in i and i['referer'] != "-":
         if 'source' not in d['days'][dt]:
             d['days'][dt]['source'] = {}
-        o = urlparse(i['referer'])
-        print("host: " + o.hostname)
-        if o.hostname not in d['days'][dt]['source']:
-            d['days'][dt]['source'][o.hostname] = 0;
-        d['days'][dt]['source'][o.hostname] += 1;
+        refurl = urlparse(i['referer']).netloc
+        rdomain = refurl.removeprefix('www.')
+        if rdomain not in d['days'][dt]['source']:
+            d['days'][dt]['source'][rdomain] = 0;
+        d['days'][dt]['source'][rdomain] += 1;
                     
     d['timelastrec'] = i['timestamp']
 
