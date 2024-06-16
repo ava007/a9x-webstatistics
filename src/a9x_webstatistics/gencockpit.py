@@ -113,7 +113,7 @@ def runGenCockpit(infile, outfile):
         h += '<div class="flex-item">'
         h += '<h2>Top 10 Sources by Domain</h2>'
         h += '<table>'
-        h += '<thead><tr><th scope="col">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
@@ -137,7 +137,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 Countries</h2>' + "\n"
             h += '<table>'
-            h += '<thead><tr><th scope="col">Country</th><th scope="col">Hit Count</th></tr></thead>'
+            h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
@@ -162,7 +162,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h2>'
             h += '<table>'
-            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
+            h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
@@ -192,7 +192,7 @@ def runGenCockpit(infile, outfile):
         if len(tquality) > 0:
             h += '<div class="flex-item">'
             h += '<h2>Possible Quality Improvements</h2>'
-            h += '<table><thead><tr><th scope="col">affected URL</th><th scope="col">Status</th><th scope="col">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
+            h += '<table><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
@@ -290,7 +290,7 @@ def runGenCockpit(infile, outfile):
             h += '<div class="flex-item">'
             h += '<h2>Top 10 Countries</h2>'
             h += '<table>'
-            h += '<thead><tr><th scope="col">Country</th><th scope="col">Hits count</th></tr></thead>'
+            h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
