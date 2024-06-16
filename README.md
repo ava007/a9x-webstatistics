@@ -4,6 +4,10 @@ This package produces web statistics and analytical output based on nginx access
 
 [![PyPI package](https://img.shields.io/badge/pip%20install-a9x_webstatistics-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/a9x_webstatistics?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/badge/license-own-blue)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
 
+## Live Example
+
+Visit the live example on [logikfabrik.com](https://www.logikfabrik.com/webstatsLF24.html).
+
 ## Installation
 
 ```bash
