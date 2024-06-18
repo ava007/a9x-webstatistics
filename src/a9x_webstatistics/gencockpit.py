@@ -37,7 +37,7 @@ def runGenCockpit(infile, outfile):
                 if day_dta_i > 31:
                     break
                 # consider only days:
-                if len(k) < 6:
+                if len(k) < 8:
                     continue
                 day_dta_i += 1
                 day_lbl.append(k)
@@ -225,6 +225,7 @@ def runGenCockpit(infile, outfile):
         mth_dta_mobile = []
         mth_dta_tablet = []
         mth_dta_bots = []
+        mth_dta_visits = []
 
         # loop through month beginning with highest month:
         for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
@@ -237,6 +238,7 @@ def runGenCockpit(infile, outfile):
                     mth_dta_mobile.append(0)
                     mth_dta_tablet.append(0)
                     mth_dta_bots.append(0)
+                    mth_dta_visits.append(0)
                     
                 if 'desktop' in d['days'][k]['device_hits']:
                     mth_dta_desktop[-1] += d['days'][k]['device_hits']['desktop']
@@ -250,12 +252,19 @@ def runGenCockpit(infile, outfile):
                 if 'others' in d['days'][k]['device_hits']:
                     mth_dta_bots[-1] += d['days'][k]['device_hits']['others']
 
+                # visits:
+                if 'visits' in d['days'][k]:
+                    mth_dta_visits.append(d['days'][k]['visits'])
+                else:
+                    mth_dta_visits.append(0)
+
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_dta_desktop.reverse()
             mth_dta_mobile.reverse()
             mth_dta_tablet.reverse()
             mth_dta_bots.reverse()
+            mth_dta_visits.reverse()
             h += '<h1>Webstatistics for the last Months</h1>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += '<script>' + "\n" + 'const mth_ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
@@ -267,7 +276,8 @@ def runGenCockpit(infile, outfile):
             h += ' data: { ' + "\n" 
             h += '   datasets: [' + "\n"
             h += '      { type: \'line\',label: \'bots and others\',data: ' + str(mth_dta_bots) + '}' + "\n"
-            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
+            h += '     ,{ type: \'line\',label: \'Visits\',  data: ' + str(mth_dta_visits) + ',backgroundColor: \'#ff0000\'}' + "\n"
+            h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(mth_dta_desktop)+ ',backgroundColor: \'#42c5f5\'}' + "\n"
             h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(mth_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
             h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(mth_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
             h += '    ],' + "\n"
