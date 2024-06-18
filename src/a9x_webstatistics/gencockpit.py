@@ -33,8 +33,12 @@ def runGenCockpit(infile, outfile):
         day_dta_i = 0
         try:
             for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
-                if day_dta_i > 30:
+                # show at max 31 days:
+                if day_dta_i > 31:
                     break
+                # consider only days:
+                if len(k) < 6:
+                    continue
                 day_dta_i += 1
                 day_lbl.append(k)
                 if 'desktop' in d['days'][k]['device_hits']:
@@ -86,7 +90,7 @@ def runGenCockpit(infile, outfile):
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
         h += '      { type: \'line\',label: \'bots and others\',data: ' + str(day_dta_bots) + '}' + "\n"
-        h += '     ,{ type: \'line\',label: \'Visits\',  data: ' + str(day_dta_visits)  + ',backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '     ,{ type: \'line\',label: \'Visits\',  data: ' + str(day_dta_visits)  + ',backgroundColor: \'#ff0000\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ',backgroundColor: \'#42c5f5\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ',backgroundColor: \'#42f5aa\'}' + "\n"
         h += '     ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ',backgroundColor: \'#f5a742\'}' + "\n"
