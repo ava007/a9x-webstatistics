@@ -211,6 +211,14 @@ def runGenCockpit(infile, outfile):
             h += '</table></div>' + "\n"
         h += '</div>' + "\n"
 
+        # top external landings (friends):
+        tland = {}   # nested dictionary!
+        firstOfCurrentMonth =  actYearMonth + '01'
+        if 'friends' in d['days'][firstOfCurrentMonth]:
+            for k, v in sorted(d['days'][firstOfCurrentMonth]['friends'].items(), key=itemgetter(0), reverse=True):
+                h += '<pre>' + k + ' ' + str(v) + '</pre>'
+
+        
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
         tlr_first = tlr.replace(day=1)
