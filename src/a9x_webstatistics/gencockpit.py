@@ -254,10 +254,8 @@ def runGenCockpit(infile, outfile):
 
                 # visits:
                 if 'visits' in d['days'][k]:
-                    mth_dta_visits.append(d['days'][k]['visits'])
-                else:
-                    mth_dta_visits.append(0)
-
+                    mth_dta_visits[-1] += d['days'][k]['visits']
+             
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_dta_desktop.reverse()
