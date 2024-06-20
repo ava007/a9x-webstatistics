@@ -214,7 +214,7 @@ def runGenCockpit(infile, outfile):
         # top external landings (friends):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
-        if 'friends' in d['days'][firstOfCurrentMonth]:
+        if firstOfCurrentMonth in d['days'] and 'friends' in d['days'][firstOfCurrentMonth]:
             for k, v in sorted(d['days'][firstOfCurrentMonth]['friends'].items(), key=itemgetter(0), reverse=True):
                 h += '<pre>' + k + ' ' + str(v) + '</pre>'
 
