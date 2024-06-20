@@ -3,6 +3,10 @@ def upd(
     d,
     i,
     visitIP):
+
+    # omit css, ico etc
+    if i['request'].endswith(('.css', '.ico', '.jpg')):
+        return
         
     dt = i['ymd']
 
