@@ -19,7 +19,7 @@ def genHeader():
     h += '<body>'
     return h
     
-def runGenCockpit(infile, outfile):
+def runGenCockpit(infile, outfile, domain):
     with open(infile) as json_file:
         d = json.load(json_file) 
 
@@ -375,6 +375,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
+    parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     args, unknown = parser.parse_known_args()
 
-    runGenCockpit(infile=args.infile, outfile=args.outfile)
+    runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
