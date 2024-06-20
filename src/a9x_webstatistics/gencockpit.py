@@ -215,8 +215,11 @@ def runGenCockpit(infile, outfile):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['days'] and 'friends' in d['days'][firstOfCurrentMonth]:
+            h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col">Target</th></tr></thead>'
             for k, v in sorted(d['days'][firstOfCurrentMonth]['friends'].items(), key=itemgetter(0), reverse=True):
-                h += '<pre>' + k + ' ' + str(v) + '</pre>'
+                for kb, vb in v['target']:
+                    h += '<tr><td>' + k + '</td><td>' + kb + '</td><td>' + str(vb) + '</td></tr>'
+            h += '</table'
 
         
         # Webstatistics for the last months
