@@ -76,6 +76,7 @@ def runGenCockpit(infile, outfile, domain):
         day_dta_mobile.reverse()
         day_dta_tablet.reverse()
         day_dta_bots.reverse()
+        day_dta_visits.reverse()
 
         h = genHeader()
         h += '<h1>Analysis and Statistics of the last Days</h1>'
