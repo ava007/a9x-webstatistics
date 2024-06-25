@@ -6,7 +6,8 @@ def upd(
 
     # omit css, ico etc
     if i['request'].endswith(('.css', '.ico', '.jpg')):
-        return
+        return d, visitIP
+
         
     dt = i['ymd']
 
