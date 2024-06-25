@@ -199,7 +199,7 @@ def runGenCockpit(infile, outfile, domain):
             h += '<h2>Possible Quality Improvements</h2>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
-            for k, v in sorted(tquality.items(), key=lambda x: (x[1]['count']), reverse=True):
+            for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
                 h += '<td>' + v['from'] + '</td>'
                 h += '<td style="text-align: right">' + str(format(v['count'],',')) + '</td>'
@@ -345,8 +345,11 @@ def runGenCockpit(infile, outfile, domain):
             h += '<table>'
             h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
+            vdomain = domain.replace('https://','')
+            vdomain = vdomain.replace('http://','')
+            vdomain = vdomain.removeprefix('www.')
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
+                if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
                     h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
                 if i == 10:
