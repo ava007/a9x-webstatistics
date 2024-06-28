@@ -84,14 +84,14 @@ def runGenCockpit(infile, outfile, domain):
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
         h += 'new Chart(ctx, {'  + "\n"
-        h += ' type: \'bar\','  
-        h += ' options: { responsive: true, scales: {'  
-        h += '    x: { stacked: true,  ticks: { beginAtZero: true } }, '
-        h += "    y: { stacked: true, ticks: { beginAtZero: true } },
+        h += " type: 'bar', "  
+        h += " options: { responsive: true, scales: {"
+        h += "    x: { stacked: true,  ticks: { beginAtZero: true } }, "
+        h += "    y: { stacked: true, ticks: { beginAtZero: true } }, "
         h += "    y2: { stacked: false, ticks: {beginAtZero: true}}"
         h += "  } }" + "\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6:] + '\'} }' + "\n"
-        h += ' ,data: { ' + "\n" 
+        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
+        h += " ,data: { " + "\n" 
         h += '   datasets: [' + "\n"
         h += '     { type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ' ,backgroundColor: \'#42c5f5\'}' + "\n"
         h += '    ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ' ,backgroundColor: \'#42f5aa\'}' + "\n"
