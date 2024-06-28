@@ -85,7 +85,7 @@ def runGenCockpit(infile, outfile, domain):
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
-        h += ' ,options: { scales: { 
+        h += ' ,options: { scales: {'  + "\n"
         h += '    xAxes: [{ stacked: true,  ticks: { beginAtZero: true } }], '
         h += "    yAxes: [{ stacked: false, ticks: { beginAtZero: true } }, {id: 'ybar', stacked: true, ticks: {beginAtZero: true}} ]"
         h += "} }\n"
