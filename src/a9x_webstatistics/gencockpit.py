@@ -85,11 +85,11 @@ def runGenCockpit(infile, outfile, domain):
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
         h += 'new Chart(ctx, {'  + "\n"
         h += ' responsive: true' + "\n"
-        h += ' ,options: { scales: {'  + "\n"
+        h += ' ,options: { scales: {'  
         h += '    xAxes: [{ stacked: true,  ticks: { beginAtZero: true } }], '
-        h += "    yAxes: [{ stacked: false, ticks: { beginAtZero: true } }, {id: 'ybar', stacked: true, ticks: {beginAtZero: true}} ]"
-        h += "} }\n"
-        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6:] + '\'} }' + "\n"
+        h += "    yAxes: [{id: 'yline', stacked: false, ticks: { beginAtZero: true } }, {id: 'ybar', stacked: true, ticks: {beginAtZero: true}} ]"
+        h += "  } }" + "\n"
+        h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6:] + '\'} }' 
         h +=  ' },' + "\n"
         h += ' data: { ' + "\n" 
         h += '   datasets: [' + "\n"
