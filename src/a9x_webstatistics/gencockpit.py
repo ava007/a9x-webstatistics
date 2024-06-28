@@ -84,18 +84,20 @@ def runGenCockpit(infile, outfile, domain):
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
         h += 'new Chart(ctx, {'  + "\n"
+        h += ' type: \'bar\','  
         h += ' options: { responsive: true, scales: {'  
-        h += '    xAxes: [{ stacked: true,  ticks: { beginAtZero: true } }], '
-        h += "    yAxes: [{id: 'yline', stacked: false, ticks: { beginAtZero: true } }, {id: 'ybar', stacked: true, ticks: {beginAtZero: true}} ]"
+        h += '    x: { stacked: true,  ticks: { beginAtZero: true } }, '
+        h += "    y: { stacked: true, ticks: { beginAtZero: true } },
+        h += "    y2: { stacked: false, ticks: {beginAtZero: true}}"
         h += "  } }" + "\n"
         h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + ' ' + d['timelastrec'][-6:] + '\'} }' + "\n"
         h += ' ,data: { ' + "\n" 
         h += '   datasets: [' + "\n"
-        h += '     { type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ' ,backgroundColor: \'#42c5f5\', yAxisID: \'ybar\'}' + "\n"
-        h += '    ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ' ,backgroundColor: \'#42f5aa\', yAxisID: \'ybar\'}' + "\n"
-        h += '    ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ' ,backgroundColor: \'#f5a742\', yAxisID: \'ybar\'}' + "\n"
-        h += '    ,{ type: \'line\',label: \'bots and others\', data: ' + str(day_dta_bots) + ', yAxisID: \'yline\'}' + "\n"
-        h += '    ,{ type: \'line\',label: \'Visits\', data: ' + str(day_dta_visits)  + ' ,backgroundColor: \'#ff0000\', yAxisID: \'yline\'}' + "\n"
+        h += '     { type: \'bar\', label: \'Desktop\', data: ' + str(day_dta_desktop) + ' ,backgroundColor: \'#42c5f5\'}' + "\n"
+        h += '    ,{ type: \'bar\', label: \'Mobile\',  data: ' + str(day_dta_mobile) + ' ,backgroundColor: \'#42f5aa\'}' + "\n"
+        h += '    ,{ type: \'bar\', label: \'Tablets\', data: ' + str(day_dta_tablet) + ' ,backgroundColor: \'#f5a742\'}' + "\n"
+        h += '    ,{ type: \'line\',label: \'bots and others\', data: ' + str(day_dta_bots) + ', yAxisID: \'y2\'}' + "\n"
+        h += '    ,{ type: \'line\',label: \'Visits\', data: ' + str(day_dta_visits)  + ' ,backgroundColor: \'#ff0000\', yAxisID: \'y2\'}' + "\n"
         h += '    ],' + "\n"
         h += '    labels: ' + str(day_lbl) + "\n"
         h += ' },' + "\n" + '});' + "\n"
