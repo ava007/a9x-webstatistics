@@ -283,23 +283,22 @@ def runGenCockpit(infile, outfile, domain):
             mth_dta_visits.reverse()
             h += '<h1>Webstatistics for the last Months</h1>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
-            h += '<script>' + "\n" + 'const mth_ctx = document.getElementById(\'a9x_ws_months\');' + "\n"
-            h += 'new Chart(mth_ctx, {'  + "\n"
-            h += ' responsive: true' + "\n"
-            h += ' ,options: { scales: {x:{ stacked: true}, y:{ stacked: true } }' + "\n"
-            h += ' ,plugins: { subtitle: { display: true, text: \'Hits per Device Class as of ' + d['timelastrec'][0:8] + '\'} }' + "\n"
+            h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
+            h += "new Chart(mth_ctx, {"  + "\n"
+            h += " ,options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false} }" + "\n"
+            h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h +=  ' },' + "\n"
             h += " data: { " + "\n" 
             h += "   datasets: [" + "\n"
             h += "      { type: 'bar', label: 'Desktop', data: " + str(mth_dta_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
             h += "     ,{ type: 'bar', label: 'Mobile',  data: " + str(mth_dta_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
             h += "     ,{ type: 'bar', label: 'Tablets', data: " + str(mth_dta_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
-            h += '     ,{ type: \'line\',label: \'bots and others\', data: ' + str(mth_dta_bots) + '}' + "\n"
-            h += '     ,{ type: \'line\',label: \'Visits\',  data: ' + str(mth_dta_visits) + ',backgroundColor: \'#ff0000\'}' + "\n"
-            h += '    ],' + "\n"
-            h += '    labels: ' + str(mth_lbl) + "\n"
-            h += ' },' + "\n" + '});' + "\n"
-            h += '</script>' + "\n"
+            h += "     ,{ type: 'line',label: 'bots and others', data: " + str(mth_dta_bots) + ", yAxisID: 'y2, order: 2}" + "\n"
+            h += "     ,{ type: 'line',label: 'Visits',  data: " + str(mth_dta_visits) + ",backgroundColor: '#ff0000', yAxisID: y2, order: 1}" + "\n"
+            h += "    ]," + "\n"
+            h += "    labels: " + str(mth_lbl) + "\n"
+            h += " }," + "\n" + "});" + "\n"
+            h += "</script>" + "\n"
 
         h += '<div class="flex-container">'
         # Top Countries
