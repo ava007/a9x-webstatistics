@@ -83,7 +83,7 @@ def runGenCockpit(infile, outfile, domain):
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
-        h += "new Chart(ctx, {"  + "\n"
+        h += "const dctx = new Chart(ctx, {"  + "\n"
         h += " type: 'bar', "  
         h += " options: { responsive: true, scales: {"
         h += "    x: { stacked: true,  ticks: { beginAtZero: true } }, "
@@ -104,12 +104,12 @@ def runGenCockpit(infile, outfile, domain):
         h += "var xmax = 0; "
         h += "var tmax = 0;" + "\n"
         h += "for (i=0; i<5; i++) {" 
-        h += "  tmax = Math.max.apply(null, ctx.data.datasets[i].data); "
+        h += "  tmax = Math.max.apply(null, dctx.data.datasets[i].data); "
         h += "  if (tmax > xmax) {  xmax = tmax; } " 
         h += "}" + "\n"
-        h += "ctx.options.scales.y.max = xmax + 5;" + "\n"
-        h += "ctx.options.scales.y2.max = xmax + 5;" + "\n"
-        h += "ctx.update();" + "\n"
+        h += "dctx.options.scales.y.max = xmax + 5;" + "\n"
+        h += "dctx.options.scales.y2.max = xmax + 5;" + "\n"
+        h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
 
         lastDate = list(d['days'].keys())[-1]
@@ -293,7 +293,7 @@ def runGenCockpit(infile, outfile, domain):
             h += '<h1>Webstatistics for the last Months</h1>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
-            h += "new Chart(mth_ctx, {"  + "\n"
+            h += "const mctx = new Chart(mth_ctx, {"  + "\n"
             h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
@@ -309,12 +309,12 @@ def runGenCockpit(infile, outfile, domain):
             h += "var xmax = 0; "
             h += "var tmax = 0;" + "\n"
             h += "for (i=0; i<5; i++) {" 
-            h += "  tmax = Math.max.apply(null, mth_ctx.data.datasets[i].data); "
+            h += "  tmax = Math.max.apply(null, mctx.data.datasets[i].data); "
             h += "  if (tmax > xmax) {  xmax = tmax; } " 
             h += "}" + "\n"
-            h += "mth_ctx.options.scales.y.max = xmax + 5;" + "\n"
-            h += "mth_ctx.options.scales.y2.max = xmax + 5;" + "\n"
-            h += "mth_ctx.update();" + "\n"
+            h += "mctx.options.scales.y.max = xmax + 5;" + "\n"
+            h += "mctx.options.scales.y2.max = xmax + 5;" + "\n"
+            h += "mctx.update();" + "\n"
             h += "</script>" + "\n"
 
         h += '<div class="flex-container">'
