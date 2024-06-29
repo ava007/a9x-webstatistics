@@ -5,9 +5,9 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 
-def genHeader():
+def genHeader(domain):
     h  = '<!doctype html><html lang="en"><head>'
-    h += '<title>Web Statistics and Analysis</title>'
+    h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta name="robots" content="index,follow">'
     h += '<style>'
@@ -78,7 +78,7 @@ def runGenCockpit(infile, outfile, domain):
         day_dta_bots.reverse()
         day_dta_visits.reverse()
 
-        h = genHeader()
+        h = genHeader(domain)
         h += '<h1>Analysis and Statistics of the last Days</h1>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
