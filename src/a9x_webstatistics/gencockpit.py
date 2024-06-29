@@ -101,6 +101,15 @@ def runGenCockpit(infile, outfile, domain):
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
+        h += "var xmax = 0; "
+        h += "var tmax = 0;" + "\n"
+        h += "for (i=0; i<5; i++) {" 
+        h += "  tmax = Math.max.apply(null, ctx.data.datasets[i].data); "
+        h += "  if (tmax > xmax) {  xmax = tmax; } " 
+        h += "}" + "\n"
+        h += "ctx.options.scales.y.max = xmax + 5;" + "\n"
+        h += "ctx.options.scales.y2.max = xmax + 5;" + "\n"
+        h += "ctx.update();" + "\n"
         h += '</script>' + "\n"
 
         lastDate = list(d['days'].keys())[-1]
@@ -297,6 +306,15 @@ def runGenCockpit(infile, outfile, domain):
             h += "    ]," + "\n"
             h += "    labels: " + str(mth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
+            h += "var xmax = 0; "
+            h += "var tmax = 0;" + "\n"
+            h += "for (i=0; i<5; i++) {" 
+            h += "  tmax = Math.max.apply(null, mth_ctx.data.datasets[i].data); "
+            h += "  if (tmax > xmax) {  xmax = tmax; } " 
+            h += "}" + "\n"
+            h += "mth_ctx.options.scales.y.max = xmax + 5;" + "\n"
+            h += "mth_ctx.options.scales.y2.max = xmax + 5;" + "\n"
+            h += "mth_ctx.update();" + "\n"
             h += "</script>" + "\n"
 
         h += '<div class="flex-container">'
