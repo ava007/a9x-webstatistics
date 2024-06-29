@@ -88,7 +88,7 @@ def runGenCockpit(infile, outfile, domain):
         h += " options: { responsive: true, scales: {"
         h += "    x: { stacked: true,  ticks: { beginAtZero: true } }, "
         h += "    y: { stacked: true,  ticks: { beginAtZero: true } }, "
-        h += "    y2: { stacked: false, ticks: {beginAtZero: true}}"
+        h += "    y2: { stacked: false, ticks: {beginAtZero: true}, position: 'right'}"
         h += "  } }" + "\n"
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
@@ -285,7 +285,7 @@ def runGenCockpit(infile, outfile, domain):
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
             h += "new Chart(mth_ctx, {"  + "\n"
-            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false} }}" + "\n"
+            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
