@@ -2,7 +2,9 @@ from urllib.parse import urlparse
 def upd(
     d,
     i,
-    visitIP):
+    visitIP,
+    domain      # own domain
+    ):
 
     # omit css, ico etc
     if i['request'].endswith(('.css', '.ico', '.jpg')):
@@ -76,7 +78,7 @@ def upd(
 
     # update friends on the first day of the month:
     dtFriends = dt[0:6] + '01'
-    if i['status'] == '200' and devCla in ('desktop','mobile','tablet') and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and d not in i['referer']:
+    if i['status'] == '200' and devCla in ('desktop','mobile','tablet') and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and domain not in i['referer']:
         refurl = urlparse(i['referer']).netloc
         rdomain = refurl.removeprefix('www.')
         if 'friends' not in d['days'][dtFriends]:
