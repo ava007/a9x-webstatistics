@@ -133,7 +133,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
             # skip already processed data:
             if recparsed['timestamp']  <=  d['timelastrec']:
                 continue
-            d, visitIP = upd(d, recparsed, visitIP)
+            d, visitIP = upd(d, recparsed, visitIP, domain)
 
     # summarize previous months
     d = summonth(d)
