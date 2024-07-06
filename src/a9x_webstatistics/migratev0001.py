@@ -28,7 +28,7 @@ def migv0001(
         d['v0001']['days'][x]['robot'] = 0
         if 'bots' in d['days'][x]['device_hits']:
             d['v0001']['days'][x]['robot'] += d['days'][x]['device_hits']['bots'] 
-        if 'others' in d['days']['device_hits']:
+        if 'others' in d['days'][x]['device_hits']:
             d['v0001']['days'][x]['robot'] += d['days'][x]['device_hits']['others'] 
         d['v0001']['days'][x]['quality'] = {}
 
