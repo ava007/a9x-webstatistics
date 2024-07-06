@@ -25,6 +25,13 @@ def migv0001(
         d['v0001']['days'][x]['user']['device_hits']['desktop'] = d['days'][x]['device_hits']['desktop']
         d['v0001']['days'][x]['user']['device_hits']['mobile'] = d['days'][x]['device_hits']['mobile']
         d['v0001']['days'][x]['user']['device_hits']['tablet'] = d['days'][x]['device_hits']['tablet']
+        d['v0001']['days'][x]['user']['external_friends_hits'] = {}
+        if 'friends' in d['days'][x]:
+            d['v0001']['days'][x]['user']['external_friends_hits'] = d['days'][x]['friends']
+        d['v0001']['days'][x]['user']['top_url'] = {}
+        if 'topurl' in d['days'][x]:
+            d['v0001']['days'][x]['user']['top_url'] = d['days'][x]['top_url']
+
         d['v0001']['days'][x]['robot'] = 0
         if 'bots' in d['days'][x]['device_hits']:
             d['v0001']['days'][x]['robot'] += d['days'][x]['device_hits']['bots'] 
