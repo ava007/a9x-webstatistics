@@ -1,6 +1,17 @@
+import json
 def migv0001(
-    d,
+    statfile
     ):
+    try:
+        f = open(statfile) 
+        d = json.load(f) 
+    except FileNotFoundError:   # first call: file does not exists
+        print("-s statistic file not found, it will be automatically created")
+        return
+    except json.JSONDecodeError:
+        print("-s json file is not valid")
+        return
+        
     # return if already migrated:
     if 'v0001' in d:
         return
