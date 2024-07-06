@@ -6,6 +6,7 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 from .summarizemonth import summonth
+from .migratev0001 import migv0001
 from importlib.metadata import version
 import geoip2.database
 
@@ -155,4 +156,5 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     args, unknown = parser.parse_known_args()
 
+    migv0001(statfile=args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain)
