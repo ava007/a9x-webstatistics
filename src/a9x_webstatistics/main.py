@@ -69,6 +69,8 @@ def runws(statfile, infile, geoip, verbosity, domain):
     d = {}
     d['timelastrec'] = '19991231235959'
     d['days'] = {}
+    d['v0001'] = {}
+    d['v0001']['days'] = {}
 
     lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
     print("lasttimerecobj: " + str(lasttimerecobj))
