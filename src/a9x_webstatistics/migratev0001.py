@@ -38,7 +38,7 @@ def migv0001(
             d['v0001']['days'][x]['user']['external_friends_hits'] = d['days'][x]['friends']
         d['v0001']['days'][x]['user']['top_url'] = {}
         if 'topurl' in d['days'][x]:
-            d['v0001']['days'][x]['user']['top_url'] = d['days'][x]['top_url']
+            d['v0001']['days'][x]['user']['top_url'] = d['days'][x]['topurl']
 
         d['v0001']['days'][x]['robot'] = {}
         d['v0001']['days'][x]['robot']['bytes_sent'] = 0
