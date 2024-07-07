@@ -6,8 +6,9 @@ def sumMonthV0001(d):
     # accumulate previous months:
     # beginning with the 15th day of the month: the previous month can be summarized:
     # 2024.08.31 => 2024.06
-    
-    sumUntilDay = datetime.now() - timedelta(days=63)
+
+    # ACHTUNG:   - timedelta!!!! when moved to PROD
+    sumUntilDay = datetime.now() + timedelta(days=63)
     sumTill = sumUntilDay.strftime("%Y%m")
     print("sumMonthV0001: accumulate including month: "  + sumTill)   # 202312
     
