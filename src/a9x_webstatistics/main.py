@@ -150,7 +150,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     with open(statfile, "w") as sf:
        json.dump(d,sf)  
 
-    d = summonthV0001(d)
+    d = sumMonthV0001(d)
 
     print("Rec processed: " + j['records_processed_for_statistic'])
     print("Reco skipped: " +  j['records_already_processed'])
