@@ -59,6 +59,7 @@ def sumMonthV0001(d):
                 d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += d['v0001']['days'][x]['user']['deviceHits']['desktop']
                 d['v0001']['days'][recMonth]['robot']['robotHits']['others']  += d['v0001']['days'][x]['robot']['robotHits']['others']
 
+                # ANDRE:  hier weiterfahren mit Anpasssungen
                 # external sources:
                 if 'source' in dtmp['days'][x]:
                     for ck,cv in dtmp['days'][x]['source'].items():
