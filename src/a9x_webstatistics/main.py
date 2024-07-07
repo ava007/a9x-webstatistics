@@ -7,6 +7,7 @@ from datetime import datetime
 from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
 from .summarizemonth import summonth
+from .summarizemonthV0001 import summonthV0001
 from .migratev0001 import migv0001
 from importlib.metadata import version
 import geoip2.database
@@ -148,6 +149,11 @@ def runws(statfile, infile, geoip, verbosity, domain):
     # write updated statistic file:
     with open(statfile, "w") as sf:
        json.dump(d,sf)  
+
+    d = summonthV0001(d)
+
+    print("Rec processed: " + j['records_processed_for_statistic'])
+    print("Reco skipped: " +  j['records_already_processed'])
     return 0
 
 if __name__ == "__main__":
