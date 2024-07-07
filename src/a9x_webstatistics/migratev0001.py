@@ -20,6 +20,14 @@ def migv0001(
     for x in d['days']:
         d['v0001']['days'][x] = {}
         d['v0001']['days'][x]['user'] = {}
+        d['v0001']['days'][x]['user']['visits'] = 0
+        if 'visits' in d['days'][x]:
+            d['v0001']['days'][x]['user']['visits'] = d['days'][x]['visits']
+            
+        d['v0001']['days'][x]['user']['bytes_sent'] = 0
+        if 'bytes_sent' in d['days'][x]:
+            d['v0001']['days'][x]['user']['bytes_sent'] = d['days'][x]['bytes_sent']
+            
         d['v0001']['days'][x]['user']['country_hits'] = d['days'][x]['countries']
         d['v0001']['days'][x]['user']['device_hits'] = {}
         d['v0001']['days'][x]['user']['device_hits']['desktop'] = d['days'][x]['device_hits']['desktop']
@@ -32,12 +40,17 @@ def migv0001(
         if 'topurl' in d['days'][x]:
             d['v0001']['days'][x]['user']['top_url'] = d['days'][x]['top_url']
 
-        d['v0001']['days'][x]['robot'] = 0
+        d['v0001']['days'][x]['robot'] = {}
+        d['v0001']['days'][x]['robot']['bytes_sent'] = 0
+        d['v0001']['days'][x]['robot']['robot_hits'] = 0
         if 'bots' in d['days'][x]['device_hits']:
-            d['v0001']['days'][x]['robot'] += d['days'][x]['device_hits']['bots'] 
+            d['v0001']['days'][x]['robot']['robot_hits'] += d['days'][x]['device_hits']['bots'] 
         if 'others' in d['days'][x]['device_hits']:
-            d['v0001']['days'][x]['robot'] += d['days'][x]['device_hits']['others'] 
+            d['v0001']['days'][x]['robot']['robot_hits'] += d['days'][x]['device_hits']['others'] 
+            
         d['v0001']['days'][x]['quality'] = {}
+        if 'quality' in d['days'][x]:
+            d['v0001']['days'][x]['quality'] = d['days'][x]['quality'] 
 
     # write updated statistic file:
     tstat = statfile.replace('.json','v0001.json')
