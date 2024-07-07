@@ -15,8 +15,13 @@ def migv0001(
     # return if already migrated:
     if 'v0001' in d:
         return
+
+    # write Save
+    tstat = statfile.replace('.json','v0001before.json')
+    with open(tstat, "w") as sf:
+       json.dump(d,sf)
+
     d['v0001'] = {}
-           
     d['v0001']['days'] = {}
     for x in d['days']:
         d['v0001']['days'][x] = {}
@@ -60,10 +65,9 @@ def migv0001(
             d['v0001']['days'][x]['quality'] = d['days'][x]['quality'] 
 
     # write updated statistic file:
-    tstat = statfile.replace('.json','v0001.json')
-    
-    with open(tstat, "w") as sf:
+    with open(statfile, "w") as sf:
        json.dump(d,sf)
+
     return
 
         
