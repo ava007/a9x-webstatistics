@@ -43,7 +43,7 @@ def sumMonthV0001(d):
                 d['v0001']['days'][recMonth]['user']['visits'] += dtmp['v0001']['days'][x]['user']['visits']
                 d['v0001']['days'][recMonth]['user']['bytesSent']   += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
-                d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['visits']
+                d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
                 d['v0001']['days'][recMonth]['robot']['bytesSent']   += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
 
                 if 'countryHits' in dtmp['v0001']['days'][x]:
