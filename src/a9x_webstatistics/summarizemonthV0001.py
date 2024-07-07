@@ -1,7 +1,7 @@
 from copy import deepcopy
 from datetime import datetime, timedelta
 
-def sumMonthV0001(d):
+def sumMonthV0001(d, statfile):
     
     # accumulate previous months:
     # beginning with the 15th day of the month: the previous month can be summarized:
