@@ -76,7 +76,7 @@ def sumMonthV0001(d, statfile):
                     for ck,cv in dtmp['v0001']['days'][x]['user']['serverResponseCode'].items():
                         print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
 
-                        print("sumV0001 responseCode: " + str(d['days'][recMonth]['serverResponseCode']))
+                        print("sumV0001 responseCode: " + str(d['days'][recMonth]['user']['serverResponseCode']))
                         if ck in d['v0001']['days'][recMonth]['user']['serverResponseCode']:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] += cv
                         else:
