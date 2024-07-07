@@ -5,7 +5,7 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 
-def genHeader(domain):
+def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
     h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
@@ -19,7 +19,7 @@ def genHeader(domain):
     h += '<body>'
     return h
     
-def runGenCockpit(infile, outfile, domain):
+def runGenCockpitV0001(infile, outfile, domain):
     with open(infile) as json_file:
         d = json.load(json_file) 
 
@@ -75,7 +75,7 @@ def runGenCockpit(infile, outfile, domain):
         day_robot_hits.reverse()
         day_usr_visits.reverse()
 
-        h = genHeader(domain)
+        h = genHeaderV0001(domain)
         h += '<h1>Analysis and Statistics of the last Days</h1>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
@@ -399,4 +399,4 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     args, unknown = parser.parse_known_args()
 
-    runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
+    runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain)
