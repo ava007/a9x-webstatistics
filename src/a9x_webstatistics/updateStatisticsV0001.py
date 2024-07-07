@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-def upd(
+def updV0001(
     d,
     i,
     visitIP,
