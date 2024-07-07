@@ -73,13 +73,13 @@ def sumMonthV0001(d):
                 # Server Response Code:
                 if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['serverResponseCode'].items():
-                        print("sum:  Responsecode: " + ck + ": " + str(cv) )
+                        print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
 
-                        print("sum responseCode: " + str(d['days'][currMonth]['serverResponseCode']))
+                        print("sumV0001 responseCode: " + str(d['days'][recMonth]['serverResponseCode']))
                         if ck in d['v0001']['days'][recMonth]['user']['serverResponseCode']:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] += cv
                         else:
-                            d['v0001']['days'][rcrMonth]['user']['serverResponseCode'][ck] = cv;
+                            d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] = cv;
 
                 # topurl:
                 if 'topUrl' in dtmp['v0001']['days'][x]['user']:
