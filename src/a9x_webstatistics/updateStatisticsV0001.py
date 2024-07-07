@@ -52,7 +52,7 @@ def updV0001(
             d['v0001']['days'][dt]['user']['countryHits'][i['country']] += 1;
 
         # update hits for device types:
-           if devCla not in d['v0001']['days'][dt]['user']['deviceHits']:
+        if devCla not in d['v0001']['days'][dt]['user']['deviceHits']:
             d['v0001']['days'][dt]['user']['deviceHits'][devCla] = 0 
         d['v0001']['days'][dt]['user']['deviceHits'][devCla] += 1 
 
