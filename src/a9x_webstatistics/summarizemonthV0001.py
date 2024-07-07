@@ -94,6 +94,10 @@ def sumMonthV0001(d):
 
                 del d['v0001']['days'][x]
    
+    # write Save
+    tstat = statfile.replace('.json','v0001sum.json')
+    with open(tstat, "w") as sf:
+       json.dump(d,sf)
     return d
 
 def compmonth(d):
