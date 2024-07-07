@@ -24,33 +24,40 @@ def migv0001(
         if 'visits' in d['days'][x]:
             d['v0001']['days'][x]['user']['visits'] = d['days'][x]['visits']
             
-        d['v0001']['days'][x]['user']['bytes_sent'] = 0
+        d['v0001']['days'][x]['user']['bytesSent'] = 0
         if 'bytes_sent' in d['days'][x]:
-            d['v0001']['days'][x]['user']['bytes_sent'] = d['days'][x]['bytes_sent']
+            d['v0001']['days'][x]['user']['bytesSent'] = d['days'][x]['bytes_sent']
             
-        d['v0001']['days'][x]['user']['country_hits'] = d['days'][x]['countries']
-        d['v0001']['days'][x]['user']['device_hits'] = {}
-        d['v0001']['days'][x]['user']['device_hits']['desktop'] = d['days'][x]['device_hits']['desktop']
-        d['v0001']['days'][x]['user']['device_hits']['mobile'] = d['days'][x]['device_hits']['mobile']
-        d['v0001']['days'][x]['user']['device_hits']['tablet'] = d['days'][x]['device_hits']['tablet']
-        d['v0001']['days'][x]['user']['external_friends_hits'] = {}
+        d['v0001']['days'][x]['user']['countryHits'] = d['days'][x]['countries']
+        
+        d['v0001']['days'][x]['user']['deviceHits'] = {}
+        d['v0001']['days'][x]['user']['deviceHits']['desktop'] = d['days'][x]['device_hits']['desktop']
+        d['v0001']['days'][x]['user']['deviceHits']['mobile'] = d['days'][x]['device_hits']['mobile']
+        d['v0001']['days'][x]['user']['deviceHits']['tablet'] = d['days'][x]['device_hits']['tablet']
+        
+        d['v0001']['days'][x]['user']['externalFriendsHits'] = {}
         if 'friends' in d['days'][x]:
-            d['v0001']['days'][x]['user']['external_friends_hits'] = d['days'][x]['friends']
-        d['v0001']['days'][x]['user']['top_url'] = {}
+            d['v0001']['days'][x]['user']['externalFriendsHits'] = d['days'][x]['friends']
+        d['v0001']['days'][x]['user']['topUrl'] = {}
         if 'topurl' in d['days'][x]:
-            d['v0001']['days'][x]['user']['top_url'] = d['days'][x]['topurl']
+            d['v0001']['days'][x]['user']['topUrl'] = d['days'][x]['topurl']
+            
+        d['v0001']['days'][x]['user']['serverResponseCode'] = {}
+        if 'serverResponseCode' in d['days'][x]:
+            d['v0001']['days'][x]['user']['serverResponseCode'] = d['days'][x]['serverResponseCode']
 
         d['v0001']['days'][x]['robot'] = {}
-        d['v0001']['days'][x]['robot']['bytes_sent'] = 0
-        d['v0001']['days'][x]['robot']['robot_hits'] = 0
+        d['v0001']['days'][x]['robot']['bytesSent'] = 0
+        d['v0001']['days'][x]['robot']['robotHits'] = 0
         if 'bots' in d['days'][x]['device_hits']:
-            d['v0001']['days'][x]['robot']['robot_hits'] += d['days'][x]['device_hits']['bots'] 
+            d['v0001']['days'][x]['robot']['robotHits'] += d['days'][x]['device_hits']['bots'] 
         if 'others' in d['days'][x]['device_hits']:
-            d['v0001']['days'][x]['robot']['robot_hits'] += d['days'][x]['device_hits']['others'] 
+            d['v0001']['days'][x]['robot']['robotHits'] += d['days'][x]['device_hits']['others'] 
             
         d['v0001']['days'][x]['quality'] = {}
         if 'quality' in d['days'][x]:
             d['v0001']['days'][x]['quality'] = d['days'][x]['quality'] 
+                d['v0001']['days'][x]['user']['serverResponseCode'] = {}
 
     # write updated statistic file:
     tstat = statfile.replace('.json','v0001.json')
