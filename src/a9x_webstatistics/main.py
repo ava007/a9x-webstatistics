@@ -72,9 +72,6 @@ def runws(statfile, infile, geoip, verbosity, domain):
     #d['v0001'] = {}
     #d['v0001']['days'] = {}
 
-    lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
-    print("lasttimerecobj: " + str(lasttimerecobj))
-
     # init job results
     j = {
         'records_read_total': 0,
@@ -93,6 +90,8 @@ def runws(statfile, infile, geoip, verbosity, domain):
         print("-s json file is not valid")
 
     visitIP = {}
+    lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
+    print("lasttimerecobj: " + str(lasttimerecobj))
 
     log_pattern = re.compile(
         r"""
@@ -136,9 +135,11 @@ def runws(statfile, infile, geoip, verbosity, domain):
                 continue
             # skip already processed data:
             if recparsed['timestamp']  <=  d['timelastrec']:
+                j['records_already_processed'] += 1
                 continue
             d, visitIP = upd(d, recparsed, visitIP, domain)
             d, visitIP = updV0001(d, recparsed, visitIP, domain)
+            j['records_processed_for_statistic'] += 1
             
 
     # summarize previous months
