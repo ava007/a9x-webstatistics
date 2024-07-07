@@ -5,7 +5,7 @@ import re
 import sys
 from datetime import datetime
 from .updatestatistics import upd
-from .updatestatisticsV0001 import updV0001
+from .updateStatisticsV0001 import updV0001
 from .summarizemonth import summonth
 from .migratev0001 import migv0001
 from importlib.metadata import version
