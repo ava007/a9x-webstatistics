@@ -404,7 +404,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     args, unknown = parser.parse_known_args()
 
-     with open(infile) as json_file:
+    with open(infile) as json_file:
         d = json.load(json_file) 
         if 'v0001' in d:
             runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain)
