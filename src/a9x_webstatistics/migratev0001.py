@@ -16,7 +16,7 @@ def migv0001(
     if 'v0001' in d:
         return
 
-    Print("Statfile to be migrated to v0001: " + statfile)
+    print("migrateV0001: Statfile to be migrated to v0001: " + statfile)
 
     # write Save
     tstat = statfile.replace('.json','v0001before.json')
