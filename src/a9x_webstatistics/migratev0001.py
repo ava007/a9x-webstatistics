@@ -11,10 +11,12 @@ def migv0001(
     except json.JSONDecodeError:
         print("-s json file is not valid")
         return
-        
+
     # return if already migrated:
     if 'v0001' in d:
         return
+
+    Print("Statfile to be migrated to v0001: " + statfile)
 
     # write Save
     tstat = statfile.replace('.json','v0001before.json')
