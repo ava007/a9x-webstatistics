@@ -54,7 +54,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 else:
                     day_usr_tablet.append(0)
                 if 'robotHits' in d['v0001']['days'][k]['robot']:
-                    day_robot_hits.append(d['days'][k]['robot']['robotHits'])
+                    day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
                 else:
                     day_robot_hits.append(0)
                                     
@@ -65,7 +65,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     day_usr_visits.append(0)
   
         except KeyError:
-            print('KeyError occured! ' + str(d['days']['v0001'][k]) )
+            print('KeyError occured! ' + str(d['v0001']['days']['v0001'][k]) )
             raise
 
         day_lbl.reverse()
