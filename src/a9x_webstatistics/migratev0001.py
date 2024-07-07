@@ -16,8 +16,7 @@ def migv0001(
     if 'v0001' in d:
         return
     d['v0001'] = {}
-    d['v0001']['timeLastRec'] = d['timelastrec']
-        
+           
     d['v0001']['days'] = {}
     for x in d['days']:
         d['v0001']['days'][x] = {}
