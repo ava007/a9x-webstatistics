@@ -152,8 +152,8 @@ def runws(statfile, infile, geoip, verbosity, domain):
 
     d = sumMonthV0001(d, statfile)
 
-    print("Rec processed: " + j['records_processed_for_statistic'])
-    print("Reco skipped: " +  j['records_already_processed'])
+    print("Rec processed: " + str(j['records_processed_for_statistic']))
+    print("Reco skipped: " +  str(j['records_already_processed']))
     return 0
 
 if __name__ == "__main__":
