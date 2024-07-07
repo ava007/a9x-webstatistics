@@ -22,7 +22,7 @@ def parseRec(rec, log_pattern, j, georeader):
         return r,j
 
     data = re.search(log_pattern, rec)
-    print("Data: " + str(data))
+    print("pareRec Data: " + str(data))
     if data:
         datadict = data.groupdict()
         ip_address = datadict["ipaddress"]
