@@ -61,38 +61,38 @@ def sumMonthV0001(d):
 
                 # ANDRE:  hier weiterfahren mit Anpasssungen
                 # external sources:
-                if 'source' in dtmp['days'][x]:
-                    for ck,cv in dtmp['days'][x]['source'].items():
-                        print("sum: external Source: " + ck + ": " + str(cv) )
+                if 'externalFriendsHits' in dtmp['v0001']['days'][x]:
+                    for ck,cv in dtmp['v0001']['days'][x]['externalFriendsHits'].items():
+                        print("sum: externalFriendsHits: " + ck + ": " + str(cv) )
 
-                        print("sum extSource: " + str(d['days'][currMonth]['source']))
-                        if ck in d['days'][currMonth]['source']:
-                            d['days'][currMonth]['source'][ck] += cv
+                        print("sum extSource: " + str(d['v0001']['days'][recMonth]['externalFriendsHits']))
+                        if ck in d['v0001']['days'][recMonth]['externalFriendsHits']:
+                            d['v0001']['days'][recMonth]['externalFriendsHits'][ck] += cv
                         else:
-                            d['days'][currMonth]['source'][ck] = cv;
+                            d['v0001']['days'][recMonth]['externalFriendsHits'][ck] = cv;
 
                 # Server Response Code:
-                for ck,cv in dtmp['days'][x]['serverResponseCode'].items():
+                for ck,cv in dtmp['v0001']['days'][x]['serverResponseCode'].items():
                     print("sum:  Responsecode: " + ck + ": " + str(cv) )
 
                     print("sum responseCode: " + str(d['days'][currMonth]['serverResponseCode']))
-                    if ck in d['days'][currMonth]['serverResponseCode']:
-                        d['days'][currMonth]['serverResponseCode'][ck] += cv
+                    if ck in d['v0001']['days'][recMonth]['serverResponseCode']:
+                        d['v0001']['days'][recMonth]['serverResponseCode'][ck] += cv
                     else:
-                        d['days'][currMonth]['serverResponseCode'][ck] = cv;
+                        d['v0001']['days'][rcrMonth]['serverResponseCode'][ck] = cv;
 
                 # topurl:
-                if 'topurl' in dtmp['days'][x]:
-                    for ck,cv in dtmp['days'][x]['topurl'].items():
+                if 'topUrl' in dtmp['v0001']['days'][x]['user']:
+                    for ck,cv in dtmp['v0001']['days'][x]['user']['topUrl'].items():
                         print("sum: topurl: " + ck + ": " + str(cv) )
 
-                        print("sum topurl: " + str(d['days'][currMonth]['topurl']))
-                        if ck in d['days'][currMonth]['topurl']:
-                            d['days'][currMonth]['topurl'][ck] += cv
+                        print("sum topurl: " + str(d['days'][recMonth]['user']['topUrl']))
+                        if ck in d['v0001']['days'][recMonth]['user']['topUrl']:
+                            d['v0001']['days'][recMonth]['user']['topUrl'][ck] += cv
                         else:
-                            d['days'][currMonth]['topurl'][ck] = cv;
+                            d['v0001']['days'][recMonth]['user']['topUrl'][ck] = cv;
 
-                del d['days'][x]
+                del d['v0001']['days'][x]
    
     return d
 
