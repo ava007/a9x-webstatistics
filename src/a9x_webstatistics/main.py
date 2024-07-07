@@ -7,7 +7,7 @@ from datetime import datetime
 from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
 from .summarizemonth import summonth
-from .summarizemonthV0001 import summonthV0001
+from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from importlib.metadata import version
 import geoip2.database
