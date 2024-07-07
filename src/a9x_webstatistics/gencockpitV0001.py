@@ -138,7 +138,7 @@ def runGenCockpit(infile, outfile, domain):
 
         # Top Countries
         tcountries = {}
-        for y in d['days']:
+        for y in d['v0001']['days']:
             curYearMonth = y[0:6]
             print (curYearMonth + " " + actYearMonth)
             if curYearMonth == actYearMonth:
@@ -163,7 +163,7 @@ def runGenCockpit(infile, outfile, domain):
         # top urls for the last 31 days:
         ttopurl = {}
         topurlcnt = 0
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             if topurlcnt >= 31:
                 break
             topurlcnt += 1
@@ -187,7 +187,7 @@ def runGenCockpit(infile, outfile, domain):
             h += '</table></div>' + "\n"
                     
         tquality = {}   # nested dictionary!
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
             if curYearMonth == actYearMonth:
                 if 'quality' in d['days'][k]:
@@ -223,7 +223,7 @@ def runGenCockpit(infile, outfile, domain):
         # top external landings (friends):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
-        if firstOfCurrentMonth in d['days'] and 'friends' in d['days'][firstOfCurrentMonth]:
+        if firstOfCurrentMonth in d['v0001']['days'] and 'friends' in d['days'][firstOfCurrentMonth]:
             h += '<div class="flex-item">'
             h += '<h2>Top 10 Landings from Friends</h2>' + "\n"
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
@@ -233,7 +233,6 @@ def runGenCockpit(infile, outfile, domain):
             h += '</table></div>'  + "\n"
         
         h += '</div>' + "\n"
-
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
@@ -252,7 +251,7 @@ def runGenCockpit(infile, outfile, domain):
         mth_usr_visits = []
 
         # loop through month beginning with highest month:
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
             if curYearMonth <= maxYearMonth:
                 if  curYearMonth != prevYearMonth:
@@ -264,21 +263,21 @@ def runGenCockpit(infile, outfile, domain):
                     mth_usr_bots.append(0)
                     mth_usr_visits.append(0)
                     
-                if 'desktop' in d['days'][k]['device_hits']:
-                    mth_usr_desktop[-1] += d['days'][k]['device_hits']['desktop']
-                if 'mobile' in d['days'][k]['device_hits']:
-                    mth_usr_mobile[-1] += d['days'][k]['device_hits']['mobile']
-                if 'tablet' in d['days'][k]['device_hits']:
-                    mth_usr_tablet[-1] += d['days'][k]['device_hits']['tablet']
-                if 'bots' in d['days'][k]['device_hits']:
-                    mth_usr_bots[-1] += d['days'][k]['device_hits']['bots']
+                if 'desktop' in d['v0001']['days'][k]['device_hits']:
+                    mth_usr_desktop[-1] += d['v0001']['days'][k]['device_hits']['desktop']
+                if 'mobile' in d['v0001']['days'][k]['device_hits']:
+                    mth_usr_mobile[-1] += d['v0001']['days'][k]['device_hits']['mobile']
+                if 'tablet' in d['v0001']['days'][k]['device_hits']:
+                    mth_usr_tablet[-1] += d['v0001']['days'][k]['device_hits']['tablet']
+                if 'bots' in d['v0001']['days'][k]['device_hits']:
+                    mth_usr_bots[-1] += d['v0001']['days'][k]['device_hits']['bots']
                 # add "others" to "bots" in last element of the list:
-                if 'others' in d['days'][k]['device_hits']:
-                    mth_usr_bots[-1] += d['days'][k]['device_hits']['others']
+                if 'others' in d['v0001']['days'][k]['device_hits']:
+                    mth_usr_bots[-1] += d['v0001']['days'][k]['device_hits']['others']
 
                 # visits:
-                if 'visits' in d['days'][k]:
-                    mth_usr_visits[-1] += d['days'][k]['visits']
+                if 'visits' in d['v0001']['days'][k]:
+                    mth_usr_visits[-1] += d['v0001']['days'][k]['visits']
              
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
@@ -319,12 +318,12 @@ def runGenCockpit(infile, outfile, domain):
         tcountries = {}
         tccount = 0
         # loop through month beginning with highest month:
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             if len(k) == 6:    
                 if tccount > 12:
                     break
                 tccount += 1
-                for co,cv in d['days'][k]['countries'].items():
+                for co,cv in d['v0001']['days'][k]['countries'].items():
                     if co not in tcountries:
                         tcountries[co] = 0
                     tcountries[co] += cv
@@ -345,13 +344,13 @@ def runGenCockpit(infile, outfile, domain):
         # top urls
         ttopurl = {}
         topurlcnt = 0
-        for k, v in sorted(d['days'].items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             if len(k) == 6:    
                 if topurlcnt > 12:
                     break
                 topurlcnt += 1
-                if 'topurl' in d['days'][k]:
-                    for tk, tv in d['days'][k]['topurl'].items():
+                if 'topUrl' in d['v0001']['days'][k]:
+                    for tk, tv in d['v0001']['days'][k]['topUrl'].items():
                         if tk not in ttopurl:
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
