@@ -57,7 +57,6 @@ def migv0001(
         d['v0001']['days'][x]['quality'] = {}
         if 'quality' in d['days'][x]:
             d['v0001']['days'][x]['quality'] = d['days'][x]['quality'] 
-                d['v0001']['days'][x]['user']['serverResponseCode'] = {}
 
     # write updated statistic file:
     tstat = statfile.replace('.json','v0001.json')
