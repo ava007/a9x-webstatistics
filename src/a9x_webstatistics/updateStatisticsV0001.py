@@ -9,12 +9,11 @@ def updV0001(
     # omit css, ico etc
     if i['request'].endswith(('.css', '.ico', '.jpg')):
         return d, visitIP
-
         
     dt = i['ymd']
 
     # init a new day with minimal attributes:
-    if dt not in d['days']:
+    if dt not in d['v0001']['days']:
         d['v0001']['days'][dt] = {}
         d['v0001']['days'][dt]['user']    = {};
         d['v0001']['days'][dt]['user']['visits']  = 0;
@@ -96,6 +95,11 @@ def updV0001(
             d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
             d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
          
+    # update statistics for ROBOTS:
+    if devCla not in ('desktop','mobile','tablet'):
+        d['v0001']['days'][dt]['robot']['bytesSent'] += int(i['bytes_sent'])
+        d['v0001']['days'][dt]['robot']['robotHits'] += 1
+        
     # update quality: internal server error
     if i['status'] == '500':
         if 'quality' not in d['v0001']['days'][dt]:
