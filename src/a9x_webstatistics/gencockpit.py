@@ -4,6 +4,7 @@ from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
+from .gencockpitV0001 import runGenCockpitV0001
 
 def genHeader(domain):
     h  = '<!doctype html><html lang="en"><head>'
@@ -403,4 +404,9 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     args, unknown = parser.parse_known_args()
 
-    runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
+     with open(infile) as json_file:
+        d = json.load(json_file) 
+        if 'v0001' in d:
+            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain)
+        else:
+            runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
