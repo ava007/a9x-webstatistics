@@ -15,6 +15,8 @@ def updV0001(
     # init a new day with minimal attributes:
     if 'v0001' not in d:
         d['v0001'] = {}
+    if 'days' not in d['v0001']:
+        d['v0001']['days'] = {}
     if dt not in d['v0001']['days']:
         d['v0001']['days'][dt] = {}
         d['v0001']['days'][dt]['user']    = {};
