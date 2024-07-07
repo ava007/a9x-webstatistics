@@ -22,7 +22,7 @@ def migv0001(
         d['v0001']['days'][x]['user'] = {}
         d['v0001']['days'][x]['user']['visits'] = 0
         if 'visits' in d['days'][x]:
-            d['v0001']['days'][x]['user']['visits'] = d['days'][x]['visits']
+            d['v0001']['days'][x]['user']['visits'] = int(d['days'][x]['visits'])
             
         d['v0001']['days'][x]['user']['bytesSent'] = 0
         if 'bytes_sent' in d['days'][x]:
