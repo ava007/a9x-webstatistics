@@ -5,13 +5,14 @@ import re
 import sys
 from datetime import datetime
 from .updatestatistics import upd
+from .updatestatisticsV0001 import updV0001
 from .summarizemonth import summonth
 from .migratev0001 import migv0001
 from importlib.metadata import version
 import geoip2.database
 
 def parseRec(rec, log_pattern, j, georeader):
-    print(str(rec))
+    #print(str(rec))
     j['records_read_total'] += 1
 
     r = {}
@@ -135,6 +136,8 @@ def runws(statfile, infile, geoip, verbosity, domain):
             if recparsed['timestamp']  <=  d['timelastrec']:
                 continue
             d, visitIP = upd(d, recparsed, visitIP, domain)
+            d, visitIP = updV0001(d, recparsed, visitIP, domain)
+            
 
     # summarize previous months
     d = summonth(d)
