@@ -66,7 +66,7 @@ def sumMonthV0001(d, statfile):
                         #print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
                         #print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
-                        if ck in dtmp['v0001']['days'][recMonth]['user']['externalFriendHits']:
+                        if ck in dtmp['v0001']['days'][x]['user']['externalFriendHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
@@ -77,7 +77,7 @@ def sumMonthV0001(d, statfile):
                         #print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
 
                         #print("sumV0001 responseCode: " + str(d['v0001']['days'][recMonth]['user']['serverResponseCode']))
-                        if ck in dtmp['v0001']['days'][recMonth]['user']['serverResponseCode']:
+                        if ck in dtmp['v0001']['days'][x]['user']['serverResponseCode']:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] = cv;
@@ -92,7 +92,7 @@ def sumMonthV0001(d, statfile):
                         # sum topurl: {'/kl/view/f95c0c51-5f00-42f6-ae4c-50abb30ed665/': 2,
                         #              '/kl/view/973a9773-2f06-4f8c-a4b6-ac785b96c990/' : 1,
                         
-                        if ck in dtmp['v0001']['days'][recMonth]['user']['topUrl']:
+                        if ck in dtmp['v0001']['days'][x]['user']['topUrl']:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] = cv;
@@ -100,7 +100,7 @@ def sumMonthV0001(d, statfile):
                 # quality:
                 if 'quality' in dtmp['v0001']['days'][x]:
                     for ck,cv in dtmp['v0001']['days'][x]['quality'].items():
-                        if ck in dtmp['v0001']['days'][recMonth]['quality']:
+                        if ck in dtmp['v0001']['days'][x]['quality']:
                             d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
