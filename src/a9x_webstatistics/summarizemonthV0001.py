@@ -20,7 +20,7 @@ def sumMonthV0001(d, statfile):
         if len(x) > 6:
             recMonth = x[0:6]
             if recMonth <= sumTill:
-                print("sumMonthV0001: recMonth : " + recMonth + "  day x: " + x)
+                #print("sumMonthV0001: recMonth : " + recMonth + "  day x: " + x)
                 if recMonth not in d['v0001']['days']:
                             
                     d['v0001']['days'][recMonth] = {}
