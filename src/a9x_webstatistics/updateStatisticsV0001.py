@@ -42,7 +42,6 @@ def updV0001(
     devCla = detectDeviceClass(i['user_agent']) 
     # update statistics for user:
     if devCla in ('desktop','mobile','tablet'):
-        #d['v0001']['days'][dt]['hits'] = d['days'][dt]['hits'] + 1
         d['v0001']['days'][dt]['user']['bytesSent'] += int(i['bytes_sent'])
 
         if i['status'] in d['v0001']['days'][dt]['user']['serverResponseCode']:
@@ -107,6 +106,11 @@ def updV0001(
     if devCla not in ('desktop','mobile','tablet'):
         d['v0001']['days'][dt]['robot']['bytesSent'] += int(i['bytes_sent'])
         d['v0001']['days'][dt]['robot']['robotHits'] += 1
+        
+        if i['status'] in d['v0001']['days'][dt]['robot']['serverResponseCode']:
+            d['v0001']['days'][dt]['robot']['serverResponseCode'][i['status']] += 1
+        else:
+            d['v0001']['days'][dt]['robot']['serverResponseCode'][i['status']] = 1
         
     # update quality: internal server error
     if i['status'] == '500':
