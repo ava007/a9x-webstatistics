@@ -273,7 +273,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     mth_usr_bots[-1] += d['v0001']['days'][k]['user']['deviceHits']['robot']
 
                 # visits:
-                if 'visits' in d['v0001']['days']['user'][k]:
+                if 'visits' in d['v0001']['days'][k]['user']:
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
              
         if len(mth_lbl) > 0:
