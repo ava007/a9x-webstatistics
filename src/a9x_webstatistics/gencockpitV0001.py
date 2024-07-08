@@ -65,7 +65,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     day_usr_visits.append(0)
   
         except KeyError:
-            print('KeyError occured! ' + str(d['v0001']['days']['v0001'][k]) )
+            print('KeyError occured! ' + str(d['v0001']['days'][k]) )
             raise
 
         day_lbl.reverse()
