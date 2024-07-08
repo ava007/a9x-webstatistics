@@ -320,7 +320,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if tccount > 12:
                     break
                 tccount += 1
-                for co,cv in d['v0001']['days'][k]['countries'].items():
+                for co,cv in d['v0001']['days'][k]['countryHits'].items():
                     if co not in tcountries:
                         tcountries[co] = 0
                     tcountries[co] += cv
