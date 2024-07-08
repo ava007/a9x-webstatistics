@@ -103,7 +103,7 @@ def sumMonthV0001(d, statfile):
                         if ck in d['v0001']['days'][recMonth]['quality']:
                             d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
                         else:
-                            d['v0001']['days'][recMonth]['quality'][ck] += cv
+                            d['v0001']['days'][recMonth]['quality'][ck] = cv
 
                 del d['v0001']['days'][x]
    
