@@ -263,21 +263,18 @@ def runGenCockpitV0001(infile, outfile, domain):
                     mth_usr_bots.append(0)
                     mth_usr_visits.append(0)
                     
-                if 'desktop' in d['v0001']['days'][k]['device_hits']:
-                    mth_usr_desktop[-1] += d['v0001']['days'][k]['device_hits']['desktop']
-                if 'mobile' in d['v0001']['days'][k]['device_hits']:
-                    mth_usr_mobile[-1] += d['v0001']['days'][k]['device_hits']['mobile']
-                if 'tablet' in d['v0001']['days'][k]['device_hits']:
-                    mth_usr_tablet[-1] += d['v0001']['days'][k]['device_hits']['tablet']
-                if 'bots' in d['v0001']['days'][k]['device_hits']:
-                    mth_usr_bots[-1] += d['v0001']['days'][k]['device_hits']['bots']
-                # add "others" to "bots" in last element of the list:
-                if 'others' in d['v0001']['days'][k]['device_hits']:
-                    mth_usr_bots[-1] += d['v0001']['days'][k]['device_hits']['others']
+                if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
+                    mth_usr_desktop[-1] += d['v0001']['days'][k]['user']['deviceHits']['desktop']
+                if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
+                    mth_usr_mobile[-1] += d['v0001']['days'][k]['user']['deviceHits']['mobile']
+                if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
+                    mth_usr_tablet[-1] += d['v0001']['days'][k]['user']['deviceHits']['tablet']
+                if 'robot' in d['v0001']['days'][k]['user']['deviceHits']:
+                    mth_usr_bots[-1] += d['v0001']['days'][k]['user']['deviceHits']['robot']
 
                 # visits:
-                if 'visits' in d['v0001']['days'][k]:
-                    mth_usr_visits[-1] += d['v0001']['days'][k]['visits']
+                if 'visits' in d['v0001']['days']['user'][k]:
+                    mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
              
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
