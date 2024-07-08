@@ -45,20 +45,20 @@ def sumMonthV0001(d, statfile):
                 d['v0001']['days'][recMonth]['user']['bytesSent']   += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
                 d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
-                d['v0001']['days'][recMonth]['robot']['bytesSent']   += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
+                d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
 
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
                         #print("sum: country: " + ck + ": " + str(cv) )
-                        #print("sum: countries" + str(d['v0001']['days'][recMonth]['user']['countryHits']))
-                        if ck in d['v0001']['days'][recMonth]['user']['countryHits']:
+                        #print("sum: countries" + str(dtmp['v0001']['days'][recMonth]['user']['countryHits']))
+                        if ck in dtmp['v0001']['days'][recMonth]['user']['countryHits']:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] = cv;
                     
-                d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += d['v0001']['days'][x]['user']['deviceHits']['mobile']
-                d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += d['v0001']['days'][x]['user']['deviceHits']['tablet']
-                d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += d['v0001']['days'][x]['user']['deviceHits']['desktop']
+                d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
+                d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
+                d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
                 
                 # external sources:
                 if 'externalFriendHits' in dtmp['v0001']['days'][x]['user']:
@@ -66,7 +66,7 @@ def sumMonthV0001(d, statfile):
                         #print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
                         #print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
-                        if ck in d['v0001']['days'][recMonth]['user']['externalFriendHits']:
+                        if ck in dtmp['v0001']['days'][recMonth]['user']['externalFriendHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
@@ -77,7 +77,7 @@ def sumMonthV0001(d, statfile):
                         #print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
 
                         #print("sumV0001 responseCode: " + str(d['v0001']['days'][recMonth]['user']['serverResponseCode']))
-                        if ck in d['v0001']['days'][recMonth]['user']['serverResponseCode']:
+                        if ck in dtmp['v0001']['days'][recMonth]['user']['serverResponseCode']:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] = cv;
@@ -92,7 +92,7 @@ def sumMonthV0001(d, statfile):
                         # sum topurl: {'/kl/view/f95c0c51-5f00-42f6-ae4c-50abb30ed665/': 2,
                         #              '/kl/view/973a9773-2f06-4f8c-a4b6-ac785b96c990/' : 1,
                         
-                        if ck in d['v0001']['days'][recMonth]['user']['topUrl']:
+                        if ck in dtmp['v0001']['days'][recMonth]['user']['topUrl']:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] = cv;
@@ -100,7 +100,7 @@ def sumMonthV0001(d, statfile):
                 # quality:
                 if 'quality' in dtmp['v0001']['days'][x]:
                     for ck,cv in dtmp['v0001']['days'][x]['quality'].items():
-                        if ck in d['v0001']['days'][recMonth]['quality']:
+                        if ck in dtmp['v0001']['days'][recMonth]['quality']:
                             d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
