@@ -320,7 +320,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if tccount > 12:
                     break
                 tccount += 1
-                for co,cv in d['v0001']['days'][k]['countryHits'].items():
+                for co,cv in d['v0001']['days'][k]['user']['countryHits'].items():
                     if co not in tcountries:
                         tcountries[co] = 0
                     tcountries[co] += cv
@@ -346,8 +346,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if topurlcnt > 12:
                     break
                 topurlcnt += 1
-                if 'topUrl' in d['v0001']['days'][k]:
-                    for tk, tv in d['v0001']['days'][k]['topUrl'].items():
+                if 'topUrl' in d['v0001']['days'][k]['user']:
+                    for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
                         if tk not in ttopurl:
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
