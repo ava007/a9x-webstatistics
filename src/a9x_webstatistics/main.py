@@ -23,7 +23,7 @@ def parseRec(rec, log_pattern, j, georeader):
         return r,j
 
     data = re.search(log_pattern, rec)
-    print("parseRec Data: " + str(data))
+    #print("parseRec Data: " + str(data))
     if data:
         datadict = data.groupdict()
         ip_address = datadict["ipaddress"]
@@ -153,7 +153,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     d = sumMonthV0001(d, statfile)
 
     print("Rec processed: " + str(j['records_processed_for_statistic']))
-    print("Reco skipped: " +  str(j['records_already_processed']))
+    print("Rec skipped: " +  str(j['records_already_processed']))
     return 0
 
 if __name__ == "__main__":
