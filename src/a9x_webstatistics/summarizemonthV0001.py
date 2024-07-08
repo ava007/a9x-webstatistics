@@ -61,15 +61,15 @@ def sumMonthV0001(d, statfile):
                 d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += d['v0001']['days'][x]['user']['deviceHits']['desktop']
                 
                 # external sources:
-                if 'externalFriendHits' in dtmp['v0001']['days'][x]:
-                    for ck,cv in dtmp['v0001']['days'][x]['externalFriendHits'].items():
+                if 'externalFriendHits' in dtmp['v0001']['days'][x]['user']:
+                    for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendHits'].items():
                         print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
-                        print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['externalFriendHits']))
-                        if ck in d['v0001']['days'][recMonth]['externalFriendHits']:
-                            d['v0001']['days'][recMonth]['externalFriendHits'][ck] += cv
+                        print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
+                        if ck in d['v0001']['days'][recMonth]['user']['externalFriendHits']:
+                            d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
-                            d['v0001']['days'][recMonth]['externalFriendHits'][ck] = cv;
+                            d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
 
                 # Server Response Code:
                 if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
@@ -109,18 +109,19 @@ def compmonthV0001(d):
     # sort accumulated countries              
     for x in d['v0001']['days']:
         if len(x) == 6:
-            d['v0001']['days'][x]['countries'] = dict(sorted(d['v0001']['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
+            d['v0001']['days'][x]['user']['countryHits'] = dict(sorted(d['v0001']['days'][x]['user']['countryHits'].items(), key=lambda item: item[1], reverse=True))
 
         # sort accumulated topurl
-        for x in d['v0001']['days']:
+        for x in d['v0001']['days']['user']:
             if len(x) == 6:
-                 if 'topUrl' in d['v0001']['days'][x]:
-                     tmpTopUrl = dict(sorted(d['v0001']['days'][x]['topUrl'].items(), key=lambda item: item[1], reverse=True))
+                 if 'topUrl' in d['v0001']['days'][x]['user']:
+                     tmpTopUrl = dict(sorted(d['v0001']['days'][x]['user']['topUrl'].items(), key=lambda item: item[1], reverse=True))
                      i = 0
+                     d['v0001']['days'][x]['user']['topUrl'] = {}
                      for k,v in tmpTopUrl:
                          i += 1
                          if i >= 24:
                              break
-                         d['v0001']['days'][x]['topurl'][k] = v
+                         d['v0001']['days'][x]['user']['topUrl'][k] = v
                      del tmpTopUrl
     return d
