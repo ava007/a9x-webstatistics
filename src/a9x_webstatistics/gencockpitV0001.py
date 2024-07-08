@@ -118,7 +118,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             curYearMonth = y[0:6]
             if curYearMonth == actYearMonth:
                 if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-                    for sk,sv in d['v0001']['days'][y]['externalFriendsHits'].items():
+                    for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
                         if sk not in tsource:
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
