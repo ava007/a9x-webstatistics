@@ -51,7 +51,7 @@ def sumMonthV0001(d, statfile):
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
                         #print("sum: country: " + ck + ": " + str(cv) )
                         #print("sum: countries" + str(dtmp['v0001']['days'][recMonth]['user']['countryHits']))
-                        if ck in dtmp['v0001']['days'][recMonth]['user']['countryHits']:
+                        if ck in d['v0001']['days'][recMonth]['user']['countryHits']:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] = cv;
@@ -66,7 +66,7 @@ def sumMonthV0001(d, statfile):
                         #print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
                         #print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
-                        if ck in dtmp['v0001']['days'][x]['user']['externalFriendHits']:
+                        if ck in d['v0001']['days'][x]['user']['externalFriendHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
