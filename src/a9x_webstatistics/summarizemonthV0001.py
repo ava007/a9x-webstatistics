@@ -87,7 +87,7 @@ def sumMonthV0001(d, statfile):
                     for ck,cv in dtmp['v0001']['days'][x]['user']['topUrl'].items():
                         print("sum: topurl: " + ck + ": " + str(cv) )
 
-                        print("sum topurl: " + str(d['days'][recMonth]['user']['topUrl']))
+                        print("sum topurl: " + str(d['v0001']['days'][recMonth]['user']['topUrl']))
                         if ck in d['v0001']['days'][recMonth]['user']['topUrl']:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] += cv
                         else:
@@ -101,22 +101,22 @@ def sumMonthV0001(d, statfile):
        json.dump(d,sf)
     return d
 
-def compmonth(d):
+def compmonthV0001(d):
     # sort accumulated countries              
-    for x in d['days']:
+    for x in d['v0001']['days']:
         if len(x) == 6:
-            d['days'][x]['countries'] = dict(sorted(d['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
+            d['v0001']['days'][x]['countries'] = dict(sorted(d['v0001']['days'][x]['countries'].items(), key=lambda item: item[1], reverse=True))
 
         # sort accumulated topurl
-        for x in d['days']:
+        for x in d['v0001']['days']:
             if len(x) == 6:
-                 if 'topurl' in d['days'][x]:
-                     tmpTopUrl = dict(sorted(d['days'][x]['topurl'].items(), key=lambda item: item[1], reverse=True))
+                 if 'topUrl' in d['v0001']['days'][x]:
+                     tmpTopUrl = dict(sorted(d['v0001']['days'][x]['topUrl'].items(), key=lambda item: item[1], reverse=True))
                      i = 0
                      for k,v in tmpTopUrl:
                          i += 1
                          if i >= 24:
                              break
-                         d['days'][x]['topurl'][k] = v
+                         d['v0001']['days'][x]['topurl'][k] = v
                      del tmpTopUrl
     return d
