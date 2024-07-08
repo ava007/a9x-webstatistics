@@ -113,7 +113,7 @@ def sumMonthV0001(d, statfile):
        json.dump(d,sf)
     return d
 
-def compmonthV0001(d):
+def compMonthV0001(d):
     # sort accumulated countries              
     for x in d['v0001']['days']:
         if len(x) == 6:
