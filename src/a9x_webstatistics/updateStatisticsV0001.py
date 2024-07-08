@@ -6,9 +6,13 @@ def updV0001(
     domain      # own domain
     ):
 
-    # omit css, ico etc
-    if i['request'].endswith(('.css', '.ico', '.jpg')):
+    # omit css and images
+    if i['request'].endswith(('.css', '.ico', '.jpg', '.jpeg', '.png')):
         return d, visitIP
+
+    owndomain = domain.replace('http://','')
+    owndomain = owndomain.replace('https://','')
+    owndomain = owndomain.replace('www.','')
         
     dt = i['ymd']
 
@@ -87,7 +91,7 @@ def updV0001(
 
         # update friends on the first day of the month:
         dtFriends = dt[0:6] + '01'
-        if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and domain not in i['referer']:
+        if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
             if 'externalFriendsHits' not in d['v0001']['days'][dtFriends]['user']:
