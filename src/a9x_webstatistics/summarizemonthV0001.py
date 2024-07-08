@@ -49,8 +49,8 @@ def sumMonthV0001(d, statfile):
 
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
-                        print("sum: country: " + ck + ": " + str(cv) )
-                        print("sum: countries" + str(d['v0001']['days'][recMonth]['user']['countryHits']))
+                        #print("sum: country: " + ck + ": " + str(cv) )
+                        #print("sum: countries" + str(d['v0001']['days'][recMonth]['user']['countryHits']))
                         if ck in d['v0001']['days'][recMonth]['user']['countryHits']:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
@@ -63,9 +63,9 @@ def sumMonthV0001(d, statfile):
                 # external sources:
                 if 'externalFriendHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendHits'].items():
-                        print("sum: externalFriendHits: " + ck + ": " + str(cv) )
+                        #print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
-                        print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
+                        #print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
                         if ck in d['v0001']['days'][recMonth]['user']['externalFriendHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
@@ -74,9 +74,9 @@ def sumMonthV0001(d, statfile):
                 # Server Response Code:
                 if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['serverResponseCode'].items():
-                        print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
+                        #print("sumV0001:  Responsecode: " + ck + ": " + str(cv) )
 
-                        print("sumV0001 responseCode: " + str(d['v0001']['days'][recMonth]['user']['serverResponseCode']))
+                        #print("sumV0001 responseCode: " + str(d['v0001']['days'][recMonth]['user']['serverResponseCode']))
                         if ck in d['v0001']['days'][recMonth]['user']['serverResponseCode']:
                             d['v0001']['days'][recMonth]['user']['serverResponseCode'][ck] += cv
                         else:
@@ -96,6 +96,14 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] = cv;
+                            
+                # quality:
+                if 'quality' in dtmp['v0001']['days'][x]:
+                    for ck,cv in dtmp['v0001']['days'][x]['quality'].items():
+                        if ck in d['v0001']['days'][recMonth]['quality']:
+                            d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
+                        else:
+                            d['v0001']['days'][recMonth]['quality'][ck] += cv
 
                 del d['v0001']['days'][x]
    
