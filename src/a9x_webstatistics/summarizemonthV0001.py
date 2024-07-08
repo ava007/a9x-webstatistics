@@ -107,7 +107,7 @@ def sumMonthV0001(d, statfile):
 
                 del d['v0001']['days'][x]
    
-    # write Save
+    # write Save - only relevant for testing
     tstat = statfile.replace('.json','v0001sum.json')
     with open(tstat, "w") as sf:
        json.dump(d,sf)
