@@ -117,11 +117,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         for y in d['v0001']['days']:
             curYearMonth = y[0:6]
             if curYearMonth == actYearMonth:
-                if 'source' in d['v0001']['days'][y]:
-                    for sk,sv in d['v0001']['days'][y]['source'].items():
+                if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
+                    for sk,sv in d['v0001']['days'][y]['externalFriendsHits'].items():
                         if sk not in tsource:
                             tsource[sk] = 0
-                        tsource[sk] += sv
+                        tsource[sk] += sv['cnt']
 
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
@@ -223,11 +223,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         # top external landings (friends):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
-        if firstOfCurrentMonth in d['v0001']['days'] and 'friends' in d['days'][firstOfCurrentMonth]:
+        if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="flex-item">'
             h += '<h2>Top 10 Landings from Friends</h2>' + "\n"
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
-            for k, v in sorted(d['days'][firstOfCurrentMonth]['friends'].items(), key=itemgetter(0), reverse=True):
+            for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
                     h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
             h += '</table></div>'  + "\n"
@@ -275,7 +275,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                 # visits:
                 if 'visits' in d['v0001']['days'][k]['user']:
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
-             
+        
+        ## Months:   
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
