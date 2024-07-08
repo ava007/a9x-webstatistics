@@ -114,7 +114,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
         # Top Sources
         tsource = {}
-        for y in d['days']:
+        for y in d['v0001']['days']:
             curYearMonth = y[0:6]
             if curYearMonth == actYearMonth:
                 if 'source' in d['v0001']['days'][y]:
@@ -142,7 +142,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             curYearMonth = y[0:6]
             print (curYearMonth + " " + actYearMonth)
             if curYearMonth == actYearMonth:
-               for co,cv in d['days'][y]['countries'].items():
+               for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
                    if co not in tcountries:
                        tcountries[co] = 0
                    tcountries[co] += cv
@@ -167,8 +167,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             if topurlcnt >= 31:
                 break
             topurlcnt += 1
-            if 'topurl' in d['days'][k]:
-                for tk, tv in d['days'][k]['topurl'].items():
+            if 'topUrl' in d['v0001']['days'][k]['user']:
+                for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
                     if tk not in ttopurl:
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
@@ -190,8 +190,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
             if curYearMonth == actYearMonth:
-                if 'quality' in d['days'][k]:
-                    for sk,sv in d['days'][k]['quality'].items():
+                if 'quality' in d['v0001']['days'][k]:
+                    for sk,sv in d['v0001']['days'][k]['quality'].items():
                         print('sk: ' + str(sk) + ' sv: ' + str(sv))
                         if sk not in tquality:
                             tquality[sk] = {}
