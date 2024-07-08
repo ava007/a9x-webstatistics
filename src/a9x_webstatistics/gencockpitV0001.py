@@ -370,9 +370,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div>' + "\n"
 
         h += '<footer>'
-        h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>'
-        h += '<pre>URL: Uniform Resource Locator'
-        h += 'salvo errore et omissione'
+        h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
+        h += '<pre>URL: Uniform Resource Locator' + "\n"
+        h += 'salvo errore et omissione'  + "\n"
         h += '</pre>'
         h += '</footer>'
                 
