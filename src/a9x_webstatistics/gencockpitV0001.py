@@ -169,6 +169,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         ttopurl = {}
         topurlcnt = 0
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            # dont take months in account:
+            if len(k) <= 6:
+                continue
             if topurlcnt >= 31:
                 break
             topurlcnt += 1
