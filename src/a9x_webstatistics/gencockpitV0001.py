@@ -20,6 +20,11 @@ def genHeaderV0001(domain):
     return h
     
 def runGenCockpitV0001(infile, outfile, domain):
+
+    owndomain = domain.replace('http://','')
+    owndomain = owndomain.replace('https://','')
+    owndomain = owndomain.replace('www.','')
+    
     with open(infile) as json_file:
         d = json.load(json_file) 
 
@@ -229,7 +234,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
-                    h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
+                    if owndomain not in k:
+                        h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
             h += '</table></div>'  + "\n"
         
         h += '</div>' + "\n"
