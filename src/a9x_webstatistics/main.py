@@ -75,7 +75,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
 
     # init job results
     j = {
-        'records_read_total': 0,
+        'records_read': 0,
         'records_skipped_comment': 0,
         'records_already_processed': 0,
         'records_processed_for_statistic': 0,
@@ -130,6 +130,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     # process infile:
     with open(infile,'r') as infile:
         for rec in infile:
+            j['records_read'] += 1
             recparsed, j = parseRec(rec, log_pattern, j, georeader)
             # skip unrecognized records:
             if not recparsed or recparsed['timestamp'] is None or recparsed['ip'] is None:
@@ -152,8 +153,9 @@ def runws(statfile, infile, geoip, verbosity, domain):
 
     d = sumMonthV0001(d, statfile)
 
+    print("Rec read: "      + str(j['records_read']))
     print("Rec processed: " + str(j['records_processed_for_statistic']))
-    print("Rec skipped: " +  str(j['records_already_processed']))
+    print("Rec skipped: "   +  str(j['records_already_processed']))
     return 0
 
 if __name__ == "__main__":
