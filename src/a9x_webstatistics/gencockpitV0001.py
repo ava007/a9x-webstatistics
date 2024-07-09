@@ -145,7 +145,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         tcountries = {}
         for y in d['v0001']['days']:
             curYearMonth = y[0:6]
-            print (curYearMonth + " " + actYearMonth)
+            #print (curYearMonth + " " + actYearMonth)
             if curYearMonth == actYearMonth:
                for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
                    if co not in tcountries:
