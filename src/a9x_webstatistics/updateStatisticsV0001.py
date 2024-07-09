@@ -85,12 +85,12 @@ def updV0001(
             rdomain = refurl.removeprefix('www.')
             if 'externalFriendsHits' not in d['v0001']['days'][dtFriends]['user']:
                 d['v0001']['days'][dtFriends]['user']['externalFriendsHits'] = {}
-            if owndomain not in d['v0001']['days'][dtFriends]['user']['externalFriendsHits']:
-                d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][owndomain] = {'cnt': 0, 'target': {} };
-            if i['request'] not in d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][owndomain]['target']:
-                d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][owndomain]['target'][i['request']] = 0
-            d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][owndomain]['target'][i['request']] += 1
-            d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][owndomain]['cnt'] += 1
+            if rdomain not in d['v0001']['days'][dtFriends]['user']['externalFriendsHits']:
+                d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} };
+            if i['request'] not in d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['target']:
+                d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['target'][i['request']] = 0
+            d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
+            d['v0001']['days'][dtFriends]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
          
     # update statistics for ROBOTS:
     if devCla not in ('desktop','mobile','tablet'):
