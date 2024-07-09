@@ -13,9 +13,6 @@ from importlib.metadata import version
 import geoip2.database
 
 def parseRec(rec, log_pattern, j, georeader):
-    #print(str(rec))
-    j['records_read_total'] += 1
-
     r = {}
     # skip comments recs
     if rec[0:1] == '#':
