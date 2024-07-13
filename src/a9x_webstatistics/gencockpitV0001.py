@@ -17,6 +17,7 @@ def genHeaderV0001(domain):
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
+    h += '<h1>Web Analytics and Statistics for ' + domain + '</a>'
     return h
     
 def runGenCockpitV0001(infile, outfile, domain):
@@ -80,8 +81,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_robot_hits.reverse()
         day_usr_visits.reverse()
 
-        h = genHeaderV0001(domain)
-        h += '<h1>Analysis and Statistics of the last Days</h1>'
+        h = genHeaderV0001(owndomain)
+        h += '<h2>Analysis and Statistics of the 31 Days</h2>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
@@ -130,7 +131,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
-        h += '<h2>Top 10 Sources by Domain</h2>'
+        h += '<h3>Top 10 Sources by Domain</h3>'
         h += '<table>'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
@@ -154,7 +155,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
-            h += '<h2>Top 10 Countries</h2>' + "\n"
+            h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
@@ -182,7 +183,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
             h += '<div class="flex-item">'
-            h += '<h2>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h2>'
+            h += '<h3>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h3>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
@@ -213,7 +214,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         if len(tquality) > 0:
             h += '<div class="flex-item">'
-            h += '<h2>Possible Quality Improvements</h2>'
+            h += '<h3>Possible Quality Improvements</h3>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
@@ -233,7 +234,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="flex-item">'
-            h += '<h2>Top 10 Landings from Friends</h2>' + "\n"
+            h += '<h3>Top 10 Landings from Friends</h3>' + "\n"
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
@@ -293,7 +294,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             mth_usr_tablet.reverse()
             mth_usr_bots.reverse()
             mth_usr_visits.reverse()
-            h += '<h1>Webstatistics for the last Months</h1>'
+            h += '<h2>Webstatistics for the last Months for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
             h += "const mctx = new Chart(mth_ctx, {"  + "\n"
@@ -337,7 +338,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
-            h += '<h2>Top 10 Countries</h2>'
+            h += '<h3>Top 10 Countries</h3>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
             i = 0
@@ -363,7 +364,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
             h += '<div class="flex-item">'
-            h += '<h2>Top 10 URL</h2>'
+            h += '<h3>Top 10 URL</h3>'
             h += '<table>'
             h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
