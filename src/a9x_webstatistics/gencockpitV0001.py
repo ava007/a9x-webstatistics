@@ -158,7 +158,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tcountries[co] = 0
                         tcountries[co] += cv
                 except KeyError: 
-                    print 'ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user'])
+                    print ('ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user']))
+                    continue
         
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
