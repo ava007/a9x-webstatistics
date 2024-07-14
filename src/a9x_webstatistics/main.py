@@ -136,7 +136,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
             if recparsed['timestamp']  <=  d['timelastrec']:
                 j['records_already_processed'] += 1
                 continue
-            d, visitIP = upd(d, recparsed, visitIP, domain)
+            #d, visitIP = upd(d, recparsed, visitIP, domain)
             d, visitIP = updV0001(d, recparsed, visitIP, domain)
             j['records_processed_for_statistic'] += 1
             
