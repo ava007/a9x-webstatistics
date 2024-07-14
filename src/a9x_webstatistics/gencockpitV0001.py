@@ -96,11 +96,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
-        h += "     { type: 'bar', label: 'Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
-        h += "    ,{ type: 'bar', label: 'Mobile',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
-        h += "    ,{ type: 'bar', label: 'Tablets', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
+        h += "     { type: 'bar', label: 'User - Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Mobile',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User -Tablets', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
         h += "    ,{ type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:2}" + "\n"
-        h += "    ,{ type: 'line',label: 'Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+        h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
@@ -194,7 +194,22 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i == 10:
                     break
             h += '</table></div>' + "\n"
-                    
+                  
+    
+       
+        # top external landings (friends):
+        tland = {}   # nested dictionary!
+        firstOfCurrentMonth =  actYearMonth + '01'
+        if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
+            h += '<div class="flex-item">'
+            h += '<h3>Top 10 Landings from Friends</h3>' + "\n"
+            h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
+            for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
+                for kb, vb in v['target'].items():
+                    if owndomain not in k:
+                        h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
+            h += '</table></div>'  + "\n"
+
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
@@ -228,19 +243,6 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i == 10:
                     break
             h += '</table></div>' + "\n"
-       
-        # top external landings (friends):
-        tland = {}   # nested dictionary!
-        firstOfCurrentMonth =  actYearMonth + '01'
-        if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div class="flex-item">'
-            h += '<h3>Top 10 Landings from Friends</h3>' + "\n"
-            h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
-            for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
-                for kb, vb in v['target'].items():
-                    if owndomain not in k:
-                        h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
-            h += '</table></div>'  + "\n"
         
         h += '</div>' + "\n"
         
@@ -302,11 +304,11 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
-            h += "      { type: 'bar', label: 'Desktop', data: " + str(mth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
-            h += "     ,{ type: 'bar', label: 'Mobile',  data: " + str(mth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'Tablets', data: " + str(mth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "      { type: 'bar', label: 'User - Desktop', data: " + str(mth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Mobile',  data: " + str(mth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Tablets', data: " + str(mth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
             h += "     ,{ type: 'line',label: 'Robots', data: " + str(mth_usr_bots) + ", yAxisID: 'y2', order: 2}" + "\n"
-            h += "     ,{ type: 'line',label: 'Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+            h += "     ,{ type: 'line',label: 'User - Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
             h += "    ]," + "\n"
             h += "    labels: " + str(mth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
