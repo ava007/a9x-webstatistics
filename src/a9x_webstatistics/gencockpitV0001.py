@@ -97,10 +97,10 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
-        h += "     { type: 'bar', label: 'User - Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
+        h += "     { type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:2}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
         h += "    ,{ type: 'bar', label: 'User - Mobile',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
         h += "    ,{ type: 'bar', label: 'User -Tablets', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
-        h += "    ,{ type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:2}" + "\n"
         h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
@@ -133,10 +133,13 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
         h += '<h3>Top 10 Sources by Domain</h3>'
+        h += '<p><small>User hits for the last 31 days by external source domain</small></p>'
         h += '<table>'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
+             if owndomain in k:
+                 continue
              h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
              i += 1
              if i == 10:
@@ -157,6 +160,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
+            h += '<p><small>User hits for the last 31 days by country</small></p>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
@@ -185,6 +189,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(ttopurl) > 0:
             h += '<div class="flex-item">'
             h += '<h3>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h3>'
+            h += '<p><small>User hits for the last 31 days by internal URL ' + owndomain + '</small></p>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
