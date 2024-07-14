@@ -17,7 +17,7 @@ def genHeaderV0001(domain):
     h += '</style>'
     h += '</head>' + "\n"
     h += '<body>'
-    h += '<h1>Web Analytics and Statistics for ' + domain + '</a>'
+    h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
     return h
     
 def runGenCockpitV0001(infile, outfile, domain):
