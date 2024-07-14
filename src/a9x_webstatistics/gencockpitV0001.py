@@ -132,8 +132,8 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
-        h += '<h3>Top 10 Sources by Domain</h3>'
-        h += '<p><small>User hits for the last 31 days by external source domain</small></p>'
+        h += '<h3>Top 10 Domains</h3>'
+        h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table>'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
@@ -192,8 +192,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
             h += '<div class="flex-item">'
-            h += '<h3>Top 10 URLs for last ' + str(topurlcnt) + ' Days</h3>'
-            h += '<p><small>User hits for the last 31 days by internal URL ' + owndomain + '</small></p>'
+            h += '<h3>Top 10 URLs</h3>'
+            h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
@@ -212,7 +212,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="flex-item">'
-            h += '<h3>Top 10 Landings from Friends</h3>' + "\n"
+            h += '<h3>Top 10 Landings</h3>' + "\n"
+            h += '<p><small>User landing for the last 31 days</small></p>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
@@ -351,6 +352,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
             h += '<h3>Top 10 Countries</h3>'
+            h += '<p><small>User hits for all months</small></p>'
             h += '<table>'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
             i = 0
