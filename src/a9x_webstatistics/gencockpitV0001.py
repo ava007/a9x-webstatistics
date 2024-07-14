@@ -152,11 +152,14 @@ def runGenCockpitV0001(infile, outfile, domain):
             curYearMonth = y[0:6]
             #print (curYearMonth + " " + actYearMonth)
             if curYearMonth == actYearMonth:
-               for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
-                   if co not in tcountries:
-                       tcountries[co] = 0
-                   tcountries[co] += cv
-
+                try:
+                    for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
+                        if co not in tcountries:
+                            tcountries[co] = 0
+                        tcountries[co] += cv
+                except KeyError: 
+                    print 'ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user'])
+        
         if len(tcountries) > 0:
             h += '<div class="flex-item">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
