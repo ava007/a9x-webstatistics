@@ -82,6 +82,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_usr_visits.reverse()
 
         h = genHeaderV0001(owndomain)
+        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + '</small></p>'
         h += '<h2>Analysis and Statistics of the 31 Days</h2>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
