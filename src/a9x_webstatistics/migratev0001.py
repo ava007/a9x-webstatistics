@@ -72,7 +72,7 @@ def migv0001(
 
     return
 
-# delete v0000
+# delete v0000 version of data
 def delv0000(
     statfile
     ):
@@ -88,6 +88,10 @@ def delv0000(
 
     # return if not migrated:
     if 'v0001' not in d:
+        return
+
+    # return if already migrated:
+    if 'days' not in d:
         return
 
     # delete old data only if it exists in v0001:
