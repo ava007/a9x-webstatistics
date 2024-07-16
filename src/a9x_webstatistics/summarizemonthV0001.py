@@ -138,7 +138,7 @@ def compMonthV0001(d):
                      tmpTopUrl = dict(sorted(d['v0001']['days'][x]['user']['topUrl'].items(), key=lambda item: item[1], reverse=True))
                      i = 0
                      d['v0001']['days'][x]['user']['topUrl'] = {}
-                     for k,v in tmpTopUrl:
+                     for k,v in tmpTopUrl.items():
                          i += 1
                          if i >= 24:
                              break
