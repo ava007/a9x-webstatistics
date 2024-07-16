@@ -144,12 +144,11 @@ def runws(statfile, infile, geoip, verbosity, domain):
 
     # summarize previous months
     d = summonth(d)
+    d = sumMonthV0001(d, statfile)
     
     # write updated statistic file:
     with open(statfile, "w") as sf:
        json.dump(d,sf)  
-
-    d = sumMonthV0001(d, statfile)
 
     print("Rec read: "      + str(j['records_read']))
     print("Rec processed: " + str(j['records_processed_for_statistic']))
