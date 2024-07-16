@@ -112,7 +112,7 @@ def sumMonthV0001(d, statfile):
                 tmpCountryHits = dict(sorted(d['v0001']['days'][x]['user']['countryHits'].items(), key=lambda item: item[1], reverse=True))
                 i = 0
                 d['v0001']['days'][x]['user']['countryHits'] = {}
-                for k,v in tmpCountryHits:
+                for k,v in tmpCountryHits.items():
                     i += 1
                     if i >= 24:
                         break
