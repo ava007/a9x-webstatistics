@@ -104,6 +104,20 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
 
                 del d['v0001']['days'][x]
+
+    # compress by month
+    for x in d['v0001']['days']:
+        if len(x) == 6:
+            if 'countryHits' in d['v0001']['days'][x]['user']:
+                tmpCountryHits = dict(sorted(d['v0001']['days'][x]['user']['countryHits'].items(), key=lambda item: item[1], reverse=True))
+                i = 0
+                d['v0001']['days'][x]['user']['countryHits'] = {}
+                for k,v in tmpCountryHits:
+                    i += 1
+                    if i >= 24:
+                        break
+                    d['v0001']['days'][x]['user']['countryHits'][k] = v
+                del tmpCountryHits
    
     # write Save - only relevant for testing
     tstat = statfile.replace('.json','v0001sum.json')
