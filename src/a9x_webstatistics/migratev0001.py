@@ -72,5 +72,33 @@ def migv0001(
 
     return
 
+# delete v0000
+def delv0000(
+    statfile
+    ):
+    try:
+        f = open(statfile) 
+        d = json.load(f) 
+    except FileNotFoundError:   # first call: file does not exists
+        print("-s statistic file not found")
+        return
+    except json.JSONDecodeError:
+        print("-s json file is not valid")
+        return
+
+    # return if not migrated:
+    if 'v0001' not in d:
+        return
+
+    #for x in d['days']:
+
+    # write updated statistic file:
+    with open(statfile, "w") as sf:
+       json.dump(d,sf)
+
+
+    return
+
+
         
 
