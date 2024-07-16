@@ -69,6 +69,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     #d['days'] = {}
     d['v0001'] = {}
     d['v0001']['days'] = {}
+    print('d: ' + str(d))
 
     # init job results
     j = {
