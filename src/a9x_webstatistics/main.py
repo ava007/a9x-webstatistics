@@ -66,9 +66,9 @@ def runws(statfile, infile, geoip, verbosity, domain):
     # init statistic file if it does not exist:
     d = {}
     d['timelastrec'] = '19991231235959'
-    d['days'] = {}
-    #d['v0001'] = {}
-    #d['v0001']['days'] = {}
+    #d['days'] = {}
+    d['v0001'] = {}
+    d['v0001']['days'] = {}
 
     # init job results
     j = {
@@ -169,3 +169,4 @@ if __name__ == "__main__":
 
     migv0001(statfile=args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain)
+    delv0000(statfile=args.statfile)
