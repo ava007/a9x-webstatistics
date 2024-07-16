@@ -96,11 +96,12 @@ def delv0000(
     if 'days' not in d:
         return
 
-    dtmp = deepcopy(d)
+    #dtmp = deepcopy(d)
     # delete old data only if it exists in v0001:
-    for x in dtmp['days']:
-        if x in d['v0001']['days']:
-          del d['days'][x]
+    #for x in dtmp['days']:
+    #    if x in d['v0001']['days']:
+    #      del d['days'][x]
+    del d['days']
 
     # write updated statistic file:
     with open(statfile, "w") as sf:
