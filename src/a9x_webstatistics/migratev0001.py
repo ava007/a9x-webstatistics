@@ -90,7 +90,10 @@ def delv0000(
     if 'v0001' not in d:
         return
 
-    #for x in d['days']:
+    # delete old data only if it exists in v0001:
+    for x in d['days']:
+        if x in d['v0001']['days']:
+          del d['days'][x]
 
     # write updated statistic file:
     with open(statfile, "w") as sf:
