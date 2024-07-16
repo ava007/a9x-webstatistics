@@ -2,6 +2,9 @@ from copy import deepcopy
 from datetime import datetime, timedelta
 
 def summonth(d):
+
+    if 'days' not in d:
+        return
     
     # accumulate previous months:
     # beginning with the 15th day of the month: the previous month can be summarized:
