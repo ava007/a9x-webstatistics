@@ -1,4 +1,6 @@
 import json
+from copy import deepcopy
+
 def migv0001(
     statfile
     ):
@@ -94,15 +96,15 @@ def delv0000(
     if 'days' not in d:
         return
 
+    dtmp = deepcopy(d)
     # delete old data only if it exists in v0001:
-    for x in d['days']:
+    for x in dtmp['days']:
         if x in d['v0001']['days']:
           del d['days'][x]
 
     # write updated statistic file:
     with open(statfile, "w") as sf:
        json.dump(d,sf)
-
 
     return
 
