@@ -396,6 +396,8 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
+        h += '<a href="https://www.chartjs.org">Uses chartjs (License)</a>'
+        h += '<a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">Uses optionally API to geolite2</a>'
         h += '<pre>URL: Uniform Resource Locator' + "\n"
         h += 'salvo errore et omissione'  + "\n"
         h += '</pre>'
