@@ -7,7 +7,7 @@ def updV0001(
     ):
 
     # omit css and images
-    if i['request'].endswith(('.css', '.ico', '.jpg', '.jpeg', '.png')):
+    if i['request'].endswith(('.css', '.ico', '.jpg', '.jpeg', '.png','.json','.txt')):
         return d, visitIP
 
     owndomain = domain.replace('http://','')
@@ -70,7 +70,7 @@ def updV0001(
             visitIP[i['ip']] = 1
 
         # top urls: accumulate top urls
-        #dtTopUrl = dt[0:6] + '01'
+        # todo: omit query string
         if i['status'] == '200':
             if 'topUrl' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['topUrl'] = {}
@@ -79,7 +79,6 @@ def updV0001(
             d['v0001']['days'][dt]['user']['topUrl'][i['request']] += 1;
 
         # update friends on the first day of the month:
-        #dtFriends = dt[0:6] + '01'
         if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
