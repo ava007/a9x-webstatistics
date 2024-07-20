@@ -261,7 +261,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
         tlr_first = tlr.replace(day=1)
         tlr_last_month = tlr_first - timedelta(days=1)
-        print("Last month: " + tlr_last_month.strftime("%Y%m"))
+        print("webstats last months; last is month: " + tlr_last_month.strftime("%Y%m"))
 
         maxYearMonth = tlr_last_month.strftime("%Y%m")
         prevYearMonth = '999912'
@@ -394,11 +394,84 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '</table></div>' + "\n"
         h += '</div>' + "\n"
 
+        # Webstatistics for the last years.
+        yth_lbl = []
+        yth_usr_desktop = []
+        yth_usr_mobile = []
+        yth_usr_tablet = []
+        yth_usr_bots = []
+        yth_usr_visits = []
+        prevYear = 9999
+
+        # loop through all dates beginning with highest date:
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            curYear = k[0:4]
+            if curYear != prevYear:
+                prevYear = curYear
+                yth_lbl.append(curYear)
+                yth_usr_desktop.append(0)
+                yth_usr_mobile.append(0)
+                yth_usr_tablet.append(0)
+                yth_usr_bots.append(0)
+                yth_usr_visits.append(0)
+                    
+            if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
+                yth_usr_desktop[-1] += d['v0001']['days'][k]['user']['deviceHits']['desktop']
+            if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
+                yth_usr_mobile[-1] += d['v0001']['days'][k]['user']['deviceHits']['mobile']
+            if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
+                yth_usr_tablet[-1] += d['v0001']['days'][k]['user']['deviceHits']['tablet']
+            if 'robot' in d['v0001']['days'][k]['user']['deviceHits']:
+                yth_usr_bots[-1] += d['v0001']['days'][k]['user']['deviceHits']['robot']
+
+            # visits:
+            if 'visits' in d['v0001']['days'][k]['user']:
+                yth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
+
+        ## Chart Years:   
+        if len(yth_lbl) > 0:
+            yth_lbl.reverse()
+            yth_usr_desktop.reverse()
+            yth_usr_mobile.reverse()
+            yth_usr_tablet.reverse()
+            yth_usr_bots.reverse()
+            yth_usr_visits.reverse()
+            h += '<h2>Webstatistics for the last Years for ' + owndomain + '</h2>'
+            h += '<div><canvas id="a9x_ws_months"></canvas></div>'
+            h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_years');" + "\n"
+            h += "const yctx = new Chart(yth_ctx, {"  + "\n"
+            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
+            h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
+            h += " ,data: { " + "\n" 
+            h += "   datasets: [" + "\n"
+            h += "      { type: 'bar', label: 'User - Desktop', data: " + str(yth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Mobile',  data: " + str(yth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Tablets', data: " + str(yth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "     ,{ type: 'line',label: 'Robots', data: " + str(yth_usr_bots) + ", yAxisID: 'y2', order: 2}" + "\n"
+            h += "     ,{ type: 'line',label: 'User - Visits',  data: " + str(yth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+            h += "    ]," + "\n"
+            h += "    labels: " + str(yth_lbl) + "\n"
+            h += " }," + "\n" + "});" + "\n"
+            h += "var xmax = 0; "
+            h += "var tmax = 0;" + "\n"
+            h += "for (i=0; i<5; i++) {" 
+            h += "  tmax = Math.max.apply(null, yctx.data.datasets[i].data); "
+            h += "  if (tmax > xmax) {  xmax = tmax; } " 
+            h += "}" + "\n"
+            h += "yctx.options.scales.y.max = xmax + 5;" + "\n"
+            h += "yctx.options.scales.y2.max = xmax + 5;" + "\n"
+            h += "yctx.update();" + "\n"
+            h += "</script>" + "\n"
+
+        # End Year
+        
+
         h += '<footer>'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
         h += '<a href="https://www.chartjs.org">Uses chartjs (License)</a>'
         h += '<a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">Uses optionally API to geolite2</a>'
         h += '<pre>URL: Uniform Resource Locator' + "\n"
+        h += '<pre>Hit: Download request of a html file' + "\n"
         h += 'salvo errore et omissione'  + "\n"
         h += '</pre>'
         h += '</footer>'
