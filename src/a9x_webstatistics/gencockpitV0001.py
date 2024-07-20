@@ -119,7 +119,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
-        # Top Sources
+        # Top Sources on daily basis
         tsource = {}
         for y in d['v0001']['days']:
             curYearMonth = y[0:6]
@@ -438,7 +438,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             yth_usr_visits.reverse()
             h += '<h2>Webstatistics for the last Years for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
-            h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_years');" + "\n"
+            h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
             h += "const yctx = new Chart(yth_ctx, {"  + "\n"
             h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
