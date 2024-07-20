@@ -464,7 +464,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             yth_usr_bots.reverse()
             yth_usr_visits.reverse()
             h += '<h2>Webstatistics for the last Years for ' + owndomain + '</h2>'
-            h += '<div><canvas id="a9x_ws_months"></canvas></div>'
+            h += '<div><canvas id="a9x_ws_years"></canvas></div>'
             h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
             h += "const yctx = new Chart(yth_ctx, {"  + "\n"
             h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
@@ -489,6 +489,32 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "yctx.options.scales.y2.max = xmax + 5;" + "\n"
             h += "yctx.update();" + "\n"
             h += "</script>" + "\n"
+            
+        # Top 10 Domains on year basis
+        tsource = {}
+        for y in d['v0001']['days']:
+            curYear = y[0:4]
+            if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
+                for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                    if curYear not in tsource:
+                        tsource[curYear] = 0
+                    tsource[curYear] += sv['cnt']
+
+        h += '<div class="flex-container">'
+        h += '<div class="flex-item">'
+        h += '<h3>Top 10 Domains</h3>'
+        h += '<p><small>Incoming traffic (user hits) for the last years by external source domain</small></p>'
+        h += '<table>'
+        h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        i = 0
+        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
+             if owndomain in k:
+                 continue
+             h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+             i += 1
+             if i == 10:
+                 break
+        h += '</table></div>'  + "\n"
 
         # End Year
         
