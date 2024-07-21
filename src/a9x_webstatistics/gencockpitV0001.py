@@ -496,9 +496,11 @@ def runGenCockpitV0001(infile, outfile, domain):
             curYear = y[0:4]
             if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-                    if curYear not in tsource:
-                        tsource[curYear] = 0
-                    tsource[curYear] += sv['cnt']
+                    if sk not in tsource:
+                        tsource[sk] = {}
+                    if curYear not in tsource[sk]:
+                        tsource[sk][curYear] = 0
+                    tsource[sk][curYear] += sv['cnt']
 
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
@@ -515,7 +517,9 @@ def runGenCockpitV0001(infile, outfile, domain):
              if i == 10:
                  break
         h += '</table></div>'  + "\n"
+        h += '<pre>' + str(tsource) + '</pre>'
 
+        h += '</div>'
         # End Year
         
 
