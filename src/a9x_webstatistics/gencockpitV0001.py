@@ -137,7 +137,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] += sv['cnt']
 
         h += '<div class="row">'
-        h += '<div class="col text-bg-info">'
+        h += '<div class="col-4 text-bg-info">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table class="table">'
@@ -169,7 +169,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     continue
         
         if len(tcountries) > 0:
-            h += '<div class="col">'
+            h += '<div class="col-4">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<p><small>User hits for the last 31 days by country</small></p>'
             h += '<table class="table">'
@@ -200,7 +200,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="col">'
+            h += '<div class="col-4">'
             h += '<h3>Top 10 URLs</h3>'
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table class="table">'
@@ -248,7 +248,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="col">'
+            h += '<div class="col-4">'
             h += '<h3>Possible Quality Improvements</h3>'
             h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
@@ -309,7 +309,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if 'visits' in d['v0001']['days'][k]['user']:
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
         
-        ## Months:   
+        ## Months:  
+        h += '<div class="row">'
+        h += '<div class="col-12">'
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
@@ -343,6 +345,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "mctx.options.scales.y2.max = xmax + 5;" + "\n"
             h += "mctx.update();" + "\n"
             h += "</script>" + "\n"
+        h += '</div></div>'
 
         # Top 10 Domains on monthly basis
         tsource = {}
@@ -370,10 +373,8 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i == 10:
                  break
-        h += '</table></div></div>'  + "\n"
+        h += '</table></div></div></div>'  + "\n"
         
-        
-        h += '<div class="col">'
         # Top Countries
         tcountries = {}
         tccount = 0
