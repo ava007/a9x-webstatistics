@@ -353,6 +353,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                     if sk not in tsource:
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
+        h += '<div class="row">'
+        h += '<div class="col-4">'
         h += '<div class="card mt-2">'
         h += '<div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
@@ -368,7 +370,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i == 10:
                  break
-        h += '</table></div>'  + "\n"
+        h += '</table></div></div>'  + "\n"
         
         
         h += '<div class="col">'
@@ -387,6 +389,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     tcountries[co] += cv
 
         if len(tcountries) > 0:
+            h += '<div class="col-4">'
             h += '<div class="card mt-2">'
             h += '<div class="card-body">'
             h += '<h3 class="card-title">Top 10 Coutries</h3>'
@@ -400,7 +403,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table></p></div></div>' + "\n"
+            h += '</table></p></div></div></div>' + "\n"
 
         # top urls
         ttopurl = {}
@@ -416,6 +419,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
+            h += '<div class="col-4">'
             h += '<div class="card text-bg-info mt-2">'
             h += '<div class="card-body">'
             h += '<h3 class="card-title">Top 10 URL</h3>'
@@ -433,7 +437,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     i += 1
                 if i > 10:
                     break
-            h += '</table></p></div></div>' + "\n"
+            h += '</table></p></div></div></div>' + "\n"
         h += '</div>' + "\n"   # end of row
 
         # Webstatistics for the last years.
@@ -470,7 +474,9 @@ def runGenCockpitV0001(infile, outfile, domain):
             if 'visits' in d['v0001']['days'][k]['user']:
                 yth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
 
-        ## Chart Years:   
+        ## Chart Years:  
+        h += '<div class="row mt-4">'
+        h += '<div class="col-md-12">'
         if len(yth_lbl) > 0:
             yth_lbl.reverse()
             yth_usr_desktop.reverse()
@@ -504,6 +510,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "yctx.options.scales.y2.max = xmax + 5;" + "\n"
             h += "yctx.update();" + "\n"
             h += "</script>" + "\n"
+
+        h += '</div></div>'
             
         # Top 10 Domains on year basis
         tsource = {}
@@ -514,6 +522,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
+        h += '<div class="row mt-4">'
+        h += '<div class="col-md-6">'
         h += '<div class="card text-bg-info mt-2">'
         h += '<div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
@@ -529,20 +539,20 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></p></div></div>'  + "\n"
-
-        h += '</div>'
+        h += '</table></p></div></div></div></div>'  + "\n"
         # End Year
         
 
-        h += '<footer>'
+        h += '<footer class="bg-light py-4 mt-4>'
+        h += '<div class="container text-center">'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
         h += '<a href="https://www.chartjs.org">Uses chartjs (License)</a>'
         h += '<a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">Uses optionally API to geolite2</a>'
         h += '<pre>URL: Uniform Resource Locator' + "\n"
-        h += '<pre>Hit: Download request of a html file' + "\n"
+        h += 'Hit: Download request of a html file' + "\n"
         h += 'salvo errore et omissione'  + "\n"
         h += '</pre>'
+        h += '</div>'
         h += '</footer>'
 
         h += '</div>'  # end of class "container"
