@@ -97,11 +97,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
-        h += "     { type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:2}" + "\n"
+        h += "     { type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:1}" + "\n"
         h += "    ,{ type: 'bar', label: 'User - Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
         h += "    ,{ type: 'bar', label: 'User - Mobile',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User -Tablets', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
-        h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Tablet', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
+        h += "    ,{ type: 'line',label: 'User Visit', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 2}" + "\n"
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
@@ -166,12 +166,12 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<p><small>User hits for the last 31 days by country</small></p>'
             h += '<table>'
-            h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
-            i = 0
+            h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
+            i = 1
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                h += '<tr><td>' +str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
-                if i == 10:
+                if i > 10:
                     break
             h += '</table></div>' + "\n"
 
@@ -317,9 +317,9 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "   datasets: [" + "\n"
             h += "      { type: 'bar', label: 'User - Desktop', data: " + str(mth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
             h += "     ,{ type: 'bar', label: 'User - Mobile',  data: " + str(mth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User - Tablets', data: " + str(mth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Tablet', data: " + str(mth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
             h += "     ,{ type: 'line',label: 'Robots', data: " + str(mth_usr_bots) + ", yAxisID: 'y2', order: 2}" + "\n"
-            h += "     ,{ type: 'line',label: 'User - Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+            h += "     ,{ type: 'line',label: 'User - Visit',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
             h += "    ]," + "\n"
             h += "    labels: " + str(mth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
@@ -473,9 +473,9 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "   datasets: [" + "\n"
             h += "      { type: 'bar', label: 'User - Desktop', data: " + str(yth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
             h += "     ,{ type: 'bar', label: 'User - Mobile',  data: " + str(yth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User - Tablets', data: " + str(yth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User - Tablet', data: " + str(yth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
             h += "     ,{ type: 'line',label: 'Robots', data: " + str(yth_usr_bots) + ", yAxisID: 'y2', order: 2}" + "\n"
-            h += "     ,{ type: 'line',label: 'User - Visits',  data: " + str(yth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+            h += "     ,{ type: 'line',label: 'User - Visit',  data: " + str(yth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
             h += "    ]," + "\n"
             h += "    labels: " + str(yth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
@@ -493,31 +493,27 @@ def runGenCockpitV0001(infile, outfile, domain):
         # Top 10 Domains on year basis
         tsource = {}
         for y in d['v0001']['days']:
-            curYear = y[0:4]
             if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
                     if sk not in tsource:
-                        tsource[sk] = {}
-                    if curYear not in tsource[sk]:
-                        tsource[sk][curYear] = 0
-                    tsource[sk][curYear] += sv['cnt']
+                        tsource[sk] = 0
+                    tsource[sk] += sv['cnt']
 
         h += '<div class="flex-container">'
         h += '<div class="flex-item">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last years by external source domain</small></p>'
         h += '<table>'
-        h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
-        i = 0
+        h += '<thead><tr><th>Rankd</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
                  continue
-             h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+             h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
              i += 1
-             if i == 10:
+             if i > 10:
                  break
         h += '</table></div>'  + "\n"
-        h += '<pre>' + str(tsource) + '</pre>'
 
         h += '</div>'
         # End Year
