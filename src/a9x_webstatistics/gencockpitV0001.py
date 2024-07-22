@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
     h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
-    h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    h += '<meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta charset="utf-8">'
     h += '<meta name="robots" content="index,follow">'
     h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
@@ -353,11 +353,11 @@ def runGenCockpitV0001(infile, outfile, domain):
                     if sk not in tsource:
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
-
-        h += '<div class="row">'
-        h += '<div class="col">'
-        h += '<h3>Top 10 Domains</h3>'
-        h += '<p><small>Incoming traffic (user hits) for the last months by external source domain</small></p>'
+        h += '<div class="card mt-2">'
+        h += '<div class="card-body">'
+        h += '<h3 class="card-title">Top 10 Domains</h3>'
+        h += '<h4 class="card-subtitle mb-2 text-body-secondary">Hit list of domains where traffic comes from.</h4>'
+        h += '<p class="card-text">'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
@@ -387,9 +387,11 @@ def runGenCockpitV0001(infile, outfile, domain):
                     tcountries[co] += cv
 
         if len(tcountries) > 0:
-            h += '<div class="flex-item">'
-            h += '<h3>Top 10 Countries</h3>'
-            h += '<p><small>User hits for all months</small></p>'
+            h += '<div class="card mt-2">'
+            h += '<div class="card-body">'
+            h += '<h3 class="card-title">Top 10 Coutries</h3>'
+            h += '<h4 class="card-subtitle mb-2 text-body-secondary">Hit list of countries giving the most hits.</h4>'
+            h += '<p class="card-text">'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
             i = 0
@@ -398,7 +400,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table></div>' + "\n"
+            h += '</table></p></div></div>' + "\n"
 
         # top urls
         ttopurl = {}
@@ -416,8 +418,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(ttopurl) > 0:
             h += '<div class="card text-bg-info mt-2">'
             h += '<div class="card-body">'
-            h += '<h5 class="card-title">Top 10 URL</h5>'
-            h += '<h6 class="card-subtitle mb-2 text-body-secondary">URL with the most hits.</h6>'
+            h += '<h3 class="card-title">Top 10 URL</h3>'
+            h += '<h4 class="card-subtitle mb-2 text-body-secondary">URL with the most hits.</h4>'
             h += '<p class="card-text">'
             h += '<table class="table table-info">'
             h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
@@ -514,8 +516,8 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div class="card text-bg-info mt-2">'
         h += '<div class="card-body">'
-        h += '<h5 class="card-title">Top 10 Domains</h5>'
-        h += '<h6 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h6>'
+        h += '<h3 class="card-title">Top 10 Domains</h3>'
+        h += '<h4 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h4>'
         h += '<p class="card-text">'
         h += '<table class="table table-info">'
         h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
