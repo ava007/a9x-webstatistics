@@ -511,7 +511,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div class="card" style="width: 18rem;">'
         h += '<div class="card-body">'
-        h += '<h5 class="card-title">Top 10 Domains</h5>''
+        h += '<h5 class="card-title">Top 10 Domains</h5>'
         h += '<h6 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h6>
         h += '<p class="card-text">'
         h += '<table class="table">'
