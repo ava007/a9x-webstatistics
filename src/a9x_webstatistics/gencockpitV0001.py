@@ -137,10 +137,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] += sv['cnt']
 
         h += '<div class="row">'
-        h += '<div class="col">'
+        h += '<div class="col text-bg-info">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
-        h += '<table>'
+        h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
@@ -172,7 +172,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<p><small>User hits for the last 31 days by country</small></p>'
-            h += '<table>'
+            h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 1
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
@@ -203,7 +203,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col">'
             h += '<h3>Top 10 URLs</h3>'
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
-            h += '<table>'
+            h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
             i = 0
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
@@ -250,7 +250,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tquality) > 0:
             h += '<div class="col">'
             h += '<h3>Possible Quality Improvements</h3>'
-            h += '<table><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
+            h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
@@ -358,7 +358,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last months by external source domain</small></p>'
-        h += '<table>'
+        h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 0
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
@@ -390,7 +390,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="flex-item">'
             h += '<h3>Top 10 Countries</h3>'
             h += '<p><small>User hits for all months</small></p>'
-            h += '<table>'
+            h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
@@ -513,7 +513,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last years by external source domain</small></p>'
-        h += '<table>'
+        h += '<table class="table">'
         h += '<thead><tr><th>Rankd</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
