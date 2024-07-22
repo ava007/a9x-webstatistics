@@ -414,21 +414,24 @@ def runGenCockpitV0001(infile, outfile, domain):
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="col">'
-            h += '<h3>Top 10 URL</h3>'
-            h += '<table>'
-            h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
-            i = 0
+            h += '<div class="card text-bg-info mt-2">'
+            h += '<div class="card-body">'
+            h += '<h5 class="card-title">Top 10 URL</h5>'
+            h += '<h6 class="card-subtitle mb-2 text-body-secondary">URL with the most hits.</h6>'
+            h += '<p class="card-text">'
+            h += '<table class="table table-info">'
+            h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
+            i = 1
             vdomain = domain.replace('https://','')
             vdomain = vdomain.replace('http://','')
             vdomain = vdomain.removeprefix('www.')
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
-                    h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                    h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
-                if i == 10:
+                if i > 10:
                     break
-            h += '</table></div>' + "\n"
+            h += '</table></p></div></div>' + "\n"
         h += '</div>' + "\n"   # end of row
 
         # Webstatistics for the last years.
@@ -509,12 +512,12 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
-        h += '<div class="card text-bg-info">'
+        h += '<div class="card text-bg-info mt-2">'
         h += '<div class="card-body">'
         h += '<h5 class="card-title">Top 10 Domains</h5>'
         h += '<h6 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h6>'
         h += '<p class="card-text">'
-        h += '<table class="table">'
+        h += '<table class="table table-info">'
         h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
@@ -525,22 +528,6 @@ def runGenCockpitV0001(infile, outfile, domain):
              if i > 10:
                  break
         h += '</table></p></div></div>'  + "\n"
-        
-        h += '<div class="row">'
-        h += '<div class="col">'
-        h += '<h3>Top 10 Domains</h3>'
-        h += '<p><small>Incoming traffic (user hits) for the last years by external source domain</small></p>'
-        h += '<table class="table">'
-        h += '<thead><tr><th>Rankd</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
-        i = 1
-        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
-             if owndomain in k:
-                 continue
-             h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-             i += 1
-             if i > 10:
-                 break
-        h += '</table></div>'  + "\n"
 
         h += '</div>'
         # End Year
