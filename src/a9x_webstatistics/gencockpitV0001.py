@@ -509,6 +509,23 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
+        h += '<div class="card" style="width: 18rem;">'
+        h += '<div class="card-body">'
+        h += '<h5 class="card-title">Top 10 Domains</h5>''
+        h += '<h6 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h6>
+        h += '<p class="card-text">'
+        h += '<table class="table">'
+        h += '<thead><tr><th>Rankd</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        i = 1
+        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
+             if owndomain in k:
+                 continue
+             h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+             i += 1
+             if i > 10:
+                 break
+        h += '</table></p></div></div>'  + "\n"
+        
         h += '<div class="row">'
         h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
