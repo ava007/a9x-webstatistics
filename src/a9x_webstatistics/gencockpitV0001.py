@@ -9,14 +9,17 @@ def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
     h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
     h += '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    h += '<meta charset="utf-8">'
     h += '<meta name="robots" content="index,follow">'
-    h += '<style>'
-    h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
-    h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
-    h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
-    h += '</style>'
-    h += '</head>' + "\n"
+    h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    #h += '<style>'
+    #h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
+    #h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
+    #h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
+    #h += '</style>'
+    #h += '</head>' + "\n"
     h += '<body>'
+    h += '<div class="container">'
     h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
     return h
     
@@ -84,6 +87,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h = genHeaderV0001(owndomain)
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + '</small></p>'
         h += '<h2>Analysis and Statistics of the 31 Days</h2>'
+        h += '<div class="row">
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
@@ -115,6 +119,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "dctx.options.scales.y2.max = xmax + 5;" + "\n"
         h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
+        h += '</div>'  # end of row
+        
 
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
@@ -130,8 +136,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
 
-        h += '<div class="flex-container">'
-        h += '<div class="flex-item">'
+        h += '<div class="row">
+        h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table>'
@@ -144,7 +150,8 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i == 10:
                  break
-        h += '</table></div>'  + "\n"
+        h += '</table>'
+        h += '</div>'  + "\n"   # end of col
 
         # Top Countries
         tcountries = {}
@@ -162,7 +169,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     continue
         
         if len(tcountries) > 0:
-            h += '<div class="flex-item">'
+            h += '<div class="col">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<p><small>User hits for the last 31 days by country</small></p>'
             h += '<table>'
@@ -173,7 +180,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i > 10:
                     break
-            h += '</table></div>' + "\n"
+            h += '</table>'
+            h += '</div>'  + "\n"   # end of col
+
 
         # top urls for the last 31 days:
         ttopurl = {}
@@ -191,7 +200,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="flex-item">'
+            h += '<div class="col">'
             h += '<h3>Top 10 URLs</h3>'
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table>'
@@ -203,15 +212,14 @@ def runGenCockpitV0001(infile, outfile, domain):
                     i += 1
                 if i == 10:
                     break
-            h += '</table></div>' + "\n"
-                  
-    
+            h += '</table>'
+            h += '</div>'  + "\n"   # end of col
        
         # top external landings (friends):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div class="flex-item">'
+            h += '<div class="col">'
             h += '<h3>Top 10 Landings</h3>' + "\n"
             h += '<p><small>User landing for the last 31 days</small></p>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
@@ -219,7 +227,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                 for kb, vb in v['target'].items():
                     if owndomain not in k:
                         h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
-            h += '</table></div>'  + "\n"
+            h += '</table>'
+            h += '</div>'  + "\n"   # end of col
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -239,7 +248,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="flex-item">'
+            h += '<div class="col">'
             h += '<h3>Possible Quality Improvements</h3>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
@@ -253,9 +262,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table></div>' + "\n"
+            h += '</table>'
+            h += '</div>'  + "\n"   # end of col
         
-        h += '</div>' + "\n"
+        h += '</div>' + "\n"   # end of row
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
@@ -344,8 +354,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
-        h += '<div class="flex-container">'
-        h += '<div class="flex-item">'
+        h += '<div class="row">'
+        h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last months by external source domain</small></p>'
         h += '<table>'
@@ -361,7 +371,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</table></div>'  + "\n"
         
         
-        h += '<div class="flex-container">'
+        h += '<div class="col">'
         # Top Countries
         tcountries = {}
         tccount = 0
@@ -404,7 +414,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             ttopurl[tk] = 0
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="flex-item">'
+            h += '<div class="col">'
             h += '<h3>Top 10 URL</h3>'
             h += '<table>'
             h += '<thead><tr><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
@@ -419,7 +429,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i == 10:
                     break
             h += '</table></div>' + "\n"
-        h += '</div>' + "\n"
+        h += '</div>' + "\n"   # end of row
 
         # Webstatistics for the last years.
         yth_lbl = []
@@ -499,8 +509,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
-        h += '<div class="flex-container">'
-        h += '<div class="flex-item">'
+        h += '<div class="row">'
+        h += '<div class="col">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last years by external source domain</small></p>'
         h += '<table>'
@@ -528,7 +538,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += 'salvo errore et omissione'  + "\n"
         h += '</pre>'
         h += '</footer>'
-                
+
+        h += '</div>'  # end of class "container"
         h += '</body></html>'
 
         # write html to file:
