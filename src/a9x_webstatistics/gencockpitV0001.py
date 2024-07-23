@@ -221,7 +221,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div class="col">'
+            h += '<div class="col-4">'
             h += '<h3>Top 10 Landings</h3>' + "\n"
             h += '<p><small>User landing for the last 31 days</small></p>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
