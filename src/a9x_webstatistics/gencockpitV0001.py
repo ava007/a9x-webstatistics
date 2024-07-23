@@ -88,8 +88,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + '</small></p>'
+        h += '</div></div>'
+        h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h2>Analysis and Statistics of the 31 Days</h2>'
-        h += '<div class="row">'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
