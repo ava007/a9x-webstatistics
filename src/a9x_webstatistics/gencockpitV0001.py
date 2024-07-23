@@ -20,7 +20,7 @@ def genHeaderV0001(domain):
     #h += '</head>' + "\n"
     h += '<body>'
     h += '<div class="container">'
-    h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
+    
     return h
     
 def runGenCockpitV0001(infile, outfile, domain):
@@ -85,6 +85,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_usr_visits.reverse()
 
         h = genHeaderV0001(owndomain)
+        h += "\n" + '<div class="row"><div class="col-12">'
+        h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + '</small></p>'
         h += '<h2>Analysis and Statistics of the 31 Days</h2>'
         h += '<div class="row">'
@@ -119,7 +121,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "dctx.options.scales.y2.max = xmax + 5;" + "\n"
         h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
-        h += '</div>'  # end of row
+        h += '</div></div>'  # end of col and row
         
 
         lastDate = list(d['v0001']['days'].keys())[-1]
@@ -136,19 +138,18 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
 
-        h += '<div class="row">'
-        h += '<div class="col-4 text-bg-info">'
+        h += '<div class="row mt-3"><div class="col-4 text-bg-info">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
-        i = 0
+        i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
                  continue
-             h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+             h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
              i += 1
-             if i == 10:
+             if i > 10:
                  break
         h += '</table>'
         h += '</div>'  + "\n"   # end of col
@@ -181,7 +182,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i > 10:
                     break
             h += '</table>'
-            h += '</div>'  + "\n"   # end of col
+            h += '</div>'    # end of col
 
 
         # top urls for the last 31 days:
@@ -205,12 +206,12 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
-            i = 0
+            i = 1
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
-                    h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                    h += '<tr><td>' + str(i) + '</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
-                if i == 10:
+                if i > 10:
                     break
             h += '</table>'
             h += '</div>'  + "\n"   # end of col
@@ -310,8 +311,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
         
         ## Months:  
-        h += '<div class="row">'
-        h += '<div class="col-12">'
+        h += "\n" + '<div class="row"><div class="col-12">'
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
@@ -345,7 +345,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "mctx.options.scales.y2.max = xmax + 5;" + "\n"
             h += "mctx.update();" + "\n"
             h += "</script>" + "\n"
-        h += '</div></div>'
+        h += '</div></div>'  # end of col and row
 
         # Top 10 Domains on monthly basis
         tsource = {}
