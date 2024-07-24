@@ -142,7 +142,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<h4 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last 31 days by external source domain.</h4>'
         h += '<p class="card-text">'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -155,6 +154,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              if i > 10:
                  break
         h += '</table></p>'
+        h += '<div class="card-footer><small class="text-body-secondary">Incoming traffic (user hits) for the last 31 days by external source domain.</small></div>'
         h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
@@ -559,7 +559,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         # End Year
         
 
-        h += '<footer class="bg-light py-4 mt-4>'
+        h += '<footer class="bg-light py-4 mt-4">'
         h += '<div class="container text-center">'
         h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
         h += '<a href="https://www.chartjs.org">Uses chartjs (License)</a>'
