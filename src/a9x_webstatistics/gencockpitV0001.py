@@ -85,7 +85,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<a href="#hdDaily">Daily Statistics</a> <a href="#hdMonthly">Monthly Statistics</a>'
+        h += '<a href="#hdDaily">Daily Statistics</a> <a href="#hdMonthly">Monthly Statistics</a> <a href="#hdYear">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h1 id="hdDaily">Statistics for ' + owndomain + '</h1>'
@@ -211,7 +211,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 URL</h3>'
-            h += '<p class="card-text">Most called URLs:'
+            h += '<p class="card-text">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
@@ -222,7 +222,6 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i > 10:
                     break
             h += '</table>'
-            h += '<div class="card-footer"><small class="text-body-secondary">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></div>'
             h += '</div></div></div>'  + "\n"   # end of card and col
        
         # top external landings (friends):
