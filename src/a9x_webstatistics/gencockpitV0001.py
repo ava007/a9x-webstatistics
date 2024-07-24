@@ -139,7 +139,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
 
-        h += '<div class="row mt-3"><div class="col-4 text-bg-info">'
+        h += '<div class="row mt-3"><div class="col-6 col-md-4 col-lg-3 text-bg-info">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table class="table">'
@@ -312,7 +312,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
         
         ## Months:  
-        h += "\n" + '<div class="row"><div class="col-12">'
+        h += "\n" + '<div class="row mt-4"><div class="col-12">'
         if len(mth_lbl) > 0:
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
