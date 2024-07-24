@@ -87,7 +87,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h1>Statistics for ' + owndomain + '</h1>'
-        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-4:] + ":" + d['timelastrec'][-4:-6] + '</small></p>'
+        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-4:2] + ":" + d['timelastrec'][-4:] +  d['timelastrec'][-6:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h2>Statistics for the last 31 days</h2>'
@@ -140,10 +140,12 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] += sv['cnt']
 
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
-        h += '<h3>Top 10 Domains</h3>'
-        h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
+        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<h3 class="card-title">Top 10 Domains</h3>'
+        h += '<h4 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last 31 days by external source domain.</h4>'
+        h += '<p class="card-text">'
         h += '<table class="table">'
-        h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
@@ -152,8 +154,8 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table>'
-        h += '</div>'  + "\n"   # end of col
+        h += '</table></p>'
+        h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
         tcountries = {}
@@ -172,8 +174,10 @@ def runGenCockpitV0001(infile, outfile, domain):
         
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
-            h += '<h3>Top 10 Countries</h3>' + "\n"
-            h += '<p><small>User hits for the last 31 days by country</small></p>'
+            h += '<div class="card mt-2"><div class="card-body">'
+            h += '<h3 class="card-title">Top 10 Countries</h3>'
+            h += '<h4 class="card-subtitle mb-2 text-body-secondary">User hits for the last 31 days by country.</h4>'
+            h += '<p class="card-text">'
             h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col">Hit Count</th></tr></thead>'
             i = 1
@@ -182,8 +186,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i > 10:
                     break
-            h += '</table>'
-            h += '</div>'    # end of col
+            h += '</table></p>'
+            h += '</div></div></div>'    # end of card and col 
 
 
         # top urls for the last 31 days:
@@ -206,7 +210,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h3>Top 10 URLs</h3>'
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table class="table">'
-            h += '<thead><tr><th scope="col" style="text-align: left">URL</th><th scope="col">Hit Count</th></tr></thead>'
+            h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
@@ -222,15 +226,22 @@ def runGenCockpitV0001(infile, outfile, domain):
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="col-6 col-md-4 col-lg-3">'
-            h += '<h3>Top 10 Landings</h3>' + "\n"
-            h += '<p><small>User landing for the last 31 days</small></p>'
-            h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
+            h += '<div class="card mt-2"><div class="card-body">'
+            h += '<h3 class="card-title">Top 10 Landings</h3>'
+            h += '<h4 class="card-subtitle mb-2 text-body-secondary">User landing for the last 31 days.</h4>'
+            h += '<p class="card-text">'
+            h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
+            i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
                     if owndomain not in k:
-                        h += '<tr><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
-            h += '</table>'
-            h += '</div>'  + "\n"   # end of col
+                        h += '<tr><td>' + str(i) + '</td><td>' + k + '</td><td>' + str(kb) + '</td><td>' + str(vb) + '</td></tr>'
+                        i += 1
+                    if i > 10:
+                        break
+
+            h += '</table></p>'
+            h += '</div></div></div>'  + "\n"   # end of col
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -251,7 +262,10 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         if len(tquality) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-            h += '<h3>Possible Quality Improvements</h3>'
+            h += '<div class="card mt-2"><div class="card-body">'
+            h += '<h3 class="card-title">Possible Quality Improvements</h3>'
+            h += '<h4 class="card-subtitle mb-2 text-body-secondary">Quality improvements that should be implemented.</h4>'
+            h += '<p class="card-text">'
             h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
@@ -264,8 +278,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table>'
-            h += '</div>'  + "\n"   # end of col
+            h += '</table></p>'
+            h += '</div></div></div>'  + "\n"   # end of card and col
         
         h += '</div>' + "\n"   # end of row
         
