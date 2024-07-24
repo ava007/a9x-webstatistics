@@ -498,7 +498,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             yth_usr_tablet.reverse()
             yth_usr_bots.reverse()
             yth_usr_visits.reverse()
-            h += '<h2>Webstatistics for the last Years for ' + owndomain + '</h2>'
+            h += '<h2>Yearly Statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_years"></canvas></div>'
             h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
             h += "const yctx = new Chart(yth_ctx, {"  + "\n"
