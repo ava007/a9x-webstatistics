@@ -121,7 +121,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "  if (tmax > xmax) {  xmax = tmax; } " 
         h += "}" + "\n"
         h += "rm = xmax % 10;" + "\n"
-        h += "rm = 10 - rm;" + "\n"
+        h += "rm = 10 - rm + 10;" + "\n"
         h += "dctx.options.scales.y.max = xmax + rm;" + "\n"
         h += "dctx.options.scales.y2.max = xmax + rm;" + "\n"
         h += "dctx.update();" + "\n"
@@ -267,7 +267,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
-            h += '<p class="card-text">Quality improvements that should be implemented.'
+            h += '<p class="card-text">Quality improvements that should be implemented:'
             h += '<table class="table-responsive"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
@@ -359,7 +359,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "  if (tmax > xmax) {  xmax = tmax; } " 
             h += "}" + "\n"
             h += "rm = xmax % 100;" + "\n"
-            h += "rm = 100 - rm;" + "\n"
+            h += "rm = 100 - rm + 100;" + "\n"
             h += "mctx.options.scales.y.max = xmax + rm;" + "\n"
             h += "mctx.options.scales.y2.max = xmax + rm;" + "\n"
             h += "mctx.update();" + "\n"
@@ -413,7 +413,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<p class="card-text">Hit list of countries giving the most user hits:'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col" style="text-align: right">Hits count</th></tr></thead>'
-            i = 0
+            i = 1
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
                 h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
@@ -440,7 +440,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h3 class="card-title">Top 10 URL</h3>'
             h += '<p class="card-text">URL with the most user hits:'
             h += '<table class="table">'
-            h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col">Hit Count</th></tr></thead>'
+            h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
             vdomain = domain.replace('https://','')
             vdomain = vdomain.replace('http://','')
@@ -520,8 +520,10 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "  tmax = Math.max.apply(null, yctx.data.datasets[i].data); "
             h += "  if (tmax > xmax) {  xmax = tmax; } " 
             h += "}" + "\n"
-            h += "yctx.options.scales.y.max = xmax + 5;" + "\n"
-            h += "yctx.options.scales.y2.max = xmax + 5;" + "\n"
+            h += "rm = xmax % 1000;" + "\n"
+            h += "rm = 1000 - rm + 1000;" + "\n"
+            h += "yctx.options.scales.y.max = xmax + rm;" + "\n"
+            h += "yctx.options.scales.y2.max = xmax + rm;" + "\n"
             h += "yctx.update();" + "\n"
             h += "</script>" + "\n"
 
