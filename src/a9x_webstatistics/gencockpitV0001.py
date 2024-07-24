@@ -89,7 +89,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h1 id="hdDaily">Statistics for ' + owndomain + '</h1>'
-        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + " >>" + d['timelastrec'][-6:] + '</small></p>'
+        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h2>Statistics for the last 31 days</h2>'
