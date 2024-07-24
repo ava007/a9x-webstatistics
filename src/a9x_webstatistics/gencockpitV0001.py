@@ -86,8 +86,8 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h1>Statistics for ' + owndomain + '</h1>'
-        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-4:2] + ":" + d['timelastrec'][-4:] +  d['timelastrec'][-6:] + '</small></p>'
+        h += '<h1 id="hdDaily">Statistics for ' + owndomain + '</h1>'
+        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:2] + ":" + d['timelastrec'][10:2] + ":" + d['timelastrec'][-2:] + " >>" + d['timelastrec'][-6:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h2>Statistics for the last 31 days</h2>'
@@ -231,7 +231,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h3 class="card-title">Top 10 Landings</h3>'
             h += '<h4 class="card-subtitle mb-2 text-body-secondary">User landing for the last 31 days.</h4>'
             h += '<p class="card-text">'
-            h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
+            h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
@@ -262,7 +262,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
+            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
             h += '<h4 class="card-subtitle mb-2 text-body-secondary">Quality improvements that should be implemented.</h4>'
@@ -335,7 +335,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             mth_usr_tablet.reverse()
             mth_usr_bots.reverse()
             mth_usr_visits.reverse()
-            h += '<h2>Webstatistics for the last Months for ' + owndomain + '</h2>'
+            h += '<h2 id="hdMonthly">Monthly Statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
             h += "const mctx = new Chart(mth_ctx, {"  + "\n"
@@ -407,14 +407,14 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Coutries</h3>'
+            h += '<h3 class="card-title">Top 10 Countries</h3>'
             h += '<h4 class="card-subtitle mb-2 text-body-secondary">Hit list of countries giving the most hits.</h4>'
             h += '<p class="card-text">'
             h += '<table class="table">'
-            h += '<thead><tr><th scope="col" style="text-align: left">Country</th><th scope="col">Hits count</th></tr></thead>'
+            h += '<thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col" style="text-align: right">Hits count</th></tr></thead>'
             i = 0
             for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                h += '<tr><td>' + str(i) + '/td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
                 if i == 10:
                     break
@@ -435,7 +435,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] += tv
         if len(ttopurl) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-            h += '<div class="card text-bg-info mt-2"><div class="card-body">'
+            h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 URL</h3>'
             h += '<h4 class="card-subtitle mb-2 text-body-secondary">URL with the most hits.</h4>'
             h += '<p class="card-text">'
