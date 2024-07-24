@@ -529,10 +529,10 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="card mt-2">'
         h += '<div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<h4 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h4>'
+        h += '<h4 class="card-subtitle mb-2">Incoming traffic (user hits) for the last years by external source domain</h4>'
         h += '<p class="card-text">'
         h += '<table class="table">'
-        h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
