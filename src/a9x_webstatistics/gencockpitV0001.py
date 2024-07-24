@@ -86,11 +86,11 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h1>Web Analytics and Statistics for ' + domain + '</h1>'
-        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + '</small></p>'
+        h += '<h1>Statistics for ' + owndomain + '</h1>'
+        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][-4:] + ":" + d['timelastrec'][-4:-6] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h2>Analysis and Statistics of the 31 Days</h2>'
+        h += '<h2>Statistics for the last 31 days</h2>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
@@ -104,11 +104,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
-        h += "     { type: 'line',label: 'Robots', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:1}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User - Desktop', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User - Mobile',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User - Tablet', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
-        h += "    ,{ type: 'line',label: 'User Visit', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 2}" + "\n"
+        h += "     { type: 'line',label: 'Robot Hits', data: " + str(day_robot_hits) + ", yAxisID: 'y2', order:1}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Desktop - Hits', data: " + str(day_usr_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Mobile - Hits',  data: " + str(day_usr_mobile) + " ,backgroundColor: '#42f5aa', order:4}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User - Tablet - Hits', data: " + str(day_usr_tablet) + " ,backgroundColor: '#f5a742', order:5}" + "\n"
+        h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 2}" + "\n"
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
@@ -139,7 +139,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
 
-        h += '<div class="row mt-3"><div class="col-md-12 col-lg-6 col-xxl-4 text-bg-info">'
+        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4 text-bg-info">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table class="table">'
@@ -526,12 +526,12 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div class="row mt-4">'
         h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-        h += '<div class="card text-bg-info mt-2">'
+        h += '<div class="card mt-2">'
         h += '<div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
         h += '<h4 class="card-subtitle mb-2 text-body-secondary">Incoming traffic (user hits) for the last years by external source domain</h4>'
         h += '<p class="card-text">'
-        h += '<table class="table table-info">'
+        h += '<table class="table">'
         h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
