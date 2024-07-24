@@ -139,11 +139,11 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
 
-        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4 text-bg-info">'
+        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<h3>Top 10 Domains</h3>'
         h += '<p><small>Incoming traffic (user hits) for the last 31 days by external source domain</small></p>'
         h += '<table class="table">'
-        h += '<thead><tr><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
+        h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col">Hit Count</th></tr></thead>'
         i = 1
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
