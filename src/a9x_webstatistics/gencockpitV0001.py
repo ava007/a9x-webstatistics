@@ -171,7 +171,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     continue
         
         if len(tcountries) > 0:
-            h += '<div class="col-4">'
+            h += '<div class="col-6 col-md-4 col-lg-3">'
             h += '<h3>Top 10 Countries</h3>' + "\n"
             h += '<p><small>User hits for the last 31 days by country</small></p>'
             h += '<table class="table">'
@@ -202,7 +202,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="col-4">'
+            h += '<div class="col-6 col-md-4 col-lg-3">'
             h += '<h3>Top 10 URLs</h3>'
             h += '<p><small>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + '</small></p>'
             h += '<table class="table">'
@@ -221,7 +221,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         tland = {}   # nested dictionary!
         firstOfCurrentMonth =  actYearMonth + '01'
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div class="col-4">'
+            h += '<div class="col-6 col-md-4 col-lg-3">'
             h += '<h3>Top 10 Landings</h3>' + "\n"
             h += '<p><small>User landing for the last 31 days</small></p>'
             h += '<table><thead><tr><th scope="col" style="text-align: left">Source</th><th scope="col">Target</th><th scope="col" style="text-align: left">Count</th></tr></thead>'
@@ -250,7 +250,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="col-4">'
+            h += '<div class="col-6 col-md-4 col-lg-3">'
             h += '<h3>Possible Quality Improvements</h3>'
             h += '<table class="table"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
