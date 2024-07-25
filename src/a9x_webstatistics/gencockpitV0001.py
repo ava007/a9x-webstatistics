@@ -570,15 +570,15 @@ def runGenCockpitV0001(infile, outfile, domain):
         
         h += '<div class="col-3"><h5>Licenses</h5>'
         h += '<ul class="nav flex-column">'
-        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>
-        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" class="nav-link p-0 text-body-secondary">Chartjs</a></li>
-        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>
+        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" class="nav-link p-0 text-body-secondary">Chartjs</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>'
         h += '</ul></div>' + "\n"
         
         h += '<div class="col-3"><h5>Abbreviations</h5>'
         h += '<ul class="nav flex-column">'
-        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>
-        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>
+        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>'
+        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>'
         h += '</ul></div>' + "\n"
 
         h += '</footer>'
