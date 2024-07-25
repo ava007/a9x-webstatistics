@@ -86,11 +86,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary" role="button" data-bs-toggle="button">Monthly Statistics</a>'
-        h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary pl-2" role="button" data-bs-toggle="button">Monthly Statistics</a>'
+        h += '<a href="#hdYear" class="btn btn-primary pl-2" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h1 id="hdDay">Statistics for ' + owndomain + '</h1>'
+        h += '<h1 id="hdDay">Daily statistics for ' + owndomain + '</h1>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
@@ -573,7 +573,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col-3"><h5>Licenses</h5>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" rel="nofollow" class="nav-link p-0 text-body-secondary">Chartjs</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" rel="nofollow" class="nav-link p-0 text-body-secondary">chartjs.org</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.getbootstrap.com" rel="nofollow" class="nav-link p-0 text-body-secondary">getbootstrap.com</a></li>'
         h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" rel="nofollow" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>'
         h += '</ul></div>' + "\n"
         
