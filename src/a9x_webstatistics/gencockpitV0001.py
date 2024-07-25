@@ -86,8 +86,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary pl-2" role="button" data-bs-toggle="button">Monthly Statistics</a>'
-        h += '<a href="#hdYear" class="btn btn-primary pl-2" role="button" data-bs-toggle="button">Yearly Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary mx-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
+        h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h1 id="hdDay">Daily statistics for ' + owndomain + '</h1>'
