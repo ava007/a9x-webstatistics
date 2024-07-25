@@ -146,7 +146,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<p class="card-text">User hits refering to external domain:'
+        h += '<p class="card-text">User hits refering to external domain:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
@@ -157,7 +157,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></p>'
+        h += '</table>'
         h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
@@ -179,7 +179,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Countries</h3>'
-            h += '<p class="card-text">User hits for the last 31 days by country:'
+            h += '<p class="card-text">User hits for the last 31 days by country:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
@@ -188,7 +188,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i > 10:
                     break
-            h += '</table></p>'
+            h += '</table>'
             h += '</div></div></div>'    # end of card and col 
 
 
@@ -231,7 +231,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Landings</h3>'
-            h += '<p class="card-text">User landings for the last 31 days:'
+            h += '<p class="card-text">User landings for the last 31 days:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
@@ -242,7 +242,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     if i > 10:
                         break
 
-            h += '</table></p>'
+            h += '</table>'
             h += '</div></div></div>'  + "\n"   # end of card and col
 
         tquality = {}   # nested dictionary!
@@ -266,7 +266,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
-            h += '<p class="card-text">Quality improvements that should be implemented:'
+            h += '<p class="card-text">Quality improvements that should be implemented:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
@@ -279,7 +279,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table></p>'
+            h += '</table>'
             h += '</div></div></div>'  + "\n"   # end of card and col
         
         h += '</div>' + "\n"   # end of row
@@ -378,7 +378,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<p class="card-text">Hit list of domains where traffic comes from:'
+        h += '<p class="card-text">Hit list of domains where traffic comes from:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
@@ -389,7 +389,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></p></div></div></div>'  + "\n"
+        h += '</table></div></div></div>'  + "\n"
         
         # Top Countries
         tcountries = {}
@@ -409,7 +409,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Countries</h3>'
-            h += '<p class="card-text">Hit list of countries giving the most user hits:'
+            h += '<p class="card-text">Hit list of countries giving the most user hits:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col" style="text-align: right">Hits count</th></tr></thead>'
             i = 1
@@ -418,7 +418,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i == 10:
                     break
-            h += '</table></p></div></div></div>' + "\n"
+            h += '</table></div></div></div>' + "\n"
 
         # top urls
         ttopurl = {}
@@ -437,7 +437,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 URL</h3>'
-            h += '<p class="card-text">URL with the most user hits:'
+            h += '<p class="card-text">URL with the most user hits:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
@@ -450,7 +450,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     i += 1
                 if i > 10:
                     break
-            h += '</table></p></div></div></div>' + "\n"   # end of card and col
+            h += '</table></div></div></div>' + "\n"   # end of card and col
         h += '</div>' + "\n"   # end of row
 
         # Webstatistics for the last years.
@@ -541,7 +541,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<p class="card-text">Incoming traffic (user hits) for the last years by external source domain:'
+        h += '<p class="card-text">Incoming traffic (user hits) for the last years by external source domain:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
@@ -552,7 +552,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></p></div></div></div></div>'  + "\n"
+        h += '</table></div></div></div></div>'  + "\n"
         # End Year
         
 
