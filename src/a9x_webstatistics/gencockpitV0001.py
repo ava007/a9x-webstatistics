@@ -556,16 +556,31 @@ def runGenCockpitV0001(infile, outfile, domain):
         # End Year
         
 
-        h += '<footer class="bg-light py-4 mt-4">'
-        h += '<div class="container text-center">'
-        h += '<a href="https://github.com/ava007/a9x-webstatistics">License and Copyright</a>' + '  V0001'
-        h += '<a href="https://www.chartjs.org">Uses chartjs (License)</a>'
-        h += '<a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">Uses optionally API to geolite2</a>'
-        h += '<pre>URL: Uniform Resource Locator' + "\n"
-        h += 'Hit: Download request of a html file' + "\n"
-        h += 'salvo errore et omissione'  + "\n"
-        h += '</pre>'
+        h += '<footer class="row row-cols-12 bg-light py-4 mt-4">'
+
+        h += '<div class="col-3">'
+        h += '<a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">'
+        h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
+        h += '</a>'
+        h += '<p class="text-body-secondary">© 2024</p>'
+        h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
+
+        h += '<div class="col-3"></div>'
+        
+        h += '<div class="col-3"><h5>Licenses</h5>'
+        h += '<ul class="nav flex-column">'
+        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>
+        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" class="nav-link p-0 text-body-secondary">Chartjs</a></li>
+        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>
+        h += '</ul></div>' + "\n"
+        
+        h += '<div class="col-3"><h5>Abbreviations</h5>'
+        h += '<ul class="nav flex-column">'
+        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>
+        h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>
+        h += '</ul></div>' + "\n"
+
         h += '</footer>'
 
         h += '</div>'  # end of class "container"
