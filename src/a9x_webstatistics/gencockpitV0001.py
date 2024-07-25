@@ -232,7 +232,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Landings</h3>'
             h += '<p class="card-text">User landings for the last 31 days:'
-            h += '<table class="table-responsive"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
+            h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 for kb, vb in v['target'].items():
@@ -267,7 +267,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
             h += '<p class="card-text">Quality improvements that should be implemented:'
-            h += '<table class="table-responsive"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
+            h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
                 h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
