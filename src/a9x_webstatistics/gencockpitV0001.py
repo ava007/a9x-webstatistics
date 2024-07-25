@@ -146,7 +146,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<p class="card-text">User hit refering to external domain:'
+        h += '<p class="card-text">User hits refering to external domain:'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
         i = 1
