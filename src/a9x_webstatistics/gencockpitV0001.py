@@ -85,10 +85,12 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<a href="#hdDaily">Daily Statistics</a> <a href="#hdMonthly">Monthly Statistics</a> <a href="#hdYear">Yearly Statistics</a>'
+        h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary" role="button" data-bs-toggle="button">Monthly Statistics</a>'
+        h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h1 id="hdDaily">Statistics for ' + owndomain + '</h1>'
+        h += '<h1 id="hdDay">Statistics for ' + owndomain + '</h1>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
@@ -335,7 +337,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             mth_usr_tablet.reverse()
             mth_usr_bots.reverse()
             mth_usr_visits.reverse()
-            h += '<h2 id="hdMonthly">Monthly Statistics for ' + owndomain + '</h2>'
+            h += '<h2 id="hdMonth">Monthly statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
             h += "const mctx = new Chart(mth_ctx, {"  + "\n"
@@ -497,7 +499,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             yth_usr_tablet.reverse()
             yth_usr_bots.reverse()
             yth_usr_visits.reverse()
-            h += '<h2 id="hdYear">Yearly Statistics for ' + owndomain + '</h2>'
+            h += '<h2 id="hdYear">Yearly statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_years"></canvas></div>'
             h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
             h += "const yctx = new Chart(yth_ctx, {"  + "\n"
@@ -571,8 +573,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<div class="col-3"><h5>Licenses</h5>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" class="nav-link p-0 text-body-secondary">Chartjs</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" rel="nofollow" class="nav-link p-0 text-body-secondary">Chartjs</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" rel="nofollow" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>'
         h += '</ul></div>' + "\n"
         
         h += '<div class="col-3"><h5>Abbreviations</h5>'
