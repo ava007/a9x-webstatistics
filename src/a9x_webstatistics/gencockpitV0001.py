@@ -265,7 +265,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+            h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
             h += '<p class="card-text">Quality improvements that should be implemented:</p>'
