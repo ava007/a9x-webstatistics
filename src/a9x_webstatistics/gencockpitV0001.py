@@ -269,7 +269,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
             h += '<p class="card-text">Quality improvements that should be implemented:</p>'
-            h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
+            h += '<table class="table-responsive text-break"><thead><tr><th scope="col">Status</th><th scope="col">affected URL</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
                 h += '<tr><td>' + str(v['status']) + '</td><td>' + str(k) + "</td>" 
@@ -278,7 +278,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 h += '<td>' + v['lastoccured'] + '</td>'
                 h += '</tr>'
                 if len(v['from']) > 1:
-                    '<tr><td></td><td colspan="5">called by: ' + v['from'] + '</td></tr>'
+                    '<tr><td></td><td colspan="4">called by: ' + v['from'] + '</td></tr>'
                 i += 1
                 if i == 10:
                     break
