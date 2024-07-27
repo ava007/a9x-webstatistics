@@ -278,7 +278,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 h += '<td>' + v['lastoccured'] + '</td>'
                 h += '</tr>'
                 if len(v['from']) > 1:
-                    '<tr><td></td><td colspan="4">called by: ' + v['from'] + '</td></tr>'
+                    h += '<tr><td></td><td colspan="4">called by: ' + v['from'] + '</td></tr>'
                 i += 1
                 if i == 10:
                     break
