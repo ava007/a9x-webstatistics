@@ -272,12 +272,13 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">affected URL</th><th scope="col">Status</th><th scope="col" style="text-align: left">affected URL is called by</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
             for k, v in sorted(tquality.items(), key=lambda x: (x[1]['lastoccured']), reverse=True):
-                h += '<tr><td>' + str(k) + "</td><td>" + str(v['status']) + '</td>'
-                h += '<td>' + v['from'] + '</td>'
+                h += '<tr><td>' + str(v['status']) + '</td><td>' + str(k) + "</td>" 
                 h += '<td style="text-align: right">' + str(format(v['count'],',')) + '</td>'
                 h += '<td>' + v['comment'] + '</td>'
                 h += '<td>' + v['lastoccured'] + '</td>'
                 h += '</tr>'
+                if len(v['from']) > 1:
+                    '<tr><td></td><td colspan="5">called by: ' + v['from'] + '</td></tr>'
                 i += 1
                 if i == 10:
                     break
