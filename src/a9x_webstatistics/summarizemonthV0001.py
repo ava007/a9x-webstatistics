@@ -131,7 +131,7 @@ def sumMonthV0001(d, statfile):
                     if i >= 24:
                         break
                     d['v0001']['days'][x]['user']['topUrl'][k] = v
-                 del tmpTopUrl
+                del tmpTopUrl
    
     # write Save - only relevant for testing
     tstat = statfile.replace('.json','v0001sum.json')
