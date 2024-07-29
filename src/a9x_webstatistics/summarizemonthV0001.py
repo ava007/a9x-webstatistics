@@ -120,6 +120,18 @@ def sumMonthV0001(d, statfile):
                         break
                     d['v0001']['days'][x]['user']['countryHits'][k] = v
                 del tmpCountryHits
+                
+            # take only 24 TopUrl in a month:
+            if 'topUrl' in d['v0001']['days'][x]['user']:
+                tmpTopUrl = dict(sorted(d['v0001']['days'][x]['user']['topUrl'].items(), key=lambda item: item[1], reverse=True))
+                i = 0
+                d['v0001']['days'][x]['user']['topUrl'] = {}
+                for k,v in tmpTopUrl.items():
+                    i += 1
+                    if i >= 24:
+                        break
+                    d['v0001']['days'][x]['user']['topUrl'][k] = v
+                 del tmpTopUrl
    
     # write Save - only relevant for testing
     tstat = statfile.replace('.json','v0001sum.json')
