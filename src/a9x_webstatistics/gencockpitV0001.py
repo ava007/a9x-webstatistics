@@ -564,7 +564,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 for sk,sv in d['v0001']['days'][y]['user']['topUrl'].items():
                     if sk not in turl:
                         turl[sk] = 0
-                    turl[sk] += sv['cnt']
+                    turl[sk] += sv
 
         h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
         h += '<div class="card mt-2"><div class="card-body">'
