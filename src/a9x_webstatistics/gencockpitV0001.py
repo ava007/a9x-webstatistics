@@ -555,7 +555,35 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></div></div></div></div>'  + "\n"
+        h += '</table></div></div></div>'  + "\n"
+
+        # Top 10 URL on year basis
+        turl = {}
+        for y in d['v0001']['days']:
+            if 'topUrl' in d['v0001']['days'][y]['user']:
+                for sk,sv in d['v0001']['days'][y]['user']['topUrl'].items():
+                    if sk not in tsource:
+                        turl[sk] = 0
+                    turl[sk] += sv['cnt']
+
+        h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
+        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<h3 class="card-title">Top 10 URL</h3>'
+        h += '<p class="card-text">Top Url (user hits) for the last years:</p>'
+        h += '<table class="table">'
+        h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
+        i = 1
+        for k, v in sorted(turl.items(), key=itemgetter(1), reverse=True):
+             if owndomain in k:
+                 continue
+             h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+             i += 1
+             if i > 10:
+                 break
+        h += '</table></div></div></div>'
+        h += '</div>'  + "\n"   # end of row
+
+        
         # End Year
         
 
