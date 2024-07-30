@@ -562,7 +562,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         for y in d['v0001']['days']:
             if 'topUrl' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['topUrl'].items():
-                    if sk not in tsource:
+                    if sk not in turl:
                         turl[sk] = 0
                     turl[sk] += sv['cnt']
 
