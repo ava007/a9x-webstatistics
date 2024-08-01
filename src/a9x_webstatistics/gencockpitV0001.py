@@ -39,6 +39,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_robot_hits = []
 
         day_usr_i = 0
+        tsource = {}
+        tcountries = {}
         try:
             for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
                 # consider only days:
@@ -71,6 +73,20 @@ def runGenCockpitV0001(infile, outfile, domain):
                     day_usr_visits.append(d['v0001']['days'][k]['user']['visits'])
                 else:
                     day_usr_visits.append(0)
+
+                # top 10 source domains:
+                if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
+                    for sk,sv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
+                        if sk not in tsource:
+                            tsource[sk] = 0
+                        tsource[sk] += sv['cnt']
+                        
+                # top 10 countries:
+                if 'countryHits' in d['v0001']['days'][k]['user']:
+                    for co,cv in d['v0001']['days'][k]['user']['countryHits'].items():
+                        if co not in tcountries:
+                            tcountries[co] = 0
+                        tcountries[co] += cv
   
         except KeyError:
             print('KeyError occured! ' + str(d['v0001']['days'][k]) )
@@ -135,15 +151,15 @@ def runGenCockpitV0001(infile, outfile, domain):
         actYearMonth = lastDate[0:6]
         
         # Top 10 Domains on daily basis
-        tsource = {}
-        for y in d['v0001']['days']:
-            curYearMonth = y[0:6]
-            if curYearMonth == actYearMonth:
-                if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-                    for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-                        if sk not in tsource:
-                            tsource[sk] = 0
-                        tsource[sk] += sv['cnt']
+        #tsource = {}
+        #for y in d['v0001']['days']:
+        #    curYearMonth = y[0:6]
+        #    if curYearMonth == actYearMonth:
+        #        if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
+        #            for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+        #                if sk not in tsource:
+        #                    tsource[sk] = 0
+        #                tsource[sk] += sv['cnt']
 
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
@@ -163,19 +179,19 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
-        tcountries = {}
-        for y in d['v0001']['days']:
-            curYearMonth = y[0:6]
+        #tcountries = {}
+        #for y in d['v0001']['days']:
+        #    curYearMonth = y[0:6]
             #print (curYearMonth + " " + actYearMonth)
-            if curYearMonth == actYearMonth:
-                try:
-                    for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
-                        if co not in tcountries:
-                            tcountries[co] = 0
-                        tcountries[co] += cv
-                except KeyError: 
-                    print ('ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user']))
-                    continue
+        #    if curYearMonth == actYearMonth:
+        #        try:
+        #            for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
+        #                if co not in tcountries:
+        #                    tcountries[co] = 0
+        #                tcountries[co] += cv
+        #        except KeyError: 
+        #            print ('ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user']))
+        #            continue
         
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
