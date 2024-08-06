@@ -133,19 +133,22 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " }," + "\n" + "});" + "\n"
         h += "var xmax = 0; "
         h += "var tmax = 0;" + "\n"
+        h += "var tmin = 0;" + "\n"
+        h += "var ymin = 99999;" + "\n"
         h += "for (i=0; i<5; i++) {" 
         h += "  tmax = Math.max.apply(null, dctx.data.datasets[i].data); "
         h += "  if (tmax > xmax) {  xmax = tmax; } " 
+        h += "  tmin = Math.min.apply(null, dctx.data.datasets[i].data); "
+        h += "  if (tmin < ymin) {  ymin = tmin; } " 
         h += "}" + "\n"
         h += "rm = xmax % 10;" + "\n"
         h += "rm = 10 - rm + 10;" + "\n"
         h += "dctx.options.scales.y.max = xmax + rm;" + "\n"
-        h += "dctx.options.scales.y2.max = xmax + rm;" + "\n"
+        h += "dctx.options.scales.y.min = ymin;" + "\n"
         h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
         h += '</div></div>'  # end of col and row
         
-
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
@@ -357,15 +360,15 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
             h += "const mctx = new Chart(mth_ctx, {"  + "\n"
-            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: true }, y2: { stacked: false, position: 'right'} }}" + "\n"
+            h += "  options: { responsive: true, scales: {x:{ stacked: true,  ticks: { beginAtZero: true }}, y:{ stacked: false, ticks: { beginAtZero: true }, type: 'logarithmic' } }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
-            h += "      { type: 'bar', label: 'User - Desktop', data: " + str(mth_usr_desktop)+ ", backgroundColor: '#42c5f5', order: 3}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User - Mobile',  data: " + str(mth_usr_mobile) + ", backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User - Tablet', data: " + str(mth_usr_tablet) + ", backgroundColor: '#f5a742', order: 5}" + "\n"
-            h += "     ,{ type: 'line',label: 'Robots', data: " + str(mth_usr_bots) + ", yAxisID: 'y2', order: 2}" + "\n"
-            h += "     ,{ type: 'line',label: 'User - Visit',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
+            h += "      { type: 'bar', label: 'User Desktop Hits', data: " + str(mth_usr_desktop)+ ", stack: 's2', backgroundColor: '#42c5f5', order: 3}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Mobile Hits',  data: " + str(mth_usr_mobile) + ", stack: 's2', backgroundColor: '#42f5aa', order: 4}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(mth_usr_tablet) + ", stack: 's2', backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "     ,{ type: 'line',label: 'Robot Hits', data: " + str(mth_usr_bots) + ", order: 2}" + "\n"
+            h += "     ,{ type: 'line',label: 'User Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, yAxisID: 'y2', order: 1}" + "\n"
             h += "    ]," + "\n"
             h += "    labels: " + str(mth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
