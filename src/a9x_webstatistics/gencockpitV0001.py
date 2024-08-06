@@ -357,7 +357,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h2 id="hdMonth">Monthly statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
-            h += "const mctx = new Chart(mth_ctx, {"  + "\n"
+            h += "const mctx = new Chart(mth_ctx, { type: 'bar', " 
             h += "  options: { responsive: true, scales: {"
             h += "     x:{ stacked: true,  ticks: { beginAtZero: true } }, "
             h += "     y:{ stacked: false, ticks: { beginAtZero: true }, type: 'logarithmic' }"
@@ -526,8 +526,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<h2 id="hdYear">Yearly statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_years"></canvas></div>'
             h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
-            h += "const yctx = new Chart(yth_ctx, {"  + "\n"
-            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: false }  }}" + "\n"
+            h += "const yctx = new Chart(yth_ctx, { type: 'bar',"
+            h += "  options: { responsive: true, scales: {x:{ stacked: true}, y:{ stacked: false, type: 'logarithmic', min: 0}  }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
