@@ -131,17 +131,17 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
-        h += "var xmax = 0; "
+        h += "var ymax = 0; "
         h += "var ymin = 99999;" + "\n"
         h += "for (i=0; i<5; i++) {" 
         h += "  var tmax = Math.max.apply(null, dctx.data.datasets[i].data); "
-        h += "  if (tmax > xmax) {  xmax = tmax; } " 
+        h += "  if (tmax > ymax) {  ymax = tmax; } " 
         h += "  var tmin = Math.min.apply(null, dctx.data.datasets[i].data); "
         h += "  if (tmin < ymin) {  ymin = tmin; } " 
         h += "}" + "\n"
-        h += "rm = xmax % 10;" + "\n"
+        h += "rm = ymax % 10;" + "\n"
         h += "rm = 10 - rm + 10;" + "\n"
-        h += "dctx.options.scales.y.max = xmax + rm;" + "\n"
+        h += "dctx.options.scales.y.max = ymax + rm;" + "\n"
         h += "dctx.options.scales.y.min = ymin;" + "\n"
         h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
@@ -179,19 +179,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
-        #tcountries = {}
-        #for y in d['v0001']['days']:
-        #    curYearMonth = y[0:6]
-            #print (curYearMonth + " " + actYearMonth)
-        #    if curYearMonth == actYearMonth:
-        #        try:
-        #            for co,cv in d['v0001']['days'][y]['user']['countryHits'].items():
-        #                if co not in tcountries:
-        #                    tcountries[co] = 0
-        #                tcountries[co] += cv
-        #        except KeyError: 
-        #            print ('ERROR: topcountries: key not found!' + str(d['v0001']['days'][y]['user']))
-        #            continue
         
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
@@ -373,19 +360,17 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "    ]," + "\n"
             h += "    labels: " + str(mth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
-            h += "var xmax = 0; "
-            h += "var tmax = 0;" + "\n"
-            h += "var tmin = 0;" + "\n"
+            h += "var ymax = 0; "  + "\n"
             h += "var ymin = 999999;" + "\n"
             h += "for (i=0; i<5; i++) {" 
-            h += "  tmax = Math.max.apply(null, mctx.data.datasets[i].data); "
-            h += "  if (tmax > xmax) {  xmax = tmax; } " 
-            h += "  tmin = Math.min.apply(null, mctx.data.datasets[i].data); "
+            h += "  var tmax = Math.max.apply(null, mctx.data.datasets[i].data); "
+            h += "  if (tmax > ymax) {  ymax = tmax; } " 
+            h += "  var tmin = Math.min.apply(null, mctx.data.datasets[i].data); "
             h += "  if (tmin < ymin) {  ymin = tmin; } " 
             h += "}" + "\n"
-            h += "rm = xmax % 100;" + "\n"
+            h += "rm = ymax % 100;" + "\n"
             h += "rm = 100 - rm + 100;" + "\n"
-            h += "mctx.options.scales.y.max = xmax + rm;" + "\n"
+            h += "mctx.options.scales.y.max = ymax + rm;" + "\n"
             h += "mctx.options.scales.y.min = ymin;" + "\n"
             h += "mctx.update();" + "\n"
             h += "</script>" + "\n"
@@ -539,17 +524,17 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "    ]," + "\n"
             h += "    labels: " + str(yth_lbl) + "\n"
             h += " }," + "\n" + "});" + "\n"
-            h += "var xmax = 0; "
+            h += "var ymax = 0; "
             h += "var ymin = 99999;" + "\n"
             h += "for (i=0; i<5; i++) {" 
             h += "  var tmax = Math.max.apply(null, yctx.data.datasets[i].data); "
-            h += "  if (tmax > xmax) {  xmax = tmax; } " 
+            h += "  if (tmax > ymax) {  ymax = tmax; } " 
             h += "  var tmin = Math.min.apply(null, yctx.data.datasets[i].data); "
             h += "  if (tmin < ymin) {  ymin = tmin; } " 
             h += "}" + "\n"
-            h += "rm = xmax % 1000;" + "\n"
+            h += "rm = ymax % 1000;" + "\n"
             h += "rm = 1000 - rm + 1000;" + "\n"
-            h += "yctx.options.scales.y.max = xmax + rm;" + "\n"
+            h += "yctx.options.scales.y.max = ymax + rm;" + "\n"
             h += "yctx.options.scales.y.min = ymin;" + "\n"
             h += "yctx.update();" + "\n"
             h += "</script>" + "\n"
