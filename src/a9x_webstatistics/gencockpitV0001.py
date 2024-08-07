@@ -506,7 +506,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 yth_usr_mobile[-1] += d['v0001']['days'][k]['user']['deviceHits']['mobile']
             if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
                 yth_usr_tablet[-1] += d['v0001']['days'][k]['user']['deviceHits']['tablet']
-            if 'robotHits' in d['v0001']['days'][k]['robot']']:
+            if 'robotHits' in d['v0001']['days'][k]['robot']:
                 yth_usr_bots[-1] += d['v0001']['days'][k]['robot']['robotHits']
 
             # visits:
