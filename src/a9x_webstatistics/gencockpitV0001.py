@@ -604,6 +604,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
         h += '</a>'
         h += '<p class="text-body-secondary">© 2024</p>'
+        h += '<p class="text-body-secondary">' + __version__ + '</p>'
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
 
