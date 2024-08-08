@@ -4,6 +4,7 @@ from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
+from a9x_webstatistics import __version__
 
 def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
@@ -604,7 +605,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
         h += '</a>'
         h += '<p class="text-body-secondary">© 2024</p>'
-        h += '<p class="text-body-secondary">' + a9x_webstatistics.__version__ + '</p>'
+        h += '<p class="text-body-secondary">' + __version__ + '</p>'
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
 
