@@ -101,12 +101,12 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_usr_visits.reverse()
 
         h = genHeaderV0001(owndomain)
-        h += "\n" + '<div class="row"><div class="col-12">'
+        h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
         h += '<a href="#hdMonth" class="btn btn-primary mx-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
         h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
-        h += "\n" + '<div class="row"><div class="col-12">'
+        h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1 id="hdDay">Daily statistics for ' + owndomain + '</h1>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
@@ -119,7 +119,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += " type: 'bar', "  
         h += " options: { responsive: true, scales: {"
         h += "    x: { stacked: true }, "
-        h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' } "
+        h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' }"
         h += "  } }" + "\n"
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,data: { " + "\n" 
@@ -152,16 +152,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         actYearMonth = lastDate[0:6]
         
         # Top 10 Domains on daily basis
-        #tsource = {}
-        #for y in d['v0001']['days']:
-        #    curYearMonth = y[0:6]
-        #    if curYearMonth == actYearMonth:
-        #        if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-        #            for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-        #                if sk not in tsource:
-        #                    tsource[sk] = 0
-        #                tsource[sk] += sv['cnt']
-
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
