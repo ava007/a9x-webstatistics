@@ -70,7 +70,6 @@ def runws(statfile, infile, geoip, verbosity, domain):
     #d['days'] = {}
     d['v0001'] = {}
     d['v0001']['days'] = {}
-    print('d: ' + str(d))
 
     # init job results
     j = {
@@ -153,7 +152,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
 
     print("Rec read: "      + str(j['records_read']))
     print("Rec processed: " + str(j['records_processed_for_statistic']))
-    print("Rec skipped: "   +  str(j['records_already_processed']))
+    print("Rec skipped: "   + str(j['records_already_processed']))
     return 0
 
 if __name__ == "__main__":
