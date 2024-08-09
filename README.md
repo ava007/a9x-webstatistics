@@ -15,13 +15,13 @@ pip install a9x-webstatistics
 ```
 
 
-## Requirements
+## Requirements on Linux / Unix
 - nginx standard access log file
 - python3.9 onwards
 - optional: maxmind db which need to be download by end user after registration
 
 
-## Deployment
+## Deployment on Linux / Unix
 
 ```bash
 #!/bin/sh
@@ -44,4 +44,41 @@ Cron-Job Entry for Linux / FreeBSD:
 #minute hour    mday    month   wday    who     command
 13,58   *       *       *       *       dj1     /usr/local/www/cronjobs/cron_webstatistics.sh
 
+```
+
+
+## Installation on Windows
+
+```bash
+# install on windows:
+
+## install a virtual env for python
+python -m venv c:\temp\webstatsenv
+
+## activate env
+c:\temp\webstatsenv\Scripts\activate.bat
+
+## install a9x-webstatistics
+pip install a9x-webstatistics
+python -m pip install --upgrade pip
+python -m pip list
+```
+
+## Deployment on Windows
+
+```bash
+# run
+c:
+cd \temp
+wget -URI https://www.logikfabrik.com/wlog/access.log -OutFile access.log
+
+## active env
+c:\temp\webstatsenv\Scripts\activate.bat
+
+## create calculate statistics
+## there are no country statistics created as not geoip defined
+python -m a9x_webstatistics.main --infile access.log --statfile webstatsLF.json
+
+## create html file for webstatistics
+python -m a9x_webstatistics.gencockpit --infile webstatsLF.json --outfile webstatsLF.html
 ```
