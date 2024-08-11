@@ -18,7 +18,22 @@ def genHeaderV0001(domain):
     #h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
     #h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
     #h += '</style>'
-    #h += '</head>' + "\n"
+    h += '<script>'
+    h += 'function DT2Locale(tdt) {'
+    h += 'try {'
+    h += 'var year = tdt.substring(0, 4);'
+    h += 'var month = tdt.substring(4, 6);'
+    h += 'var day = tdt.substring(6, 8);'
+    h += 'var hour = tdt.substring(8, 10);'
+    h += 'var min = tdt.substring(10, 12);'
+    h += 'var sec = tdt.substring(12, 14);'
+    h += 'var date = new Date(year, month, day, hour, min, sec);'
+    h += 'return tDateTime.toLocaleString();'
+    h += '} catch (error) {'
+    h += ' return null; }'
+    h += '}'
+    h += '</script>'
+    h += '</head>' + "\n"
     h += '<body>'
     h += '<div class="container">'
     return h
