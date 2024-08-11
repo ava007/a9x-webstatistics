@@ -124,7 +124,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div></div>'
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
-        h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
+        h += '<p><small>Last record included in statistic:  + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h3>Statistics for the last 31 days</h3>'
@@ -138,7 +138,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' }"
         h += "  } }" + "\n"
         #h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
-        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2locale('" + d['timelastrec'] + "') + } }" + "\n"
+        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2Locale('" + d['timelastrec'] + "') } }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
         h += "     { type: 'line',label: 'Robot Hits', data: " + str(day_robot_hits) + ", order:1}" + "\n"
