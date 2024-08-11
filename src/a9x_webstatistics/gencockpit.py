@@ -16,6 +16,21 @@ def genHeader(domain):
     h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
     h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
     h += '</style>'
+    h += '<script>'
+    h += 'function DT2Locale(tdt) {'
+    h += 'try {'
+    h += 'var year = tdt.substring(0, 4);'
+    h += 'var month = tdt.substring(4, 6);'
+    h += 'var day = tdt.substring(6, 8);'
+    h += 'var hour = tdt.substring(8, 10);'
+    h += 'var min = tdt.substring(10, 12);'
+    h += 'var sec = tdt.substring(12, 14);'
+    h += 'var date = new Date(year, month, day, hour, min, sec);'
+    h += 'return tDateTime.toLocaleString();'
+    h += '} catch (error) {'
+    h += ' return null; }'
+    h += '}'
+    h += '</script>'
     h += '</head>' + "\n"
     h += '<body>'
     return h
@@ -91,7 +106,8 @@ def runGenCockpit(infile, outfile, domain):
         h += "    y: { stacked: true,  ticks: { beginAtZero: true } }, "
         h += "    y2: { stacked: false, ticks: {beginAtZero: true}, position: 'right'}"
         h += "  } }" + "\n"
-        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
+        //h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
+        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2locale('" + ['timelastrec'] + "') + } }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
         h += "     { type: 'bar', label: 'Desktop', data: " + str(day_dta_desktop) + " ,backgroundColor: '#42c5f5', order:3}" + "\n"
