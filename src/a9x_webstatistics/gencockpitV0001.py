@@ -590,7 +590,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<footer class="row row-cols-12 bg-light py-4 mt-4">'
 
-        h += '<div class="col-6">'
+        h += '<div class="col-6"><h2>About</h2>'
         h += '<a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">'
         h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
         h += '</a>'
@@ -599,7 +599,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
           
-        h += '<div class="col-6"><h5>Abbreviations</h5>'
+        h += '<div class="col-6"><h3>Abbreviations</h3>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>'
