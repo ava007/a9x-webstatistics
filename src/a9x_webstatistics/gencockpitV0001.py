@@ -18,7 +18,7 @@ def genHeaderV0001(domain):
     #h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
     #h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
     #h += '</style>'
-    h += '<script>'
+    h += "\n" + '<script>'
     h += 'function DT2Locale(tdt) {'
     h += 'try {'
     h += 'var year = tdt.substring(0, 4);'
@@ -125,7 +125,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
         #h += '<p><small>Last record included in statistic:  + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
-        h += "<p><small>Last record included in statistic: <script>echo DT2Locale('" + d['timelastrec'] + "') </script></small></p>"
+        h += "<p><small>Last record included in statistic: <script>document.write(DT2Locale('" + d['timelastrec'] + "'));</script></small></p>"
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h3>Statistics for the last 31 days</h3>'
