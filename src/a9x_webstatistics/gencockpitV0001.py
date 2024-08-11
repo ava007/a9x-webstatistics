@@ -27,7 +27,7 @@ def genHeaderV0001(domain):
     h += 'var hour = tdt.substring(8, 10);'
     h += 'var min = tdt.substring(10, 12);'
     h += 'var sec = tdt.substring(12, 14);'
-    h += 'var date = new Date(year, month, day, hour, min, sec);'
+    h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
     h += 'return tDateTime.toLocaleString();'
     h += '} catch (error) {'
     h += ' return null; }'
@@ -125,7 +125,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
         #h += '<p><small>Last record included in statistic:  + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
-        h += "<p><small>Last record included in statistic: <script>print DT2Locale('" + d['timelastrec'] + "');</script></small></p>"
+        h += "<p><small>Last record included in statistic: <script>echo DT2Locale('" + d['timelastrec'] + "') </script></small></p>"
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
         h += '<h3>Statistics for the last 31 days</h3>'
