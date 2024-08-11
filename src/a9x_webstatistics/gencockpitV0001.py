@@ -102,16 +102,17 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
+         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
         h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
         h += '<a href="#hdMonth" class="btn btn-primary mx-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
         h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
-        h += '<h1 id="hdDay">Daily statistics for ' + owndomain + '</h1>'
+        h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
         h += '<p><small>Last record included in statistic: ' + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h2>Statistics for the last 31 days</h2>'
+        h += '<h3>Statistics for the last 31 days</h3>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
@@ -154,7 +155,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         # Top 10 Domains on daily basis
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top 10 Domains</h3>'
+        h += '<h4 class="card-title">Top 10 Domains</h4>'
         h += '<p class="card-text">User hits refering to external domain:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -174,7 +175,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Countries</h3>'
+            h += '<h4 class="card-title">Top 10 Countries</h4>'
             h += '<p class="card-text">User hits for the last 31 days by country:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -206,7 +207,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(ttopurl) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 URL</h3>'
+            h += '<h4 class="card-title">Top 10 URL</h4>'
             h += '<p class="card-text">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -226,7 +227,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Landings</h3>'
+            h += '<h4 class="card-title">Top 10 Landings</h4>'
             h += '<p class="card-text">User landings for the last 31 days:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
@@ -261,7 +262,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tquality) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Quality Improvements</h3>'
+            h += '<h4 class="card-title">Quality Improvements</h4>'
             h += '<p class="card-text">Quality improvements that should be implemented:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col">Status</th><th scope="col">affected URL</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
@@ -586,30 +587,19 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         
         # End Year
-        
 
         h += '<footer class="row row-cols-12 bg-light py-4 mt-4">'
 
-        h += '<div class="col-3">'
+        h += '<div class="col-6">'
         h += '<a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">'
         h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
         h += '</a>'
-        h += '<p class="text-body-secondary">© 2024</p>'
+        h += '<p class="text-body-secondary"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024 a9x-webstatistics</a></p>'
         h += '<p class="text-body-secondary">' + __version__ + '</p>'
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
-
-        h += '<div class="col-3"></div>'
-        
-        h += '<div class="col-3"><h5>Licenses</h5>'
-        h += '<ul class="nav flex-column">'
-        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">Webstatistics V0001</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://www.chartjs.org" rel="nofollow" class="nav-link p-0 text-body-secondary">chartjs.org</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://www.getbootstrap.com" rel="nofollow" class="nav-link p-0 text-body-secondary">getbootstrap.com</a></li>'
-        h += '<li class="nav-item mb-2"><a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" rel="nofollow" class="nav-link p-0 text-body-secondary">optional API to geolite2</a></li>'
-        h += '</ul></div>' + "\n"
-        
-        h += '<div class="col-3"><h5>Abbreviations</h5>'
+          
+        h += '<div class="col-6"><h5>Abbreviations</h5>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>'
