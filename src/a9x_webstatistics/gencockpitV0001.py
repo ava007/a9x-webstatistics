@@ -22,7 +22,8 @@ def genHeaderV0001(domain):
     h += 'function DT2Locale(tdt) {'
     h += 'try {'
     h += 'var year = tdt.substring(0, 4);'
-    h += 'var month = tdt.substring(4, 6);'
+    # month is 0-indexed:
+    h += 'var month = tdt.substring(4, 6) - 1;' 
     h += 'var day = tdt.substring(6, 8);'
     h += 'var hour = tdt.substring(8, 10);'
     h += 'var min = tdt.substring(10, 12);'
