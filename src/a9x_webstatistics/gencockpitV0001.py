@@ -189,7 +189,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div></div></div>'  + "\n"   # end of col and card
 
         # Top Countries
-        
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
@@ -205,7 +204,6 @@ def runGenCockpitV0001(infile, outfile, domain):
                     break
             h += '</table>'
             h += '</div></div></div>'    # end of card and col 
-
 
         # top urls for the last 31 days:
         ttopurl = {}
@@ -343,8 +341,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
         
         ## Months:  
-        h += "\n" + '<div class="row mt-4"><div class="col-12">'
         if len(mth_lbl) > 0:
+            h += "\n" + '<div class="row mt-4"><div class="col-12">'
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
             mth_usr_mobile.reverse()
@@ -384,96 +382,97 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "mctx.options.scales.y.min = ymin;" + "\n"
             h += "mctx.update();" + "\n"
             h += "</script>" + "\n"
-        h += '</div></div>'  # end of col and row
+            h += '</div></div>'  # end of col and row
 
-        # Top 10 Domains on monthly basis
-        tsource = {}
-        for y in d['v0001']['days']:
-            curYearMonth = y[0:6]
-            if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-                for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-                    if sk not in tsource:
-                        tsource[sk] = 0
-                    tsource[sk] += sv['cnt']
-        h += '<div class="row">'
-        h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
-        h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top 10 Domains</h3>'
-        h += '<p class="card-text">Hit list of domains where traffic comes from:</p>'
-        h += '<table class="table">'
-        h += '<thead><tr><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
-        i = 1
-        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
-             if owndomain in k:
-                 continue
-             h += '<tr><td>' +str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-             i += 1
-             if i > 10:
-                 break
-        h += '</table></div></div></div>'  + "\n"
-        
-        # Top Countries
-        tcountries = {}
-        tccount = 0
-        # loop through month beginning with highest month:
-        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-            if len(k) == 6:    
-                if tccount > 12:
-                    break
-                tccount += 1
-                for co,cv in d['v0001']['days'][k]['user']['countryHits'].items():
-                    if co not in tcountries:
-                        tcountries[co] = 0
-                    tcountries[co] += cv
-
-        if len(tcountries) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
+            # Top 10 Domains on monthly basis
+            tsource = {}
+            for y in d['v0001']['days']:
+                curYearMonth = y[0:6]
+                if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
+                    for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                        if sk not in tsource:
+                            tsource[sk] = 0
+                        tsource[sk] += sv['cnt']
+            h += '<div class="row">'
+            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Countries</h3>'
-            h += '<p class="card-text">Hit list of countries giving the most user hits:</p>'
+            h += '<h3 class="card-title">Top 10 Domains</h3>'
+            h += '<p class="card-text">Hit list of domains where traffic comes from:</p>'
             h += '<table class="table">'
-            h += '<thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col" style="text-align: right">Hits count</th></tr></thead>'
+            h += '<thead><tr><th scope="col">Rank</th><th scope="col">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
-            for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+            for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
+                if owndomain in k:
+                    continue
+                h += '<tr><td>' +str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                 i += 1
-                if i == 10:
-                    break
-            h += '</table></div></div></div>' + "\n"
-
-        # top urls
-        ttopurl = {}
-        topurlcnt = 0
-        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-            if len(k) == 6:    
-                if topurlcnt > 12:
-                    break
-                topurlcnt += 1
-                if 'topUrl' in d['v0001']['days'][k]['user']:
-                    for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
-                        if tk not in ttopurl:
-                            ttopurl[tk] = 0
-                        ttopurl[tk] += tv
-        if len(ttopurl) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-            h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 URL</h3>'
-            h += '<p class="card-text">URL with the most user hits:</p>'
-            h += '<table class="table">'
-            h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
-            i = 1
-            vdomain = domain.replace('https://','')
-            vdomain = vdomain.replace('http://','')
-            vdomain = vdomain.removeprefix('www.')
-            for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
-                    h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-                    i += 1
                 if i > 10:
                     break
-            h += '</table></div></div></div>' + "\n"   # end of card and col
-        h += '</div>' + "\n"   # end of row
+            h += '</table></div></div></div>'  + "\n"
+        
+            # Top Countries
+            tcountries = {}
+            tccount = 0
+            # loop through month beginning with highest month:
+            for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+                if len(k) == 6:    
+                    if tccount > 12:
+                        break
+                    tccount += 1
+                    for co,cv in d['v0001']['days'][k]['user']['countryHits'].items():
+                        if co not in tcountries:
+                            tcountries[co] = 0
+                        tcountries[co] += cv
 
+            if len(tcountries) > 0:
+                h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
+                h += '<div class="card mt-2"><div class="card-body">'
+                h += '<h3 class="card-title">Top 10 Countries</h3>'
+                h += '<p class="card-text">Hit list of countries giving the most user hits:</p>'
+                h += '<table class="table">'
+                h += '<thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col" style="text-align: right">Hits count</th></tr></thead>'
+                i = 1
+                for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
+                    h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                    i += 1
+                    if i == 10:
+                        break
+                h += '</table></div></div></div>' + "\n"
+
+            # top urls
+            ttopurl = {}
+            topurlcnt = 0
+            for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+                if len(k) == 6:    
+                    if topurlcnt > 12:
+                        break
+                    topurlcnt += 1
+                    if 'topUrl' in d['v0001']['days'][k]['user']:
+                        for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
+                            if tk not in ttopurl:
+                                ttopurl[tk] = 0
+                            ttopurl[tk] += tv
+            if len(ttopurl) > 0:
+                h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
+                h += '<div class="card mt-2"><div class="card-body">'
+                h += '<h3 class="card-title">Top 10 URL</h3>'
+                h += '<p class="card-text">URL with the most user hits:</p>'
+                h += '<table class="table">'
+                h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
+                i = 1
+                vdomain = domain.replace('https://','')
+                vdomain = vdomain.replace('http://','')
+                vdomain = vdomain.removeprefix('www.')
+                for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
+                    if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
+                        h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                        i += 1
+                    if i > 10:
+                        break
+                h += '</table></div></div></div>' + "\n"   # end of card and col
+            h += '</div>' + "\n"   # end of row
+        # End of Months
+  
         # Webstatistics for the last years.
         yth_lbl = []
         yth_usr_desktop = []
