@@ -65,7 +65,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     try: 
         georeader = geoip2.database.Reader(geoip)
     except (FileNotFoundError, TypeError) as gerr:
-        geoip = None
+        georeader = None
         print("geoip2 file not found, continue processing")
 
     # init statistic file if it does not exist:
