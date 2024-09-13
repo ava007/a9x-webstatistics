@@ -116,6 +116,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_robot_hits.reverse()
         day_usr_visits.reverse()
 
+        # order in bars:  smallest traffic = order 1
+        order_mobile = 1
+        order_tablet = 2
+        ordet_desktop = 3
+
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
@@ -145,9 +150,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "   datasets: [" + "\n"
         h += "     { type: 'line',label: 'Robot Hits', data: " + str(day_robot_hits) + ", order:1}" + "\n"
         h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, order: 2}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User Desktop Hits', data: " + str(day_usr_desktop) + ", stack: 's1', backgroundColor: '#42c5f5', order:3}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User Mobile Hits',  data: " + str(day_usr_mobile) + ", stack: 's1', backgroundColor: '#42f5aa', order:4}" + "\n"
-        h += "    ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(day_usr_tablet) + ", stack: 's1', backgroundColor: '#f5a742', order:5}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User Desktop Hits', data: " + str(day_usr_desktop) + ", stack: 's1', backgroundColor: '#42c5f5', order:" + str(order_desktop) + "}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User Mobile Hits',  data: " + str(day_usr_mobile) + ", stack: 's1', backgroundColor: '#42f5aa', order:" + str(order_mobile) + "}" + "\n"
+        h += "    ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(day_usr_tablet) + ", stack: 's1', backgroundColor: '#f5a742', order:" + str(order_tablet) + "}" + "\n"
         h += "    ]," + "\n"
         h += "    labels: " + str(day_lbl) + "\n"
         h += " }," + "\n" + "});" + "\n"
