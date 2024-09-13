@@ -119,7 +119,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         # order in bars:  smallest traffic = order 1
         order_mobile = 1
         order_tablet = 2
-        ordet_desktop = 3
+        order_desktop = 3
+        if sum(day_usr_tablet) > sum(day_usr_mobile):
+            order_tablet, order_mobile = order_mobile, order_tablet
 
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
