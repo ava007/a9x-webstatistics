@@ -23,9 +23,9 @@ def updV0001(
         d['v0001']['days'] = {}
     if dt not in d['v0001']['days']:
         d['v0001']['days'][dt] = {}
-        d['v0001']['days'][dt]['user']    = {};
-        d['v0001']['days'][dt]['user']['visits']  = 0;
-        d['v0001']['days'][dt]['user']['bytesSent'] = 0;
+        d['v0001']['days'][dt]['user'] = {}
+        d['v0001']['days'][dt]['user']['visits']  = 0
+        d['v0001']['days'][dt]['user']['bytesSent'] = 0
 
         d['v0001']['days'][dt]['user']['deviceHits'] = {}
         d['v0001']['days'][dt]['user']['deviceHits']['mobile']  = 0 
@@ -33,11 +33,11 @@ def updV0001(
         d['v0001']['days'][dt]['user']['deviceHits']['desktop'] = 0 
         d['v0001']['days'][dt]['user']['serverResponseCode'] = {}
 
-        d['v0001']['days'][dt]['robot']    = {};
-        d['v0001']['days'][dt]['robot']['robotHits']  = 0;
-        d['v0001']['days'][dt]['robot']['bytesSent'] = 0;
+        d['v0001']['days'][dt]['robot'] = {}
+        d['v0001']['days'][dt]['robot']['robotHits'] = 0
+        d['v0001']['days'][dt]['robot']['bytesSent'] = 0
         d['v0001']['days'][dt]['robot']['serverResponseCode'] = {}
-        d['v0001']['days'][dt]['quality']    = {};
+        d['v0001']['days'][dt]['quality'] = {}
 
     devCla = detectDeviceClass(i['user_agent']) 
     # update statistics for user:
@@ -54,8 +54,8 @@ def updV0001(
             if 'countryHits' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['countryHits'] = {}
             if i['country'] not in d['v0001']['days'][dt]['user']['countryHits']:
-                d['v0001']['days'][dt]['user']['countryHits'][i['country']] = 0;
-            d['v0001']['days'][dt]['user']['countryHits'][i['country']] += 1;
+                d['v0001']['days'][dt]['user']['countryHits'][i['country']] = 0
+            d['v0001']['days'][dt]['user']['countryHits'][i['country']] += 1
 
         # update hits for device types:
         if devCla not in d['v0001']['days'][dt]['user']['deviceHits']:
@@ -75,8 +75,8 @@ def updV0001(
             if 'topUrl' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['topUrl'] = {}
             if i['request'] not in d['v0001']['days'][dt]['user']['topUrl']:
-                d['v0001']['days'][dt]['user']['topUrl'][i['request']] = 0;
-            d['v0001']['days'][dt]['user']['topUrl'][i['request']] += 1;
+                d['v0001']['days'][dt]['user']['topUrl'][i['request']] = 0
+            d['v0001']['days'][dt]['user']['topUrl'][i['request']] += 1
 
         # update friends on the first day of the month:
         if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
@@ -85,7 +85,7 @@ def updV0001(
             if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
             if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} };
+                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
             if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
                 d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] = 0
             d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
@@ -139,6 +139,16 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['comment'] = 'internal not found'
         else:
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
+
+    # accumulate user navigation on first day of the month
+    if len(i['referer']) > 1 and (i['status'] == '200') and devCla in ('desktop','mobile','tablet'):
+        dt01 = i['ym'] + '01'
+        if 'navigation' not in d['v0001]['days'][dt01]:
+           d['v0001']['days'][dt01]['navigation'] = {}
+        nkey = i['referer'] + '(())' + i['request']
+        if nkey not in d['v0001']['days'][dt01]['navigation']:
+           d['v0001']['days'][dt01]['navigation'][nkey] = 0
+        d['v0001']['days'][dt01]['navigation'][nkey] += 1
 
     return d, visitIP
 
