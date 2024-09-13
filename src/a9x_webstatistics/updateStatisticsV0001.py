@@ -142,7 +142,7 @@ def updV0001(
 
     # accumulate user navigation on first day of the month
     if len(i['referer']) > 1 and (i['status'] == '200') and devCla in ('desktop','mobile','tablet'):
-        dt01 = i['ym'] + '01'
+        dt01 = i['ymd'][0:6] + '01'
         if 'navigation' not in d['v0001']['days'][dt01]:
            d['v0001']['days'][dt01]['navigation'] = {}
         nkey = i['referer'] + '(())' + i['request']
