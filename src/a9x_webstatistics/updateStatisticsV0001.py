@@ -142,10 +142,12 @@ def updV0001(
 
     # accumulate user navigation on first day of the month
     if len(i['referer']) > 1 and (i['status'] == '200') and devCla in ('desktop','mobile','tablet'):
+        oref = urlparse(i['referer'])   # remove query string...
+        oreq = urlparse(i['request'])   # remove query string...
         dt01 = i['ymd'][0:6] + '01'
         if 'navigation' not in d['v0001']['days'][dt01]['user']:
            d['v0001']['days'][dt01]['user']['navigation'] = {}
-        nkey = i['referer'] + '(())' + i['request']
+        nkey = oref.path + '(())' + oreq.path
         if nkey not in d['v0001']['days'][dt01]['user']['navigation']:
            d['v0001']['days'][dt01]['user']['navigation'][nkey] = 0
         d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
