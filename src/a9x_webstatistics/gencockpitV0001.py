@@ -324,17 +324,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         mth_usr_bots = []
         mth_usr_visits = []
 
-        # order for monthly bars:  smallest traffic is "order 1"
-        order_mobile = 1
-        order_tablet = 2
-        order_desktop = 3
-        # swap orders if needed:
-        if sum(mth_usr_tablet) < sum(mth_usr_mobile):
-            order_tablet, order_mobile = order_mobile, order_tablet
-        if sum(mth_usr_desktop) < sum(mth_usr_tablet):
-            order_tablet, order_desktop = order_desktop, order_tablet
-
-
         # loop through month beginning with highest month:
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
@@ -370,6 +359,17 @@ def runGenCockpitV0001(infile, outfile, domain):
             mth_usr_tablet.reverse()
             mth_usr_bots.reverse()
             mth_usr_visits.reverse()
+
+            # order for monthly bars:  smallest traffic is "order 1"
+            order_mobile = 1
+            order_tablet = 2
+            order_desktop = 3
+            # swap orders if needed:
+            if sum(mth_usr_tablet) < sum(mth_usr_mobile):
+                order_tablet, order_mobile = order_mobile, order_tablet
+            if sum(mth_usr_desktop) < sum(mth_usr_tablet):
+                order_tablet, order_desktop = order_desktop, order_tablet
+            
             h += '<h2 id="hdMonth">Monthly statistics for ' + owndomain + '</h2>'
             h += '<div><canvas id="a9x_ws_months"></canvas></div>'
             h += "<script>" + "\n" + "const mth_ctx = document.getElementById('a9x_ws_months');" + "\n"
@@ -528,6 +528,16 @@ def runGenCockpitV0001(infile, outfile, domain):
             if 'visits' in d['v0001']['days'][k]['user']:
                 yth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
 
+        # order for yeary bars:  smallest traffic is "order 1"
+        order_mobile = 1
+        order_tablet = 2
+        order_desktop = 3
+        # swap orders if needed:
+        if sum(yth_usr_tablet) < sum(yth_usr_mobile):
+            order_tablet, order_mobile = order_mobile, order_tablet
+        if sum(yth_usr_desktop) < sum(yth_usr_tablet):
+            order_tablet, order_desktop = order_desktop, order_tablet
+
         ## Chart Years:  
         h += '<div class="row mt-4">'
         h += '<div class="col-12">'
@@ -546,9 +556,9 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
-            h += "      { type: 'bar', label: 'User Desktop Hits',data: " + str(yth_usr_desktop)+ ", stack: 's3', backgroundColor: '#42c5f5', order: 3}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User Mobile Hits', data: " + str(yth_usr_mobile) + ", stack: 's3', backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(yth_usr_tablet) + ", stack: 's3', backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "      { type: 'bar', label: 'User Desktop Hits',data: " + str(yth_usr_desktop)+ ", stack: 's3', backgroundColor: '#42c5f5', order: " + str(order_desktop) + "}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Mobile Hits', data: " + str(yth_usr_mobile) + ", stack: 's3', backgroundColor: '#42f5aa', order: " + str(order_mobile) + "}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(yth_usr_tablet) + ", stack: 's3', backgroundColor: '#f5a742', order: " + str(order_tablet) + "}" + "\n"
             h += "     ,{ type: 'line',label: 'Robot Hits', data: " + str(yth_usr_bots) + ", order: 2}" + "\n"
             h += "     ,{ type: 'line',label: 'User Visits',  data: " + str(yth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, order: 1}" + "\n"
             h += "    ]," + "\n"
