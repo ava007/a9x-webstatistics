@@ -116,7 +116,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         day_robot_hits.reverse()
         day_usr_visits.reverse()
 
-        # order in bars:  smallest traffic = order 1
+        # order for bars:  smallest traffic is "order 1"
         order_mobile = 1
         order_tablet = 2
         order_desktop = 3
@@ -324,6 +324,17 @@ def runGenCockpitV0001(infile, outfile, domain):
         mth_usr_bots = []
         mth_usr_visits = []
 
+        # order for monthly bars:  smallest traffic is "order 1"
+        order_mobile = 1
+        order_tablet = 2
+        order_desktop = 3
+        # swap orders if needed:
+        if sum(day_mth_tablet) < sum(day_mth_mobile):
+            order_tablet, order_mobile = order_mobile, order_tablet
+        if sum(day_mth_desktop) < sum(day_mth_tablet):
+            order_tablet, day_usr_desktop = day_usr_desktop, order_tablet
+
+
         # loop through month beginning with highest month:
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
@@ -370,9 +381,9 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8]+ " " + d['timelastrec'][-6:] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
-            h += "      { type: 'bar', label: 'User Desktop Hits', data: " + str(mth_usr_desktop)+ ", stack: 's2', backgroundColor: '#42c5f5', order: 3}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User Mobile Hits',  data: " + str(mth_usr_mobile) + ", stack: 's2', backgroundColor: '#42f5aa', order: 4}" + "\n"
-            h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(mth_usr_tablet) + ", stack: 's2', backgroundColor: '#f5a742', order: 5}" + "\n"
+            h += "      { type: 'bar', label: 'User Desktop Hits',data: " + str(mth_usr_desktop)+ ", stack: 's2', backgroundColor: '#42c5f5', order: " + str(order_desktop) + "}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Mobile Hits', data: " + str(mth_usr_mobile) + ", stack: 's2', backgroundColor: '#42f5aa', order: " + str(order_mobile) + "}" + "\n"
+            h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(mth_usr_tablet) + ", stack: 's2', backgroundColor: '#f5a742', order: " + str(order_tablet) + "}" + "\n"
             h += "     ,{ type: 'line',label: 'Robot Hits', data: " + str(mth_usr_bots) + ", order: 2}" + "\n"
             h += "     ,{ type: 'line',label: 'User Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, order: 1}" + "\n"
             h += "    ]," + "\n"
