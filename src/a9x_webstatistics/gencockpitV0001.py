@@ -124,7 +124,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         if sum(day_usr_tablet) < sum(day_usr_mobile):
             order_tablet, order_mobile = order_mobile, order_tablet
         if sum(day_usr_desktop) < sum(day_usr_tablet):
-            order_tablet, day_usr_desktop = day_usr_desktop, order_tablet
+            order_tablet, order_desktop = order_desktop, order_tablet
         
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
@@ -329,10 +329,10 @@ def runGenCockpitV0001(infile, outfile, domain):
         order_tablet = 2
         order_desktop = 3
         # swap orders if needed:
-        if sum(day_mth_tablet) < sum(day_mth_mobile):
+        if sum(mth_usr_tablet) < sum(mth_usr_mobile):
             order_tablet, order_mobile = order_mobile, order_tablet
-        if sum(day_mth_desktop) < sum(day_mth_tablet):
-            order_tablet, day_usr_desktop = day_usr_desktop, order_tablet
+        if sum(mth_usr_desktop) < sum(mth_usr_tablet):
+            order_tablet, order_desktop = order_desktop, order_tablet
 
 
         # loop through month beginning with highest month:
