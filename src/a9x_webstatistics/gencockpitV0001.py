@@ -181,7 +181,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         actYearMonth = lastDate[0:6]
         
         # Top 10 Domains on daily basis
-        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-4">'
+        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h4 class="card-title">Top 10 Domains</h4>'
         h += '<p class="card-text">User hits refering to external domain:</p>'
@@ -200,7 +200,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         # Top Countries
         if len(tcountries) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+            h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h4 class="card-title">Top 10 Countries</h4>'
             h += '<p class="card-text">User hits for the last 31 days by country:</p>'
@@ -231,7 +231,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
         if len(ttopurl) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+            h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h4 class="card-title">Top 10 URL</h4>'
             h += '<p class="card-text">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
@@ -286,7 +286,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
+            h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h4 class="card-title">Quality Improvements</h4>'
             h += '<p class="card-text">Quality improvements that should be implemented:</p>'
