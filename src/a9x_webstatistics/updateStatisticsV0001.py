@@ -152,6 +152,10 @@ def updV0001(
            d['v0001']['days'][dt01]['user']['navigation'][nkey] = 0
         d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
 
+        # cleanup
+        for ck,cv in d['v0001']['days'][dt01]['user']['navigation'].items():
+           print("nav: " + str(ck) + " " + str(cv) )
+
     return d, visitIP
 
 def detectDeviceClass(ua):
