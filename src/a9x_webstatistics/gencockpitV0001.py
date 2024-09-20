@@ -15,8 +15,6 @@ def genHeaderV0001(domain):
     h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
     #h += '<style>'
     #h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
-    #h += '.flex-container { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }'
-    #h += '.flex-item { background: tomato; padding: 14px; margin-top: 10px; margin-right: 10px; color: white; }'
     #h += '</style>'
     h += "\n" + '<script>'
     h += 'function DT2Locale(tdt) {'
@@ -29,7 +27,9 @@ def genHeaderV0001(domain):
     h += 'var min = tdt.substring(10, 12);'
     h += 'var sec = tdt.substring(12, 14);'
     h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
-    h += 'return tDateTime.toLocaleString();'
+    h += 'var tDT = tDateTime.toLocaleString();
+    h += 'tDT.replace(", 00:00:00","");   
+    h += 'return tDT;'
     h += '} catch (error) {'
     h += ' return null; }'
     h += '}'
