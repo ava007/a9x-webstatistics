@@ -12,7 +12,7 @@ def genHeaderV0001(domain):
     h += '<meta name="viewport" content="width=device-width, initial-scale=1">'
     h += '<meta charset="utf-8">'
     h += '<meta name="robots" content="index,follow">'
-    h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
     h += '<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
     #h += '<style>'
     #h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
@@ -311,7 +311,16 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         h += '<div>'
         h += '<button data-toggle="collapse" data-target="#navpath" class="btn btn-secondary btn-sm">Show experimental  feature</button>
-        h += '<div id="navpath" class="collapse">dfsadf</div>'
+        h += '<div id="navpath" class="collapse">'
+        h += '<div id="npath"></div>'
+        h += '<script type="text/javascript">'
+        h += 'var container = document.getElementById("npath");'
+        h += 'var dot ='
+        h += '"dinetwork {node[shape=circle]; 1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 }";'
+        h += 'var data = vis.parseDOTNetwork(dot);'
+        h += 'var network = new vis.Network(container, data);'
+        h += '</script>'
+        h += '</div>'
         h += '</div>'
         
         # Webstatistics for the last months
