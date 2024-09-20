@@ -296,7 +296,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 h += '<tr><td>' + str(v['status']) + '</td><td>' + str(k) + "</td>" 
                 h += '<td style="text-align: right">' + str(format(v['count'],',')) + '</td>'
                 h += '<td>' + v['comment'] + '</td>'
-                h += '<td>' + v['lastoccured'] + '</td>'
+                h += "<td><script>document.write(DT2Locale('" + v['lastoccured'] + "'));</script></td>"
                 h += '</tr>'
                 if len(v['from']) > 1:
                     h += '<tr><td></td><td colspan="4">called by: ' + v['from'] + '</td></tr>'
