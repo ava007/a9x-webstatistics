@@ -315,26 +315,26 @@ def runGenCockpitV0001(infile, outfile, domain):
         
         h += '</div>' + "\n"   # end of row
 
-        h += '<div>'
-        h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm" style="display: none">Show experimental feature</button>'
-        h += '<div id="navpath">'
-        h += '<div id="npath"></div>'
-        h += '<script type="text/javascript">'
-        h += 'var container = document.getElementById("npath");'
-        h += 'var dot ='
-        h += '"dinetwork {node[shape=circle];'
-        if 'navigation' in d['v0001']['days'] [firstOfCurrentMonth]['user']:
+        if 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
+            h += '<div>'
+            h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm" style="display: none">Show experimental feature</button>'
+            h += '<div id="navpath">'
+            h += '<div id="npath"></div>'
+            h += '<script type="text/javascript">'
+            h += 'var container = document.getElementById("npath");'
+            h += 'var dot ='
+            h += '"dinetwork {node[shape=circle];'
+        
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
                n = sk.split('(())') 
                h += n[0] + ' -> ' + n[1] + ';'
-        
-        #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
-        h += '}";'
-        h += 'var data = vis.parseDOTNetwork(dot);'
-        h += 'var network = new vis.Network(container, data);'
-        h += '</script>'
-        h += '</div>'
-        h += '</div>'
+                    #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
+            h += '}";'
+            h += 'var data = vis.parseDOTNetwork(dot);'
+            h += 'var network = new vis.Network(container, data);'
+            h += '</script>'
+            h += '</div>'
+            h += '</div>'   # end of navpath
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
