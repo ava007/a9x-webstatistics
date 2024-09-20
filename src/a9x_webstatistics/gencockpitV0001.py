@@ -28,8 +28,8 @@ def genHeaderV0001(domain):
     h += 'var min = tdt.substring(10, 12);'
     h += 'var sec = tdt.substring(12, 14);'
     h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
-    h += 'var tDT = tDateTime.toLocaleString();
-    h += 'tDT.replace(", 00:00:00","");   
+    h += 'var tDT = tDateTime.toLocaleString();'
+    h += 'tDT.replace(", 00:00:00","");'
     h += 'return tDT;'
     h += '} catch (error) {'
     h += ' return null; }'
