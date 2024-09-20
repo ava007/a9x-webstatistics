@@ -315,7 +315,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
         h += '</div>' + "\n"   # end of row
 
-        if 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
+        if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div>'
             h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm" style="display: none">Show experimental feature</button>'
             h += '<div id="navpath">'
