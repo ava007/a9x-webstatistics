@@ -34,6 +34,12 @@ def genHeaderV0001(domain):
     h += '} catch (error) {'
     h += ' return null; }'
     h += '}'
+    h += 'function wsShowHide(eid) {'
+    h += 'var x = document.getElementById(eid);'
+    h += 'if (x.style.display === "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
+    h += '}'
+
+    
     h += '</script>'
     h += '</head>' + "\n"
     h += '<body>'
@@ -310,8 +316,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div>' + "\n"   # end of row
 
         h += '<div>'
-        h += '<button data-toggle="collapse" data-target="#navpath" class="btn btn-secondary btn-sm">Show experimental feature</button>'
-        h += '<div id="navpath" class="collapse">'
+        h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm" style="display: none">Show experimental feature</button>'
+        h += '<div id="navpath">'
         h += '<div id="npath"></div>'
         h += '<script type="text/javascript">'
         h += 'var container = document.getElementById("npath");'
