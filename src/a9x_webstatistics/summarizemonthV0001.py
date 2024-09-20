@@ -33,6 +33,11 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  = 0 
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] = 0 
 
+                    #todo AVA 20240919:
+                    # if x[6:2] == '01':   # only on first day of month:
+                    # d['v0001']['days'][recMonth]['user']['navigation'] = dtmp['v0001']['days'][x]['user']['navigation']
+                    
+
                     d['v0001']['days'][recMonth]['user']['externalFriendHits'] = {}
                     d['v0001']['days'][recMonth]['user']['topUrl'] = {}
                     d['v0001']['days'][recMonth]['user']['serverResponseCode'] = {}
