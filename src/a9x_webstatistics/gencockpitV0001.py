@@ -30,6 +30,7 @@ def genHeaderV0001(domain):
     h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
     h += 'var tDT = tDateTime.toLocaleString();'
     h += 'tDT.replace(", 00:00:00","");'
+    h += 'tDT.replace(", 12:00:00 AM","");'
     h += 'return tDT;'
     h += '} catch (error) {'
     h += ' return null; }'
@@ -318,15 +319,15 @@ def runGenCockpitV0001(infile, outfile, domain):
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div>'
             h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm">Show experimental feature</button>'
-            h += '<div style="display: none" id="navpath">'
+            h += '<div id="navpath">'
             h += '<div id="npath"></div>'
             h += '<script type="text/javascript">'
             h += 'var container = document.getElementById("npath");'
-            h += 'var dot = "dinetwork {node[shape=circle]; '
+            h += 'var dot = "dinetwork { node[shape=circle]; '
         
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
                n = sk.split('(())') 
-               h += "'" + n[0] + "' -> '" + n[1] + "';"
+               h += "'" + n[0].replace('/','') + "' -> '" + n[1].replace('/','') + "';"
                     #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
