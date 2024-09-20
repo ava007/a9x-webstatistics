@@ -310,7 +310,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div>' + "\n"   # end of row
 
         h += '<div>'
-        h += '<button data-toggle="collapse" data-target="#navpath" class="btn btn-secondary btn-sm">Show experimental  feature</button>
+        h += '<button data-toggle="collapse" data-target="#navpath" class="btn btn-secondary btn-sm">Show experimental feature</button>'
         h += '<div id="navpath" class="collapse">'
         h += '<div id="npath"></div>'
         h += '<script type="text/javascript">'
