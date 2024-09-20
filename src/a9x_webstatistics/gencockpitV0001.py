@@ -322,12 +322,11 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div id="npath"></div>'
             h += '<script type="text/javascript">'
             h += 'var container = document.getElementById("npath");'
-            h += 'var dot ='
-            h += '"dinetwork {node[shape=circle];'
+            h += 'var dot = "dinetwork {node[shape=circle]; '
         
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
                n = sk.split('(())') 
-               h += "'" + n[0] + "' -> '" + n[1] + "';" + "\n"
+               h += "'" + n[0] + "' -> '" + n[1] + "';"
                     #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
