@@ -324,6 +324,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += 'var dot = "dinetwork { node[shape=circle]; '
         
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
+               if '?' in sk:   # skip wrong data
+                   continue
                n = sk.split('(())') 
                h += n[0].replace('/','') + ' -> ' + n[1].replace('/','') + ';'
                     #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
