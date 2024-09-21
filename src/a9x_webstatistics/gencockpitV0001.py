@@ -328,6 +328,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                    continue
                n = sk.split('(())') 
                # allow only a-z and 0-9:
+               if na == '/'    # to avoid empty na
+                  na = owndomain
                na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb + ';'
