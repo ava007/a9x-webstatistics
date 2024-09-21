@@ -318,7 +318,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div>'
-            h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm">Show experimental feature</button>'
+            h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm">Show/Hide experimental feature</button>'
             h += '<div id="navpath">'
             h += '<div id="npath"></div>'
             h += '<script type="text/javascript">'
@@ -327,7 +327,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
                n = sk.split('(())') 
-               h += "'" + n[0].replace('/','') + "' -> '" + n[1].replace('/','') + "';"
+               h += n[0].replace('/','') + " -> ' + n[1].replace('/','') + ";"
                     #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
