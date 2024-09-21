@@ -156,7 +156,6 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "    x: { stacked: true }, "
         h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' }"
         h += "  } }" + "\n"
-        #h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + " " + d['timelastrec'][-6:] + "'} }" + "\n"
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2Locale('" + d['timelastrec'] + "') } }" + "\n"
         h += " ,data: { " + "\n" 
         h += "   datasets: [" + "\n"
@@ -326,7 +325,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
             for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
                n = sk.split('(())') 
-               h += n[0].replace('/','') + " -> ' + n[1].replace('/','') + ";"
+               h += n[0].replace('/','') + ' -> ' + n[1].replace('/','') + ';'
                     #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
