@@ -327,8 +327,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                if '?' in sk:   # skip wrong data
                    continue
                n = sk.split('(())') 
-               h += n[0].replace('/','') + ' -> ' + n[1].replace('/','') + ';'
-                    #1 -> 1 -> 2; 2 -> 3; 2 -- 4; 2 -> 1 
+               # allow only a-z and 0-9:
+               na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
+               nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
+               h += na + ' -> ' + nb + ';'
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
             h += 'var network = new vis.Network(container, data);'
