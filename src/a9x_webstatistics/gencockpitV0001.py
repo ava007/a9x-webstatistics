@@ -29,8 +29,8 @@ def genHeaderV0001(domain):
     h += 'var sec = tdt.substring(12, 14);'
     h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
     h += 'var tDT = tDateTime.toLocaleString();'
-    h += 'tDT.replace(", 00:00:00","");'
-    h += 'tDT.replace(", 12:00:00 AM","");'
+    h += 'tDT = tDT.replace(", 00:00:00","");'
+    h += 'tDT = tDT.replace(", 12:00:00 AM","");'
     h += 'return tDT;'
     h += '} catch (error) {'
     h += ' return null; }'
@@ -39,7 +39,6 @@ def genHeaderV0001(domain):
     h += 'var x = document.getElementById(eid);'
     h += 'if (x.style.display === "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
     h += '}'
-
     
     h += '</script>'
     h += '</head>' + "\n"
@@ -183,7 +182,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += "dctx.options.scales.y.min = ymin;" + "\n"
         h += "dctx.update();" + "\n"
         h += '</script>' + "\n"
-        h += '</div></div>'  # end of col and row
+        h += '</div></div>' + "\n"  # end of col and row
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
@@ -377,6 +376,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 # visits:
                 if 'visits' in d['v0001']['days'][k]['user']:
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
+        h += "\n"
         
         ## Months:  
         if len(mth_lbl) > 0:
@@ -520,7 +520,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                         break
                 h += '</table></div></div></div>' + "\n"   # end of card and col
             h += '</div>' + "\n"   # end of row
+        h += "\n"
         # End of Months
+        
+        
   
         # Webstatistics for the last years.
         yth_lbl = []
