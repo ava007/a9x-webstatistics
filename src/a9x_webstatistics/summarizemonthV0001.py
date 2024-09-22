@@ -111,6 +111,11 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['navigation'] = {}
                     pcount = 0
                     for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+                        if nk[0:7] == 'https://':
+                            continue
+                        if nk[0:6] == 'http://':
+                            continue
+                            
                         d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
                         pcount += 1
                         if pcount > 24:
