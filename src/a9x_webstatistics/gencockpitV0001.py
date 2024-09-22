@@ -325,7 +325,9 @@ def runGenCockpitV0001(infile, outfile, domain):
         
             # loop through path beginning with the most traffic:
             pcount = 0
-            h += owndomain + '[ fontcolor=white, color=red, ];'
+            # setup root:
+            h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, ];'
+            
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
                if '?' in pk:   # skip wrong data
                    continue
