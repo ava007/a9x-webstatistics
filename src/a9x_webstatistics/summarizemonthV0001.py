@@ -110,6 +110,12 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
 
+                # navigation on the first day of the month:
+                dayOfMonth = x[-2:]
+                if 'navigation' in dtmp['v0001']['days'][x]['user'] and dayOfMonth == '01':
+                    d['v0001']['days'][recMonth]['user']['navigation'] = {}
+                
+
                 del d['v0001']['days'][x]
 
     # compress by month
