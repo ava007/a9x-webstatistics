@@ -339,7 +339,11 @@ def runGenCockpitV0001(infile, outfile, domain):
                   n[1] = owndomain
                na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
-               h += na + ' -> ' + nb + ';'
+               h += na + ' -> ' + nb 
+               if pcount <= 5
+                   h += ' [ color=\\"red\\" ] 
+               # [ label=" ",color="blue",arrowhead="dot" ];
+               h += ';'
                pcount += 1
                if pcount > 20:
                    break
