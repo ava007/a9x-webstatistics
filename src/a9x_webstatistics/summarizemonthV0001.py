@@ -33,11 +33,6 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  = 0 
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] = 0 
 
-                    #todo AVA 20240919:
-                    # if x[6:2] == '01':   # only on first day of month:
-                    # d['v0001']['days'][recMonth]['user']['navigation'] = dtmp['v0001']['days'][x]['user']['navigation']
-                    
-
                     d['v0001']['days'][recMonth]['user']['externalFriendHits'] = {}
                     d['v0001']['days'][recMonth]['user']['topUrl'] = {}
                     d['v0001']['days'][recMonth]['user']['serverResponseCode'] = {}
@@ -110,12 +105,17 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
 
-                # navigation on the first day of the month:
+                # navigation on the first day of the month:  take the 24 path with the most traffic:
                 dayOfMonth = x[-2:]
                 if 'navigation' in dtmp['v0001']['days'][x]['user'] and dayOfMonth == '01':
                     d['v0001']['days'][recMonth]['user']['navigation'] = {}
-                
-
+                    pcount = 0
+                    for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+                        d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
+                        pcount += 1
+                        if pcount > 24:
+                            break
+                        
                 del d['v0001']['days'][x]
 
     # compress by month
