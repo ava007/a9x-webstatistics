@@ -321,10 +321,11 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div id="npath" class="vh-100"></div>'
             h += '<script type="text/javascript">'
             h += 'var container = document.getElementById("npath");'
-            h += 'var dot = "dinetwork { node[shape=circle]; '
+            h += 'var dot = "dinetwork { node[shape=solid]; '
         
             # loop through path beginning with the most traffic:
             pcount = 0
+            h += owndomain + '[ fontcolor=white, color=red, ];'
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
                if '?' in pk:   # skip wrong data
                    continue
