@@ -37,7 +37,7 @@ def genHeaderV0001(domain):
     h += '}'
     h += 'function wsShowHide(eid) {'
     h += 'var x = document.getElementById(eid);'
-    h += 'if (x.style.display === "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
+    h += 'if (x.style.display == "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
     h += '}'
     
     h += '</script>'
