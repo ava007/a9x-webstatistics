@@ -318,15 +318,17 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div>'
             h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm">Show/Hide experimental feature</button>'
             h += '<div id="navpath">'
-            h += '<div id="npath"></div>'
+            h += '<div id="npath" class="vh-100"></div>'
             h += '<script type="text/javascript">'
             h += 'var container = document.getElementById("npath");'
             h += 'var dot = "dinetwork { node[shape=circle]; '
         
-            for sk,sv in d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items():
-               if '?' in sk:   # skip wrong data
+            # loop through path beginning with the most traffic:
+            pcount = 0
+            for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+               if '?' in pk:   # skip wrong data
                    continue
-               n = sk.split('(())') 
+               n = pk.split('(())') 
                # allow only a-z and 0-9:
                if n[0] == '/':    # to avoid empty na
                   n[0] = owndomain
@@ -335,6 +337,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb + ';'
+               pcount += 1
+               if pcount > 20:
+                   break
             h += '}";'
             h += 'var data = vis.parseDOTNetwork(dot);'
             h += 'var network = new vis.Network(container, data);'
