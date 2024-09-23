@@ -41,6 +41,7 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['robot']['robotHits']   = 0;
                     d['v0001']['days'][recMonth]['quality'] = {}
 
+                # always check, if structure exists as we might start within the month (not on the first day of month)
                 if 'visits' in dtmp['v0001']['days'][x]['user']:
                     d['v0001']['days'][recMonth]['user']['visits']     += dtmp['v0001']['days'][x]['user']['visits']
                 if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
@@ -60,10 +61,10 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] = cv;
-                    
-                d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
-                d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
-                d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
+                if 'devicesHits' in  dtmp['v0001']['days'][x]['user']['deviceHits']:   
+                    d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
+                    d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
+                    d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
                 
                 # external sources:
                 if 'externalFriendHits' in dtmp['v0001']['days'][x]['user']:
