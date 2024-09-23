@@ -41,11 +41,15 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['robot']['robotHits']   = 0;
                     d['v0001']['days'][recMonth]['quality'] = {}
 
-                d['v0001']['days'][recMonth]['user']['visits']     += dtmp['v0001']['days'][x]['user']['visits']
-                d['v0001']['days'][recMonth]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
+                if 'visits' in dtmp['v0001']['days'][x]['user']:
+                    d['v0001']['days'][recMonth]['user']['visits']     += dtmp['v0001']['days'][x]['user']['visits']
+                if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
+                    d['v0001']['days'][recMonth]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
-                d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
-                d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
+                if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
+                    d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
+                if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
+                    d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
 
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
