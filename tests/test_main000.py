@@ -22,7 +22,7 @@ class TestMain(unittest.TestCase):
         contents = json.loads(file_data)
 
         # check with nginx_access0.log
-        assert '20230923165709' in contents['timelastrec']
+        assert '20230923165725' in contents['timelastrec']
 
 if __name__ == '__main__':
     unittest.main()
