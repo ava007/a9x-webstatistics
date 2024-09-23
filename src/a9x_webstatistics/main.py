@@ -56,7 +56,7 @@ def parseRec(rec, log_pattern, j, georeader):
         }
         if country:
             r['country'] = country
-    else
+    else:
         j['records_parsing_failed'] += 1
         
     return r,j
