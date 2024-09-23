@@ -47,12 +47,6 @@ def sumMonthV0001(d, statfile):
                 if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
                     d['v0001']['days'][recMonth]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
-                if 'robot' in dtmp['v0001']['days'][x]:
-                    if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
-                        d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
-                    if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
-                        d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
-
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
                         #print("sum: country: " + ck + ": " + str(cv) )
@@ -61,7 +55,8 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] = cv;
-                if 'devicesHits' in  dtmp['v0001']['days'][x]['user']['deviceHits']:   
+                
+                if 'deviceHits' in  dtmp['v0001']['days'][x]['user']:   
                     d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
@@ -76,6 +71,13 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
+                
+                if 'robot' in dtmp['v0001']['days'][x]:
+                    if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
+                        d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
+                    if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
+                        d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
+
 
                 # Server Response Code:
                 if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
