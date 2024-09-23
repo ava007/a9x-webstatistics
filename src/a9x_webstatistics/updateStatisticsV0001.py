@@ -145,6 +145,12 @@ def updV0001(
         oref = urlparse(i['referer'])   # remove query string...
         oreq = urlparse(i['request'])   # remove query string...
         dt01 = i['ymd'][0:6] + '01'
+
+        # on the very first run during the month, make sure that the structure exists:
+        if dt01 not in d['v0001']['days']:
+            d['v0001']['days'][dt01] = {}
+            d['v0001']['days'][dt01]['user'] = {}
+            
         if 'navigation' not in d['v0001']['days'][dt01]['user']:
            d['v0001']['days'][dt01]['user']['navigation'] = {}
         nkey = oref.path + '(())' + oreq.path
