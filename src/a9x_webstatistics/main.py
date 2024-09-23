@@ -56,7 +56,9 @@ def parseRec(rec, log_pattern, j, georeader):
         }
         if country:
             r['country'] = country
-    
+    else
+        j['records_parsing_failed'] += 1
+        
     return r,j
 
 
@@ -79,6 +81,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
     j = {
         'records_read': 0,
         'records_skipped_comment': 0,
+        'records_parsing_failed': 0,
         'records_already_processed': 0,
         'records_processed_for_statistic': 0,
     }
@@ -154,9 +157,10 @@ def runws(statfile, infile, geoip, verbosity, domain):
     with open(statfile, "w") as sf:
        json.dump(d,sf)  
 
-    print("Rec read: "      + str(j['records_read']))
-    print("Rec processed: " + str(j['records_processed_for_statistic']))
-    print("Rec skipped: "   + str(j['records_already_processed']))
+    print("Rec read:           "      + str(j['records_read']))
+    print("Rec processed:      " + str(j['records_processed_for_statistic']))
+    print("Rec parsing failed: " + str(j['records_parsing_failed']))
+    print("Rec skipped (already processed): "   + str(j['records_already_processed']))
     return 0
 
 if __name__ == "__main__":
