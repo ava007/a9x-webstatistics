@@ -46,10 +46,11 @@ def sumMonthV0001(d, statfile):
                 if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
                     d['v0001']['days'][recMonth]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
-                if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
-                    d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
-                if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
-                    d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
+                if 'robot' in dtmp['v0001']['days'][x]:
+                    if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
+                        d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
+                    if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
+                        d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
 
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
