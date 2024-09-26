@@ -325,7 +325,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
             # loop through path beginning with the most traffic:
             pcount = 0
-            # setup root:
+            # setup root:  map(lambda...) for eliminating special characters
             h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
@@ -340,10 +340,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
-               if pcount <= 5:
-                   h += ' [ value=\\"3\\" ]' 
-               if pcount > 5 and pcount <= 10:
+               if pcount < 5:
                    h += ' [ value=\\"2\\" ]' 
+               if pcount >= 5 and pcount < 10:
+                   h += ' [ value=\\"1\\" ]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
                pcount += 1
