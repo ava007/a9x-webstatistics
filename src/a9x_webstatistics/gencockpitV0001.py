@@ -346,9 +346,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
                if pcount < 5:
-                   h += ' [ value=\\"1.2\\",title=\\"' + pcount + '\\"]' 
+                   h += ' [ value=\\"1.2\\",title=\\"' + str(pcount) + '\\"]' 
                if pcount >= 5 and pcount < 10:
-                   h += ' [ value=\\"1.1\\",title=\\"' + pcount + '\\"]' 
+                   h += ' [ value=\\"1.1\\",title=\\"' + str(pcount) + '\\"]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
                          
