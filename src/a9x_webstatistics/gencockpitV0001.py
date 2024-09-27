@@ -480,8 +480,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         if sk not in tsource:
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
-            h += '<div class="row">'
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+            h += '<div class="row"><div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Domains</h3>'
             h += '<p class="card-text">Hit list of domains where traffic comes from:</p>'
@@ -512,8 +511,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tcountries[co] += cv
 
             if len(tcountries) > 0:
-                h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-                h += '<div class="card mt-2"><div class="card-body">'
+                h += '<div class="col-md-12 col-lg-6 col-xxl-4"><div class="card mt-2"><div class="card-body">'
                 h += '<h3 class="card-title">Top 10 Countries</h3>'
                 h += '<p class="card-text">Hit list of countries giving the most user hits:</p>'
                 h += '<table class="table">'
@@ -540,8 +538,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                                 ttopurl[tk] = 0
                             ttopurl[tk] += tv
             if len(ttopurl) > 0:
-                h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-                h += '<div class="card mt-2"><div class="card-body">'
+                h += '<div class="col-md-12 col-lg-6 col-xxl-4"><div class="card mt-2"><div class="card-body">'
                 h += '<h3 class="card-title">Top 10 URL</h3>'
                 h += '<p class="card-text">URL with the most user hits:</p>'
                 h += '<table class="table">'
@@ -608,8 +605,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             order_tablet, order_desktop = order_desktop, order_tablet
 
         ## Chart Years:  
-        h += '<div class="row mt-4">'
-        h += '<div class="col-12">'
+        h += '<div class="row mt-4"><div class="col-12">'
         if len(yth_lbl) > 0:
             yth_lbl.reverse()
             yth_usr_desktop.reverse()
@@ -659,9 +655,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
 
-        h += '<div class="row mt-4">'
-        h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<div class="row mt-4"><div class="col-md-12 col-lg-6 col-xxl-4"><div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
         h += '<p class="card-text">Incoming traffic (user hits) for the last years by external source domain:</p>'
         h += '<table class="table">'
@@ -685,8 +679,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                         turl[sk] = 0
                     turl[sk] += sv
 
-        h += '<div class="col-md-12 col-lg-6 col-xxl-4 ">'
-        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<div class="col-md-12 col-lg-6 col-xxl-4"><div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 URL</h3>'
         h += '<p class="card-text">Top Url (user hits) for the last years:</p>'
         h += '<table class="table">'
