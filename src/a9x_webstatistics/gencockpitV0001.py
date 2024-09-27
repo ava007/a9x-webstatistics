@@ -329,6 +329,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         
             # loop through path beginning with the most traffic:
             pcount = 0
+            navNodes = []
             # setup root:  map(lambda...) for eliminating special characters
             h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
@@ -345,11 +346,20 @@ def runGenCockpitV0001(infile, outfile, domain):
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
                if pcount < 5:
-                   h += ' [ value=\\"1.2\\" ]' 
+                   h += ' [ value=\\"1.2\\",title=\\"' + pcount + '\\"]' 
                if pcount >= 5 and pcount < 10:
-                   h += ' [ value=\\"1.1\\" ]' 
+                   h += ' [ value=\\"1.1\\",title=\\"' + pcount + '\\"]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
+                         
+               # add nodes with their links:
+               if n[0] not in navNodes:
+                   navNodes.append[n[0]]
+                   h += na + '[url=\\"' + n[0] + '\\"];'
+               if n[1] not in navNodes:
+                   navNodes.append[n[1]]
+                   h += na + '[url=\\"' + n[1] + '\\"];'
+                   
                pcount += 1
                if pcount > 20:
                    break
