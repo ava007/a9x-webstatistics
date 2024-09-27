@@ -315,8 +315,11 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div>' + "\n"   # end of row
 
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div>'
-            h += '<button onclick="wsShowHide(\'navpath\')" class="btn btn-secondary btn-sm">Show/Hide experimental feature</button>'
+            h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
+            h += '<div class="card mt-2"><div class="card-body">'
+            h += '<h4 class="card-title">Navigation Analysis for ' + owndomain + '</h4>'
+            h += '<p class="card-text">User navigation or flows on internal links:</p>'
+
             h += '<div id="navpath">'
             h += '<div id="npath" class="vh-100"></div>'
             h += '<script type="text/javascript">'
@@ -353,8 +356,11 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += 'var data = vis.parseDOTNetwork(dot);'
             h += 'var network = new vis.Network(container, data);'
             h += '</script>'
-            h += '</div>'
             h += '</div>'   # end of navpath
+
+            h += '</div>'   # end of card
+            h += '</div></div>' + "\n"   # end of row
+            
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
