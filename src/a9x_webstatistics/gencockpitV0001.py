@@ -315,7 +315,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '</div>' + "\n"   # end of row
 
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
-            h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
+            h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h4 class="card-title">Navigation Analysis for ' + owndomain + '</h4>'
             h += '<p class="card-text">User navigation or flows on internal links:</p>'
@@ -324,7 +324,8 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div id="npath" class="vh-100"></div>'
             h += '<script type="text/javascript">'
             h += 'var container = document.getElementById("npath");'
-            h += 'var dot = "dinetwork { node[shape=solid]; '
+            #h += 'var dot = "dinetwork { node[shape=solid]; '
+            h += 'var dot = "dinetwork { node[shape=box]; '
         
             # loop through path beginning with the most traffic:
             pcount = 0
@@ -344,9 +345,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
                if pcount < 5:
-                   h += ' [ value=\\"2\\" ]' 
+                   h += ' [ value=\\"1.2\\" ]' 
                if pcount >= 5 and pcount < 10:
-                   h += ' [ value=\\"1\\" ]' 
+                   h += ' [ value=\\"1.1\\" ]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
                pcount += 1
