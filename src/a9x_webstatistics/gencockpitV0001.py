@@ -358,7 +358,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                    h += na + '[url=\\"' + n[0] + '\\"];'
                if n[1] not in navNodes:
                    navNodes.append(n[1])
-                   h += na + '[url=\\"' + n[1] + '\\"];'
+                   h += nb + '[url=\\"' + n[1] + '\\"];'
                    
                pcount += 1
                if pcount > 20:
