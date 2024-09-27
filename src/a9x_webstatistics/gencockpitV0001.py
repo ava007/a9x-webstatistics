@@ -149,39 +149,39 @@ def runGenCockpitV0001(infile, outfile, domain):
         h += '<h3>Statistics for the last 31 days</h3>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
-        h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');' + "\n"
-        h += "const dctx = new Chart(ctx, {"  + "\n"
+        h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');'
+        h += "const dctx = new Chart(ctx, {"
         h += " type: 'bar', "  
         h += " options: { responsive: true, scales: {"
         h += "    x: { stacked: true }, "
         h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' }"
-        h += "  } }" + "\n"
-        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2Locale('" + d['timelastrec'] + "') } }" + "\n"
-        h += " ,data: { " + "\n" 
-        h += "   datasets: [" + "\n"
+        h += "  } }"
+        h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2Locale('" + d['timelastrec'] + "') } }"
+        h += " ,data: { "
+        h += "   datasets: [" 
         h += "     { type: 'line',label: 'Robot Hits', data: " + str(day_robot_hits) + ", order:1}" + "\n"
         h += "    ,{ type: 'line',label: 'User Visits', data: " + str(day_usr_visits)  + " ,backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, order: 2}" + "\n"
         h += "    ,{ type: 'bar', label: 'User Desktop Hits', data: " + str(day_usr_desktop) + ", stack: 's1', backgroundColor: '#42c5f5', order:" + str(order_desktop) + "}" + "\n"
         h += "    ,{ type: 'bar', label: 'User Mobile Hits',  data: " + str(day_usr_mobile) + ", stack: 's1', backgroundColor: '#42f5aa', order:" + str(order_mobile) + "}" + "\n"
         h += "    ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(day_usr_tablet) + ", stack: 's1', backgroundColor: '#f5a742', order:" + str(order_tablet) + "}" + "\n"
-        h += "    ]," + "\n"
-        h += "    labels: " + str(day_lbl) + "\n"
-        h += " }," + "\n" + "});" + "\n"
+        h += "    ],"
+        h += "    labels: " + str(day_lbl)
+        h += " }," + "\n" + "});"
         h += "var ymax = 0; "
-        h += "var ymin = 99999;" + "\n"
+        h += "var ymin = 99999;"
         h += "for (i=0; i<5; i++) {" 
         h += "  var tmax = Math.max.apply(null, dctx.data.datasets[i].data); "
         h += "  if (tmax > ymax) {  ymax = tmax; } " 
         h += "  var tmin = Math.min.apply(null, dctx.data.datasets[i].data); "
         h += "  if (tmin < ymin) {  ymin = tmin; } " 
         h += "}" + "\n"
-        h += "rm = ymax % 10;" + "\n"
-        h += "rm = 10 - rm + 10;" + "\n"
-        h += "dctx.options.scales.y.max = ymax + rm;" + "\n"
-        h += "dctx.options.scales.y.min = ymin;" + "\n"
-        h += "dctx.update();" + "\n"
-        h += '</script>' + "\n"
-        h += '</div></div>' + "\n"  # end of col and row
+        h += "rm = ymax % 10;"
+        h += "rm = 10 - rm + 10;"
+        h += "dctx.options.scales.y.max = ymax + rm;"
+        h += "dctx.options.scales.y.min = ymin;"
+        h += "dctx.update();"
+        h += '</script>'
+        h += '</div></div>' + "\n\n"  # end of col and row
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
@@ -251,7 +251,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i > 10:
                     break
             h += '</table>'
-            h += '</div></div></div>'  + "\n"   # end of card and col
+            h += '</div></div></div>'   # end of card and col
        
         # top external landings (friends):
         tland = {}   # nested dictionary!
@@ -310,9 +310,9 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if i == 10:
                     break
             h += '</table>'
-            h += '</div></div></div>'  + "\n"   # end of card and col
+            h += '</div></div></div>'   # end of card and col
         
-        h += '</div>' + "\n"   # end of row
+        h += '</div>' + "\n\n"   # end of row
 
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
@@ -370,7 +370,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '</div>'   # end of navpath
 
             h += '</div>'   # end of card
-            h += '</div></div>' + "\n"   # end of row
+            h += '</div></div>' + "\n\n"   # end of row
             
         
         # Webstatistics for the last months
@@ -414,11 +414,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                 # visits:
                 if 'visits' in d['v0001']['days'][k]['user']:
                     mth_usr_visits[-1] += d['v0001']['days'][k]['user']['visits']
-        h += "\n"
-        
+               
         ## Months:  
         if len(mth_lbl) > 0:
-            h += "\n" + '<div class="row mt-4"><div class="col-12">'
+            h += '<div class="row mt-4"><div class="col-12">'
             mth_lbl.reverse()
             mth_usr_desktop.reverse()
             mth_usr_mobile.reverse()
@@ -452,24 +451,24 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "     ,{ type: 'bar', label: 'User Tablet Hits', data: " + str(mth_usr_tablet) + ", stack: 's2', backgroundColor: '#f5a742', order: " + str(order_tablet) + "}" + "\n"
             h += "     ,{ type: 'line',label: 'Robot Hits', data: " + str(mth_usr_bots) + ", order: 2}" + "\n"
             h += "     ,{ type: 'line',label: 'User Visits',  data: " + str(mth_usr_visits) + ",backgroundColor: '#ff0000', borderColor: '#ff0000', tension: 0.1, order: 1}" + "\n"
-            h += "    ]," + "\n"
-            h += "    labels: " + str(mth_lbl) + "\n"
-            h += " }," + "\n" + "});" + "\n"
-            h += "var ymax = 0; "  + "\n"
-            h += "var ymin = 999999;" + "\n"
+            h += "    ],"
+            h += "    labels: " + str(mth_lbl)
+            h += " }," + "\n" + "});"
+            h += "var ymax = 0; "
+            h += "var ymin = 999999;"
             h += "for (i=0; i<5; i++) {" 
             h += "  var tmax = Math.max.apply(null, mctx.data.datasets[i].data); "
             h += "  if (tmax > ymax) {  ymax = tmax; } " 
             h += "  var tmin = Math.min.apply(null, mctx.data.datasets[i].data); "
             h += "  if (tmin < ymin) {  ymin = tmin; } " 
-            h += "}" + "\n"
-            h += "rm = ymax % 100;" + "\n"
-            h += "rm = 100 - rm + 100;" + "\n"
-            h += "mctx.options.scales.y.max = ymax + rm;" + "\n"
-            h += "mctx.options.scales.y.min = ymin;" + "\n"
-            h += "mctx.update();" + "\n"
-            h += "</script>" + "\n"
-            h += '</div></div>'  # end of col and row
+            h += "}"
+            h += "rm = ymax % 100;"
+            h += "rm = 100 - rm + 100;"
+            h += "mctx.options.scales.y.max = ymax + rm;"
+            h += "mctx.options.scales.y.min = ymin;"
+            h += "mctx.update();"
+            h += "</script>"
+            h += '</div></div>' + "\n\n"  # end of col and row
 
             # Top 10 Domains on monthly basis
             tsource = {}
@@ -494,7 +493,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 i += 1
                 if i > 10:
                     break
-            h += '</table></div></div></div>'  + "\n"
+            h += '</table></div></div></div>'
         
             # Top Countries
             tcountries = {}
@@ -522,7 +521,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     i += 1
                     if i == 10:
                         break
-                h += '</table></div></div></div>' + "\n"
+                h += '</table></div></div></div>'
 
             # top urls
             ttopurl = {}
@@ -554,8 +553,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                     if i > 10:
                         break
                 h += '</table></div></div></div>' + "\n"   # end of card and col
-            h += '</div>' + "\n"   # end of row
-        h += "\n"
+            h += '</div>' + "\n\n"   # end of row
         # End of Months
         
         
@@ -636,15 +634,15 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += "  if (tmax > ymax) {  ymax = tmax; } " 
             h += "  var tmin = Math.min.apply(null, yctx.data.datasets[i].data); "
             h += "  if (tmin < ymin) {  ymin = tmin; } " 
-            h += "}" + "\n"
-            h += "rm = ymax % 1000;" + "\n"
-            h += "rm = 1000 - rm + 1000;" + "\n"
-            h += "yctx.options.scales.y.max = ymax + rm;" + "\n"
-            h += "yctx.options.scales.y.min = ymin;" + "\n"
-            h += "yctx.update();" + "\n"
+            h += "}"
+            h += "rm = ymax % 1000;"
+            h += "rm = 1000 - rm + 1000;"
+            h += "yctx.options.scales.y.max = ymax + rm;"
+            h += "yctx.options.scales.y.min = ymin;"
+            h += "yctx.update();"
             h += "</script>" + "\n"
 
-        h += '</div></div>'
+        h += '</div></div>' + "\n\n"   # End of Row
             
         # Top 10 Domains on year basis
         tsource = {}
@@ -668,7 +666,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              i += 1
              if i > 10:
                  break
-        h += '</table></div></div></div>'  + "\n"
+        h += '</table></div></div></div>'
 
         # Top 10 URL on year basis
         turl = {}
@@ -693,7 +691,7 @@ def runGenCockpitV0001(infile, outfile, domain):
              if i > 10:
                  break
         h += '</table></div></div></div>'
-        h += '</div>'  + "\n"   # end of row
+        h += '</div>'  + "\n\n"   # end of row
 
         
         # End Year
