@@ -13,7 +13,7 @@ def genHeaderV0001(domain):
     h += '<meta charset="utf-8">'
     h += '<meta name="robots" content="index,follow">'
     h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
-    h += '<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
+    h += '<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
     #h += '<style>'
     #h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
     #h += '</style>'
@@ -322,7 +322,7 @@ def runGenCockpitV0001(infile, outfile, domain):
 
             h += '<div id="navpath">'
             h += '<div id="npath" class="vh-100"></div>'
-            h += '<script type="text/javascript">'
+            h += '<script>'
             h += 'var container = document.getElementById("npath");'
             #h += 'var dot = "dinetwork { node[shape=solid]; '
             h += 'var dot = "dinetwork { node[shape=box]; '
