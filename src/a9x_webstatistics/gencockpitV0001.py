@@ -337,6 +337,8 @@ def runGenCockpitV0001(infile, outfile, domain):
                if '?' in pk:   # skip wrong data
                    continue
                n = pk.split('(())') 
+               if n[0] = n[1]:
+                   continue
                # allow only a-z and 0-9:
                if n[0] == '/':    # to avoid empty na
                   n[0] = owndomain
@@ -346,9 +348,11 @@ def runGenCockpitV0001(infile, outfile, domain):
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
                if pcount < 5:
-                   h += ' [ value=\\"1.2\\",title=\\"' + str(pcount) + '\\"]' 
-               if pcount >= 5 and pcount < 10:
-                   h += ' [ value=\\"1.1\\",title=\\"' + str(pcount) + '\\"]' 
+                   h += ' [penwidth=4,title=\\"Clicks: ' + str(pcount) + '\\"]' 
+               elif pcount >= 5 and pcount < 10:
+                   h += ' [penwidth=2,title=\\"Clicks: ' + str(pcount) + '\\"]' 
+               else
+                   h += ' [title=\\"Clicks: ' + str(pcount) + '\\"]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
                          
