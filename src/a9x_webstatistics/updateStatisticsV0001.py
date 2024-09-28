@@ -116,7 +116,7 @@ def updV0001(
 
     # update quality: internal permanently redirects: 301
     if len(i['referer']) > 1 and (i['status'] == '301'):
-        if 'quality' not in d['days'][dt]:
+        if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['days'][dt]['quality']:
             d['v0001']['days'][dt]['quality'][i['request']] = {}
@@ -129,7 +129,7 @@ def updV0001(
 
     # update quality: internal not found    
     if len(i['referer']) > 1 and (i['status'] == '404'):
-        if 'quality' not in d['days'][dt]:
+        if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
             d['v0001']['days'][dt]['quality'][i['request']] = {}
