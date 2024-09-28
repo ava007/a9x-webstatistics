@@ -351,7 +351,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                    h += ' [penwidth=4,title=\\"Clicks: ' + str(pcount) + '\\"]' 
                elif pcount >= 5 and pcount < 10:
                    h += ' [penwidth=2,title=\\"Clicks: ' + str(pcount) + '\\"]' 
-               else
+               else:
                    h += ' [title=\\"Clicks: ' + str(pcount) + '\\"]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
