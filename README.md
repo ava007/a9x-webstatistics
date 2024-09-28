@@ -4,7 +4,7 @@ This package produces web statistics and analytical output based on nginx access
 
 [![PyPI package](https://img.shields.io/badge/pip%20install-a9x_webstatistics-brightgreen)](https://pypi.org/project/a9x-webstatistics/) [![version number](https://img.shields.io/pypi/v/a9x_webstatistics?color=green&label=version)](https://github.com/ava007/a9x-webstatistics/releases) [![Actions Status](https://github.com/ava007/a9x-webstatistics/workflows/Test/badge.svg)](https://github.com/ava007/a9x-webstatistics/actions) [![License](https://img.shields.io/badge/license-own-blue)](https://github.com/ava007/a9x-webstatistics/blob/main/LICENSE)
 
-[![Downloads](https://img.shields.io/dm/a9x-webstatistics)](https://img.shields.io/pypi/dm/a9x-webstatistics)
+[![Downloads](https://img.shields.io/pypi/dm/a9x-webstatistics)](https://img.shields.io/pypi/dm/a9x-webstatistics)
 [![Python](https://pypi.org/project/a9x-webstatistics)](https://img.shields.io/pypi/pyversions/a9x-webstatistics)
 
 ## Live Example
