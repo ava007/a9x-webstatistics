@@ -337,7 +337,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                if '?' in pk:   # skip wrong data
                    continue
                n = pk.split('(())') 
-               if n[0] = n[1]:
+               if n[0] == n[1]:
                    continue
                # allow only a-z and 0-9:
                if n[0] == '/':    # to avoid empty na
