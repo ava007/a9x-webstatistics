@@ -348,21 +348,21 @@ def runGenCockpitV0001(infile, outfile, domain):
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
                h += na + ' -> ' + nb 
                if pcount < 5:
-                   h += ' [penwidth=4,title=\\"Clicks: ' + str(pcount) + '\\"]' 
+                   h += ' [penwidth=4,title=\\"Clicks: ' + str(pv) + '\\"]' 
                elif pcount >= 5 and pcount < 10:
-                   h += ' [penwidth=2,title=\\"Clicks: ' + str(pcount) + '\\"]' 
+                   h += ' [penwidth=2,title=\\"Clicks: ' + str(pv) + '\\"]' 
                else:
-                   h += ' [title=\\"Clicks: ' + str(pcount) + '\\"]' 
+                   h += ' [title=\\"Clicks: ' + str(pv) + '\\"]' 
                # [ label=" ",color="blue",arrowhead="dot" ];
                h += ';'
                          
                # add nodes with their links:
                if n[0] not in navNodes:
                    navNodes.append(n[0])
-                   h += na + '[url=\\"' + n[0] + '\\"];'
+                   h += na + '[label=\\"' + n[0] + '\\"];'
                if n[1] not in navNodes:
                    navNodes.append(n[1])
-                   h += nb + '[url=\\"' + n[1] + '\\"];'
+                   h += nb + '[label=\\"' + n[1] + '\\"];'
                    
                pcount += 1
                if pcount > 20:
