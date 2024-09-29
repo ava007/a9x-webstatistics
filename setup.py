@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setuptools.setup(
     name='a9x_webstatistics',
     author='André von Arx',
-    author_email='andrevonarx@bluewin.ch',
+    author_email='avonarx@outlook.de',
     description='Web Statistics and Analytics Package',
     keywords='webstats, statistics, analytics',
     long_description=long_description,
