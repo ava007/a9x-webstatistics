@@ -118,7 +118,7 @@ def updV0001(
     if len(i['referer']) > 1 and (i['status'] == '301'):
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
-        if i['request'] not in d['days'][dt]['quality']:
+        if i['request'] not in d['v0001']['days'][dt]['quality']:
             d['v0001']['days'][dt]['quality'][i['request']] = {}
             d['v0001']['days'][dt]['quality'][i['request']]['from'] = i['referer']
             d['v0001']['days'][dt]['quality'][i['request']]['status'] = i['status']
