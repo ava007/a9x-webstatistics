@@ -189,7 +189,7 @@ def runGenCockpitV0001(infile, outfile, domain):
         # Top 10 Domains on daily basis
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
         h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h4 class="card-title">Top 10 Domains</h4>'
+        h += '<h4 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h4>'
         h += '<p class="card-text">User hits refering to external domain:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -208,8 +208,8 @@ def runGenCockpitV0001(infile, outfile, domain):
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Top 10 Countries</h4>'
-            h += '<p class="card-text">User hits for the last 31 days by country:</p>'
+            h += '<h4 class="card-title">Top 10 Countries for the last ' + str(day_usr_i) + ' days</h4>'
+            h += '<p class="card-text">User hits by country for the last ' + str(day_usr_i) + ' days:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
