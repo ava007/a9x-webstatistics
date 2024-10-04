@@ -71,7 +71,7 @@ def runGenCockpitV0001(infile, outfile, domain):
                 if len(k) < 8:
                     continue
                 # show at max 31 days:
-                if day_usr_i > 31:
+                if day_usr_i >= 31:
                     break
                 day_usr_i += 1
                 day_lbl.append(k)
