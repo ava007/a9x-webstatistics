@@ -373,7 +373,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '</script>'
             h += '</div>'   # end of navpath
 
-            h += '</div>'   # end of card
+            h += '</div></div>'   # end of card
             h += '</div></div>' + "\n\n"   # end of row
             
         
