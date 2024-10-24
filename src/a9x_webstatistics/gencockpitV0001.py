@@ -346,6 +346,10 @@ def runGenCockpitV0001(infile, outfile, domain):
                   n[1] = owndomain
                na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
                nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
+               if len(na) == 0:
+                   na = 'root'
+               if len(nb) == 0:
+                   nb = 'root'
                h += na + ' -> ' + nb 
                if pcount < 5:
                    h += ' [penwidth=4,title=\\"Clicks: ' + str(pv) + '\\"]' 
