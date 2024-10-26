@@ -82,6 +82,7 @@ def updV0001(
         if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
+            rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
             if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
             if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
