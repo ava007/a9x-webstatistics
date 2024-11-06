@@ -35,6 +35,7 @@ export PATH=/usr/local/www/django5/envpy311/bin:$PATH
 python3.11 -m a9x_webstatistics.main \
    --infile /var/log/nginx-access.log \
    --geoip /usr/local/share/GeoIP/GeoLite2-Country.mmdb \
+   --domain https://www.logikfabrik.com \
    --statfile /usr/local/www/lf_static/webstatsLF24.json &> $LOG
 
 python3.11 -m a9x_webstatistics.gencockpit \
@@ -85,3 +86,34 @@ python -m a9x_webstatistics.main --infile access.log --statfile webstatsLF.json
 ## create html file for webstatistics
 python -m a9x_webstatistics.gencockpit --infile webstatsLF.json --outfile webstatsLF.html
 ```
+
+## Extended Example
+
+```bash
+#!/bin/sh
+
+export LOG=/usr/local/www/webstats.log
+export PATH=/usr/local/www/django5/envpy311/bin:$PATH
+
+_YEARNUM="$(date +'%Y')";
+_MONTHNUM="$(date +'%m')";
+
+# make a archive copy for every month:
+cp /usr/local/www/lf_static/webstatsLF24.json /usr/local/www/lf_static/webstatsLF24$_YEARNUM$_MONTHNUM.json
+cp /usr/local/www/lf_static/webstatsLF24.html /usr/local/www/lf_static/webstatsLF24$_YEARNUM$_MONTHNUM.html
+
+# updates all packages:
+pip install -U `pip list --outdated | awk 'NR > 2 {print $1}'` >> $LOG
+
+
+python3.11 -m a9x_webstatistics.main \
+   --infile /var/log/nginx-access.log \
+   --geoip /usr/local/share/GeoIP/GeoLite2-Country.mmdb \
+   --domain https://www.logikfabrik.com \
+   --statfile /usr/local/www/lf_static/webstatsLF24.json &> $LOG
+
+python3.11 -m a9x_webstatistics.gencockpit \
+   --infile /usr/local/www/lf_static/webstatsLF24.json \
+   --outfile /usr/local/www/lf_static/webstatsLF24.html &>> $LOG
+```
+
