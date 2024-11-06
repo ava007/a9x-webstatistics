@@ -260,7 +260,7 @@ def runGenCockpitV0001(infile, outfile, domain):
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h4 class="card-title">Top 10 Landings</h4>'
-            h += '<p class="card-text">User landings for the last 31 days:</p>'
+            h += '<p class="card-text">User landings for the current month:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
