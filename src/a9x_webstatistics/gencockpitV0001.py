@@ -233,6 +233,9 @@ def runGenCockpitV0001(infile, outfile, domain, omitpaths):
             topurlcnt += 1
             if 'topUrl' in d['v0001']['days'][k]['user']:
                 for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
+                    # check if url is blocked for display:
+                    if tk in omitpaths:
+                        continue
                     if tk not in ttopurl:
                         ttopurl[tk] = 0
                     ttopurl[tk] += tv
