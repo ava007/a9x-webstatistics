@@ -160,7 +160,8 @@ def updV0001(
         d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
 
         # cleanup
-        for ck,cv in d['v0001']['days'][dt01]['user']['navigation'].items():
+        #for ck,cv in d['v0001']['days'][dt01]['user']['navigation'].items():
+        for ck,cv in dict(sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=lambda item: item[1],reverse=True))
            print("nav: " + str(ck) + " " + str(cv) )
 
     return d, visitIP
