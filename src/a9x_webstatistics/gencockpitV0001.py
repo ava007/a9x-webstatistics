@@ -745,7 +745,7 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
-    parser.add_argument("-p", "--omitpaths", help="omits path ie. will not display these path in generated cockpit", default="/robots.txt", action="extend", nargs="*", type=str)
+    parser.add_argument("-p", "--omitpaths", help="omits path ie. will not display these path in generated cockpit", action="append", nargs="*", type=str)
     args, unknown = parser.parse_known_args()
 
     runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omitpaths=args.omitpaths)
