@@ -1,4 +1,6 @@
 from urllib.parse import urlparse
+from operator import itemgetter
+
 def updV0001(
     d,
     i,
@@ -160,7 +162,6 @@ def updV0001(
         d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
 
         # cleanup
-        #for ck,cv in d['v0001']['days'][dt01]['user']['navigation'].items():
         for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
            print("nav: " + str(ck) + " " + str(cv) )
 
