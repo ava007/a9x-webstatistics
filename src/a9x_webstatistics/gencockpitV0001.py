@@ -748,4 +748,7 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--omitpaths", help="omits path ie. will not display these path in generated cockpit", action="append", nargs="*", type=str)
     args, unknown = parser.parse_known_args()
 
+    if args.omitpaths is None:
+        args.omitpaths = []        
+
     runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omitpaths=args.omitpaths)
