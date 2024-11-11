@@ -405,6 +405,10 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--omitpaths", help="omits path in generated html-cockpit", action="append", nargs="*", type=str)
     args, unknown = parser.parse_known_args()
 
+    # avoid untyped variable
+    if args.omitpaths is None:
+        args.omitpaths = []
+
     with open(args.infile) as json_file:
         d = json.load(json_file) 
         if 'v0001' in d:
