@@ -248,6 +248,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
+                if k in omit:
+                    continue
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
