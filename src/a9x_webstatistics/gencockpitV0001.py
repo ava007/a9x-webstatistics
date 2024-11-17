@@ -46,7 +46,7 @@ def genHeaderV0001(domain):
     h += '<div class="container">'
     return h
     
-def runGenCockpitV0001(infile, outfile, domain, omitpaths):
+def runGenCockpitV0001(infile, outfile, domain, omit):
 
     owndomain = domain.replace('http://','')
     owndomain = owndomain.replace('https://','')
