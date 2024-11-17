@@ -540,7 +540,13 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             ttopurl = {}
             topurlcnt = 0
             for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-                if len(k) == 6:    
+                if len(k) == 6:
+                    if k in omit:   # suppress omitted paths
+                        continue
+                    if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or vdomain in k:
+                        continue
+
+                    
                     if topurlcnt > 12:
                         break
                     topurlcnt += 1
@@ -560,9 +566,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 vdomain = vdomain.replace('http://','')
                 vdomain = vdomain.removeprefix('www.')
                 for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                    if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
-                        h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-                        i += 1
+                    #if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
+                    h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+                    i += 1
                     if i > 10:
                         break
                 h += '</table></div></div></div>' + "\n"   # end of card and col
