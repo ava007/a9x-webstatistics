@@ -402,16 +402,16 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
-    parser.add_argument("-p", "--omitpaths", help="omits path in generated html-cockpit", action="append", nargs="*", type=str)
+    parser.add_argument("-p", "--omit", help="omits path in generated html-cockpit", action="append", nargs="*", type=str)
     args, unknown = parser.parse_known_args()
 
     # avoid untyped variable
-    if args.omitpaths is None:
-        args.omitpaths = []
+    if args.omit is None:
+        args.omit = []
 
     with open(args.infile) as json_file:
         d = json.load(json_file) 
         if 'v0001' in d:
-            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omitpaths=args.omitpaths)
+            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omitpaths=args.omit)
         else:
             runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
