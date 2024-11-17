@@ -543,7 +543,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 if len(k) == 6:
                     if k in omit:   # suppress omitted paths
                         continue
-                    if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or vdomain in k:
+                    if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or owndomain in k:
                         continue
 
                     
@@ -562,9 +562,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 h += '<table class="table">'
                 h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
                 i = 1
-                vdomain = domain.replace('https://','')
-                vdomain = vdomain.replace('http://','')
-                vdomain = vdomain.removeprefix('www.')
+                #vdomain = domain.replace('https://','')
+                #vdomain = vdomain.replace('http://','')
+                #vdomain = vdomain.removeprefix('www.')
                 for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                     #if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
