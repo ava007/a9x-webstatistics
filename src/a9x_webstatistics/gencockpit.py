@@ -412,6 +412,6 @@ if __name__ == "__main__":
     with open(args.infile) as json_file:
         d = json.load(json_file) 
         if 'v0001' in d:
-            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omitpaths=args.omit)
+            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omit=args.omit)
         else:
             runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
