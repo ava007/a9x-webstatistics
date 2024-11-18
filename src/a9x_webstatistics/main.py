@@ -32,7 +32,7 @@ def parseRec(rec, log_pattern, j, georeader):
         user_agent = datadict["useragent"]
         status = datadict["statuscode"]
         method = datadict["method"]
-        j['records_processed_for_statistic'] += 1
+        #j['records_processed_for_statistic'] += 1
         if georeader:
             try:
                 grrsp = georeader.country(ip_address)
@@ -73,7 +73,6 @@ def runws(statfile, infile, geoip, verbosity, domain):
     # init statistic file if it does not exist:
     d = {}
     d['timelastrec'] = '19991231235959'
-    #d['days'] = {}
     d['v0001'] = {}
     d['v0001']['days'] = {}
 
@@ -144,7 +143,6 @@ def runws(statfile, infile, geoip, verbosity, domain):
             if recparsed['timestamp']  <=  d['timelastrec']:
                 j['records_already_processed'] += 1
                 continue
-            #d, visitIP = upd(d, recparsed, visitIP, domain)
             d, visitIP = updV0001(d, recparsed, visitIP, domain)
             j['records_processed_for_statistic'] += 1
             
