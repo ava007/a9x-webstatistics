@@ -161,9 +161,13 @@ def updV0001(
            d['v0001']['days'][dt01]['user']['navigation'][nkey] = 0
         d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
 
-        # cleanup
+        # cleanup: delete entry from long tail...
+        z = 1
         for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-           print("nav: " + str(ck) + " " + str(cv) )
+           z += 1
+           if z > 100 and cv == 1:
+              print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
+              del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
     return d, visitIP
 
