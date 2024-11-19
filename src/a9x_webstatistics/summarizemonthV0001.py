@@ -157,6 +157,18 @@ def sumMonthV0001(d, statfile):
                         break
                     d['v0001']['days'][x]['user']['topUrl'][k] = v
                 del tmpTopUrl
+                
+            # take only 24 Navigatins per month:
+            if 'navigation' in d['v0001']['days'][x]['user']:
+                tmpNav = dict(sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=lambda item: item[1], reverse=True))
+                i = 0
+                d['v0001']['days'][x]['user']['navigation'] = {}
+                for k,v in tmpNav.items():
+                    i += 1
+                    if i >= 24:
+                        break
+                    d['v0001']['days'][x]['user']['navigation'][k] = v
+                del tmpNav
    
     return d
 
