@@ -160,7 +160,7 @@ def sumMonthV0001(d, statfile):
                 
             # take only 24 Navigatins per month:
             if 'navigation' in d['v0001']['days'][x]['user']:
-                tmpNav = dict(sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=lambda item: item[1], reverse=True))
+                tmpNav = dict(sorted(d['v0001']['days'][x]['user']['navigation'].items(), key=lambda item: item[1], reverse=True))
                 i = 0
                 d['v0001']['days'][x]['user']['navigation'] = {}
                 for k,v in tmpNav.items():
