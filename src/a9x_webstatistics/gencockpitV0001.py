@@ -711,13 +711,12 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                  break
         h += '</table></div></div></div>'
         h += '</div>'  + "\n\n"   # end of row
-
         
         # End Year
 
-        h += '<footer class="row row-cols-12 bg-light py-4 mt-4">'
+        h += '<footer class="row bg-light py-4 mt-4">'
 
-        h += '<div class="col-6"><h2>About</h2>'
+        h += '<div class="col"><h2>About</h2>'
         h += '<a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">'
         h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
         h += '</a>'
@@ -725,8 +724,14 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h += '<p class="text-body-secondary">' + __version__ + '</p>'
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
         h += '</div>'
+
+        h += '<div class="col"><h3>Powered by</h3>'
+        h += '<ul class="nav flex-column">'
+        h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com" class="nav-link p-0 text-body-secondary">LogikFabrik.com</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com/webstatsLF24.html" class="nav-link p-0 text-body-secondary">Live Example</a></li>'
+        h += '</ul></div>' + "\n"
           
-        h += '<div class="col-6"><h3>Abbreviations</h3>'
+        h += '<div class="col"><h3>Abbreviations</h3>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>'
