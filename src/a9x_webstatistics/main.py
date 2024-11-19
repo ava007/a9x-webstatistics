@@ -21,7 +21,7 @@ def parseRec(rec, log_pattern, j, georeader):
         return r,j
 
     data = re.search(log_pattern, rec)
-    #print("parseRec Data: " + str(data))
+
     if data:
         datadict = data.groupdict()
         ip_address = datadict["ipaddress"]
@@ -57,6 +57,7 @@ def parseRec(rec, log_pattern, j, georeader):
         if country:
             r['country'] = country
     else:
+        print("Log Rec parsing failed for: " + str(data)[0:50])
         j['records_parsing_failed'] += 1
         
     return r,j
