@@ -136,8 +136,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
-        h += '<a href="#hdDay" class="btn btn-primary" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary mx-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
+        h += '<a href="#hdDay" class="btn btn-primary mr-3" role="button" data-bs-toggle="button">Daily Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary mr-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
         h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
@@ -154,7 +154,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h += " type: 'bar', "  
         h += " options: { responsive: true, scales: {"
         h += "    x: { stacked: true }, "
-        h += "    y: { stacked: false,  beginAtZero: true, type: 'logarithmic' }"
+        h += "    y: { stacked: true,  beginAtZero: true, type: 'logarithmic' }"
         h += "  } }"
         h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of ' + DT2Locale('" + d['timelastrec'] + "') } }"
         h += " ,data: { "
@@ -454,7 +454,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += "const mctx = new Chart(mth_ctx, { type: 'bar', " 
             h += "  options: { responsive: true, scales: {"
             h += "     x:{ stacked: true }, "
-            h += "     y:{ stacked: false, beginAtZero: true, type: 'logarithmic' }"
+            h += "     y:{ stacked: true, beginAtZero: true, type: 'logarithmic' }"
             h += "  }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8]+ " " + d['timelastrec'][-6:] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
@@ -634,7 +634,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<div><canvas id="a9x_ws_years"></canvas></div>'
             h += "<script>" + "\n" + "const yth_ctx = document.getElementById('a9x_ws_years');" + "\n"
             h += "const yctx = new Chart(yth_ctx, { type: 'bar',"
-            h += "  options: { responsive: true, scales: {x: { stacked: true}, y:{ stacked: false, type: 'logarithmic', beginAtZero: true, min: 0}  }}" + "\n"
+            h += "  options: { responsive: true, scales: {x: { stacked: true}, y:{ stacked: true, type: 'logarithmic', beginAtZero: true, min: 0}  }}" + "\n"
             h += " ,plugins: { subtitle: { display: true, text: 'Hits per Device Class as of " + d['timelastrec'][0:8] + "'} }" + "\n"
             h += " ,data: { " + "\n" 
             h += "   datasets: [" + "\n"
