@@ -716,10 +716,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
         h += '<footer class="row bg-light py-4 mt-4">'
 
-        h += '<div class="col"><h2>About</h2>'
-        h += '<a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">'
-        h += '<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>'
-        h += '</a>'
+        h += '<div class="col"><h3>About</h3>'
         h += '<p class="text-body-secondary"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024 a9x-webstatistics</a></p>'
         h += '<p class="text-body-secondary">' + __version__ + '</p>'
         h += '<p class="text-body-secondary">salvo errore et omissione</p>' + "\n"
