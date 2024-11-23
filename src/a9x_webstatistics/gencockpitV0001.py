@@ -101,6 +101,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 # top 10 source domains:
                 if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
                     for sk,sv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
+                        if sk in omit:
+                            continue
                         if sk not in tsource:
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
@@ -142,7 +144,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h += '</div></div>'
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
-        #h += '<p><small>Last record included in statistic:  + d['timelastrec'][0:8] + " " + d['timelastrec'][8:10] + ":" + d['timelastrec'][-4:-2] + ":" + d['timelastrec'][-2:] + '</small></p>'
         h += "<p><small>Last record included in statistic: <script>document.write(DT2Locale('" + d['timelastrec'] + "'));</script></small></p>"
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
