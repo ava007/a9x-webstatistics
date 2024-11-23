@@ -11,6 +11,8 @@ This package produces web statistics and analytical output based on nginx access
 
 Visit the live example on [logikfabrik.com](https://www.logikfabrik.com/webstatsLF24.html).
 
+<img src="https://github.com/ava007/a9x-webstatistics/blob/main/a9x-webstatistics_20241123.png">
+
 ## Installation
 
 ```bash
