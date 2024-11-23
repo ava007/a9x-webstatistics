@@ -1,4 +1,4 @@
-__version__ = "1.1.27"
+__version__ = "1.1.28"
 
 from .module1 import *
 #from .main import *
