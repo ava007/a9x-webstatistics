@@ -228,6 +228,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             # dont take months in account:
             if len(k) <= 6:
                 continue
+            if k in omit:  # do not show support url by parameter
+                continue
             if topurlcnt >= 31:
                 break
             topurlcnt += 1
@@ -269,6 +271,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
+                if k in omit:
+                    continue
                 for kb, vb in v['target'].items():
                     if owndomain not in k:
                         h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
@@ -329,7 +333,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<div id="npath" class="vh-100"></div>'
             h += '<script>'
             h += 'var container = document.getElementById("npath");'
-            #h += 'var dot = "dinetwork { node[shape=solid]; '
             h += 'var dot = "dinetwork { node[shape=box]; '
         
             # loop through path beginning with the most traffic:
