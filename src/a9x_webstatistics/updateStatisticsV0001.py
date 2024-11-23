@@ -1,5 +1,13 @@
 from urllib.parse import urlparse
 from operator import itemgetter
+import ipaddress
+
+def is_valid_ip(address):
+    try: 
+        x = ipaddress.ip_address(address)
+        return True
+    except:
+        return False
 
 def updV0001(
     d,
@@ -85,14 +93,15 @@ def updV0001(
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
             rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
-            if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
-                d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
-            if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
-            if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] = 0
-            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
-            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
+            if is_valid_ip(rdomain) == False:  # to suppress ip; ip is not a domain anyway
+                if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
+                    d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
+                if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
+                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
+                if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
+                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] = 0
+                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
+                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
          
     # update statistics for ROBOTS:
     if devCla not in ('desktop','mobile','tablet'):
