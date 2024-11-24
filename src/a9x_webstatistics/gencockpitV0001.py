@@ -238,7 +238,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
                     # check if url is blocked for display:
                     if any(oelm in tk for oelm in omit):  # don not show parts of url 
-                    #if tk in omit:
                         continue
                     if tk not in ttopurl:
                         ttopurl[tk] = 0
@@ -252,8 +251,12 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                if k in omit:
+                #if k in omit:
+                #    continue
+                # check if url is blocked for display:
+                if any(oelm in k for oelm in omit):  # don not show parts of url 
                     continue
+
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
@@ -273,8 +276,12 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
-                if k in omit:
-                    continue
+                # check if url is blocked for display:
+                if any(oelm in k for oelm in omit):  # don not show parts of url 
+                     continue
+
+                #if k in omit:
+                #    continue
                 for kb, vb in v['target'].items():
                     if owndomain not in k:
                         h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
@@ -546,11 +553,14 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             topurlcnt = 0
             for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
                 if len(k) == 6:
-                    if k in omit:   # suppress omitted paths
-                        continue
-                    if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or owndomain in k:
+                    # check if url is blocked for display:
+                    if any(oelm in k for oelm in omit):  # suppress omitted paths 
                         continue
 
+                    #if k in omit:   # suppress omitted paths
+                    #    continue
+                    if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or owndomain in k:
+                        continue
                     
                     if topurlcnt > 12:
                         break
@@ -697,6 +707,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for y in d['v0001']['days']:
             if 'topUrl' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['topUrl'].items():
+                    # check if url is blocked for display:
+                    if any(oelm in sk for oelm in omit):  # suppress omitted paths 
+                        continue
                     if sk not in turl:
                         turl[sk] = 0
                     turl[sk] += sv
