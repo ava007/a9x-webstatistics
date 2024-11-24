@@ -14,9 +14,6 @@ def genHeaderV0001(domain):
     h += '<meta name="robots" content="index,follow">'
     h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
     h += '<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
-    #h += '<style>'
-    #h += '* { font-family: "\'Helvetica Neue\', Helvetica, Arial, sans-serif"; font-size: 12px; }'
-    #h += '</style>'
     h += "\n" + '<script>'
     h += 'function DT2Locale(tdt) {'
     h += 'try {'
@@ -402,7 +399,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
         tlr_first = tlr.replace(day=1)
         tlr_last_month = tlr_first - timedelta(days=1)
-        print("webstats last months; last is month: " + tlr_last_month.strftime("%Y%m"))
+        #print("webstats last months; last is month: " + tlr_last_month.strftime("%Y%m"))
 
         maxYearMonth = tlr_last_month.strftime("%Y%m")
         prevYearMonth = '999912'
@@ -577,9 +574,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 h += '<table class="table">'
                 h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
                 i = 1
-                #vdomain = domain.replace('https://','')
-                #vdomain = vdomain.replace('http://','')
-                #vdomain = vdomain.removeprefix('www.')
                 for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
                     #if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
