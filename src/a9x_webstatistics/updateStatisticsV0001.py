@@ -175,7 +175,7 @@ def updV0001(
         for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
            z += 1
            if z > 100 and cv == 1:
-              print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
+              #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
               del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
     return d, visitIP
