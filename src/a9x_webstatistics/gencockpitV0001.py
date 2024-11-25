@@ -135,8 +135,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h = genHeaderV0001(owndomain)
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
-        h += '<a href="#hdDay" class="btn btn-primary mr-3" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary mr-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
+        h += '<a href="#hdDay" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Daily Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
         h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
@@ -226,7 +226,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             if len(k) <= 6:
                 continue
             if any(oelm in k for oelm in omit):  # don not show parts of url 
-            #if k in omit:  # do not show support url by parameter
                 continue
             if topurlcnt >= 31:
                 break
@@ -248,12 +247,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
             i = 1
             for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                #if k in omit:
-                #    continue
-                # check if url is blocked for display:
-                if any(oelm in k for oelm in omit):  # don not show parts of url 
-                    continue
-
                 if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
@@ -277,8 +270,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 if any(oelm in k for oelm in omit):  # don not show parts of url 
                      continue
 
-                #if k in omit:
-                #    continue
                 for kb, vb in v['target'].items():
                     if owndomain not in k:
                         h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
@@ -348,6 +339,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+                if any(oelm in pk for oelm in omit):  # don not show parts of url 
+                continue
+
                if '?' in pk:   # skip wrong data
                    continue
                n = pk.split('(())') 
@@ -554,8 +548,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                     if any(oelm in k for oelm in omit):  # suppress omitted paths 
                         continue
 
-                    #if k in omit:   # suppress omitted paths
-                    #    continue
                     if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or owndomain in k:
                         continue
                     
@@ -575,7 +567,6 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 h += '<thead><tr><th scope="col">Rank</th><th scope="col">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
                 i = 1
                 for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                    #if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico') and vdomain not in k:
                     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
                     i += 1
                     if i > 10:
