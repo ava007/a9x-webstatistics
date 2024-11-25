@@ -339,7 +339,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-                if any(oelm in pk for oelm in omit):  # don not show parts of url 
+               if any(oelm in pk for oelm in omit):  # don not show parts of url 
                    continue
 
                if '?' in pk:   # skip wrong data
