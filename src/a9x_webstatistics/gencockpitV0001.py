@@ -340,7 +340,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             
             for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
                 if any(oelm in pk for oelm in omit):  # don not show parts of url 
-                continue
+                   continue
 
                if '?' in pk:   # skip wrong data
                    continue
