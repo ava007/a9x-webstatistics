@@ -754,7 +754,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
         return 0
         
- def is_valid_ip(address):
+def is_valid_ip(address):
     try: 
         x = ipaddress.ip_address(address)
         return True
