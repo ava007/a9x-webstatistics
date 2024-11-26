@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import io, sys, argparse, json, ast
+import io, ipaddress, sys, argparse, json, ast
 from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
@@ -749,8 +749,14 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         outfile.close()
 
         return 0
-
-
+        
+ def is_valid_ip(address):
+    try: 
+        x = ipaddress.ip_address(address)
+        return True
+    except:
+        return False
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(allow_abbrev=False,
         prog='a9x_webstatistics',
