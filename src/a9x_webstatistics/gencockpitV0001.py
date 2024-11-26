@@ -194,6 +194,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
                  continue
+             if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
+                 continue
              h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
              i += 1
              if i > 10:
@@ -268,6 +270,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             for k, v in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['externalFriendsHits'].items(), key=itemgetter(0), reverse=True):
                 # check if url is blocked for display:
                 if any(oelm in k for oelm in omit):  # don not show parts of url 
+                     continue
+                if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
                      continue
 
                 for kb, vb in v['target'].items():
