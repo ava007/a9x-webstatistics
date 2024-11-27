@@ -496,6 +496,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 curYearMonth = y[0:6]
                 if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                     for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                        if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
+                            continue
                         if sk not in tsource:
                             tsource[sk] = 0
                         tsource[sk] += sv['cnt']
@@ -672,6 +674,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for y in d['v0001']['days']:
             if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                    if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
+                        continue
                     if sk not in tsource:
                         tsource[sk] = 0
                     tsource[sk] += sv['cnt']
