@@ -191,10 +191,12 @@ def detectDeviceClass(ua):
      return 'bots'
   if (ua.lower().find('crawler') > 0):
      return 'others'
-  if (ua.lower().find('python') > 0):
+  if (ua.lower().find('python') > 0):  # python-requests
      return 'bots'
   if (ua.lower().find('mediapartner') > 0):
      return 'others'
+  if (ua.lower().find('feedly') > 0):   # Feedly
+     return 'bots'
   if (ua.lower().find('curl') > 0):
      return 'others'
   if (ua.lower().find('ipad') > 0):
