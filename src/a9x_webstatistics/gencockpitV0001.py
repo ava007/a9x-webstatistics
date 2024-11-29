@@ -144,7 +144,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         h += "<p><small>Last record included in statistic: <script>document.write(DT2Locale('" + d['timelastrec'] + "'));</script></small></p>"
         h += '</div></div>'
         h += "\n" + '<div class="row"><div class="col-12">'
-        h += '<h3>Statistics for the last 31 days</h3>'
+        h += '<h3>Hits and Visits for the last 31 days</h3>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
         h += '<script>' + "\n" + 'const ctx = document.getElementById(\'myChart\');'
@@ -186,7 +186,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         # Top 10 Domains on daily basis
         h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
         h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h4 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h4>'
+        h += '<h3 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h3>'
         h += '<p class="card-text">User hits refering to external domain:</p>'
         h += '<table class="table">'
         h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -207,7 +207,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         if len(tcountries) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Top 10 Countries for the last ' + str(day_usr_i) + ' days</h4>'
+            h += '<h3 class="card-title">Top 10 Countries for the last ' + str(day_usr_i) + ' days</h3>'
             h += '<p class="card-text">User hits by country for the last ' + str(day_usr_i) + ' days:</p>'
             h += '<table class="table">'
             h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -243,7 +243,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         if len(ttopurl) > 0:
             h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Top 10 URL</h4>'
+            h += '<h3 class="card-title">Top 10 URL</h3>'
             h += '<p class="card-text">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
             h += '<table class="table">'
             h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
@@ -263,7 +263,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         if firstOfCurrentMonth in d['v0001']['days'] and 'externalFriendsHits' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Top 10 Landings</h4>'
+            h += '<h3 class="card-title">Top 10 Landings</h3>'
             h += '<p class="card-text">User landings for the current month:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr></thead>'
             i = 1
@@ -304,7 +304,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         if len(tquality) > 0:
             h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Quality Improvements</h4>'
+            h += '<h3 class="card-title">Quality Improvements</h3>'
             h += '<p class="card-text">Quality improvements that should be implemented:</p>'
             h += '<table class="table-responsive text-break"><thead><tr><th scope="col">Status</th><th scope="col">affected URL</th><th scope="col">Count</th><th scope="col">Remark</th><th scope="col">Date last occured</th></tr></thead>'
             i = 0
@@ -327,7 +327,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
             h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h4 class="card-title">Navigation Analysis for ' + owndomain + '</h4>'
+            h += '<h3 class="card-title">Navigation Analysis for ' + owndomain + '</h3>'
             h += '<p class="card-text">User navigation or flows on internal links:</p>'
 
             h += '<div id="navpath">'
@@ -727,20 +727,20 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
         h += '<footer class="row bg-light py-4 mt-4">'
 
-        h += '<div class="col"><h3>About</h3>'
+        h += '<div class="col"><h2>About</h2>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024 a9x-webstatistics</a></li>'
         h += '<li class="nav-item mb-2">' + __version__ + '</li>'
         h += '<li class="nav-item mb-2">salvo errore et omissione</li>'
         h += '</ul></div>' + "\n"
 
-        h += '<div class="col"><h3>Powered by</h3>'
+        h += '<div class="col"><h2>Powered by</h2>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com" class="nav-link p-0 text-body-secondary">LogikFabrik.com</a></li>'
         h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com/webstatsLF24.html" class="nav-link p-0 text-body-secondary">Live Example</a></li>'
         h += '</ul></div>' + "\n"
           
-        h += '<div class="col"><h3>Abbreviations</h3>'
+        h += '<div class="col"><h2>Abbreviations</h2>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hit: Download request of a html file</a></li>'
         h += '<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">URL: Uniform Resource Locator</a></li>'
