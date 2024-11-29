@@ -185,17 +185,19 @@ def detectDeviceClass(ua):
      return 'others'
   if (ua.lower().find('bot') > 0):
      return 'bots'
-  if (ua.lower().find('externalhit') > 0):  # facebook
+  if (ua.lower().find('externalhit') > 0):    # facebook
      return 'bots'
-  if (ua.lower().find('spider') > 0):  # bytedance
+  if (ua.lower().find('spider') > 0):        # bytedance
      return 'bots'
   if (ua.lower().find('crawler') > 0):
      return 'others'
-  if (ua.lower().find('python') > 0):  # python-requests
+  if (ua.lower().find('python') > 0):        # python-requests
      return 'bots'
   if (ua.lower().find('mediapartner') > 0):
      return 'others'
-  if (ua.lower().find('feedly') > 0):   # Feedly
+  if (ua.lower().find('feedly') > 0):        # Feedly
+     return 'bots'
+  if (ua.lower().find('validator') > 0):     # validator
      return 'bots'
   if (ua.lower().find('curl') > 0):
      return 'others'
