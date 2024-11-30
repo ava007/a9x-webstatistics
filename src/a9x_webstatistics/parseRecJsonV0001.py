@@ -26,9 +26,13 @@ def(rec, lasttimerecobj, georeader):
             'status': r['status'],
             'bytes_sent': r['bytes_sent'],
             'referer': r['referer'],
-            'user_agent': r['user_agent']
+            'user_agent': r['http_user_agent']
         }
     if country:
-        r['country'] = country
+        ret['country'] = country
+    if r['upstream_respone_time'] is not None:
+        ret['response_time'] = r['upstream_respone_time']
+    if r['upstream_cache_status'] is not None:
+        ret['cache_status'] = r['upstream_cache_status']
 
     return ret
