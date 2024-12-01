@@ -10,6 +10,7 @@ from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from .migratev0001 import delv0000
+from .parseRecJsonV0001.py import parseRecJsonV0001
 from importlib.metadata import version
 import geoip2.database
 
@@ -20,45 +21,48 @@ def parseRec(rec, log_pattern, j, georeader):
         j['records_skipped_comment'] += 1
         return r,j
 
-    data = re.search(log_pattern, rec)
-
-    if data:
-        datadict = data.groupdict()
-        ip_address = datadict["ipaddress"]
-        timestamp = datadict["dateandtime"]
-        request = datadict["url"]
-        bytes_sent = datadict["bytessent"]
-        referer = datadict["referer"]
-        user_agent = datadict["useragent"]
-        status = datadict["statuscode"]
-        method = datadict["method"]
-        #j['records_processed_for_statistic'] += 1
-        if georeader:
-            try:
-                grrsp = georeader.country(ip_address)
-                country = grrsp.country.name
-            except geoip2.errors.AddressNotFoundError:
-                country = None
-        else:
-            country = None
-        
-        dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
-                
-        r = {
-            'ip': ip_address,
-            'ymd': dto.strftime("%Y%m%d"),
-            'timestamp': dto.strftime("%Y%m%d%H%M%S") ,
-            'request': request,
-            'status': status,
-            'bytes_sent': bytes_sent,
-            'referer': referer,
-            'user_agent': user_agent
-        }
-        if country:
-            r['country'] = country
+    if rec[0:2] == '{"':
+        r = parseRecJsonV0001(rec)
     else:
-        print("Log Rec parsing failed for: " + rec[0:50])
-        j['records_parsing_failed'] += 1
+        data = re.search(log_pattern, rec)
+
+        if data:
+            datadict = data.groupdict()
+            ip_address = datadict["ipaddress"]
+            timestamp = datadict["dateandtime"]
+            request = datadict["url"]
+            bytes_sent = datadict["bytessent"]
+            referer = datadict["referer"]
+            user_agent = datadict["useragent"]
+            status = datadict["statuscode"]
+            method = datadict["method"]
+            #j['records_processed_for_statistic'] += 1
+            if georeader:
+                try:
+                    grrsp = georeader.country(ip_address)
+                    country = grrsp.country.name
+                except geoip2.errors.AddressNotFoundError:
+                    country = None
+            else:
+                country = None
+        
+            dto = datetime.strptime(timestamp,'%d/%b/%Y:%H:%M:%S %z')  # 07/Jan/2024:14:06:24 +0000
+                
+            r = {
+                'ip': ip_address,
+                'ymd': dto.strftime("%Y%m%d"),
+                'timestamp': dto.strftime("%Y%m%d%H%M%S") ,
+                'request': request,
+                'status': status,
+                'bytes_sent': bytes_sent,
+                'referer': referer,
+                'user_agent': user_agent
+            }
+            if country:
+                r['country'] = country
+        else:
+            print("Log Rec parsing failed for: " + rec[0:50])
+            j['records_parsing_failed'] += 1
         
     return r,j
 
