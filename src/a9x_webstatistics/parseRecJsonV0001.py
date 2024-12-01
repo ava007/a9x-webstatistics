@@ -34,5 +34,7 @@ def(rec, lasttimerecobj, georeader):
         ret['response_time'] = r['upstream_respone_time']
     if r['upstream_cache_status'] is not None:
         ret['cache_status'] = r['upstream_cache_status']
+    if r['http_accept_language'] is not None:
+        ret['accept_language'] = r['http_accept_language']
 
     return ret
