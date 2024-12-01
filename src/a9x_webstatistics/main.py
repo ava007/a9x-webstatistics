@@ -10,7 +10,7 @@ from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from .migratev0001 import delv0000
-from .parseRecJsonV0001.py import parseRecJsonV0001
+from .parseRecJsonV0001 import parseRecJsonV0001
 from importlib.metadata import version
 import geoip2.database
 
