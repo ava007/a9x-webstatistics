@@ -152,31 +152,25 @@ def updV0001(
         else:
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
-    # accumulate user navigation on first day of the month
+    # accumulate user navigation 
     if len(i['referer']) > 1 and (i['status'] == '200') and devCla in ('desktop','mobile','tablet'):
         oref = urlparse(i['referer'])   # remove query string...
         oreq = urlparse(i['request'])   # remove query string...
-        dt01 = i['ymd'][0:6] + '01'
-
-        # on the very first run during the month, make sure that the structure exists:
-        if dt01 not in d['v0001']['days']:
-            d['v0001']['days'][dt01] = {}
-            d['v0001']['days'][dt01]['user'] = {}
             
-        if 'navigation' not in d['v0001']['days'][dt01]['user']:
-           d['v0001']['days'][dt01]['user']['navigation'] = {}
+        if 'navigation' not in d['v0001']['days'][dt]['user']:
+           d['v0001']['days'][dt]['user']['navigation'] = {}
         nkey = oref.path + '(())' + oreq.path
-        if nkey not in d['v0001']['days'][dt01]['user']['navigation']:
-           d['v0001']['days'][dt01]['user']['navigation'][nkey] = 0
-        d['v0001']['days'][dt01]['user']['navigation'][nkey] += 1
+        if nkey not in d['v0001']['days'][dt]['user']['navigation']:
+           d['v0001']['days'][dt]['user']['navigation'][nkey] = 0
+        d['v0001']['days'][dt]['user']['navigation'][nkey] += 1
 
         # cleanup: delete entry from long tail...
-        z = 1
-        for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-           z += 1
-           if z > 100 and cv == 1:
-              #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
-              del d['v0001']['days'][dt01]['user']['navigation'][ck]
+        #z = 1
+        #for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+        #   z += 1
+        #   if z > 100 and cv == 1:
+        #      #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
+        #      del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
     return d, visitIP
 
