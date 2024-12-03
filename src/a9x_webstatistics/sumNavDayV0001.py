@@ -1,5 +1,5 @@
 from copy import deepcopy
-from datetime import datetime, timedelta
+from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
 def sumNavDayV0001(d):
