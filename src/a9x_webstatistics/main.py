@@ -11,6 +11,7 @@ from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from .migratev0001 import delv0000
 from .parseRecJsonV0001 import parseRecJsonV0001
+from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
 import geoip2.database
 
@@ -152,9 +153,13 @@ def runws(statfile, infile, geoip, verbosity, domain):
             j['records_processed_for_statistic'] += 1
             
 
+    # sum navigation
+    d = sumNavDayV0001(d)
+    
     # summarize previous months
     d = summonth(d)
     d = sumMonthV0001(d, statfile)
+    
     
     # write updated statistic file:
     with open(statfile, "w") as sf:
