@@ -6,7 +6,7 @@ def sumNavDayV0001(d):
     tmpNav = {}
     prevMonth = None
     for x in d['v0001']['days']:
-        if prevMonth is None
+        if prevMonth is None:
             prevMonth = x[0:6]
         if prevMonth != x[0:6]:
             if len(tmpNav) > 1:
