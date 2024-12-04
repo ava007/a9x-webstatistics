@@ -13,6 +13,7 @@ def parseRecJsonV0001(rec):
         raise Exception("no remote addr found in input file")
 
     ret = {
+        'referer': '',
         'ymd': dto.strftime("%Y%m%d"),
         'timestamp': dto.strftime("%Y%m%d%H%M%S")
     }
