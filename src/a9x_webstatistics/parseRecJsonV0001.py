@@ -3,20 +3,45 @@ from datetime import datetime
 
 def parseRecJsonV0001(rec):
     r = ast.literal_eval(rec)    # parse rec to dict
-    dto = datetime.strptime(r['time_local'], "%d/%b/%Y:%H:%M:%S %z")   # 07/Jan/2024:14:06:24 +0000
 
-    # transform the mandatory attributes:
+    # local time:
+    if 'time_local' in r:
+        dto = datetime.strptime(r['time_local'], "%d/%b/%Y:%H:%M:%S %z")   # 07/Jan/2024:14:06:24 +0000
+    elif 'tl' in r:
+        dto = datetime.strptime(r['tl'], "%d/%b/%Y:%H:%M:%S %z")   # 07/Jan/2024:14:06:24 +0000
+    else:
+        raise Exception("no remote addr found in input file")
+
     ret = {
-            'ip': r['remote_addr'],
-            'ymd': dto.strftime("%Y%m%d"),
-            'timestamp': dto.strftime("%Y%m%d%H%M%S") ,
-            'request': r['request'],
-            'status': r['status'],
-            'bytes_sent': r['bytes_sent'],
-            'referer': r['http_referer'],
-            'user_agent': r['http_user_agent']
-        }
+        'ymd': dto.strftime("%Y%m%d"),
+        'timestamp': dto.strftime("%Y%m%d%H%M%S")
+    }
+
+    # remote address IPv4 or IPv6:
+    if 'ra' in r:
+        ret['ip'] = r['ra']
+    elif 'remote_addr' in r:
+        ret['ip'] = r['remote_addr']
+    else:
+        raise Exception("no remote addr found in input file")
+
+    # request:
+    if 'rq' in r:
+        ret['request'] = r['rq']
+    elif 'request' in r:
+        ret['request'] = r['request']
+    else:
+        raise Exception("no request found in input file")
     
+    if 'status' in r:
+       ret['status'] = r['status']
+    if 'bytes_sent' in r:
+        ret['bytes_sent'] = r['bytes_sent']
+    if 'referer' in r:
+         ret['http_referer'] =  r['http_referer']
+    if 'user_agent' in r: r['http_user_agent']
+        ret['http_user_agent'] = r['http_user_agent']
+   
     # collect the optional attributes:
     if 'upstream_respone_time' in r:
         ret['response_time'] = r['upstream_respone_time']
