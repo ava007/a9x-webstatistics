@@ -20,6 +20,8 @@ def parseRecJsonV0001(rec):
     # remote address IPv4 or IPv6:
     if 'ra' in r:
         ret['ip'] = r['ra']
+    elif 'ip' in r:
+        ret['ip'] = r['ip']
     elif 'remote_addr' in r:
         ret['ip'] = r['remote_addr']
     else:
@@ -35,19 +37,30 @@ def parseRecJsonV0001(rec):
     
     if 'status' in r:
        ret['status'] = r['status']
+        
     if 'bytes_sent' in r:
         ret['bytes_sent'] = r['bytes_sent']
-    if 'referer' in r:
-         ret['http_referer'] =  r['http_referer']
-    if 'user_agent' in r: r['http_user_agent']
-        ret['http_user_agent'] = r['http_user_agent']
+    if 'bs' in r:
+        ret['bytes_sent'] = r['bytes_sent']
+        
+    if 'rf' in r:
+         ret['referer'] =  r['referer']
+    
+    if 'http_user_agent' in r: 
+        ret['user_agent'] = r['http_user_agent']
+    if 'ua' in r: 
+        ret['user_agent'] = r['ua']
    
     # collect the optional attributes:
     if 'upstream_respone_time' in r:
         ret['response_time'] = r['upstream_respone_time']
     if 'upstream_cache_status' in r:
         ret['cache_status'] = r['upstream_cache_status']
+    if 'cs' in r:
+        ret['cache_status'] = r['cs']
     if 'http_accept_language' in r:
         ret['accept_language'] = r['http_accept_language']
+    if 'al' in r:
+        ret['accept_language'] = r['al']
 
     return ret
