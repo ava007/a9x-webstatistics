@@ -14,7 +14,7 @@ def parseRecJsonV0001(rec):
 
     ret = {
         'ymd': dto.strftime("%Y%m%d"),
-        'timestamp': dto.strftime("%Y%m%d%H%M%S")
+        'timestamp': dto.strftime("%Y%m%d%H%M%S"),
         'referer': ''
     }
 
