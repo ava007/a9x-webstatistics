@@ -13,9 +13,9 @@ def parseRecJsonV0001(rec):
         raise Exception("no remote addr found in input file")
 
     ret = {
-        'referer': '',
         'ymd': dto.strftime("%Y%m%d"),
         'timestamp': dto.strftime("%Y%m%d%H%M%S")
+        'referer': ''
     }
 
     # remote address IPv4 or IPv6:
@@ -38,7 +38,9 @@ def parseRecJsonV0001(rec):
     
     if 'status' in r:
        ret['status'] = r['status']
-        
+    if 'st' in r:
+       ret['status'] = r['st']
+
     if 'bytes_sent' in r:
         ret['bytes_sent'] = r['bytes_sent']
     if 'bs' in r:
@@ -53,16 +55,25 @@ def parseRecJsonV0001(rec):
         ret['user_agent'] = r['ua']
    
     # collect the optional attributes:
+    if 'rt' in r:
+        ret['request_time'] = r['rt']
+    if 'request_time' in r:
+        ret['request_time'] = r['request_time']
+
     if 'upstream_respone_time' in r:
         ret['response_time'] = r['upstream_respone_time']
+    if 'rt' in r:
+        ret['response_time'] = r['rt']
+    
     if 'upstream_cache_status' in r:
         ret['cache_status'] = r['upstream_cache_status']
     if 'cs' in r:
         ret['cache_status'] = r['cs']
+    
     if 'http_accept_language' in r:
         ret['accept_language'] = r['http_accept_language']
     if 'al' in r:
         ret['accept_language'] = r['al']
-    print(str(ret))
+   
 
     return ret
