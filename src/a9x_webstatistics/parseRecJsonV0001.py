@@ -63,5 +63,6 @@ def parseRecJsonV0001(rec):
         ret['accept_language'] = r['http_accept_language']
     if 'al' in r:
         ret['accept_language'] = r['al']
+    print(str(ret))
 
     return ret
