@@ -172,6 +172,16 @@ def updV0001(
         #      #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
         #      del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
+    # cache status for all requests:
+    if 'cache_status' in i:
+        if 'cache' not in d['v0001']['days'][dt]:
+           d['v0001']['days'][dt]['cache'] = {}
+        if i['cache_status'] not in d['v0001']['days'][dt]['cache']:
+            d['v0001']['days'][dt]['cache'][i['cache_status']] = 1
+        else:
+            d['v0001']['days'][dt]['cache'][i['cache_status']] += 1
+          
+
     return d, visitIP
 
 def detectDeviceClass(ua):
