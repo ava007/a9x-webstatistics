@@ -175,7 +175,7 @@ def updV0001(
     # cache status for all requests:
     if 'cache_status' in i:
         if i['cache_status'] is None:  # avoid empty values
-            [i['cache_status'] = 'unknown'
+            i['cache_status'] = 'unknown'
         if 'response' not in d['v0001']['days'][dt]:
            d['v0001']['days'][dt]['response'] = {} 
         if 'cache' not in d['v0001']['days'][dt]['response']:
