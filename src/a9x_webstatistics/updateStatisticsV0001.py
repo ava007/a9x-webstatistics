@@ -176,23 +176,23 @@ def updV0001(
     if 'cache_status' in i:
         if len(i['cache_status']) == 0:  # avoid empty values
             i['cache_status'] = 'unknown'
-        if 'response' not in d['v0001']['days'][dt]:
-           d['v0001']['days'][dt]['response'] = {} 
-        if 'cache' not in d['v0001']['days'][dt]['response']:
-           d['v0001']['days'][dt]['response']['cache'] = {} 
-        if i['cache_status'] not in d['v0001']['days'][dt]['response']['cache']:
-            d['v0001']['days'][dt]['response']['cache'][i['cache_status']] = 1
+        if 'performance' not in d['v0001']['days'][dt]:
+           d['v0001']['days'][dt]['performance'] = {} 
+        if 'cache' not in d['v0001']['days'][dt]['performance']:
+           d['v0001']['days'][dt]['performance']['cache'] = {} 
+        if i['cache_status'] not in d['v0001']['days'][dt]['performance']['cache']:
+            d['v0001']['days'][dt]['performance']['cache'][i['cache_status']] = 1
         else:
-            d['v0001']['days'][dt]['response']['cache'][i['cache_status']] += 1
+            d['v0001']['days'][dt]['performance']['cache'][i['cache_status']] += 1
 
     # response time:
     if 'response_time' in i:
-        if 'response' not in d['v0001']['days'][dt]:
-           d['v0001']['days'][dt]['response'] = {} 
-        if 'response_time' not in d['v0001']['days'][dt]['response']:
-           d['v0001']['days'][dt]['response']['response_time'] = {'time_count': 0, 'time_sum': 0} 
-        d['v0001']['days'][dt]['response']['response_time']['time_sum'] += i['response_time']
-        d['v0001']['days'][dt]['response']['response_time']['time_count'] += 1
+        if 'performance' not in d['v0001']['days'][dt]:
+           d['v0001']['days'][dt]['performance'] = {} 
+        if 'response_time' not in d['v0001']['days'][dt]['performance']:
+           d['v0001']['days'][dt]['performance']['response_time'] = {'time_count': 0, 'time_sum': 0} 
+        d['v0001']['days'][dt]['performance']['response_time']['time_sum'] += i['response_time']
+        d['v0001']['days'][dt]['performance']['response_time']['time_count'] += 1
 
     return d, visitIP
 
