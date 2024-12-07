@@ -191,7 +191,7 @@ def updV0001(
            d['v0001']['days'][dt]['performance'] = {} 
         if 'response_time' not in d['v0001']['days'][dt]['performance']:
            d['v0001']['days'][dt]['performance']['response_time'] = {'time_count': 0, 'time_sum': 0} 
-        d['v0001']['days'][dt]['performance']['response_time']['time_sum'] += i['response_time']
+        d['v0001']['days'][dt]['performance']['response_time']['time_sum'] += float(i['response_time'])
         d['v0001']['days'][dt]['performance']['response_time']['time_count'] += 1
 
     return d, visitIP
