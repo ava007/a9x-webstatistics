@@ -51,7 +51,9 @@ def parseRecJsonV0001(rec):
         ret['bytes_sent'] = r['bs']
         
     if 'rf' in r:
-         ret['referer'] =  r['referer']
+         ret['referer'] =  r['rf']
+    if 'http_referer' in r:
+         ret['referer'] =  r['http_referer']
     
     if 'http_user_agent' in r: 
         ret['user_agent'] = r['http_user_agent']
