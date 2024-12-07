@@ -48,7 +48,7 @@ def parseRecJsonV0001(rec):
     if 'bytes_sent' in r:
         ret['bytes_sent'] = r['bytes_sent']
     if 'bs' in r:
-        ret['bytes_sent'] = r['bytes_sent']
+        ret['bytes_sent'] = r['bs']
         
     if 'rf' in r:
          ret['referer'] =  r['referer']
