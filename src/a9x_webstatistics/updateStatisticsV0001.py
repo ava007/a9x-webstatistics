@@ -195,18 +195,36 @@ def updV0001(
         d['v0001']['days'][dt]['performance']['response_time']['time_count'] += 1
 
         # top x fastest:
-        if 'top_fastest' not in d['v0001']['days'][dt]['performance']:
-            d['v0001']['days'][dt]['performance']['topFastest'] = {} 
-            d['v0001']['days'][dt]['performance']['topFastest'][i['request']] = float(i['response_time'])
+        if 'topFast' not in d['v0001']['days'][dt]['performance']:
+            d['v0001']['days'][dt]['performance']['topFast'] = {} 
+            d['v0001']['days'][dt]['performance']['topFast'][i['request']] = float(i['response_time'])
         else:
-            if len(d['v0001']['days'][dt]['performance']['topFastest']) < 5:
-                d['v0001']['days'][dt]['performance']['topFastest'][i['request']] = float(i['response_time'])
+            if len(d['v0001']['days'][dt]['performance']['topFast']) < 5:
+                d['v0001']['days'][dt]['performance']['topFast'][i['request']] = float(i['response_time'])
             else:
-                max_value = max(d['v0001']['days'][dt]['performance']['topFastest'].values())  # maximum value
+                max_value = max(d['v0001']['days'][dt]['performance']['topFast'].values())  # maximum value
                 print("TOP fASTEST: MAX:" + str(max_value) + " mIN:" + str(i['response_time']))
                 # eliminate item that has the max value:
-                d['v0001']['days'][dt]['performance']['topFastest'] = {
-                    key:val for key, val in d['v0001']['days'][dt]['performance']['topFastest'].items() if val != max_value}
+                d['v0001']['days'][dt]['performance']['topFast'] = {
+                    key:val for key, val in d['v0001']['days'][dt]['performance']['topFast'].items() if val != max_value}
+        # top Slowest:
+        if 'topSlow' not in d['v0001']['days'][dt]['performance']:
+            d['v0001']['days'][dt]['performance']['topSlow'] = {} 
+            d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = float(i['response_time'])
+        else:
+            min_value = min(d['v0001']['days'][dt]['performance']['topSlow'].values())  # maximum value
+            if i['response_time'] > min_value:
+                d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = float(i['response_time'])
+        print("Len topSlow: " + str(len(d['v0001']['days'][dt]['performance']['topSlow'])))
+        if len(d['v0001']['days'][dt]['performance']['topSlow']) > 10:
+            tmpSlow = dict(sorted(d['v0001']['days'][dt]['performance']['topSlow'].items(), key=lambda item: item[1], reverse=True))
+            i = 0
+            for k,v in tmpSlow.items():
+                i += 1
+                if i >= 5:
+                    break
+                d['v0001']['days'][dt]['performance']['topSlow'][k] = v
+            del tmpNav
 
                                                                               
 
