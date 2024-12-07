@@ -213,7 +213,7 @@ def updV0001(
             d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = float(i['response_time'])
         else:
             min_value = min(d['v0001']['days'][dt]['performance']['topSlow'].values())  # maximum value
-            if i['response_time'] > min_value:
+            if float(i['response_time']) > min_value:
                 d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = float(i['response_time'])
         print("Len topSlow: " + str(len(d['v0001']['days'][dt]['performance']['topSlow'])))
         if len(d['v0001']['days'][dt]['performance']['topSlow']) > 10:
