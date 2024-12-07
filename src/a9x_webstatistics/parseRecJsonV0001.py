@@ -10,7 +10,7 @@ def parseRecJsonV0001(rec):
     elif 'tl' in r:
         dto = datetime.strptime(r['tl'], "%d/%b/%Y:%H:%M:%S %z")   # 07/Jan/2024:14:06:24 +0000
     else:
-        raise Exception("no remote addr found in input file: " + str(r) )
+        raise Exception("no time found in input file. Details of input record: " + str(r) )
 
     ret = {
         'ymd': dto.strftime("%Y%m%d"),
@@ -26,7 +26,7 @@ def parseRecJsonV0001(rec):
     elif 'remote_addr' in r:
         ret['ip'] = r['remote_addr']
     else:
-        raise Exception("no remote addr found in input file")
+        raise Exception("no remote addr found in input file.   Details of input record: " + str(r))
 
     # request:
     if 'rq' in r:
@@ -34,7 +34,7 @@ def parseRecJsonV0001(rec):
     elif 'request' in r:
         ret['request'] = r['request']
     else:
-        raise Exception("no request found in input file")
+        raise Exception("no request found in input file.   Details of input record: " + str(r))
     
     if 'status' in r:
        ret['status'] = r['status']
