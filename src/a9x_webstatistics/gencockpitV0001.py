@@ -194,6 +194,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
                  continue
+            # prevent IP oder domains with special characters:
+            if any(x in k for x in {'[', ']', ':'} ):
+                 continue
              if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
                  continue
              h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
