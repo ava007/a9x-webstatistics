@@ -33,8 +33,12 @@ def parseRecJsonV0001(rec):
         ret['request'] = r['rq']
     elif 'request' in r:
         ret['request'] = r['request']
+    elif 'u' in r:
+        ret['request'] = r['u']
+    elif 'ur' in r:
+        ret['request'] = r['ur']
     else:
-        raise Exception("no request found in input file.   Details of input record: " + str(r))
+        raise Exception("no request found in input file.   for details check input record: " + str(r))
     
     if 'status' in r:
        ret['status'] = r['status']
