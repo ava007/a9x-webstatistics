@@ -186,7 +186,7 @@ def updV0001(
             d['v0001']['days'][dt]['performance']['cache'][i['cache_status']] += 1
 
     # response time:
-    if 'response_time' in i and len(i['response_time'] > 0:
+    if 'response_time' in i and len(i['response_time']) > 0:
         if 'performance' not in d['v0001']['days'][dt]:
            d['v0001']['days'][dt]['performance'] = {} 
         if 'response_time' not in d['v0001']['days'][dt]['performance']:
@@ -201,6 +201,13 @@ def updV0001(
         else:
             if len(d['v0001']['days'][dt]['performance']['topFastest']) < 5:
                 d['v0001']['days'][dt]['performance']['topFastest'][i['request']] = float(i['response_time'])
+            else:
+                max_value = max(d['v0001']['days'][dt]['performance']['topFastest'].values())  # maximum value
+                print("TOP fASTEST: MAX:" + str(max_value) + " mIN:" + str(i['response_time']))
+                # eliminate item that has the max value:
+                d['v0001']['days'][dt]['performance']['topFastest'] = {
+                    key:val for key, val in d['v0001']['days'][dt]['performance']['topFastest'].items() if val != max_value}
+
                                                                               
 
     return d, visitIP
