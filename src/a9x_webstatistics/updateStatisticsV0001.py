@@ -186,13 +186,22 @@ def updV0001(
             d['v0001']['days'][dt]['performance']['cache'][i['cache_status']] += 1
 
     # response time:
-    if 'response_time' in i:
+    if 'response_time' in i and len(i['response_time'] > 0:
         if 'performance' not in d['v0001']['days'][dt]:
            d['v0001']['days'][dt]['performance'] = {} 
         if 'response_time' not in d['v0001']['days'][dt]['performance']:
            d['v0001']['days'][dt]['performance']['response_time'] = {'time_count': 0, 'time_sum': 0} 
         d['v0001']['days'][dt]['performance']['response_time']['time_sum'] += float(i['response_time'])
         d['v0001']['days'][dt]['performance']['response_time']['time_count'] += 1
+
+        # top x fastest:
+        if 'top_fastest' not in d['v0001']['days'][dt]['performance']:
+            d['v0001']['days'][dt]['performance']['topFastest'] = {} 
+            d['v0001']['days'][dt]['performance']['topFastest'][i['request']] = float(i['response_time'])
+        else:
+            if len(d['v0001']['days'][dt]['performance']['topFastest']) < 5:
+                d['v0001']['days'][dt]['performance']['topFastest'][i['request']] = float(i['response_time'])
+                                                                              
 
     return d, visitIP
 
