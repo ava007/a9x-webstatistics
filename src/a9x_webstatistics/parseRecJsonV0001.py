@@ -10,7 +10,7 @@ def parseRecJsonV0001(rec):
     elif 'tl' in r:
         dto = datetime.strptime(r['tl'], "%d/%b/%Y:%H:%M:%S %z")   # 07/Jan/2024:14:06:24 +0000
     else:
-        raise Exception("no remote addr found in input file")
+        raise Exception("no remote addr found in input file: " + str(r) )
 
     ret = {
         'ymd': dto.strftime("%Y%m%d"),
