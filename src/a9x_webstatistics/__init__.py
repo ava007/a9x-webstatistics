@@ -1,4 +1,4 @@
-__version__ = "1.1.36-beta.24"
+__version__ = "1.2.0"
 
 from .module1 import *
 #from .main import *
