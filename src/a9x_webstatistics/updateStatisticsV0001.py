@@ -199,15 +199,16 @@ def updV0001(
             # top x fastest:
             if 'topFast' not in d['v0001']['days'][dt]['performance']:
                 d['v0001']['days'][dt]['performance']['topFast'] = {} 
-                d['v0001']['days'][dt]['performance']['topFast'][i['request']] = str(tmp_rtime)
+                d['v0001']['days'][dt]['performance']['topFast'][i['request']] = tmp_rtime
             else:
                 max_value = float(max(d['v0001']['days'][dt]['performance']['topFast'].values()))  # maximum value
                 if tmp_rtime  < max_value:
-                    d['v0001']['days'][dt]['performance']['topFast'][i['request']] = str(tmp_rtime)
+                    d['v0001']['days'][dt]['performance']['topFast'][i['request']] = tmp_rtime
 
                 if len(d['v0001']['days'][dt]['performance']['topFast']) > 5:
                     tmpFast = dict(sorted(d['v0001']['days'][dt]['performance']['topFast'].items(), key=lambda item: item[1], reverse=False))
                     i = 0
+                    d['v0001']['days'][dt]['performance']['topFast'] = {}
                     for k,v in tmpFast.items():
                         i += 1
                         if i >= 5:
@@ -218,15 +219,16 @@ def updV0001(
             # top Slowest:
             if 'topSlow' not in d['v0001']['days'][dt]['performance']:
                 d['v0001']['days'][dt]['performance']['topSlow'] = {} 
-                d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = str(tmp_rtime)
+                d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = tmp_rtime
             else:
                 min_value = float(min(d['v0001']['days'][dt]['performance']['topSlow'].values()))  # minimum value
                 if tmp_rtime > min_value:
-                    d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = str(tmp_rtime)
+                    d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = tmp_rtime
 
             if len(d['v0001']['days'][dt]['performance']['topSlow']) > 5:
                 tmpSlow = dict(sorted(d['v0001']['days'][dt]['performance']['topSlow'].items(), key=lambda item: item[1], reverse=True))
                 i = 0
+                d['v0001']['days'][dt]['performance']['topSlow'] = {}
                 for k,v in tmpSlow.items():
                     i += 1
                     if i >= 5:
