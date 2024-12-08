@@ -201,8 +201,8 @@ def updV0001(
                 d['v0001']['days'][dt]['performance']['topFast'] = {} 
                 d['v0001']['days'][dt]['performance']['topFast'][i['request']] = tmp_rtime
             else:
-                max_value = max(d['v0001']['days'][dt]['performance']['topFast'].values())  # maximum value
-                if float(i['response_time']) < max_value:
+                max_value = float(max(d['v0001']['days'][dt]['performance']['topFast'].values()))  # maximum value
+                if tmp_rtime  < max_value:
                     d['v0001']['days'][dt]['performance']['topFast'][i['request']] = tmp_rtime
 
                 if len(d['v0001']['days'][dt]['performance']['topFast']) > 5:
@@ -220,8 +220,8 @@ def updV0001(
                 d['v0001']['days'][dt]['performance']['topSlow'] = {} 
                 d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = tmp_rtime
             else:
-                min_value = min(d['v0001']['days'][dt]['performance']['topSlow'].values())  # maximum value
-                if float(i['response_time']) > min_value:
+                min_value = float(min(d['v0001']['days'][dt]['performance']['topSlow'].values()))  # minimum value
+                if tmp_rtime > min_value:
                     d['v0001']['days'][dt]['performance']['topSlow'][i['request']] = tmp_rtime
 
             if len(d['v0001']['days'][dt]['performance']['topSlow']) > 5:
