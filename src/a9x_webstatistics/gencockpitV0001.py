@@ -194,7 +194,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
              if owndomain in k:
                  continue
-             # prevent IP oder domains with special characters:
+             # prevent IP or domains with special characters:
              if any( x in k for x in {'[', ']', ':'} ):
                  continue
              if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
@@ -499,6 +499,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 curYearMonth = y[0:6]
                 if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                     for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                        # prevent IP or domains with special characters:
+                        if any( x in sk for x in {'[', ']', ':'} ):
+                            continue
                         if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
                             continue
                         if sk not in tsource:
@@ -677,6 +680,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for y in d['v0001']['days']:
             if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
                 for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
+                    # prevent IP or domains with special characters:
+                    if any( x in sk for x in {'[', ']', ':'} ):
+                        continue
                     if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
                         continue
                     if sk not in tsource:
