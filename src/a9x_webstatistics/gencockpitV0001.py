@@ -335,7 +335,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 break
             if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
                 for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
-                    if sk not in tnav:
+                    if sk not in topnav:
                         topnav[sk]= sv
                     else:
                         topnav[sk] += sv
