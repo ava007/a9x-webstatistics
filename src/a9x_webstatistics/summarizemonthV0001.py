@@ -114,21 +114,21 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
 
-                # navigation on the first day of the month:  take the 24 path with the most traffic:
-                dayOfMonth = x[-2:]
-                if 'navigation' in dtmp['v0001']['days'][x]['user'] and dayOfMonth == '01':
-                    d['v0001']['days'][recMonth]['user']['navigation'] = {}
-                    pcount = 0
+                # navigation:
+                if 'navigation' in dtmp['v0001']['days'][x]['user']:
+                    if 'navigation' not in d['v0001']['days'][recMonth]['user']:
+                        d['v0001']['days'][recMonth]['user']['navigation'] = {}
                     for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
                         if nk[0:7] == 'https://':
                             continue
                         if nk[0:6] == 'http://':
                             continue
-                            
-                        d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
+
+                        if nk in d['v0001']['days'][recMonth]['user']['navigation']:
+                            d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
+                        else:
+                            d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
                         pcount += 1
-                        if pcount > 24:
-                            break
                         
                 del d['v0001']['days'][x]
 
