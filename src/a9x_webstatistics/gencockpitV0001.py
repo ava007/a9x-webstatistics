@@ -327,7 +327,23 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         
         h += '</div>' + "\n\n"   # end of row
 
-        if firstOfCurrentMonth in d['v0001']['days'] and 'navigation' in d['v0001']['days'][firstOfCurrentMonth]['user']:
+        # Navigation for the last 31 days:
+        topnav = {}   # nested dictionary!
+        days = 0
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            if len(k) < 8:   # not a day anymore
+                break
+            if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
+                for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
+                    if sk not in tnav:
+                        topnav[sk]= sv
+                    else:
+                        topnav[sk] += sv
+            days += 1
+            if days > 31:
+                break
+                            
+        if len(topnav) > 1:
             h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Navigation Analysis for ' + owndomain + '</h3>'
@@ -345,7 +361,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             # setup root:  map(lambda...) for eliminating special characters
             h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
-            for pk, pv in sorted(d['v0001']['days'][firstOfCurrentMonth]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+            for pk, pv in sorted(topnav.items(), key=itemgetter(1), reverse=True):
                if any(oelm in pk for oelm in omit):  # don not show parts of url 
                    continue
 
