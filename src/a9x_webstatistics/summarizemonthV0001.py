@@ -128,8 +128,7 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
                         else:
                             d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
-                        pcount += 1
-                        
+                                               
                 del d['v0001']['days'][x]
 
     # compress by month
@@ -158,7 +157,7 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][x]['user']['topUrl'][k] = v
                 del tmpTopUrl
                 
-            # take only 24 Navigatins per month:
+            # take only 24 navigations per month:
             if 'navigation' in d['v0001']['days'][x]['user']:
                 tmpNav = dict(sorted(d['v0001']['days'][x]['user']['navigation'].items(), key=lambda item: item[1], reverse=True))
                 i = 0
