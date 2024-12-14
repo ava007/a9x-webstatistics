@@ -172,8 +172,8 @@ def updV0001(
         #      #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
         #      del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
-    # cache status for all requests:
-    if 'cache_status' in i:
+    # cache status for all successful requests:
+    if 'cache_status' in i and i['status'] == '200':
         if len(i['cache_status']) == 0:  # avoid empty values
             i['cache_status'] = 'unknown'
         if 'performance' not in d['v0001']['days'][dt]:
