@@ -259,6 +259,31 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                     break
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
+
+        # performace for the last 31 days:
+        time_count = 0
+        time_sum = 0
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            # dont take months in account:
+            if len(k) <= 6:
+                break
+            if 'performance' in d['v0001']['days'][k]['user'] and 'response_time' in d['v0001']['days'][k]['user']['performance']:
+                time_count += d['v0001']['days'][k]['user']['performance']['response_time']['time_count']
+                time_sum += d['v0001']['days'][k]['user']['performance']['response_time']['time_sum']
+                
+        if time_count > 0:                
+            h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
+            h += '<div class="card mt-2"><div class="card-body">'
+            h += '<h3 class="card-title">Performance for the last ' + str(day_usr_i) + ' days</h3>'
+            h += '<p class="card-text">User hits refering to external domain:</p>'
+            h += '<table class="table">'
+            h += '<tr>'
+            h += '<td>Average Response Time</td><td>' + str(time_sum/time_count) + '</td>'
+            h += '</tr>'
+            h += '</table>'
+            h += '</div></div></div>'   # end of card and col
+
+        
        
         # top external landings (friends):
         tland = {}   # nested dictionary!
