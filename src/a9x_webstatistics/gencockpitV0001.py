@@ -269,7 +269,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             # dont take months in account:
             if len(k) <= 6:
-                contine
+                continue
             if 'performance' in d['v0001']['days'][k] and 'response_time' in d['v0001']['days'][k]['performance']:
                 time_count += d['v0001']['days'][k]['performance']['response_time']['time_count']
                 time_sum += d['v0001']['days'][k]['performance']['response_time']['time_sum']
