@@ -270,16 +270,16 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             # dont take months in account:
             if len(k) <= 6:
                 break
-            if 'performance' in d['v0001']['days'][k]['user'] and 'response_time' in d['v0001']['days'][k]['user']['performance']:
-                time_count += d['v0001']['days'][k]['user']['performance']['response_time']['time_count']
-                time_sum += d['v0001']['days'][k]['user']['performance']['response_time']['time_sum']
-            if 'performance' in d['v0001']['days'][k]['user'] and 'cache' in d['v0001']['days'][k]['user']['performance']:
-                if 'MISS' in d['v0001']['days'][k]['user']['performance']['cache']:
-                    cache_miss += d['v0001']['days'][k]['user']['performance']['cache']['MISS']
-                if 'HIT' in d['v0001']['days'][k]['user']['performance']['cache']:
-                    cache_hit += d['v0001']['days'][k]['user']['performance']['cache']['HIT']
-                if 'unknown' in d['v0001']['days'][k]['user']['performance']['cache']:
-                    cache_unknown += d['v0001']['days'][k]['user']['performance']['cache']['unknown']
+            if 'performance' in d['v0001']['days'][k] and 'response_time' in d['v0001']['days'][k]['performance']:
+                time_count += d['v0001']['days'][k]['performance']['response_time']['time_count']
+                time_sum += d['v0001']['days'][k]['performance']['response_time']['time_sum']
+            if 'performance' in d['v0001']['days'][k] and 'cache' in d['v0001']['days'][k]['performance']:
+                if 'MISS' in d['v0001']['days'][k]['performance']['cache']:
+                    cache_miss += d['v0001']['days'][k]['performance']['cache']['MISS']
+                if 'HIT' in d['v0001']['days'][k]['performance']['cache']:
+                    cache_hit += d['v0001']['days'][k]['performance']['cache']['HIT']
+                if 'unknown' in d['v0001']['days'][k]['performance']['cache']:
+                    cache_unknown += d['v0001']['days'][k]['performance']['cache']['unknown']
                 
         if time_count > 0 or cache_miss > 0:                
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
