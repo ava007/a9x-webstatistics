@@ -22,8 +22,8 @@ pip install a9x-webstatistics
 
 ## Requirements on Linux / Unix
 - access log file from web servce
--   standard access log file from nginx, freenginx or apache
--   access log file in json format
+--   standard access log file from nginx, freenginx or apache
+--   access log file in json format
 - python3.9 onwards
 - optional: maxmind db which need to be download by end user after registration
 
