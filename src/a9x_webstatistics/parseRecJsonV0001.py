@@ -87,6 +87,9 @@ import re
 
 # 'da, en-gb;q=0.8, en;q=0.7'
 # 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'
+# https://www.rfc-editor.org/rfc/rfc9110.html#name-accept-language
+# https://www.rfc-editor.org/rfc/rfc4647.html
+# https://www.rfc-editor.org/rfc/rfc5646.html
 
 def parse_accept_language(accept_language_input):
     if not accept_language_input:
