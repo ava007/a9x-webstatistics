@@ -260,7 +260,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
 
-        # performace for the last 31 days:
+        # performance for the last 31 days:
         time_count = 0
         time_sum = 0
         cache_miss = 0
@@ -270,16 +270,18 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             # dont take months in account:
             if len(k) <= 6:
                 continue
-            if 'performance' in d['v0001']['days'][k] and 'response_time' in d['v0001']['days'][k]['performance']:
-                time_count += d['v0001']['days'][k]['performance']['response_time']['time_count']
-                time_sum += d['v0001']['days'][k]['performance']['response_time']['time_sum']
-            if 'performance' in d['v0001']['days'][k] and 'cache' in d['v0001']['days'][k]['performance']:
-                if 'MISS' in d['v0001']['days'][k]['performance']['cache']:
-                    cache_miss += d['v0001']['days'][k]['performance']['cache']['MISS']
-                if 'HIT' in d['v0001']['days'][k]['performance']['cache']:
-                    cache_hit += d['v0001']['days'][k]['performance']['cache']['HIT']
-                if 'unknown' in d['v0001']['days'][k]['performance']['cache']:
-                    cache_unknown += d['v0001']['days'][k]['performance']['cache']['unknown']
+            if 'performance' in d['v0001']['days'][k]:
+                if 'response_time' in d['v0001']['days'][k]['performance']:
+                    if 'time_count' in d['v0001']['days'][k]['performance']['response_time']:
+                        time_count += d['v0001']['days'][k]['performance']['response_time']['time_count']
+                        time_sum += d['v0001']['days'][k]['performance']['response_time']['time_sum']
+                if 'cache' in d['v0001']['days'][k]['performance']:
+                    if 'MISS' in d['v0001']['days'][k]['performance']['cache']:
+                        cache_miss += d['v0001']['days'][k]['performance']['cache']['MISS']
+                    if 'HIT' in d['v0001']['days'][k]['performance']['cache']:
+                        cache_hit += d['v0001']['days'][k]['performance']['cache']['HIT']
+                    if 'unknown' in d['v0001']['days'][k]['performance']['cache']:
+                        cache_unknown += d['v0001']['days'][k]['performance']['cache']['unknown']
                 
         if time_count > 0 or cache_miss > 0:                
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
