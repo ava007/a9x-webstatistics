@@ -291,7 +291,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<table class="table">'
             if time_count > 0:
                 h += '<tr>'
-                h += '<td>Average Response Time</td><td>' + str(time_sum/time_count) + '</td>'
+                h += '<td>Average Response Time</td><td>' + {:.2%}'.format(time_sum/time_count) + '</td>'
                 h += '</tr>'
             if cache_miss > 0:
                 h += '<tr>'
