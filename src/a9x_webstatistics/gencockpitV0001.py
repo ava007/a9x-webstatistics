@@ -291,11 +291,11 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<table class="table">'
             if time_count > 0:
                 h += '<tr>'
-                h += '<td>Average Response Time</td><td>' + {:.2%}'.format(time_sum/time_count) + '</td>'
+                h += '<td>Average Response Time</td><td>' + '{:.2%}'.format(time_sum/time_count) + '</td>'
                 h += '</tr>'
             if cache_miss > 0:
                 h += '<tr>'
-                h += '<td>Cache Hit Ratio</td><td>' + str(cache_hit * 100 / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
+                h += '<td>Cache Hit Ratio</td><td>' + '{:.0%}'.format(cache_hit * 100 / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
                 h += '</tr>'
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
