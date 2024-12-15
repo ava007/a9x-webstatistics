@@ -82,3 +82,41 @@ def parseRecJsonV0001(rec):
         ret['accept_language'] = r['al']
    
     return ret
+
+import re
+
+# 'da, en-gb;q=0.8, en;q=0.7'
+
+def parse_accept_language(accept_language_input):
+    if not accept_language_input:
+        return []
+
+    if len(accept_language_input) > 8192:
+        raise ValueError('Accpet-Language exceeds maximum length of 8192 characters.')
+        
+    # Split the string by commas to get each language tag
+    language_tags = accept_language_input.split(',')
+
+    parsed_languages = []
+
+    for tag in language_tags:
+        # Regular expression to match the language, country, and quality (if present)
+        match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
+        
+        if match:
+            language = match.group(1)  # language (e.g., en, fr)
+            country = match.group(2) if match.group(2) else None  # country (e.g., US, FR)
+            quality = float(match.group(3)) if match.group(3) else 1.0  # quality, default is 1.0
+
+            parsed_languages.append({
+                'language': language,
+                'country': country,
+                'quality': quality
+            })
+
+    return parsed_languages
+
+
+    
+        
+    
