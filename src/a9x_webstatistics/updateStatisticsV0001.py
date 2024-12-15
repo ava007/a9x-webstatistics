@@ -237,6 +237,11 @@ def updV0001(
                 del tmpSlow
     
     # accept language:
+    # ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+    # en
+    # en-US,en;q=0.5
+    # de,en-US;q=0.7,en;q=0.3
+    # zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
     if 'accept_language' in i and devCla in ('desktop','mobile','tablet'):
         print(str(i['accept_language']) )
         #if 'language' not in d['v0001']['days'][dt]['user']:
