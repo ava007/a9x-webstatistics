@@ -235,6 +235,13 @@ def updV0001(
                         break
                     d['v0001']['days'][dt]['performance']['topSlow'][k] = v
                 del tmpSlow
+    
+    # accept language:
+    if 'accept_language' in i and devCla in ('desktop','mobile','tablet'):
+        print(str(i['accept_language']) )
+        #if 'language' not in d['v0001']['days'][dt]['user']:
+        #    d['v0001']['days'][dt]['user']['language'] = {}
+        #d['v0001']['days'][dt]['user']['language'] += int(i['bytes_sent'])
 
     return d, visitIP
 
