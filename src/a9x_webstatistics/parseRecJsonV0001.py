@@ -77,19 +77,21 @@ def parseRecJsonV0001(rec):
         ret['cache_status'] = r['cs']
     
     if 'http_accept_language' in r:
-        ret['accept_language'] = r['http_accept_language']
+        ret['accept_language'] = parse_accept_language(r['http_accept_language'])
     if 'al' in r:
-        ret['accept_language'] = r['al']
+        ret['accept_language'] = parse_accept_language(r['al'])
    
     return ret
 
 import re
 
-# 'da, en-gb;q=0.8, en;q=0.7'
+# 'da, en-gb;q=0.8, en;q=0.7'  meaning: "I prefer Danish, but will accept British English and other types of English"
 # 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'
 # https://www.rfc-editor.org/rfc/rfc9110.html#name-accept-language
 # https://www.rfc-editor.org/rfc/rfc4647.html
 # https://www.rfc-editor.org/rfc/rfc5646.html
+# Country code according to ISO3166-1 (capitalized letters)
+# Language codes according to ISO639-1 (lowercase letters)
 
 def parse_accept_language(accept_language_input):
     if not accept_language_input:
@@ -118,6 +120,7 @@ def parse_accept_language(accept_language_input):
                 'quality': quality
             })
 
+        print("parse_languages: " + str(parsed_languages) + " " + str(accept_language_input) )
     return parsed_languages
 
 
