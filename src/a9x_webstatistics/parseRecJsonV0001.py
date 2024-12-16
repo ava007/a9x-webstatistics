@@ -98,7 +98,7 @@ def parse_accept_language(accept_language_input):
         return []
 
     if len(accept_language_input) > 8192:
-        raise ValueError('Accpet-Language exceeds maximum length of 8192 characters.')
+        raise ValueError('Accept-Language exceeds maximum length of 8192 characters.')
         
     # Split the string by commas to get each language tag
     language_tags = accept_language_input.split(',')
@@ -109,19 +109,24 @@ def parse_accept_language(accept_language_input):
     for tag in language_tags:
         # split locale and quality
         locale, _, qstr = tag.partition(';q=')
-        try:
-            q = float(qstr or 1.0)
-        except ValueError:
-            continue  # ignore malformed entry
+        if len(qstr) == 0:
+            qstr = 1
+        #try:
+        #    q = float(qstr or 1.0)
+        #except ValueError:
+        #    continue  # ignore malformed entry
 
         # split locale into locale and region
         locale, _, region = locale.rpartition('-')
+        
         print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
             locales[locale] = {}
             locales[locale]['q'] = q
+            locales[locale]['c'] = 1
         else:
             locales[locale]['q'] += q
+            locales[locale]['c'] += 1
         
         print("AL-Results: "  + str(locales))
     return locales
