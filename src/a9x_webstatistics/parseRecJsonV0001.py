@@ -83,7 +83,7 @@ def parseRecJsonV0001(rec):
    
     return ret
 
-import re
+#import re
 
 # 'da, en-gb;q=0.8, en;q=0.7'  meaning: "I prefer Danish, but will accept British English and other types of English"
 # 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'
@@ -107,8 +107,29 @@ def parse_accept_language(accept_language_input):
 
     for tag in language_tags:
         # Regular expression to match the language, country, and quality (if present)
-        match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
+        #match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
+
+        locale, _, qstr = tag.partition(';q=')
+         try:
+            q = float(qstr or 1.0)
+        except ValueError:
+            continue  # ignore malformed entry
+
+        print("locale: " + str(locale) )
+        while locale:
+            locales_with_q.append((locale, q))
+            # strip off '-detail' suffixes until there's nothing left
+            locale, _, _region = locale.rpartition('-')
+        locales_with_q.sort(key=lambda pair: pair[1], reverse=True)
+        results = []
+        for locale, _q in locales_with_q:
+            if locale == 'en':
+                break
+            if locale not in results:
+                results.append(locale)
+
         
+"""        
         if match:
             language = match.group(1)  # language (e.g., en, fr)
             country = match.group(2) if match.group(2) else None  # country (e.g., US, FR)
@@ -121,6 +142,7 @@ def parse_accept_language(accept_language_input):
             })
 
         print("parse_languages: " + str(parsed_languages) + " " + str(accept_language_input) )
+"""
     return parsed_languages
 
 
