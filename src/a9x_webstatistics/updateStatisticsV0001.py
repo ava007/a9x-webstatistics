@@ -207,11 +207,11 @@ def updV0001(
 
                 if len(d['v0001']['days'][dt]['performance']['topFast']) > 5:
                     tmpFast = dict(sorted(d['v0001']['days'][dt]['performance']['topFast'].items(), key=lambda item: item[1], reverse=False))
-                    i = 0
+                    z = 0
                     d['v0001']['days'][dt]['performance']['topFast'] = {}
                     for k,v in tmpFast.items():
-                        i += 1
-                        if i >= 5:
+                        z += 1
+                        if z >= 5:
                             break
                         d['v0001']['days'][dt]['performance']['topFast'][k] = v
                     del tmpFast
@@ -227,11 +227,11 @@ def updV0001(
 
             if len(d['v0001']['days'][dt]['performance']['topSlow']) > 5:
                 tmpSlow = dict(sorted(d['v0001']['days'][dt]['performance']['topSlow'].items(), key=lambda item: item[1], reverse=True))
-                i = 0
+                z = 0
                 d['v0001']['days'][dt]['performance']['topSlow'] = {}
                 for k,v in tmpSlow.items():
-                    i += 1
-                    if i >= 5:
+                    z += 1
+                    if z >= 5:
                         break
                     d['v0001']['days'][dt]['performance']['topSlow'][k] = v
                 del tmpSlow
