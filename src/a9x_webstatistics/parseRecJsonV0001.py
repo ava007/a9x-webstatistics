@@ -116,11 +116,12 @@ def parse_accept_language(accept_language_input):
         except ValueError:
             continue  # ignore malformed entry
 
-        print("locale: " + str(locale) )
+        
         while locale:
             locales_with_q.append((locale, q))
             # strip off '-detail' suffixes until there's nothing left
             locale, _, _region = locale.rpartition('-')
+            print("locale: " + str(locale) + " " + str(q) + " " + str(_region) )
         locales_with_q.sort(key=lambda pair: pair[1], reverse=True)
         results = []
         for locale, _q in locales_with_q:
