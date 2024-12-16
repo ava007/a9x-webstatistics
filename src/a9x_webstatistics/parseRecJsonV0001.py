@@ -111,10 +111,11 @@ def parse_accept_language(accept_language_input):
         locale, _, qstr = tag.partition(';q=')
         if len(qstr) == 0:
             qstr = 1
-        #try:
-        #    q = float(qstr or 1.0)
-        #except ValueError:
-        #    continue  # ignore malformed entry
+            
+        try:
+            q = float(qstr or 1.0)
+        except ValueError:
+            continue  # ignore malformed entry
 
         # split locale into locale and region
         locale, _, region = locale.rpartition('-')
