@@ -118,7 +118,7 @@ def parse_accept_language(accept_language_input):
             continue  # ignore malformed entry
 
         # split locale into locale and region
-        locale, _, region = localeregion.rpartition('-')
+        locale, _, region = localeregion.partition('-')
         
         print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
