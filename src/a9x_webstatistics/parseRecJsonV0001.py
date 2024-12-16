@@ -104,33 +104,30 @@ def parse_accept_language(accept_language_input):
     language_tags = accept_language_input.split(',')
 
     #parsed_languages = []
-    locales_with_q = []
+    locales = {}
 
     for tag in language_tags:
         # Regular expression to match the language, country, and quality (if present)
         #match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
 
+        # split locale and quality
         locale, _, qstr = tag.partition(';q=')
         try:
             q = float(qstr or 1.0)
         except ValueError:
             continue  # ignore malformed entry
 
+        # split locale and region
+        locale, _, _region = locale.rpartition('-')
+        print("locale: " + str(locale) + " " + str(q) + " " + str(_region) )
+        if locale not in locales:
+            locales[locale] = {}
+            locales[locale]['q'] = q
+        else:
+            locales[locale]['q'] += q
         
-        while locale:
-            locales_with_q.append((locale, q))
-            # strip off '-detail' suffixes until there's nothing left
-            locale, _, _region = locale.rpartition('-')
-            print("locale: " + str(locale) + " " + str(q) + " " + str(_region) )
-        locales_with_q.sort(key=lambda pair: pair[1], reverse=True)
-        results = []
-        for locale, _q in locales_with_q:
-            if locale == 'en':
-                break
-            if locale not in results:
-                results.append(locale)
-        print("AL-Results: "  + str(results))
-    return tuple(results)
+        print("AL-Results: "  + str(locales))
+    return locales
         
 """        
         if match:
