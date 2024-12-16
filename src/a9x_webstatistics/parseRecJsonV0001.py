@@ -127,7 +127,8 @@ def parse_accept_language(accept_language_input):
                 break
             if locale not in results:
                 results.append(locale)
-
+        print("AL-Results: "  + str(results))
+    return tuple(results)
         
 """        
         if match:
@@ -142,8 +143,9 @@ def parse_accept_language(accept_language_input):
             })
 
         print("parse_languages: " + str(parsed_languages) + " " + str(accept_language_input) )
-"""
+
     return parsed_languages
+"""
 
 
     
