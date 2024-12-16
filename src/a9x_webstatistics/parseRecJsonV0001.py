@@ -103,13 +103,10 @@ def parse_accept_language(accept_language_input):
     # Split the string by commas to get each language tag
     language_tags = accept_language_input.split(',')
 
-    #parsed_languages = []
     locales = {}
+    print("Input: " + accept_language_input)
 
     for tag in language_tags:
-        # Regular expression to match the language, country, and quality (if present)
-        #match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
-
         # split locale and quality
         locale, _, qstr = tag.partition(';q=')
         try:
@@ -117,9 +114,9 @@ def parse_accept_language(accept_language_input):
         except ValueError:
             continue  # ignore malformed entry
 
-        # split locale and region
-        locale, _, _region = locale.rpartition('-')
-        print("locale: " + str(locale) + " " + str(q) + " " + str(_region) )
+        # split locale into locale and region
+        locale, _, region = locale.rpartition('-')
+        print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
             locales[locale] = {}
             locales[locale]['q'] = q
@@ -128,25 +125,3 @@ def parse_accept_language(accept_language_input):
         
         print("AL-Results: "  + str(locales))
     return locales
-        
-"""        
-        if match:
-            language = match.group(1)  # language (e.g., en, fr)
-            country = match.group(2) if match.group(2) else None  # country (e.g., US, FR)
-            quality = float(match.group(3)) if match.group(3) else 1.0  # quality, default is 1.0
-
-            parsed_languages.append({
-                'language': language,
-                'country': country,
-                'quality': quality
-            })
-
-        print("parse_languages: " + str(parsed_languages) + " " + str(accept_language_input) )
-
-    return parsed_languages
-"""
-
-
-    
-        
-    
