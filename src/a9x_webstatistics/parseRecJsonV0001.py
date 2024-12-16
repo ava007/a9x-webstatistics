@@ -108,7 +108,7 @@ def parse_accept_language(accept_language_input):
 
     for tag in language_tags:
         # split locale and quality
-        locale, _, qstr = tag.partition(';q=')
+        localeregion, _, qstr = tag.partition(';q=')
         if len(qstr) == 0:
             qstr = 1
             
@@ -118,7 +118,7 @@ def parse_accept_language(accept_language_input):
             continue  # ignore malformed entry
 
         # split locale into locale and region
-        locale, _, region = locale.rpartition('-')
+        locale, _, region = localeregion.rpartition('-')
         
         print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
@@ -129,5 +129,5 @@ def parse_accept_language(accept_language_input):
             locales[locale]['q'] += q
             locales[locale]['c'] += 1
         
-        print("AL-Results: "  + str(locales))
+    print("AL-Results: "  + str(locales))
     return locales
