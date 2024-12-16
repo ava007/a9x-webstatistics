@@ -122,12 +122,7 @@ def parse_accept_language(accept_language_input):
         
         print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
-            locales[locale] = {}
-            locales[locale]['q'] = q
-            locales[locale]['c'] = 1
-        else:
-            locales[locale]['q'] += q
-            locales[locale]['c'] += 1
+            locales[locale] = q
         
     print("AL-Results: "  + str(locales))
     return locales
