@@ -109,6 +109,7 @@ def parse_accept_language(accept_language_input):
         # Regular expression to match the language, country, and quality (if present)
         #match = re.match(r'([a-zA-Z-]+)(?:-([a-zA-Z]{2}))?(?:;q=([0-1](?:\.\d{1,3})?))?', tag.strip())
 
+        locales_with_q = []
         locale, _, qstr = tag.partition(';q=')
         try:
             q = float(qstr or 1.0)
