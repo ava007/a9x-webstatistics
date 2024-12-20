@@ -104,7 +104,7 @@ def parse_accept_language(accept_language_input):
     language_tags = accept_language_input.split(',')
 
     locales = {}
-    print("Input: " + accept_language_input)
+    #print("Input: " + accept_language_input)
 
     for tag in language_tags:
         # split locale and quality
@@ -120,9 +120,9 @@ def parse_accept_language(accept_language_input):
         # split locale into locale and region
         locale, _, region = localeregion.partition('-')
         
-        print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
+        #print("locale: " + str(locale) + " " + str(q) + " " + str(region) )
         if locale not in locales:
             locales[locale] = q
         
-    print("AL-Results: "  + str(locales))
+    #print("AL-Results: "  + str(locales))
     return locales
