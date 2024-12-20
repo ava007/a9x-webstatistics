@@ -247,15 +247,15 @@ def updV0001(
         print("updStats::accept_language: " + str(i['accept_language']) )
         if 'language' not in d['v0001']['days'][dt]['user']:
             d['v0001']['days'][dt]['user']['language'] = {}
-            for k,v in i['accept_language']:
-                print("updStats: lang k,v: " + str(k) + " " + str(v) )
-                lng = k[0:2]
-                # count each language only once per hit:
-                if lng not in tmp_lang:
-                    tmp_lang.append(lng)
-                    if lng not in d['v0001']['days'][dt]['user']['language']:
-                        d['v0001']['days'][dt]['user']['language'][lng] = 0
-                    d['v0001']['days'][dt]['user']['language'][lng] += 1
+        for k,v in i['accept_language']:
+            print("updStats: lang k,v: " + str(k) + " " + str(v) )
+            lng = k[0:2]
+            # count each language only once per hit:
+            if lng not in tmp_lang:
+                tmp_lang.append(lng)
+                if lng not in d['v0001']['days'][dt]['user']['language']:
+                    d['v0001']['days'][dt]['user']['language'][lng] = 0
+                d['v0001']['days'][dt]['user']['language'][lng] += 1
                 
     return d, visitIP
 
