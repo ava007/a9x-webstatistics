@@ -236,18 +236,26 @@ def updV0001(
                     d['v0001']['days'][dt]['performance']['topSlow'][k] = v
                 del tmpSlow
     
-    # accept language:
+    # accept language for user hits only:
     # ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
     # en
     # en-US,en;q=0.5
     # de,en-US;q=0.7,en;q=0.3
     # zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+    tmp_lang = []
     if 'accept_language' in i and len(i['accept_language']) > 0 and devCla in ('desktop','mobile','tablet'):
         print(str(i['accept_language']) )
-        #if 'language' not in d['v0001']['days'][dt]['user']:
-        #    d['v0001']['days'][dt]['user']['language'] = {}
-        #d['v0001']['days'][dt]['user']['language'] += int(i['bytes_sent'])
-
+        if 'language' not in d['v0001']['days'][dt]['user']:
+            d['v0001']['days'][dt]['user']['language'] = {}
+            if l in i['accept_language']:
+                lng = l['language'][0:2]
+                # count each language only once per hit:
+                if lng not in tmp_lang:
+                    tmp_lang.append(lng)
+                    if lng not in d['v0001']['days'][dt]['user']['language']:
+                        d['v0001']['days'][dt]['user']['language'][lng] = 0
+                    d['v0001']['days'][dt]['user']['language'][lng] += 1
+                
     return d, visitIP
 
 def detectDeviceClass(ua):
