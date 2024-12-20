@@ -247,7 +247,7 @@ def updV0001(
         print("updStats::accept_language: " + str(i['accept_language']) )
         if 'language' not in d['v0001']['days'][dt]['user']:
             d['v0001']['days'][dt]['user']['language'] = {}
-        for k,v in i['accept_language']:
+        for k,v in i['accept_language'].items():
             print("updStats: lang k,v: " + str(k) + " " + str(v) )
             lng = k[0:2]
             # count each language only once per hit:
