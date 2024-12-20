@@ -244,12 +244,10 @@ def updV0001(
     # zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
     tmp_lang = []
     if i['status'] == '200' and 'accept_language' in i and len(i['accept_language']) > 0 and devCla in ('desktop','mobile','tablet'):
-        print("updStats::accept_language: " + str(i['accept_language']) )
         if 'language' not in d['v0001']['days'][dt]['user']:
             d['v0001']['days'][dt]['user']['language'] = {}
         for k,v in i['accept_language'].items():
-            print("updStats: lang k,v: " + str(k) + " " + str(v) )
-            lng = k[0:2]
+            lng = k[0:2]  # take language only, ignore country
             # count each language only once per hit:
             if lng not in tmp_lang:
                 tmp_lang.append(lng)
