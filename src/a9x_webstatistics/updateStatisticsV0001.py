@@ -243,8 +243,8 @@ def updV0001(
     # de,en-US;q=0.7,en;q=0.3
     # zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
     tmp_lang = []
-    if 'accept_language' in i and len(i['accept_language']) > 0 and devCla in ('desktop','mobile','tablet'):
-        print(str(i['accept_language']) )
+    if i['status'] == '200' and 'accept_language' in i and len(i['accept_language']) > 0 and devCla in ('desktop','mobile','tablet'):
+        print("updStats::accept_language: " + str(i['accept_language']) )
         if 'language' not in d['v0001']['days'][dt]['user']:
             d['v0001']['days'][dt]['user']['language'] = {}
             if l in i['accept_language']:
