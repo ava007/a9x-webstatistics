@@ -4,7 +4,8 @@ from operator import itemgetter
 from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
-from .gencockpitV0001 import runGenCockpitV0001
+#from .gencockpitV0001 import runGenCockpitV0001
+from . import gencockpitV0001
 import gencockpitV0001
 
 def genHeader(domain):
