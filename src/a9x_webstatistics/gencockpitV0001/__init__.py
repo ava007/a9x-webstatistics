@@ -1,1 +1,1 @@
-from .cockpitlanguages import *
+from . import cockpitlanguages
