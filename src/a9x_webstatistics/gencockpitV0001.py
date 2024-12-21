@@ -5,9 +5,10 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
-from a9x_webstatistics.gencockpitsubV0001 import cockpitlanguages
+#from a9x_webstatistics.gencockpitsubV0001 import cockpitlanguages
 #import a9x_webstatistics.gencockpitsubV0001
 #from . import gencockpitsubV0001
+from gencockpitsubV0001 import *
 
 def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
