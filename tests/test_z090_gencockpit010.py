@@ -7,6 +7,7 @@ from a9x_webstatistics.gencockpitV0001 import *
 #from .gencockpitV0001 import runGenCockpitV0001    # --> ModuleNotFoundError: No module named 'tests.gencockpitV0001'
 #from a9x_webstatistics.gencockpitV0001 import runGenCockpitV0001
 #import gencockpitV0001
+from a9x_webstatistics import *
 
 class TestGencockpit010(unittest.TestCase):
 
