@@ -8,7 +8,7 @@ from a9x_webstatistics.gencockpitV0001 import *
 #from a9x_webstatistics.gencockpitV0001 import runGenCockpitV0001
 #import gencockpitV0001
 #from a9x_webstatistics import *
-from a9x_webstatistics import gencockpit    # includes runGenCockpitV001
+#from a9x_webstatistics import gencockpit    # includes runGenCockpitV001
 
 class TestGencockpit010(unittest.TestCase):
 
