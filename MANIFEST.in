@@ -4,3 +4,4 @@ include *.png
 include LICENSE
 include dist_del
 recursive-include tests test*.py
+recursive-include src *.py
