@@ -3,7 +3,9 @@ import sys
 from pathlib import Path
 from subprocess import run
 
-from a9x_webstatistics.gencockpitV0001 import *
+#from a9x_webstatistics.gencockpitV0001 import *
+from .gencockpitV0001 import runGenCockpitV0001
+import gencockpitV0001
 
 class TestGencockpit010(unittest.TestCase):
 
