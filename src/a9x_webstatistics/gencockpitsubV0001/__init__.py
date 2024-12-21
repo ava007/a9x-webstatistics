@@ -1,2 +1,2 @@
-#from .cockpitlanguages import cockpitLanguages
-from . import cockpitlanguages
+from .cockpitlanguages import cockpitLanguages
+#from . import cockpitlanguages
