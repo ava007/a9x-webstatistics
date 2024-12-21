@@ -5,7 +5,7 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
-#from a9x_webstatistics.gencockpitsubV0001 import cockpitlanguages
+from a9x_webstatistics.gencockpitsubV0001 import cockpitlanguages
 #import a9x_webstatistics.gencockpitsubV0001
 #from . import gencockpitsubV0001
 
