@@ -291,15 +291,15 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Performance for the last ' + str(day_usr_i) + ' days</h3>'
-            h += '<p class="card-text">User hits refering to external domain:</p>'
+            #h += '<p class="card-text">User hits refering to external domain:</p>'
             h += '<table class="table">'
             if time_count > 0:
                 h += '<tr>'
-                h += '<td>Average Response Time in Seconds</td><td>' + '{:.2}'.format(time_sum/time_count) + '</td>'
+                h += '<td>Average Response Time (internal)</td><td>' + '{:.2}'.format(time_sum/time_count) + ' Seconds</td>'
                 h += '</tr>'
             if cache_miss > 0:
                 h += '<tr>'
-                h += '<td>Cache Hit Ratio</td><td>' + '{:.2%}'.format(cache_hit * 100 / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
+                h += '<td>Cache Hit Ratio</td><td>' + "{:.%}".format((cache_hit * 100) / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
                 h += '</tr>'
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
