@@ -5,6 +5,7 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
+from gencockpitV0001 import cockpitlanguages
 
 def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
@@ -259,6 +260,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                     break
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
+
+        h += cockpitLanguages(d, owndomain)
 
         # performance for the last 31 days:
         time_count = 0
