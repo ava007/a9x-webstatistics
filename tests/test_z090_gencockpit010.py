@@ -4,6 +4,7 @@ from pathlib import Path
 from subprocess import run
 
 from a9x_webstatistics.gencockpitV0001 import *
+from a9x_webstatistics.gencockpitsubV0001 import *
 #from a9x_webstatistics.gencockpitV0001 import runGenCockpitV0001
 #import gencockpitV0001
 #from a9x_webstatistics import *
