@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
 from operator import itemgetter
-    
-def cockpitLanguages(d, owndomain):
-    # top Languages for the last 31 days:
 
+# top languages for the last 31 days:
+def cockpitLanguages(d, owndomain):
+    
     # accumulate the results for maximum the last 31 days:
     toplng = {}
     toplngcnt = 0
@@ -27,15 +27,17 @@ def cockpitLanguages(d, owndomain):
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Languages</h3>'
-        h += '<p class="card-text">User Languages for the last ' + str(toplngcnt) + ' days by internal URL on ' + owndomain + ':'
+        h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
         h += '<table class="table">'
-        h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
+        h += '<thead>
+        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Language</th><th scope="col" style="text-align: right">Hit Count</th></tr>'
+        h += '</thead>'
         i = 1
         for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
             h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
             i += 1
             if i > 10:
                 break
-        h += '</table>'
+        h += '</table></p>'
         h += '</div></div></div>'   # end of card and col
     return h
