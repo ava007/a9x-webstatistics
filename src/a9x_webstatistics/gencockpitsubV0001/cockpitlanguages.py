@@ -4,6 +4,8 @@ from operator import itemgetter
     
 def cockpitLanguages(d, owndomain):
     # top Languages for the last 31 days:
+
+    # accumulate the results for maximum the last 31 days:
     toplng = {}
     toplngcnt = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -15,9 +17,11 @@ def cockpitLanguages(d, owndomain):
         toplngcnt += 1
         if 'language' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['language'].items():
-                if tk not in ttopurl:
+                if tk not in toplng:
                     toplng[tk] = 0
                 toplng[tk] += tv
+                
+    # show results if available:
     h = ''
     if len(toplng) > 0:
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
