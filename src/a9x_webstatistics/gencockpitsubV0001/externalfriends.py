@@ -20,11 +20,9 @@ def externalFriends(d, owndomain, omit):
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
-                print("tk: " + str(tk) + " tv: " + str(tv) )
                 if tk not in tland:
                     tland[tk] = {}
                 for tdk,tdv in tv['target'].items():
-                    print("td*: " + str(tdk) + " " + str(tdv) )
                     if tdk not in tland[tk]:
                         tland[tk][tdk] = 0
                     tland[tk][tdk] += tdv
