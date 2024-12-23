@@ -15,12 +15,14 @@ def externalFriends(d, owndomain, omit):
         topland += 1
         if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
-                    # check if url is blocked for display:
-                    if any(oelm in tk for oelm in omit):  # don not show parts of url 
-                        continue
-                    if tk not in topland:
-                        topland[tk] = {}
-                    topland[tk] = tv
+                #d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
+                # check if url is blocked for display:
+                if any(oelm in tk for oelm in omit):  # don not show parts of url 
+                    continue
+                if tk not in topland:
+                    topland[tk] = {'cnt': 0, 'target': {} }
+                for tx in tv.items():
+                topland[tk] = tv
         if len(topland) > 0:
             h  = '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
