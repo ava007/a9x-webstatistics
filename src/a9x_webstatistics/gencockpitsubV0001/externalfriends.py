@@ -16,7 +16,6 @@ def externalFriends(d, owndomain, omit):
         topland += 1
         if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
-                #d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
@@ -36,7 +35,7 @@ def externalFriends(d, owndomain, omit):
         h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr>'
         h += '</thead>'
         i = 1
-        for k, v in sorted(tland.items(), key=itemgetter(0), reverse=True):
+        for k, v in sorted(tland.items(), key=itemgetter(1), reverse=True):
             # check if url is blocked for display:
             if any(oelm in k for oelm in omit):  # don not show parts of url 
                  continue
