@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
+import ipaddress
 from operator import itemgetter
 
 # top external landings (friends) for max 31 days:
@@ -43,7 +43,7 @@ def externalFriends(d, owndomain, omit):
                 if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
                      continue
 
-                for kb, vb in v['target'].items():
+                for kb, vb in v.items():
                     if owndomain not in k:
                         h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
                         i += 1
