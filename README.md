@@ -120,4 +120,38 @@ python3.11 -m a9x_webstatistics.gencockpit \
    --infile /usr/local/www/lf_static/webstatsLF24.json \
    --outfile /usr/local/www/lf_static/webstatsLF24.html &>> $LOG
 ```
+# Supported Access Log Formats
+
+
+
+## Nginx Combined Format
+
+predefined combined format:    access_log /.../logs/nginx-access.log combined;
+
+
+## Nginx Json Format
+
+log_format a9x_logs escape=json '{'
+  '"tl":"$time_local",'
+  '"ip":"$remote_addr",'                 # must; client IP
+  '"rq":"$request_uri",'                 # must; full original request URI (with arguments)
+  '"qs":"$query_string",'                # optional
+  '"st":"$status",'                      # must; response status code
+  '"ru":"$remote_user",'                 # optional; client HTTP username
+  '"bs":"$bytes_sent", '                 # must; the number of bytes sent to a client
+  '"rf":"$http_referer",'                # optional;
+  '"rt":"$upstream_response_time", '     # optional; time spend receiving upstream body
+  '"sc":"$scheme", '                     # optional; http or https
+  '"ua":"$http_user_agent",'             # optional
+  '"cs":"$upstream_cache_status",'       # optional
+  '"al":"$http_accept_language",'        # optional
+'}';
+
+  access_log     /.../log/nginx-access-log.json a9x_logs buffer=1k;
+
+## Apache Combined Format
+
+
+CustomLog /.../log/apache2/apache_access.log combined
+
 
