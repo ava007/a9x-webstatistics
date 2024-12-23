@@ -19,7 +19,7 @@ def externalFriends(d, owndomain, omit):
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
-                print("tk: " + str(tk)))
+                print("tk: " + str(tk) )
                 if tk not in tland:
                     tland[tk] = {}
                 for tx in tv.items():
