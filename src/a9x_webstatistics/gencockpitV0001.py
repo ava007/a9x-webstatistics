@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
 #from . import gencockpitsubV0001
 from .gencockpitsubV0001.cockpitlanguages import cockpitLanguages
+from .gencockpitsubV0001 import *
 
 def genHeaderV0001(domain):
     h  = '<!doctype html><html lang="en"><head>'
