@@ -29,31 +29,30 @@ def externalFriends(d, owndomain, omit):
                         tland[tk][tdk] = 0
                     tland[tk][tdk] += tdv
                     
-        if len(tland) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
-            h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Landings</h3>'
-            h += '<p class="card-text">User landings for the current month:</p>'
-            h += '<table class="table-responsive text-break"><thead>'
-            h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr>'
-            h += '</thead>'
-            i = 1
-            for k, v in sorted(tland.items(), key=itemgetter(0), reverse=True):
-                # check if url is blocked for display:
-                if any(oelm in k for oelm in omit):  # don not show parts of url 
-                     continue
-                if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
-                     continue
+    if len(tland) > 0:
+        h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<h3 class="card-title">Top 10 Landings</h3>'
+        h += '<p class="card-text">User landings for the current month:</p>'
+        h += '<table class="table-responsive text-break"><thead>'
+        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr>'
+        h += '</thead>'
+        i = 1
+        for k, v in sorted(tland.items(), key=itemgetter(0), reverse=True):
+            # check if url is blocked for display:
+            if any(oelm in k for oelm in omit):  # don not show parts of url 
+                 continue
+            if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
+                 continue
 
-                for kb, vb in v.items():
-                    if owndomain not in k:
-                        h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
-                        i += 1
-                    if i > 10:
-                        break
+            for kb, vb in v.items():
+                h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
+                i += 1
+                if i > 10:
+                    break
 
-            h += '</table>'
-            h += '</div></div></div>'
+        h += '</table>'
+        h += '</div></div></div>'
     return h
 
 def is_valid_ip(address):
