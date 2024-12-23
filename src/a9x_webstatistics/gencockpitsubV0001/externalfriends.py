@@ -6,6 +6,7 @@ from operator import itemgetter
 def externalFriends(d, owndomain, omit):
     tland = {}   # nested dictionary!
     topland = 0
+    h = ''
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit months or years:
         if len(k) <= 6:
@@ -29,7 +30,7 @@ def externalFriends(d, owndomain, omit):
                     tland[tk][tx] += 1
                     
         if len(tland) > 0:
-            h  = '<div class="col-md-12 col-lg-6 col-xxl-4">'
+            h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Landings</h3>'
             h += '<p class="card-text">User landings for the current month:</p>'
@@ -51,4 +52,4 @@ def externalFriends(d, owndomain, omit):
 
             h += '</table>'
             h += '</div></div></div>'  + "\n"   # end of card and col
-            return h
+    return h
