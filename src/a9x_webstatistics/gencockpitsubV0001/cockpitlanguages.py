@@ -29,7 +29,7 @@ def cockpitLanguages(d, owndomain):
         h += '<h3 class="card-title">Top 10 Languages</h3>'
         h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
         h += '<table class="table">'
-        h += '<thead>
+        h += '<thead>'
         h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Language</th><th scope="col" style="text-align: right">Hit Count</th></tr>'
         h += '</thead>'
         i = 1
