@@ -23,11 +23,11 @@ def externalFriends(d, owndomain, omit):
                 print("tk: " + str(tk) )
                 if tk not in tland:
                     tland[tk] = {}
-                for tx in tv.items():
-                    print("tv: " + str(tx))
-                    if tv.target not in tland[tk][tx]:
-                        tland[tk][tx] = 0
-                    tland[tk][tx] += 1
+                for tdk,tdv in tv['target'].items():
+                    print("td*: " + str(tdk) + " " + str(tdv) )
+                    if tdk not in tland[tk]:
+                        tland[tk][tdk] = 0
+                    tland[tk][tdk] += tdv
                     
         if len(tland) > 0:
             h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
