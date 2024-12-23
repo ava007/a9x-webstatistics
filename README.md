@@ -131,6 +131,7 @@ predefined combined format:    access_log /.../logs/nginx-access.log combined;
 
 ## Nginx Json Format
 
+```bash
 log_format a9x_logs escape=json '{'
   '"tl":"$time_local",'
   '"ip":"$remote_addr",'                 # must; client IP
@@ -147,7 +148,8 @@ log_format a9x_logs escape=json '{'
   '"al":"$http_accept_language",'        # optional
 '}';
 
-  access_log     /.../log/nginx-access-log.json a9x_logs buffer=1k;
+access_log     /.../log/nginx-access-log.json a9x_logs buffer=1k;
+```
 
 ## Apache Combined Format
 
