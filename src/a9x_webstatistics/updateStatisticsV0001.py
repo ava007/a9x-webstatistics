@@ -93,7 +93,12 @@ def updV0001(
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
             rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
-            if is_valid_ip(rdomain) == False:  # to suppress ip; ip is not a domain anyway
+            # omit subdomains:
+            if rdomain.count('.') > 1:
+                rdomain_ar = rdomain.split('.')
+                rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
+                
+            if is_valid_ip(rdomain) == False and '[' not in rdomain:  # to suppress ip; ip is not a domain anyway
                 if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
                     d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
                 if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
