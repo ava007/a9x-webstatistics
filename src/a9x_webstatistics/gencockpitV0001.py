@@ -775,7 +775,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
         h += '<div class="col"><h2>About</h2>'
         h += '<ul class="nav flex-column">'
-        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024 a9x-webstatistics</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024-2025 a9x-webstatistics</a></li>'
         h += '<li class="nav-item mb-2">' + __version__ + '</li>'
         h += '<li class="nav-item mb-2">salvo errore et omissione</li>'
         h += '</ul></div>' + "\n"
