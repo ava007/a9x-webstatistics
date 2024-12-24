@@ -283,9 +283,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 if 'cache' in d['v0001']['days'][k]['performance']:
                     if 'MISS' in d['v0001']['days'][k]['performance']['cache']:
                         cache_miss += d['v0001']['days'][k]['performance']['cache']['MISS']
-                    if 'HIT' in d['v0001']['days'][k]['performance']['cache']:
+                    elif 'HIT' in d['v0001']['days'][k]['performance']['cache']:
                         cache_hit += d['v0001']['days'][k]['performance']['cache']['HIT']
-                    if 'unknown' in d['v0001']['days'][k]['performance']['cache']:
+                    else:
                         cache_unknown += d['v0001']['days'][k]['performance']['cache']['unknown']
                 
         if time_count > 0 or cache_miss > 0:                
@@ -296,11 +296,11 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '<table class="table">'
             if time_count > 0:
                 h += '<tr>'
-                h += '<td>Average Response Time (internal)</td><td>' + '{:.2}'.format(time_sum/time_count) + ' Seconds</td>'
+                h += '<td>Average Response Time for internal processing:</td><td>' + '{:.2}'.format(time_sum/time_count) + ' Seconds</td>'
                 h += '</tr>'
             if cache_miss > 0:
                 h += '<tr>'
-                h += '<td>Cache Hit Ratio</td><td>' + "{:.0%}".format((cache_hit * 100) / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
+                h += '<td>Cache Hit Ratio:</td><td>' + "{:.0%}".format(cache_hit / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
                 h += '</tr>'
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
