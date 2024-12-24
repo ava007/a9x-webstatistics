@@ -25,6 +25,7 @@ def updV0001(
     owndomain = owndomain.replace('www.','')
         
     dt = i['ymd']
+    req = urlparse(i['request'])
 
     # init a new day with minimal attributes:
     if 'v0001' not in d:
@@ -79,16 +80,15 @@ def updV0001(
             d['v0001']['days'][dt]['user']['visits'] = d['v0001']['days'][dt]['user']['visits'] + 1;
             visitIP[i['ip']] = 1
 
-        # top urls: accumulate top urls
-        # todo: omit query string
+        # top urls: accumulate top urls - omitting query strings
         if i['status'] == '200':
             if 'topUrl' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['topUrl'] = {}
-            if i['request'] not in d['v0001']['days'][dt]['user']['topUrl']:
-                d['v0001']['days'][dt]['user']['topUrl'][i['request']] = 0
-            d['v0001']['days'][dt]['user']['topUrl'][i['request']] += 1
+            if req.path not in d['v0001']['days'][dt]['user']['topUrl']:
+                d['v0001']['days'][dt]['user']['topUrl'][req.path] = 0
+            d['v0001']['days'][dt]['user']['topUrl'][req.path] += 1
 
-        # update friends on the first day of the month:
+        # update friends:
         if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
             refurl = urlparse(i['referer']).netloc
             rdomain = refurl.removeprefix('www.')
@@ -99,8 +99,8 @@ def updV0001(
                 if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
                     d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
                 if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
-                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] = 0
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][i['request']] += 1
+                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] = 0
+                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] += 1
                 d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
          
     # update statistics for ROBOTS:
