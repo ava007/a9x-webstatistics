@@ -128,7 +128,27 @@ def sumMonthV0001(d, statfile):
                             d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
                         else:
                             d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
-                                               
+
+                # language:
+                if 'language' in dtmp['v0001']['days'][x]['user']:
+                    if 'language' not in d['v0001']['days'][recMonth]['user']:
+                        d['v0001']['days'][recMonth]['user']['language'] = {}
+                    for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['language'].items(), key=itemgetter(1), reverse=True):
+                        if nk in d['v0001']['days'][recMonth]['user']['language']:
+                            d['v0001']['days'][recMonth]['user']['language'][nk] += nv
+                        else:
+                            d['v0001']['days'][recMonth]['user']['language'][nk] = nv
+
+                # performance:
+                if 'performance' in dtmp['v0001']['days'][x]:
+                    if 'performance' not in d['v0001']['days'][recMonth]:
+                        d['v0001']['days'][recMonth]['performance'] = {}
+                    for nk, nv in sorted(dtmp['v0001']['days'][x]['performance'].items(), key=itemgetter(1), reverse=True):
+                        if nk in d['v0001']['days'][recMonth]['performance']:
+                            d['v0001']['days'][recMonth]['performance'][nk] += nv
+                        else:
+                            d['v0001']['days'][recMonth]['performance'][nk] = nv
+                
                 del d['v0001']['days'][x]
 
     # compress by month
