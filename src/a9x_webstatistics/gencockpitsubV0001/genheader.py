@@ -1,0 +1,37 @@
+def genHeaderV0001(domain):
+    h  = '<!doctype html><html lang="en"><head>'
+    h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
+    h += '<meta name="viewport" content="width=device-width, initial-scale=1">'
+    h += '<meta charset="utf-8">'
+    h += '<meta name="robots" content="index,follow">'
+    h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
+    h += '<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
+    h += "\n" + '<script>'
+    h += 'function DT2Locale(tdt) {'
+    h += 'try {'
+    h += 'var year = tdt.substring(0, 4);'
+    # month is 0-indexed:
+    h += 'var month = tdt.substring(4, 6) - 1;' 
+    h += 'var day = tdt.substring(6, 8);'
+    h += 'var hour = tdt.substring(8, 10);'
+    h += 'var min = tdt.substring(10, 12);'
+    h += 'var sec = tdt.substring(12, 14);'
+    h += 'var tDateTime = new Date(year, month, day, hour, min, sec);'
+    h += 'var tDT = tDateTime.toLocaleString();'
+    h += 'tDT = tDT.replace(", 00:00:00","");'
+    h += 'tDT = tDT.replace(", 12:00:00 AM","");'
+    h += 'return tDT;'
+    h += '} catch (error) {'
+    h += ' return null; }'
+    h += '}'
+    h += 'function wsShowHide(eid) {'
+    h += 'var x = document.getElementById(eid);'
+    h += 'if (x.style.display == "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
+    h += '}'
+    
+    h += '</script>'
+    h += '</head>' + "\n"
+    h += '<body>'
+    h += '<div class="container">'
+    return h
+
