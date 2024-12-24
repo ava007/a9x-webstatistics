@@ -263,7 +263,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
                 h += '</tr>'
             if cache_miss > 0:
                 h += '<tr>'
-                h += '<td>Cache Hit Ratio:</td><td>' + "{:.0%}".format(cache_hit / (cache_hit+cache_miss+cache_unknown) ) + '</td>'
+                h += '<td>Cache Hit Ratio:</td><td>' + "{:.0%}".format(cache_hit / (cache_hit+cache_miss+cache_unknown) / 100 ) + '</td>'
                 h += '</tr>'
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
