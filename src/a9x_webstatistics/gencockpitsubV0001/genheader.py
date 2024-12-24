@@ -1,4 +1,4 @@
-def genHeaderV0001(domain):
+def genHeader(domain):
     h  = '<!doctype html><html lang="en"><head>'
     h += '<title>Web Statistics and Analysis for ' + domain + '</title>'
     h += '<meta name="viewport" content="width=device-width, initial-scale=1">'
