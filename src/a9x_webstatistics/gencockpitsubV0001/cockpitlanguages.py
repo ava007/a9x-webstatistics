@@ -8,6 +8,7 @@ def cockpitLanguages(d, owndomain):
     # accumulate the results for maximum the last 31 days:
     toplng = {}
     toplngcnt = 0
+    total_languages = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # dont take months in account:
         if len(k) <= 6:
@@ -20,6 +21,7 @@ def cockpitLanguages(d, owndomain):
                 if tk not in toplng:
                     toplng[tk] = 0
                 toplng[tk] += tv
+                total_languages += tv
                 
     # show results if available:
     h = ''
@@ -34,7 +36,10 @@ def cockpitLanguages(d, owndomain):
         h += '</thead>'
         i = 1
         for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
-            h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
+            h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td>'
+            h += '<td style="text-align: right">' + str(format(v, ',')) + '</td>'
+            h += '<td style="text-align: right">' + {:.0}".format(v * 100 / total_languages) + '%</td>'
+            h += '</tr>'
             i += 1
             if i > 10:
                 break
