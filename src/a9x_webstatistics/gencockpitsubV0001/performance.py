@@ -3,7 +3,7 @@ import ipaddress
 from operator import itemgetter
 
 # performance for the last 31 days:
-def performance(d, owndomain, omit):
+def performance(d):
     time_count = 0
     time_sum = 0
     cache_miss = 0
