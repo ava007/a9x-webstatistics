@@ -132,7 +132,9 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
     # update quality: internal permanently redirects: 301
-    if len(i['referer']) > 1 and (i['status'] == '301'):
+    if (len(i['referer']) > 1
+            and i['status'] == '301'
+            and devCla in ('desktop','mobile','tablet')):
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
@@ -145,7 +147,9 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
     # update quality: internal not found    
-    if len(i['referer']) > 1 and (i['status'] == '404'):
+    if len(i['referer']) > 1 
+            and i['status'] == '404'
+            and devCla in ('desktop','mobile','tablet'):
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
@@ -158,7 +162,9 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
     # accumulate user navigation 
-    if len(i['referer']) > 1 and (i['status'] == '200') and devCla in ('desktop','mobile','tablet'):
+    if (len(i['referer']) > 1 
+            and i['status'] == '200'
+            and devCla in ('desktop','mobile','tablet')):
         oref = urlparse(i['referer'])   # remove query string...
         oreq = urlparse(i['request'])   # remove query string...
             
@@ -178,7 +184,8 @@ def updV0001(
         #      del d['v0001']['days'][dt01]['user']['navigation'][ck]
 
     # cache status for all successful requests:
-    if 'cache_status' in i and i['status'] == '200':
+    if ('cache_status' in i 
+            and i['status'] == '200'):
         if len(i['cache_status']) == 0:  # avoid empty values
             i['cache_status'] = 'unknown'
         if 'performance' not in d['v0001']['days'][dt]:
@@ -191,7 +198,8 @@ def updV0001(
             d['v0001']['days'][dt]['performance']['cache'][i['cache_status']] += 1
 
     # response time:
-    if 'response_time' in i and len(i['response_time']) > 0:
+    if ('response_time' in i 
+            and len(i['response_time']) > 0):
         tmp_rtime = float(i['response_time'])
         if tmp_rtime > 0:
             if 'performance' not in d['v0001']['days'][dt]:
