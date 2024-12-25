@@ -23,9 +23,9 @@ def performance(d):
                 ic += 1
                 if 'MISS' in d['v0001']['days'][k]['performance']['cache']:
                     cache_miss += d['v0001']['days'][k]['performance']['cache']['MISS']
-                elif 'HIT' in d['v0001']['days'][k]['performance']['cache']:
+                if 'HIT' in d['v0001']['days'][k]['performance']['cache']:
                     cache_hit += d['v0001']['days'][k]['performance']['cache']['HIT']
-                else:
+                if 'unknown' in d['v0001']['days'][k]['performance']['cache']:
                     cache_unknown += d['v0001']['days'][k]['performance']['cache']['unknown']
         if ic >= 31:
             break
