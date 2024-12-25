@@ -147,9 +147,9 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
     # update quality: internal not found    
-    if len(i['referer']) > 1 
+    if (len(i['referer']) > 1 
             and i['status'] == '404'
-            and devCla in ('desktop','mobile','tablet'):
+            and devCla in ('desktop','mobile','tablet')):
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
