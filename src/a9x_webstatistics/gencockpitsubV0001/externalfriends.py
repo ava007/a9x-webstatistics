@@ -27,7 +27,7 @@ def externalFriends(d, owndomain, omit):
                     tland[tk][tdk] += tdv
                     
     if len(tland) > 0:
-        print("tland: " + str(tland) )
+        #print("tland: " + str(tland) )
         h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Landings</h3>'
