@@ -32,13 +32,14 @@ def cockpitLanguages(d, owndomain):
         h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
         h += '<table class="table">'
         h += '<thead>'
-        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Language</th><th scope="col" style="text-align: right">Hit Count</th></tr>'
+        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Language</th>'
+        h += '<th scope="col" style="text-align: right">Hit Count</th><th scope="col" style="text-align: right">Percentage</th></tr>'
         h += '</thead>'
         i = 1
         for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
             h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td>'
             h += '<td style="text-align: right">' + str(format(v, ',')) + '</td>'
-            h += '<td style="text-align: right">' + "{:.0}".format(v * 100 / total_languages) + '%</td>'
+            h += '<td style="text-align: right">{:.0%}</td>'.format(v / total_languages)
             h += '</tr>'
             i += 1
             if i > 10:
