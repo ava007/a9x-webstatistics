@@ -19,6 +19,7 @@ def sumNavDayV0001(d):
                 else:
                     tmpNav[ck] += cv
                 del d['v0001']['days'][x]['user']['navigation'][ck]
+            del d['v0001']['days'][x]['user']['navigation']
 
     if len(tmpNav) > 1:
         d['v0001']['days'][x]['user']['navigation'] = tmpNav
