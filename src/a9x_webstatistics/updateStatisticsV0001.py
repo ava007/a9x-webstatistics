@@ -94,11 +94,13 @@ def updV0001(
             rdomain = refurl.removeprefix('www.')
             rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
             # omit subdomains:
-            if rdomain.count('.') > 1:
+            if (rdomain.count('.') > 1 
+                    and is_valid_ip(rdomain) == False):
                 rdomain_ar = rdomain.split('.')
                 rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
                 
-            if is_valid_ip(rdomain) == False and '[' not in rdomain:  # to suppress ip; ip is not a domain anyway
+            if (is_valid_ip(rdomain) == False 
+                    and '[' not in rdomain):  # to suppress ip; ip is not a domain anyway
                 if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
                     d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
                 if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
