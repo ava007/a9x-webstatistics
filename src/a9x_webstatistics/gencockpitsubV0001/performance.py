@@ -39,11 +39,11 @@ def performance(d):
         h += '<table class="table">'
         if time_count > 0:
             h += '<tr>'
-            h += '<td>Average Response Time for internal processing:</td><td>' + '{:.2}'.format(time_sum/time_count) + ' Seconds</td>'
+            h += '<td>Average Response Time for internal processing:</td><td>{:.2} Seconds</td>'.format(time_sum/time_count)
             h += '</tr>'
         if cache_hit > 0:
             h += '<tr>'
-            h += '<td>Cache Hit Ratio:</td><td>' + "{:.0}".format(cache_hit / (cache_hit+cache_miss+cache_unknown) * 100 ) + '%</td>'
+            h += '<td>Cache Hit Ratio:</td><td>{:.0%}</td>'.format(cache_hit / (cache_hit+cache_miss+cache_unknown) )
             h += '</tr>'
         h += '</table>'
         h += '</div></div></div>'
