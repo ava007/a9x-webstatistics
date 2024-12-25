@@ -38,7 +38,7 @@ def cockpitLanguages(d, owndomain):
         for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
             h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td>'
             h += '<td style="text-align: right">' + str(format(v, ',')) + '</td>'
-            h += '<td style="text-align: right">' + {:.0}".format(v * 100 / total_languages) + '%</td>'
+            h += '<td style="text-align: right">' + "{:.0}".format(v * 100 / total_languages) + '%</td>'
             h += '</tr>'
             i += 1
             if i > 10:
