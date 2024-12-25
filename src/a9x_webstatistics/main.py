@@ -37,7 +37,6 @@ def parseRec(rec, log_pattern, j, georeader):
             user_agent = datadict["useragent"]
             status = datadict["statuscode"]
             method = datadict["method"]
-            #j['records_processed_for_statistic'] += 1
             if georeader:
                 try:
                     grrsp = georeader.country(ip_address)
@@ -55,12 +54,14 @@ def parseRec(rec, log_pattern, j, georeader):
                 'timestamp': dto.strftime("%Y%m%d%H%M%S") ,
                 'request': request,
                 'status': status,
-                'bytes_sent': bytes_sent,
+                'bytes_sent': 0,
                 'referer': referer,
                 'user_agent': user_agent
             }
             if country:
                 r['country'] = country
+            if bytes_sent.isdigit():                 # bytes_sent can also hold "-"
+                r['bytes_sent'] = int(bytes_sent)
         else:
             print("Log Rec parsing failed for: " + rec[0:79])
             j['records_parsing_failed'] += 1
@@ -130,7 +131,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
         ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE|OPTIONS|PROPFIND))[ ]
         (?P<url>.+)[ ](HTTP\/(1\.0|1\.1|2\.0)"))[ ]
         (?P<statuscode>\d{3})[ ]
-        (?P<bytessent>\d+)[ ]
+        (?P<bytessent>\S+)[ ]                              # number, can also be "-"
         (["](?P<referer>[^"]+)["])[ ]
         (["](?P<useragent>[^"]+)["])
         """,
