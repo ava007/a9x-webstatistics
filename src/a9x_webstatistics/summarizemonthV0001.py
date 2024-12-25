@@ -129,7 +129,7 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
 
-                # language:
+                # language - optional KPI:
                 if 'language' in dtmp['v0001']['days'][x]['user']:
                     if 'language' not in d['v0001']['days'][recMonth]['user']:
                         d['v0001']['days'][recMonth]['user']['language'] = {}
@@ -139,15 +139,26 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['user']['language'][nk] = nv
 
-                # performance:
+                # performance - optional KPI:
                 if 'performance' in dtmp['v0001']['days'][x]:
                     if 'performance' not in d['v0001']['days'][recMonth]:
                         d['v0001']['days'][recMonth]['performance'] = {}
-                    for nk, nv in sorted(dtmp['v0001']['days'][x]['performance'].items(), key=itemgetter(1), reverse=True):
-                        if nk in d['v0001']['days'][recMonth]['performance']:
-                            d['v0001']['days'][recMonth]['performance'][nk] += nv
-                        else:
-                            d['v0001']['days'][recMonth]['performance'][nk] = nv
+                        
+                    if 'cache' in dtmp['v0001']['days'][x]['performance']:
+                        d['v0001']['days'][recMonth]['performance']['cache'] = {}
+                        for nk, nv in sorted(dtmp['v0001']['days'][x]['performance']['cache'].items(), key=itemgetter(1), reverse=True):
+                            if nk in d['v0001']['days'][recMonth]['performance']['cache']:
+                                d['v0001']['days'][recMonth]['performance']['cache'][nk] += nv
+                            else:
+                                d['v0001']['days'][recMonth]['performance']['cache'][nk] = nv
+                                
+                    if 'response_time' in dtmp['v0001']['days'][x]['performance']:
+                        d['v0001']['days'][recMonth]['performance']['response_time'] = {}
+                        for nk, nv in sorted(dtmp['v0001']['days'][x]['performance']['response_time'].items(), key=itemgetter(1), reverse=True):
+                            if nk in d['v0001']['days'][recMonth]['performance']['response_time']:
+                                d['v0001']['days'][recMonth]['performance']['response_time'][nk] += nv
+                            else:
+                                d['v0001']['days'][recMonth]['performance']['response_time'][nk] = nv
                 
                 del d['v0001']['days'][x]
 
