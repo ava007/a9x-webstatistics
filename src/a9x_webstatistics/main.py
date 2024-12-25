@@ -128,7 +128,7 @@ def runws(statfile, infile, geoip, verbosity, domain):
         )
         )[ ]-[ ](?P<uid>.+)[ ]\[(?P<dateandtime>\d{2}\/[a-zA-Z]{3}\/\d{4}:\d{2}:\d{2}:\d{2}[ ](\+|\-)\d{4})\][ ]
         ((?P<method>)(\"(GET|POST|HEAD|PUT|DELETE|OPTIONS|PROPFIND))[ ]
-        (?P<url>.+)[ ](HTTP\/(1\.1|2\.0)"))[ ]
+        (?P<url>.+)[ ](HTTP\/(1\.0|1\.1|2\.0)"))[ ]
         (?P<statuscode>\d{3})[ ]
         (?P<bytessent>\d+)[ ]
         (["](?P<referer>[^"]+)["])[ ]
