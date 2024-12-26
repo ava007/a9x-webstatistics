@@ -20,7 +20,7 @@ def externalFriends(d, owndomain, omit):
                     continue
                 if tk not in tland:
                     tland[tk] = {}
-                    tland[tk]['cnt'] = tv['cnt']
+                    tland[tk]['cnt'] = 0
                     tland[tk]['target'] = {}
                 for tdk,tdv in tv['target'].items():
                     # check if url is blocked for display:
@@ -29,6 +29,7 @@ def externalFriends(d, owndomain, omit):
                     if tdk not in tland[tk]['target']:
                         tland[tk]['target'][tdk] = 0
                     tland[tk]['target'][tdk] += tdv
+                    tland[tk]['cnt'] += tdv
                     
     if len(tland) > 0:
         print("tland: " + str(tland) )
