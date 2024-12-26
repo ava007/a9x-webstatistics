@@ -34,7 +34,7 @@ def externalFriends(d, owndomain, omit):
                     tland[tk]['cnt'] += tdv
                     
     if len(tland) > 0:
-        print("tland: " + str(tland) )
+        #print("tland: " + str(tland) )
         h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Landings</h3>'
@@ -47,7 +47,7 @@ def externalFriends(d, owndomain, omit):
         prev_k = ''
         for k, v in sorted(tland.items(), key=lambda x: x[1]['cnt'], reverse=True):
             #print("k/v: " + str(k) + " --> " + str(v))
-            for kb, vb in sorted(v['target'].items(), key=lambda item: item[1], reserse=True):
+            for kb, vb in sorted(v['target'].items(), key=lambda item: item[1], reverse=True):
                 h += '<tr>'
                 if k == prev_k:
                     h += '<td></td><td></td><td></td>'
