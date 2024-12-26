@@ -49,7 +49,7 @@ def externalFriends(d, owndomain, omit):
                 if k == prev_k:
                     h += '<td></td><td></td><td></td>'
                 else:
-                    h += '<td>' + str(i) + '.</td><td>' + k + '</td><td>' + v['cnt'] + '</td>'
+                    h += '<td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(v['cnt']) + '</td>'
                 h += '<td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td>'
                 h += '</tr>'
                 i += 1
