@@ -38,18 +38,20 @@ def externalFriends(d, owndomain, omit):
         h += '<h3 class="card-title">Top 10 Landings</h3>'
         h += '<p class="card-text">User landings from external domains for the current month:</p>'
         h += '<table class="table-responsive text-break"><thead>'
-        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr>'
+        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Count Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count Target</th></tr>'
         h += '</thead>'
         i = 1
         prev_k = ''
         for k, v in sorted(tland.items(), key=itemgetter(0), reverse=True):
             print("k/v: " + str(k) + " --> " + str(v))
-            for kb, vb in v.items():
+            for kb, vb in v['target'].items():
+                h += '<tr>'
                 if k == prev_k:
-                    h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + v.cnt + '</td>'
+                    h += '<td></td><td></td><td></td>'
                 else:
-                    h += '<tr><td></td><td></td><td></td>'
-                h += '<td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td></tr>'
+                    h += '<td>' + str(i) + '.</td><td>' + k + '</td><td>' + v['cnt'] + '</td>'
+                h += '<td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td>'
+                h += '</tr>'
                 i += 1
                 if i > 10:
                     break
