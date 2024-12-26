@@ -42,7 +42,7 @@ def externalFriends(d, owndomain, omit):
         h += '</thead>'
         i = 1
         prev_k = ''
-        for k, v in sorted(tland.items(), key=itemgetter(1), reverse=True):
+        for k, v in sorted(tland.items(), key=lambda x: x[1], reverse=True):
             print("k/v: " + str(k) + " --> " + str(v))
             for kb, vb in v['target'].items():
                 h += '<tr>'
