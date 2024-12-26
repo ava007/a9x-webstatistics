@@ -40,9 +40,9 @@ def externalFriends(d, owndomain, omit):
         h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count</th></tr>'
         h += '</thead>'
         i = 1
-        prev_k = None
+        prev_k = ''
         for k, v in sorted(tland.items(), key=itemgetter(0), reverse=True):
-            print("k/v" + str(k) + " " + str(v))
+            print("k/v: " + str(k) + " --> " + str(v))
             for kb, vb in v.items():
                 if k == prev_k:
                     h += '<tr><td>' + str(i) + '.</td><td>' + k + '</td><td>' + v.cnt + '</td>'
