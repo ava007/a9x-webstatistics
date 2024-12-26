@@ -39,9 +39,10 @@ def externalFriends(d, owndomain, omit):
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Landings</h3>'
         h += '<p class="card-text">User landings from external domains for the current month:</p>'
-        h += '<table class="table-responsive text-break"><thead>'
+        h += '<div class="table-responsive">'
+        h += '<table class="table text-break table-striped"><thead>'
         h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Count Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count Target</th></tr>'
-        h += '</thead>'
+        h += '</thead><tbody>'
         i = 1
         j = 1
         prev_k = ''
@@ -62,7 +63,7 @@ def externalFriends(d, owndomain, omit):
                     break
                 prev_k = k
                        
-        h += '</table>'
+        h += '</tbody></table></div>'
         h += '</div></div></div>'
     return h
 
