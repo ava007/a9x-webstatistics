@@ -18,6 +18,8 @@ def externalFriends(d, owndomain, omit):
             for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
                 if is_valid_ip(tk) == True:  # to suppress ip; ip is not a domain anyway    
                     continue
+                if '[' in tk:    # hack for IPv6 addresses
+                    continue
                 if tk not in tland:
                     tland[tk] = {}
                     tland[tk]['cnt'] = 0
@@ -41,22 +43,25 @@ def externalFriends(d, owndomain, omit):
         h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col">Source</th><th scope="col">Count Source</th><th scope="col">Target</th><th scope="col" style="text-align: right">Count Target</th></tr>'
         h += '</thead>'
         i = 1
+        j = 1
         prev_k = ''
-        for k, v in sorted(tland.items(), key=lambda x: (x[1]['cnt'],x[1]['target'][1]), reverse=True):
-            print("k/v: " + str(k) + " --> " + str(v))
-            for kb, vb in v['target'].items():
+        for k, v in sorted(tland.items(), key=lambda x: x[1]['cnt'], reverse=True):
+            #print("k/v: " + str(k) + " --> " + str(v))
+            for kb, vb in sorted(v['target'].items(), key=lambda item: item[1], reserse=True):
                 h += '<tr>'
                 if k == prev_k:
                     h += '<td></td><td></td><td></td>'
                 else:
                     h += '<td>' + str(i) + '.</td><td>' + k + '</td><td>' + str(v['cnt']) + '</td>'
+                    i += 1
+                j += 1
                 h += '<td>' + str(kb) + '</td><td style="text-align: right">' + str(vb) + '</td>'
                 h += '</tr>'
-                i += 1
-                if i > 10:
+              
+                if i > 10 or j > 24:
                     break
-            prev_k = k
-            print("prev_k: " + prev_k + " --> " + k)
+                prev_k = k
+                       
         h += '</table>'
         h += '</div></div></div>'
     return h
