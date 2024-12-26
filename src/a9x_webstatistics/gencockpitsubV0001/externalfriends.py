@@ -35,7 +35,7 @@ def externalFriends(d, owndomain, omit):
                     
     if len(tland) > 0:
         #print("tland: " + str(tland) )
-        h += '<div class="col-md-12 col-lg-6 col-xxl-4">'
+        h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Landings</h3>'
         h += '<p class="card-text">User landings from external domains for the current month:</p>'
