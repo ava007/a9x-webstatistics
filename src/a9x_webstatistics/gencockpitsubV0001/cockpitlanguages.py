@@ -64,7 +64,7 @@ def cockpitLanguages(d, owndomain):
         h += '<div id="browserlanguages-container">'
         h += '<script type="module">'
         h += 'const reasons = [{Checked: 4, Reason: "Reason 1"},{Checked: 7, Reason: "Reason 2"},{Checked: 3, Reason: "Reason 3"},{Checked: 8, Reason: "Reason 4"}];'
-        h += 'const languages = ' + str(language_array + ';'
+        h += 'const languages = ' + str(language_array) + ';'
         h += 'const plot = Plot.plot({'
         h += 'x: {axis: "top", percent: true},'
         h += 'y: {label: null, grid: true},'
