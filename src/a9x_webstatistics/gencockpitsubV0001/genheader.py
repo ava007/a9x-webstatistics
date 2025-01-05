@@ -5,6 +5,7 @@ def genHeader(domain):
     h += '<meta charset="utf-8">'
     h += '<meta name="robots" content="index,follow">'
     h += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">'
+    h += '<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>'
     h += '<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>'
     h += "\n" + '<script>'
     h += 'function DT2Locale(tdt) {'
@@ -34,4 +35,3 @@ def genHeader(domain):
     h += '<body>'
     h += '<div class="container">'
     return h
-
