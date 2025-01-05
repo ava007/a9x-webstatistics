@@ -57,6 +57,7 @@ def cockpitLanguages(d, owndomain):
 
     # d3js horizontal bubble chart:
     if len(toplng) > 0:
+        h += "\n\n"
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Languages</h3>'
@@ -94,29 +95,31 @@ def cockpitLanguages(d, owndomain):
         h += '  .attr("x", 0)'
         h += '  .attr("y", d => y(d.lang))'
         h += '  .attr("width", d => x(d.freq))'
-        h += '  .attr("height", y.bandwidth());'
+        h += '  .attr("height", y.bandwidth())'
+        h += '  .style("fill", "steelblue");'
 
         # Add labels for percentages
         h += 'svg.selectAll(".label")'
-        h += '    .data(languages)'
-        h += '    .enter().append("text")'
-        h += '    .attr("class", "label")'
-        h += '    .attr("x", d => x(d.freq) - 5)'
-        h += '    .attr("y", d => y(d.lang) + y.bandwidth() / 2)'
-        h += '    .attr("dy", ".35em")'
-        h += '    .attr("text-anchor", "end")'
-        h += '    .text(d => d3.format(".1f")(d.percent) + "%");'
+        h += '  .data(languages)'
+        h += '  .enter().append("text")'
+        h += '  .attr("class", "label")'
+        h += '  .attr("x", d => x(d.freq) - 5)'
+        h += '  .attr("y", d => y(d.lang) + y.bandwidth() / 2)'
+        h += '  .attr("dy", ".35em")'
+        h += '  .attr("text-anchor", "end")'
+        h += '  .style("fill", "white")'
+        h += '  .text(d => d3.format(".1f")(d.percent) + "%");'
 
         # Add y-axis labels
         h += 'svg.append("g").selectAll(".axis-label")'
-        h += '    .data(languages)'
-        h += '    .enter().append("text")'
-        h += '    .attr("class", "axis-label")'
-        h += '    .attr("x", -10)'
-        h += '    .attr("y", d => y(d.lang) + y.bandwidth() / 2)'
-        h += '    .attr("dy", ".35em")'
-        h += '    .attr("text-anchor", "end")'
-        h += '    .text(d => d.lang);'
+        h += '  .data(languages)'
+        h += '  .enter().append("text")'
+        h += '  .attr("class", "axis-label")'
+        h += '  .attr("x", -10)'
+        h += '  .attr("y", d => y(d.lang) + y.bandwidth() / 2)'
+        h += '  .attr("dy", ".35em")'
+        h += '  .attr("text-anchor", "end")'
+        h += '  .text(d => d.lang);'
         h += '</script>'
         h += '</p>'
         h += '</div></div></div>'   # end of card and col
