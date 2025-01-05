@@ -28,7 +28,7 @@ def cockpitLanguages(d, owndomain):
     for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
         l = {}
         l['lang'] = k
-        l['freq'] = v / total_languages
+        l['freq'] = v / total_languages * 100
         language_array.append(l)
                 
     # show results if available:
