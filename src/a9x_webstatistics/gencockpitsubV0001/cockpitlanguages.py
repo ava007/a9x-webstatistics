@@ -68,7 +68,7 @@ def cockpitLanguages(d, owndomain):
         h += 'const rect = document.getElementById("browserlanguages-container").getBoundingClientRect();'
         h += 'const width = Math.round(rect.width);'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
-        h += 'const width = width - margin.left - margin.right;'
+        h += 'width = width - margin.left - margin.right;'
         h += 'const height = 400 - margin.top - margin.bottom;'
 
         # Create SVG container
