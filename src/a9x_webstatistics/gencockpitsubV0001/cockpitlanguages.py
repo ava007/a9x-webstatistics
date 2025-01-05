@@ -47,8 +47,8 @@ def cockpitLanguages(d, owndomain):
         h += '</table></p>'
         h += '</div></div></div>'   # end of card and col
 
-        # d3js horizontal bubble chart:
-        if len(toplng) > 0:
+    # d3js horizontal bubble chart:
+    if len(toplng) > 0:
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Languages</h3>'
@@ -69,7 +69,6 @@ def cockpitLanguages(d, owndomain):
 
         # Append the plot to the container div
         h += 'document.getElementById('browserlanguages-container').appendChild(plot);'
-        h += ''
         h += '</script>'
         h += '</p>'
         h += '</div></div></div>'   # end of card and col
