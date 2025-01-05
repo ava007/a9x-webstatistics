@@ -68,7 +68,7 @@ def cockpitLanguages(d, owndomain):
         h += '});'
 
         # Append the plot to the container div
-        h += 'document.getElementById('browserlanguages-container').appendChild(plot);'
+        h += 'document.getElementById("browserlanguages-container").appendChild(plot);'
         h += '</script>'
         h += '</p>'
         h += '</div></div></div>'   # end of card and col
