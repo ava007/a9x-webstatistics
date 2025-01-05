@@ -66,9 +66,9 @@ def cockpitLanguages(d, owndomain):
         h += 'const reasons = [{Checked: 4, Reason: "Reason 1"},{Checked: 7, Reason: "Reason 2"},{Checked: 3, Reason: "Reason 3"},{Checked: 8, Reason: "Reason 4"}];'
         h += 'const languages = ' + str(language_array) + ';'
         h += 'const rect = document.getElementById("browserlanguages-container").getBoundingClientRect();'
-        h += 'const width = Math.round(rect.width);'
+        #h += 'const width = Math.round(rect.width);'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
-        h += 'width = width - margin.left - margin.right;'
+        h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
         h += 'const height = 400 - margin.top - margin.bottom;'
 
         # Create SVG container
@@ -80,7 +80,7 @@ def cockpitLanguages(d, owndomain):
 
         # Set up the x and y scales
         h += 'const x = d3.scaleLinear()'
-        h += '  .domain([0, d3.max(languages, d => d.percent)])'
+        h += '  .domain([0, d3.max(languages, d => d.freq)])'
         h += '  .range([0, width]);'
 
         h += 'const y = d3.scaleBand()'
@@ -95,7 +95,7 @@ def cockpitLanguages(d, owndomain):
         h += '  .attr("class", "bar")'
         h += '  .attr("x", 0)'
         h += '  .attr("y", d => y(d.lang))'
-        h += '  .attr("width", d => x(d.percent))'
+        h += '  .attr("width", d => x(d.freq))'
         h += '  .attr("height", y.bandwidth());'
 
         # Add labels for percentages
@@ -103,7 +103,7 @@ def cockpitLanguages(d, owndomain):
         h += '    .data(languages)'
         h += '    .enter().append("text")'
         h += '    .attr("class", "label")'
-        h += '    .attr("x", d => x(d.percent) - 5)'
+        h += '    .attr("x", d => x(d.freq) - 5)'
         h += '    .attr("y", d => y(d.lang) + y.bandwidth() / 2)'
         h += '    .attr("dy", ".35em")'
         h += '    .attr("text-anchor", "end")'
