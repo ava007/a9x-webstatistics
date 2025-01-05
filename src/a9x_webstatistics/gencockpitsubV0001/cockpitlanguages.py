@@ -46,4 +46,31 @@ def cockpitLanguages(d, owndomain):
                 break
         h += '</table></p>'
         h += '</div></div></div>'   # end of card and col
+
+        # d3js horizontal bubble chart:
+        if len(toplng) > 0:
+        h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
+        h += '<div class="card mt-2"><div class="card-body">'
+        h += '<h3 class="card-title">Top 10 Languages</h3>'
+        h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
+        h += '<div id="browserlanguages-container">'
+        h += '<script type="module">'
+        h += 'const reasons = [{Checked: 4, Reason: "Reason 1"},{Checked: 7, Reason: "Reason 2"},{Checked: 3, Reason: "Reason 3"},{Checked: 8, Reason: "Reason 4"}];'
+        h += 'const plot = Plot.plot({'
+        h += 'x: {axis: "top", percent: true},'
+        h += 'y: {label: null, grid: true},'
+        h += 'marks: ['
+        h += '     Plot.barX(reasons, {x: "Checked", y: "Reason", fill: "steelblue", opacity: 0.5, sort: {y: "-x"}}),'
+        h += '     Plot.text(reasons, {x: 0, y: "Reason", text: "Reason", textAnchor: "start", dx: +3, fill: "black", fontSize: 12}),'
+        h += 'Plot.axisY({x: 0, ticks: []}),'
+        h += 'Plot.ruleX([0])'
+        h += ']'
+        h += '});'
+
+        # Append the plot to the container div
+        h += 'document.getElementById('browserlanguages-container').appendChild(plot);'
+        h += ''
+        h += '</script>'
+        h += '</p>'
+        h += '</div></div></div>'   # end of card and col
     return h
