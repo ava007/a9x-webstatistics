@@ -31,37 +31,14 @@ def cockpitLanguages(d, owndomain):
         l['freq'] = v / total_languages * 100
         language_array.append(l)
                 
-    # show results if available:
     h = ''
-    if len(toplng) > 0:
-        h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
-        h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top 10 Languages</h3>'
-        h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
-        h += '<table class="table">'
-        h += '<thead>'
-        h += '<tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Language</th>'
-        h += '<th scope="col" style="text-align: right">Hit Count</th><th scope="col" style="text-align: right">Percentage</th></tr>'
-        h += '</thead>'
-        i = 1
-        for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
-            h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td>'
-            h += '<td style="text-align: right">' + str(format(v, ',')) + '</td>'
-            h += '<td style="text-align: right">{:.0%}</td>'.format(v / total_languages)
-            h += '</tr>'
-            i += 1
-            if i > 10:
-                break
-        h += '</table></p>'
-        h += '</div></div></div>'   # end of card and col
-
-    # d3js horizontal bubble chart:
+    # d3js horizontal bubble char in case results are available:
     if len(toplng) > 0:
         h += "\n\n"
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top 10 Languages</h3>'
-        h += '<p class="card-text">User languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
+        h += '<h3 class="card-title">Top Browser Languages</h3>'
+        h += '<p class="card-text">Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
         h += '<div id="browserlanguages-container"><svg width="600" height="400"></svg></div>'
         h += '<script type="module">'
         h += 'const languages = ' + str(language_array) + ';'
