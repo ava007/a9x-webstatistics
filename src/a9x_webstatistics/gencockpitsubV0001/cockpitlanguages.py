@@ -28,7 +28,7 @@ def cockpitLanguages(d, owndomain):
     for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
         l = {}
         l['lang'] = k
-        l['freq'] = v
+        l['freq'] = v / total_languages
         language_array.append(l)
                 
     # show results if available:
@@ -108,7 +108,7 @@ def cockpitLanguages(d, owndomain):
         h += '  .attr("dy", ".35em")'
         h += '  .attr("text-anchor", "end")'
         h += '  .style("fill", "white")'
-        h += '  .text(d => d3.format(".1f")(d.percent) + "%");'
+        h += '  .text(d => d3.format(".1f")(d.freq) + "%");'
 
         # Add y-axis labels
         h += 'svg.append("g").selectAll(".axis-label")'
