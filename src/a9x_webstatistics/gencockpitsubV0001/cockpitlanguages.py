@@ -22,6 +22,14 @@ def cockpitLanguages(d, owndomain):
                     toplng[tk] = 0
                 toplng[tk] += tv
                 total_languages += tv
+
+    # build array for plot:
+    language_array = []
+    for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
+        l = {}
+        l['lang'] = k
+        l['freq'] = v
+        language_array.append(l)
                 
     # show results if available:
     h = ''
@@ -56,18 +64,17 @@ def cockpitLanguages(d, owndomain):
         h += '<div id="browserlanguages-container">'
         h += '<script type="module">'
         h += 'const reasons = [{Checked: 4, Reason: "Reason 1"},{Checked: 7, Reason: "Reason 2"},{Checked: 3, Reason: "Reason 3"},{Checked: 8, Reason: "Reason 4"}];'
+        h += 'const languages = ' + str(language_array + ';'
         h += 'const plot = Plot.plot({'
         h += 'x: {axis: "top", percent: true},'
         h += 'y: {label: null, grid: true},'
         h += 'marks: ['
-        h += '     Plot.barX(reasons, {x: "Checked", y: "Reason", fill: "steelblue", opacity: 0.5, sort: {y: "-x"}}),'
-        h += '     Plot.text(reasons, {x: 0, y: "Reason", text: "Reason", textAnchor: "start", dx: +3, fill: "black", fontSize: 12}),'
+        h += '     Plot.barX(languages, {x: "freq", y: "lang", fill: "steelblue", opacity: 0.5, sort: {y: "-x"}}),'
+        h += '     Plot.text(languages, {x: 0, y: "Language", text: "Freqency", textAnchor: "start", dx: +3, fill: "black", fontSize: 12}),'
         h += 'Plot.axisY({x: 0, ticks: []}),'
         h += 'Plot.ruleX([0])'
         h += ']'
         h += '});'
-
-        # Append the plot to the container div
         h += 'document.getElementById("browserlanguages-container").appendChild(plot);'
         h += '</script>'
         h += '</p>'
