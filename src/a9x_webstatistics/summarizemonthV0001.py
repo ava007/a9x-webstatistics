@@ -63,15 +63,15 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
                 
                 # external sources:
-                if 'externalFriendHits' in dtmp['v0001']['days'][x]['user']:
-                    for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendHits'].items():
+                if 'externalFriendsHits' in dtmp['v0001']['days'][x]['user']:
+                    for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendsHits'].items():
                         #print("sum: externalFriendHits: " + ck + ": " + str(cv) )
 
-                        #print("sum extFriendHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
-                        if ck in d['v0001']['days'][x]['user']['externalFriendHits']:
-                            d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] += cv
+                        #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendHits']))
+                        if ck in d['v0001']['days'][x]['user']['externalFriendsHits']:
+                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] += cv
                         else:
-                            d['v0001']['days'][recMonth]['user']['externalFriendHits'][ck] = cv;
+                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = cv;
                 
                 if 'robot' in dtmp['v0001']['days'][x]:
                     if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
