@@ -21,17 +21,23 @@ def migv0001sub0001(
     with open(tstat, "w") as sf:
        json.dump(d,sf)
 
-
     for x in d['days']:
         if 'user' in d['v0001']['days'][x]:
             if 'externalFriendsHits' d['v0001']['days'][x]['user']:
                 if 'nav' not in d['v0001']['days'][x]['user']:
                     d['v0001']['days'][x]['user']['nav'] = []
-                
+                for tk, tv in d['v0001']['days'][x]['user']['externalFriendsHits'].items():
+                    for tdk,tdv in tv['target'].items():
+                        tmprec = {}
+                        tmprec['s'] = tk   # Source
+                        tmprec['t'] = tdk  # Target
+                        tmprec['y'] = 'e'  # type: e=external source, i=internal source
+                        tmprec['c'] = tdv
+                        # check if source and target already exists:
         
 
     # write updated statistic file:
-    with open(statfile, "w") as sf:
-       json.dump(d,sf)
+    #with open(statfile, "w") as sf:
+    #   json.dump(d,sf)
 
     return        
