@@ -14,7 +14,9 @@ def migv0001sub0001(
         print("-s json file is not valid")
         return
 
-    # loop through extern friendsHits:
+    # Migrations:
+    # 1. User --> ExternalFriendsHits migrate to User --> Nav
+    # 2. User --> Navigation migrate to User --> Nav
 
     # save
     tstat = statfile.replace('.json','v0001sub0001before.json')
@@ -27,13 +29,24 @@ def migv0001sub0001(
                 if 'nav' not in d['v0001']['days'][x]['user']:
                     d['v0001']['days'][x]['user']['nav'] = []
                 for tk, tv in d['v0001']['days'][x]['user']['externalFriendsHits'].items():
+                    print("tk: " + str(tk) + " tv: " + str(tv))
                     for tdk,tdv in tv['target'].items():
                         tmprec = {}
                         tmprec['s'] = tk   # Source
                         tmprec['t'] = tdk  # Target
                         tmprec['y'] = 'e'  # type: e=external source, i=internal source
-                        tmprec['c'] = tdv
+                        tmprec['c'] = int(tdv)   # count
+                        print("tmprec: " + str(tmprec))
                         # check if source and target already exists:
+                        for e in d['v0001']['days'][x]['user']['nav']:
+                            if e['s'] == tmprec['s']
+                                    and e['t'] = tmprec['t']:
+                                e['c'] += tmprec['c']
+                            else:
+                                d['v0001']['days'][x]['user']['nav'].append(tmprec)
+                        #todo:  delete externalFriendsHits
+                            
+        
         
 
     # write updated statistic file:
