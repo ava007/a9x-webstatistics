@@ -15,7 +15,7 @@ def migv0001sub0001(
         return
 
     # Migrations:
-    # 1. User --> ExternalFriendsHits migrate to User --> Nav
+    # 1. User --> ExternalFriendsHits migrate to User --> Nav   (list of dict)
     # 2. User --> Navigation migrate to User --> Nav
 
     # save
@@ -38,6 +38,7 @@ def migv0001sub0001(
                         tmprec['c'] = int(tdv)   # count
                         print("tmprec: " + str(tmprec))
                         # check if source and target already exists:
+                        #if next(item for item in d['v0001']['days'][x]['user']['nav'] if item['s'] == tmprec['s] and item['t'] == tmprec['t']):
                         for e in d['v0001']['days'][x]['user']['nav']:
                             if e['s'] == tmprec['s']
                                     and e['t'] = tmprec['t']:
