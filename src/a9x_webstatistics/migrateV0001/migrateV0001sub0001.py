@@ -25,7 +25,7 @@ def migv0001sub0001(
 
     for x in d['days']:
         if 'user' in d['v0001']['days'][x]:
-            if 'externalFriendsHits' d['v0001']['days'][x]['user']:
+            if 'externalFriendsHits' in d['v0001']['days'][x]['user']:
                 if 'nav' not in d['v0001']['days'][x]['user']:
                     d['v0001']['days'][x]['user']['nav'] = []
                 for tk, tv in d['v0001']['days'][x]['user']['externalFriendsHits'].items():
@@ -46,9 +46,26 @@ def migv0001sub0001(
                             else:
                                 d['v0001']['days'][x]['user']['nav'].append(tmprec)
                         #todo:  delete externalFriendsHits
-                            
-        
-        
+            if 'navigation' in d['v0001']['days'][x]['user']:
+                if 'nav' not in d['v0001']['days'][x]['user']:
+                    d['v0001']['days'][x]['user']['nav'] = []
+                for nk, nv in d['v0001']['days'][x]['user']['navigation'].items():
+                    print("navigation nk: " + str(nk) + " nv: " + str(nv))
+                    n = nk.split('(())') 
+                    if n[0] == n[1]:
+                        continue
+                    tmprec = {}
+                    tmprec['s'] = n[0]    # Source
+                    tmprec['t'] = n[1]    # Target
+                    tmprec['y'] = 'i'     # type: e=external source, i=internal source
+                    tmprec['c'] = int(nv) # count
+                    for e in d['v0001']['days'][x]['user']['nav']:
+                        if e['s'] == tmprec['s']
+                                and e['t'] = tmprec['t']:
+                            e['c'] += tmprec['c']
+                        else:
+                            d['v0001']['days'][x]['user']['nav'].append(tmprec)
+                #todo:  delete externalFriendsHits
 
     # write updated statistic file:
     #with open(statfile, "w") as sf:
