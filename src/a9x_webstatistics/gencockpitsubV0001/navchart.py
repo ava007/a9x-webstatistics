@@ -36,7 +36,9 @@ def navchart(d, owndomain, omit):
                    
                 tmpnode = {}
                 tmpnode['id'] = n[0]
-                tmpnode['y'] = 'root'
+                if ('.com' in tmpnode['id'] or
+                       '.ru' in tmpnode['id']):
+                    tmpnode['y'] = 'root'
                 duplicate_found = False
                 for no in nodes:
                     if (no['id'] == tmpnode['id']):
@@ -64,18 +66,18 @@ def navchart(d, owndomain, omit):
         h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
-        h += 'const height = 400 - margin.top - margin.bottom;'
+        h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
 
         # 2. Set up the SVG container and dimensions
         h += 'const svg = d3.select("#svgchart");'
         #h += "const width = +svg.attr('width');"   # duplicate to line 66-67
-        #h += "const height = +svg.attr('height');"
+        #h += "const height = +svg.attr('height');" + "\n"
        
         # 3. Set up the D3 force simulation
         h += "const simulation = d3.forceSimulation(nodes)"
         h += ".force('link', d3.forceLink(links).id(d => d.id).distance(150))"
         h += ".force('charge', d3.forceManyBody().strength(-300))"
-        h += ".force('center', d3.forceCenter(width / 2, height / 2));"
+        h += ".force('center', d3.forceCenter(width / 2, height / 2));"  + "\n"
 
         # 4. Create links (edges)
         h += "const link = svg.append('g')"
