@@ -27,9 +27,10 @@ def navchart(d, owndomain, omit):
                 duplicate_found = False
                 for li in links:
                     if (li['s'] == tmplink['s']
-                            and li['t'] = tmplink['t']):
+                            and li['t'] == tmplink['t']):
                         duplicate_found = True
                         li['c'] += sv
+                        break
                 if duplicate_found == False:
                     links.append(tmplink)
                    
@@ -40,6 +41,7 @@ def navchart(d, owndomain, omit):
                 for no in nodes:
                     if (no['id'] == tmpnode['id']):
                         duplicate_found = True
+                        break
                 if duplicate_found == False:
                     nodes.append(tmpnode)
             
