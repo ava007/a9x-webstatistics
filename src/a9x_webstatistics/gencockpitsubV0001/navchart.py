@@ -15,6 +15,8 @@ def navchart(d, owndomain, omit):
                 n = sk.split('(())') 
                 if n[0] == n[1]:
                     continue
+                if len(n[0]) == 0 or len(n[1]) == 0:
+                    continue
                 # allow only a-z and 0-9:
                 if n[0] == '/':    # to avoid empty na
                     n[0] = owndomain
