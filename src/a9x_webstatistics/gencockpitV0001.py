@@ -358,7 +358,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
             h += '</div></div>'   # end of card
             h += '</div></div>' + "\n\n"   # end of row
-            
+
+        # navigation chart
+        h += navchart(d, owndomain, omit):
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
