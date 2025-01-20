@@ -68,8 +68,8 @@ def navchart(d, owndomain, omit):
 
         # 2. Set up the SVG container and dimensions
         h += 'const svg = d3.select("#svgchart");'
-        h += "const width = +svg.attr('width');"
-        h += "const height = +svg.attr('height');"
+        #h += "const width = +svg.attr('width');"   # duplicate to line 66-67
+        #h += "const height = +svg.attr('height');"
        
         # 3. Set up the D3 force simulation
         h += "const simulation = d3.forceSimulation(nodes)"
