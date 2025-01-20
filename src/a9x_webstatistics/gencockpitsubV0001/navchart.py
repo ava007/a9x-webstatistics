@@ -2,7 +2,7 @@
 from operator import itemgetter
 
 # navigation chart:
-def navchart(d, owndomain):
+def navchart(d, owndomain, omit):
     h = ''
     links = []    # {'s': 'google.com', 't': '/team/view/ax', 'c': 1}
     nodes = []    # {'id': 'google.com', 'y':'root'}
