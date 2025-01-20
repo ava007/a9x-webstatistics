@@ -41,7 +41,7 @@ def navchart(d, owndomain, omit):
                     tmpnode['id'] = n[i]
                     if ('.com' in tmpnode['id'] or
                            '.ru' in tmpnode['id']):
-                        tmpnode['y'] = 'root'
+                        tmpnode['typ'] = 'root'
                     duplicate_found = False
                     for no in nodes:
                         if (no['id'] == tmpnode['id']):
