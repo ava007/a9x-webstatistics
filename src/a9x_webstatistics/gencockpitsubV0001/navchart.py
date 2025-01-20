@@ -101,10 +101,10 @@ def navchart(d, owndomain, omit):
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
         h += "node.fx = node.x;"  # Freeze position
         h += "node.fy = node.y;"  # Freeze position
-        h += "});
+        h += "});"
 
         # 8. Define the tick function to update positions
-        h += "simulation.on('tick', function() {
+        h += "simulation.on('tick', function() {"
         # Update link positions
         h += "link"
         h += ".attr('x1', d => d.source.x)"
