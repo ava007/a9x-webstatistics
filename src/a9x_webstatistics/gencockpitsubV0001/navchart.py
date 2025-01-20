@@ -26,11 +26,9 @@ def navchart(d, owndomain, omit):
                     continue
                 if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
                     continue
-                n[0] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
-                n[1] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
                 tmplink = {}
-                tmplink['s'] = n[0]
-                tmplink['t'] = n[1]
+                tmplink['s'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
+                tmplink['t'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
                 tmplink['c'] = sv
                 duplicate_found = False
                 for li in links:
@@ -44,15 +42,16 @@ def navchart(d, owndomain, omit):
 
                 for i in range(2):   # n[0] and n[1]
                     tmpnode = {}
-                    tmpnode['id'] = n[i]
-                    if ('.com' in tmpnode['id'] or
-                           '.ru' in tmpnode['id']):
+                    if ('.com' in n[i] or
+                           '.ru' in n[i]):
                         tmpnode['typ'] = 'root'
                     duplicate_found = False
+                    tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
                     for no in nodes:
                         if (no['id'] == tmpnode['id']):
                             duplicate_found = True
                             break
+                    
                     if duplicate_found == False:
                         nodes.append(tmpnode)
             
