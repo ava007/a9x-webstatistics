@@ -26,6 +26,8 @@ def navchart(d, owndomain, omit):
                     continue
                 if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
                     continue
+                n[0] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
+                n[1] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
                 tmplink = {}
                 tmplink['s'] = n[0]
                 tmplink['t'] = n[1]
