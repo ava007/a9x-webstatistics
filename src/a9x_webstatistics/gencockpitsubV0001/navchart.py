@@ -23,16 +23,26 @@ def cockpitLanguages(d, owndomain):
                tmplink = {}
                tmplink['s'] = n[0]
                tmplink['t'] = n[1]
-               tmplink['c'] = sk
-               links.append(tmplink)
+               tmplink['c'] = sv
+               duplicate_found = False
+               for li in links:
+                   if (li['s'] == tmplink['s']
+                           and li['t'] = tmplink['t']):
+                       duplicate_found = True
+                       li['c'] += sv
+               if duplicate_found == False:
+                   links.append(tmplink)
+                   
                tmpnode = {}
                tmpnode['id'] = n[0]
                tmpnode['y'] = 'root'
-               nodes.append(tmpnode)
-               tmpnode['id'] = n[0]
-               nodes.append(tmpnode)
-               break
-               
+               duplicate_found = False
+               for no in nodes:
+                   if (no['id'] == tmpnode['id']):
+                       duplicate_found = True
+               if duplicate_found == False:
+                   nodes.append(tmpnode)
+            
         days += 1
         if days > 31:
             break
@@ -47,8 +57,9 @@ def cockpitLanguages(d, owndomain):
         h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':'
         h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
         h += '<script type="module">'
-        h += 'const languages = ' + str(language_array) + ';'
-        h += 'const rect = document.getElementById("browserlanguages-container").getBoundingClientRect();'
+        h += 'const nodes = ' + str(nodes) + ';'
+        h += 'const links = ' + str(links) + ';'
+        h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
         h += 'const height = 400 - margin.top - margin.bottom;'
