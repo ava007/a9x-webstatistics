@@ -5,8 +5,6 @@ from copy import deepcopy
 from importlib.metadata import version
 from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
-#from . import gencockpitsubV0001
-#from .gencockpitsubV0001.cockpitlanguages import cockpitLanguages
 from .gencockpitsubV0001 import *
     
 def runGenCockpitV0001(infile, outfile, domain, omit):
@@ -360,7 +358,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
             h += '</div></div>' + "\n\n"   # end of row
 
         # navigation chart
-        h += navchart(d, owndomain, omit):
+        h += navchart(d, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
