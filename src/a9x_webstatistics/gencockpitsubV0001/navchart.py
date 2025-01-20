@@ -22,6 +22,10 @@ def navchart(d, owndomain, omit):
                     n[0] = owndomain
                 if n[1] == '/':    # to avoid empty nb
                     n[1] = owndomain
+                if any(oelm in n[0] for oelm in omit):  # do not show parts of url 
+                    continue
+                if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
+                    continue
                 tmplink = {}
                 tmplink['s'] = n[0]
                 tmplink['t'] = n[1]
