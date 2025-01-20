@@ -20,28 +20,28 @@ def navchart(d, owndomain, omit):
                     n[0] = owndomain
                 if n[1] == '/':    # to avoid empty nb
                     n[1] = owndomain
-               tmplink = {}
-               tmplink['s'] = n[0]
-               tmplink['t'] = n[1]
-               tmplink['c'] = sv
-               duplicate_found = False
-               for li in links:
-                   if (li['s'] == tmplink['s']
-                           and li['t'] = tmplink['t']):
-                       duplicate_found = True
-                       li['c'] += sv
-               if duplicate_found == False:
-                   links.append(tmplink)
+                tmplink = {}
+                tmplink['s'] = n[0]
+                tmplink['t'] = n[1]
+                tmplink['c'] = sv
+                duplicate_found = False
+                for li in links:
+                    if (li['s'] == tmplink['s']
+                            and li['t'] = tmplink['t']):
+                        duplicate_found = True
+                        li['c'] += sv
+                if duplicate_found == False:
+                    links.append(tmplink)
                    
-               tmpnode = {}
-               tmpnode['id'] = n[0]
-               tmpnode['y'] = 'root'
-               duplicate_found = False
-               for no in nodes:
-                   if (no['id'] == tmpnode['id']):
-                       duplicate_found = True
-               if duplicate_found == False:
-                   nodes.append(tmpnode)
+                tmpnode = {}
+                tmpnode['id'] = n[0]
+                tmpnode['y'] = 'root'
+                duplicate_found = False
+                for no in nodes:
+                    if (no['id'] == tmpnode['id']):
+                        duplicate_found = True
+                if duplicate_found == False:
+                    nodes.append(tmpnode)
             
         days += 1
         if days > 31:
