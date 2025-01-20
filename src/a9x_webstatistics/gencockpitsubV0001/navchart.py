@@ -35,19 +35,20 @@ def navchart(d, owndomain, omit):
                         break
                 if duplicate_found == False:
                     links.append(tmplink)
-                   
-                tmpnode = {}
-                tmpnode['id'] = n[0]
-                if ('.com' in tmpnode['id'] or
-                       '.ru' in tmpnode['id']):
-                    tmpnode['y'] = 'root'
-                duplicate_found = False
-                for no in nodes:
-                    if (no['id'] == tmpnode['id']):
-                        duplicate_found = True
-                        break
-                if duplicate_found == False:
-                    nodes.append(tmpnode)
+
+                for i in range(2):   # n[0] and n[1]
+                    tmpnode = {}
+                    tmpnode['id'] = n[i]
+                    if ('.com' in tmpnode['id'] or
+                           '.ru' in tmpnode['id']):
+                        tmpnode['y'] = 'root'
+                    duplicate_found = False
+                    for no in nodes:
+                        if (no['id'] == tmpnode['id']):
+                            duplicate_found = True
+                            break
+                    if duplicate_found == False:
+                        nodes.append(tmpnode)
             
         days += 1
         if days > 31:
