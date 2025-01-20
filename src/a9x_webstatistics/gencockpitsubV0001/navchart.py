@@ -3,7 +3,7 @@ from operator import itemgetter
 
 # navigation chart:
 def cockpitLanguages(d, owndomain):
-
+    h = ''
     links = []    # {'s': 'google.com', 't': '/team/view/ax', 'c': 1}
     nodes = []    # {'id': 'google.com', 'y':'root'}
     days = 0
@@ -36,34 +36,7 @@ def cockpitLanguages(d, owndomain):
         days += 1
         if days > 31:
             break
-    
-    # accumulate the results for maximum the last 31 days:
-    toplng = {}
-    toplngcnt = 0
-    total_languages = 0
-    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-        # dont take months in account:
-        if len(k) <= 6:
-            continue
-        if toplngcnt >= 31:
-            break
-        toplngcnt += 1
-        if 'language' in d['v0001']['days'][k]['user']:
-            for tk, tv in d['v0001']['days'][k]['user']['language'].items():
-                if tk not in toplng:
-                    toplng[tk] = 0
-                toplng[tk] += tv
-                total_languages += tv
-
-    # build array for plot:
-    language_array = []
-    for k, v in sorted(toplng.items(), key=itemgetter(1), reverse=True):
-        l = {}
-        l['lang'] = k
-        l['freq'] = v / total_languages * 100
-        language_array.append(l)
-                
-    h = ''
+ 
     # d3js horizontal bubble char in case results are available:
     #if len(toplng) > 0:
     if 'logikfabrik' in owndomain:
