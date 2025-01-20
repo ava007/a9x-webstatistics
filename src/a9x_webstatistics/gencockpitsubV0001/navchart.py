@@ -67,7 +67,7 @@ def navchart(d, owndomain, omit):
         h += 'const height = 400 - margin.top - margin.bottom;'
 
         # 2. Set up the SVG container and dimensions
-        h += 'const svg = d3.select("#svgchart")'
+        h += 'const svg = d3.select("#svgchart");'
         h += "const width = +svg.attr('width');"
         h += "const height = +svg.attr('height');"
        
