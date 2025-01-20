@@ -58,9 +58,9 @@ def navchart(d, owndomain, omit):
         h += '<h3 class="card-title">Navigation Chart</h3>'
         h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':'
         h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
-        h += '<script type="module">'
-        h += 'const nodes = ' + str(nodes) + ';'
-        h += 'const links = ' + str(links) + ';'
+        h += '<script type="module">' + "\n"
+        h += 'const nodes = ' + str(nodes) + ';' + "\n"
+        h += 'const links = ' + str(links) + ';' + "\n"
         h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
@@ -82,7 +82,19 @@ def navchart(d, owndomain, omit):
         h += ".selectAll('.link')"
         h += ".data(links)"
         h += ".enter().append('line')"
-        h += ".attr('class', 'link');"
+        h += ".attr('class', 'link');"  + "\n"
+
+        # 5. Create nodes
+        h += "const node = svg.append('g')"
+        h += ".selectAll('.node')"
+        h += ".data(nodes)"
+        h += ".enter().append('circle')"
+        h += ".attr('class', 'node')"
+        h += ".attr('r', 20)"
+        h += ".call(d3.drag()"
+        h += ".on('start', dragStarted)"
+        h += ".on('drag', dragged)"
+        h += ".on('end', dragEnded));" + "\n"
 
         # 6. Add labels to the nodes
         h += "const labels = svg.append('g')"
@@ -92,16 +104,16 @@ def navchart(d, owndomain, omit):
         h += ".attr('class', 'label')"
         h += ".attr('dx', 25)"
         h += ".attr('dy', '.35em')"
-        h += ".text(d => d.name);"
+        h += ".text(d => d.name);"  + "\n"
 
         # 7. Place root nodes along the left side of the screen and freeze their positions
         h += "const rootNodes = nodes.filter(n => n.typ === 'root');"
         h += "rootNodes.forEach((node, index) => {"
-        h += "node.x = 100; // Set all root nodes on the left (x = 100)"
+        h += "node.x = 100;" # Set all root nodes on the left (x = 100)
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
         h += "node.fx = node.x;"  # Freeze position
         h += "node.fy = node.y;"  # Freeze position
-        h += "});"
+        h += "});"  + "\n"
 
         # 8. Define the tick function to update positions
         h += "simulation.on('tick', function() {"
@@ -110,34 +122,34 @@ def navchart(d, owndomain, omit):
         h += ".attr('x1', d => d.source.x)"
         h += ".attr('y1', d => d.source.y)"
         h += ".attr('x2', d => d.target.x)"
-        h += ".attr('y2', d => d.target.y);"
+        h += ".attr('y2', d => d.target.y);"  + "\n"
 
         # Update node positions
-        h += "node.attr('cx', d => d.x).attr('cy', d => d.y);"
+        h += "node.attr('cx', d => d.x).attr('cy', d => d.y);"  + "\n"
 
         # Update label positions
         h += "labels.attr('x', d => d.x).attr('y', d => d.y);"
-        h += "});"
+        h += "});"  + "\n"
 
         # 9. Drag functions to allow node movement
         h += "function dragStarted(event) {"
         h += "if (!event.active) simulation.alphaTarget(0.3).restart();"
         h += "event.subject.fx = event.subject.x;"
         h += "event.subject.fy = event.subject.y;"
-        h += "}"
+        h += "}"  + "\n"
 
         h += "function dragged(event) {"
         h += "event.subject.fx = event.x;"
         h += "event.subject.fy = event.y;"
-        h += "}"
+        h += "}"  + "\n"
 
         h += "function dragEnded(event) {"
         h += "if (!event.active) simulation.alphaTarget(0);"
         h += "event.subject.fx = null;"
         h += "event.subject.fy = null;"
-        h += "}"
+        h += "}"  + "\n"
         h += "</script>"
 
         h += '</p>'
-        h += '</div></div></div>'   # end of card and col
+        h += '</div></div></div>'
     return h
