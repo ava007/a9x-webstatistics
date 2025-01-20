@@ -3,6 +3,39 @@ from operator import itemgetter
 
 # navigation chart:
 def cockpitLanguages(d, owndomain):
+
+    links = []    # {'s': 'google.com', 't': '/team/view/ax', 'c': 1}
+    nodes = []    # {'id': 'google.com', 'y':'root'}
+    days = 0
+    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+        if len(k) < 8:   # not a day anymore
+            break
+        if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
+            for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
+                n = sk.split('(())') 
+                if n[0] == n[1]:
+                    continue
+                # allow only a-z and 0-9:
+                if n[0] == '/':    # to avoid empty na
+                    n[0] = owndomain
+                if n[1] == '/':    # to avoid empty nb
+                    n[1] = owndomain
+               tmplink = {}
+               tmplink['s'] = n[0]
+               tmplink['t'] = n[1]
+               tmplink['c'] = sk
+               links.append(tmplink)
+               tmpnode = {}
+               tmpnode['id'] = n[0]
+               tmpnode['y'] = 'root'
+               nodes.append(tmpnode)
+               tmpnode['id'] = n[0]
+               nodes.append(tmpnode)
+               break
+               
+        days += 1
+        if days > 31:
+            break
     
     # accumulate the results for maximum the last 31 days:
     toplng = {}
