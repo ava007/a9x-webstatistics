@@ -42,6 +42,7 @@ def navchart(d, owndomain, omit):
 
                 for i in range(2):   # n[0] and n[1]
                     tmpnode = {}
+                    tmpnode['name'] = n[i]
                     if ('.com' in n[i] or
                            '.ru' in n[i]):
                         tmpnode['typ'] = 'root'
