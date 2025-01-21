@@ -77,7 +77,7 @@ def navchart(d, owndomain, omit):
         h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
 
         # 2. Set up the SVG container and dimensions
-        h += 'const svg = d3.select("#svgchart");'
+        h += 'const svg = d3.select("#svgchart").attr("width", width).attr("height", height);'
         #h += "const width = +svg.attr('width');"   # duplicate to line 66-67
         #h += "const height = +svg.attr('height');" + "\n"
        
@@ -92,7 +92,9 @@ def navchart(d, owndomain, omit):
         h += ".selectAll('.link')"
         h += ".data(links)"
         h += ".enter().append('line')"
-        h += ".attr('class', 'link');"  + "\n"
+        h += ".style('stroke','#999')"
+        h += ".style('stroke-opacity','0.6')" + "\n"
+        #h += ".attr('class', 'link');"  + "\n"
 
         # 5. Create nodes
         h += "const node = svg.append('g')"
@@ -101,6 +103,9 @@ def navchart(d, owndomain, omit):
         h += ".enter().append('circle')"
         h += ".attr('class', 'node')"
         h += ".attr('r', 20)"
+        h += ".style('fill','steelblue')"
+        h += ".style('stroke','white')"
+        h += ".style('stroke-width','1.5px')"
         h += ".call(d3.drag()"
         h += ".on('start', dragStarted)"
         h += ".on('drag', dragged)"
@@ -111,7 +116,10 @@ def navchart(d, owndomain, omit):
         h += ".selectAll('.label')"
         h += ".data(nodes)"
         h += ".enter().append('text')"
-        h += ".attr('class', 'label')"
+        #h += ".attr('class', 'label')"
+        h += ".style('font-family','Arial, sans-serif')"
+        h += ".style('font-size','12px')"
+        h += ".style('pointer-events','none')"
         h += ".attr('dx', 25)"
         h += ".attr('dy', '.35em')"
         h += ".text(d => d.name);"  + "\n"
