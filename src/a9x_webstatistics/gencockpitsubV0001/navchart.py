@@ -27,15 +27,15 @@ def navchart(d, owndomain, omit):
                 if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
                     continue
                 tmplink = {}
-                tmplink['s'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
-                tmplink['t'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
-                tmplink['c'] = sv
+                tmplink['source'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
+                tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
+                tmplink['cnt'] = sv
                 duplicate_found = False
                 for li in links:
-                    if (li['s'] == tmplink['s']
-                            and li['t'] == tmplink['t']):
+                    if (li['source'] == tmplink['source']
+                            and li['target'] == tmplink['target']):
                         duplicate_found = True
-                        li['c'] += sv
+                        li['cnt'] += sv
                         break
                 if duplicate_found == False:
                     links.append(tmplink)
