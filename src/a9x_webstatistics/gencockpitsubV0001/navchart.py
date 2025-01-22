@@ -133,7 +133,7 @@ def navchart(d, owndomain, omit):
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
         h += "node.fx = node.x;"  # Freeze position
         h += "node.fy = node.y;"  # Freeze position
-        h += "node.style('fill','red');"  # color
+        h += "d3.select(node).style('fill', 'red');"  # color
         h += "});"  + "\n"
 
         # 8. Define the tick function to update positions
