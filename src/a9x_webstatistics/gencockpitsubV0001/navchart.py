@@ -75,7 +75,8 @@ def navchart(d, owndomain, omit):
         h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
-        h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
+        #h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
+        h += 'const height = width;'  + "\n"   # make height at least as width
 
         # 2. Set up the SVG container and dimensions
         h += 'const svg = d3.select("#svgchart").attr("width", width).attr("height", height);'
@@ -103,7 +104,7 @@ def navchart(d, owndomain, omit):
         h += ".data(nodes)"
         h += ".enter().append('circle')"
         h += ".attr('class', 'node')"
-        h += ".attr('r', 20)"
+        h += ".attr('r', 15)"
         h += ".style('fill','steelblue')"
         h += ".style('stroke','white')"
         h += ".style('stroke-width','1.5px')"
@@ -132,6 +133,7 @@ def navchart(d, owndomain, omit):
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
         h += "node.fx = node.x;"  # Freeze position
         h += "node.fy = node.y;"  # Freeze position
+        h += "node.style('fill','red');"  # color
         h += "});"  + "\n"
 
         # 8. Define the tick function to update positions
