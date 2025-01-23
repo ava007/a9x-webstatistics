@@ -74,12 +74,12 @@ def navchart(d, owndomain, omit):
                 if '[' in tk:    # hack for IPv6 addresses
                     continue
                 tmplink = {}
-                tmplink['source'] = tk
+                tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmplink['cnt'] = 0
                 for tdk,tdv in tv['target'].items():
-                    tmplink['target'] = tdk
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
+                    tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdv) ) # eliminate special chars
                     duplicate_found = False
                     for li in links:
                         if (li['source'] == tmplink['source']
@@ -90,8 +90,8 @@ def navchart(d, owndomain, omit):
                     if duplicate_found == False:
                         links.append(tmplink)
 
-                    n[0] = tmplink['source']
-                    n[1] = tmplink['target']
+                    n[0] = tk
+                    n[1] = tdv
                     for i in range(2):   # n[0] and n[1]
                         tmpnode = {}
                         tmpnode['name'] = n[i]
