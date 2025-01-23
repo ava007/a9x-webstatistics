@@ -29,7 +29,8 @@ def cockpitLanguages(d, owndomain):
         l = {}
         l['lang'] = k
         l['freq'] = v / total_languages * 100
-        language_array.append(l)
+        if l['freq'] > 0.4:
+            language_array.append(l)
                 
     h = ''
     # d3js horizontal bubble char in case results are available:
@@ -38,7 +39,7 @@ def cockpitLanguages(d, owndomain):
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top Browser Languages</h3>'
-        h += '<p class="card-text">Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':'
+        h += '<p class="card-text">Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':</p>'
         h += '<div id="browserlanguages-container"><svg width="600" height="400"></svg></div>'
         h += '<script type="module">'
         h += 'const languages = ' + str(language_array) + ';'
@@ -98,6 +99,6 @@ def cockpitLanguages(d, owndomain):
         h += '  .attr("text-anchor", "end")'
         h += '  .text(d => d.lang);'
         h += '</script>'
-        h += '</p>'
-        h += '</div></div></div>'   # end of card and col
+        #h += '</p>'
+        h += '</div></div></div>'  + "\n" 
     return h
