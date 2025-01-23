@@ -79,7 +79,7 @@ def navchart(d, owndomain, omit):
                 for tdk,tdv in tv['target'].items():
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
-                    tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdv) ) # eliminate special chars
+                    tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
                     duplicate_found = False
                     for li in links:
                         if (li['source'] == tmplink['source']
@@ -91,7 +91,7 @@ def navchart(d, owndomain, omit):
                         links.append(tmplink)
 
                     n[0] = tk
-                    n[1] = tdv
+                    n[1] = tdk
                     for i in range(2):   # n[0] and n[1]
                         tmpnode = {}
                         tmpnode['name'] = n[i]
