@@ -4,7 +4,7 @@ from operator import itemgetter
 # navigation chart:
 def navchart(d, owndomain, omit):
     h = ''
-    links = []    # {'s': 'google.com', 't': '/team/view/ax', 'c': 1}
+    links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
     nodes = []    # {'id': 'google.com', 'y':'root'}
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -59,6 +59,56 @@ def navchart(d, owndomain, omit):
         days += 1
         if days > 31:
             break
+
+    days = 0
+    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+        # omit months or years:
+        if len(k) <= 6:
+            continue
+        days += 1
+        if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
+            for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
+                if is_valid_ip(tk) == True:  # to suppress ip; ip is not a domain anyway    
+                    continue
+                if '[' in tk:    # hack for IPv6 addresses
+                    continue
+                tmplink = {}
+                tmplink['source'] = tk
+                tmplink['cnt'] = 0
+                for tdk,tdv in tv['target'].items():
+                    tmplink['target'] = tdk
+                    if any(oelm in tdk for oelm in omit):  # don not show parts of url 
+                        continue
+                    duplicate_found = False
+                    for li in links:
+                        if (li['source'] == tmplink['source']
+                                and li['target'] == tmplink['target']):
+                            duplicate_found = True
+                            li['cnt'] += tdv
+                            break
+                    if duplicate_found == False:
+                        links.append(tmplink)
+
+                    n[0] = tmplink['source']
+                    n[1] = tmplink['target']
+                    for i in range(2):   # n[0] and n[1]
+                        tmpnode = {}
+                        tmpnode['name'] = n[i]
+                        tmpnode['typ'] = 'root'
+                        duplicate_found = False
+                        tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
+                        for no in nodes:
+                            if (no['id'] == tmpnode['id']):
+                                duplicate_found = True
+                                break
+                    
+                        if duplicate_found == False:
+                            nodes.append(tmpnode)
+                days += 1
+                if days > 31:
+                    break
+
+                    
  
     # d3js horizontal bubble char in case results are available:
     #if len(toplng) > 0:
