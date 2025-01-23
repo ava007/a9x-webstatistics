@@ -78,10 +78,8 @@ def navchart(d, owndomain, omit):
         #h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
         h += 'const height = width;'  + "\n"   # make height at least as width
 
-        # 2. Set up the SVG container and dimensions
+        # 2. Set up the SVG container and set dimensions
         h += 'const svg = d3.select("#svgchart").attr("width", width).attr("height", height);'
-        #h += "const width = +svg.attr('width');"   # duplicate to line 66-67
-        #h += "const height = +svg.attr('height');" + "\n"
        
         # 3. Set up the D3 force simulation
         h += "const simulation = d3.forceSimulation(nodes)"
@@ -118,7 +116,6 @@ def navchart(d, owndomain, omit):
         h += ".selectAll('.label')"
         h += ".data(nodes)"
         h += ".enter().append('text')"
-        #h += ".attr('class', 'label')"
         h += ".style('font-family','Arial, sans-serif')"
         h += ".style('font-size','12px')"
         h += ".style('pointer-events','none')"
@@ -133,13 +130,11 @@ def navchart(d, owndomain, omit):
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
         h += "node.fx = node.x;"  # Freeze position
         h += "node.fy = node.y;"  # Freeze position
-        #h += "d3.select(node).style('fill', 'red');"  # color
-        h += "d3.select(node).attr('fill', 'red');"  # Set the fill color to red
+        h += "d3.selectAll('.node').filter(d => d.id === node.id).style('fill', 'red');"  # color red
         h += "});"  + "\n"
 
         # 8. Define the tick function to update positions
         h += "simulation.on('tick', function() {"
-        # Update link positions
         h += "link"
         h += ".attr('x1', d => d.source.x)"
         h += ".attr('y1', d => d.source.y)"
