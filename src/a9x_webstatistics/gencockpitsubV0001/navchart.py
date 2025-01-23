@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from operator import itemgetter
+import ipaddress
 
 # navigation chart:
 def navchart(d, owndomain, omit):
@@ -220,3 +221,10 @@ def navchart(d, owndomain, omit):
         #h += '</p>'
         h += '</div></div></div>'
     return h
+
+def is_valid_ip(address):
+    try: 
+        x = ipaddress.ip_address(address)
+        return True
+    except:
+        return False
