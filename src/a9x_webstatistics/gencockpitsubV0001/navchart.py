@@ -67,7 +67,7 @@ def navchart(d, owndomain, omit):
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Navigation Chart</h3>'
-        h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':'
+        h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':</p>'
         h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
         h += '<script type="module">' + "\n"
         h += 'const nodes = ' + str(nodes) + ';' + "\n"
@@ -167,6 +167,6 @@ def navchart(d, owndomain, omit):
         h += "}"  + "\n"
         h += "</script>"
 
-        h += '</p>'
+        #h += '</p>'
         h += '</div></div></div>'
     return h
