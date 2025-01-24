@@ -17,7 +17,7 @@ from operator import itemgetter
 #
 #
 #  Migrationsteps:
-#  a)  Build Chart based on user->Nav ---> Beta, can be Prod
+#  a)  Build Chart based on user->Nav with fixed experimental data   ---> Prod (if domain = logikfabrik.com)
 #  b)  New Data goes into user->Nav    ---> Beta
 #  c)  Migrate using this function    ---> Beta
 #  d)  Discard old Navigation         ---> Prod
