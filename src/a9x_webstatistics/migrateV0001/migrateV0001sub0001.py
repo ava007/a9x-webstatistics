@@ -16,6 +16,11 @@ from operator import itemgetter
 #     ]
 #
 #
+#  Migrationsteps:
+#  a)  Build Chart based on user->Nav ---> Beta, can be Prod
+#  b)  New Data goes into user->Nav    ---> Beta
+#  c)  Migrate using this function    ---> Beta
+#  d)  Discard old Navigation         ---> Prod
 
 def migv0001sub0001(
     statfile
