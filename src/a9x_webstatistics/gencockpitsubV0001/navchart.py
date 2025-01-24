@@ -144,7 +144,7 @@ def navchart(d, owndomain, omit):
         h += ".data(links)"
         h += ".enter().append('line')"
         h += ".style('stroke','#999')"
-        h += ".style('stroke-opacity','0.6')" + "\n"
+        h += ".style('stroke-opacity','0.6');" + "\n"
         #h += ".attr('class', 'link');"  + "\n"
 
         # 5. Create nodes
