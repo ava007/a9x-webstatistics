@@ -6,7 +6,7 @@ import ipaddress
 def navchart(d, owndomain, omit):
     h = ''
     links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
-    nodes = []    # {'id': 'google.com', 'y':'root'}
+    nodes = []    # {'id': 'google.com', 'value':1}
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         if len(k) < 8:   # not a day anymore
@@ -30,13 +30,13 @@ def navchart(d, owndomain, omit):
                 tmplink = {}
                 tmplink['source'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
                 tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
-                tmplink['cnt'] = sv
+                tmplink['value'] = sv
                 duplicate_found = False
                 for li in links:
                     if (li['source'] == tmplink['source']
                             and li['target'] == tmplink['target']):
                         duplicate_found = True
-                        li['cnt'] += sv
+                        li['value'] += sv
                         break
                 if duplicate_found == False:
                     links.append(tmplink)
@@ -75,7 +75,7 @@ def navchart(d, owndomain, omit):
                     continue
                 tmplink = {}
                 tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
-                tmplink['cnt'] = 0
+                tmplink['value'] = 0
                 for tdk,tdv in tv['target'].items():
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
@@ -85,7 +85,7 @@ def navchart(d, owndomain, omit):
                         if (li['source'] == tmplink['source']
                                 and li['target'] == tmplink['target']):
                             duplicate_found = True
-                            li['cnt'] += tdv
+                            li['value'] += tdv
                             break
                     if duplicate_found == False:
                         links.append(tmplink)
@@ -119,106 +119,95 @@ def navchart(d, owndomain, omit):
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Navigation Chart</h3>'
         h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':</p>'
-        h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
+        h += '<div id="navchart-container20250128"><svg id="svgchart20250128" width="600" height="400"></svg></div>'
         h += '<script type="module">' + "\n"
         h += 'const nodes = ' + str(nodes) + ';' + "\n"
         h += 'const links = ' + str(links) + ';' + "\n"
-        h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
-        h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
+        h += 'const rect = document.getElementById("navchart-container20250128").getBoundingClientRect();'
+        h += 'const margin = { top: 1, right: 20, bottom: 5, left: 1 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
-        #h += 'const height = 400 - margin.top - margin.bottom;'  + "\n"
         h += 'const height = width;'  + "\n"   # make height at least as width
 
-        # 2. Set up the SVG container and set dimensions
-        h += 'const svg = d3.select("#svgchart").attr("width", width).attr("height", height);'
-       
-        # 3. Set up the D3 force simulation
-        h += "const simulation = d3.forceSimulation(nodes)"
-        h += ".force('link', d3.forceLink(links).id(d => d.id).distance(150))"
-        h += ".force('charge', d3.forceManyBody().strength(-300))"
-        h += ".force('center', d3.forceCenter(width / 2, height / 2));"  + "\n"
+        #  Convert the source and target to internal node indices
+        h += 'const LS = d3.map(links, (link) => link.source);'
+        h += 'const LT = d3.map(links, (link) => link.target);'
+        h += 'const LV = d3.map(links, (link) => link.value);'
 
-        # 4. Create links (edges)
-        h += "const link = svg.append('g')"
-        h += ".selectAll('.link')"
-        h += ".data(links)"
-        h += ".enter().append('line')"
-        h += ".style('stroke','#999')"
-        h += ".style('stroke-opacity','0.6');" + "\n"
-        #h += ".attr('class', 'link');"  + "\n"
+        h += 'const N = d3.map(nodes, (node) => node.id);'
+        h += 'const G = null;'   # No specific node groups in this case
 
-        # 5. Create nodes
-        h += "const node = svg.append('g')"
-        h += ".selectAll('.node')"
-        h += ".data(nodes)"
-        h += ".enter().append('circle')"
-        h += ".attr('class', 'node')"
-        h += ".attr('r', 15)"
-        h += ".style('fill','steelblue')"
-        h += ".style('stroke','white')"
-        h += ".style('stroke-width','1.5px')"
-        h += ".call(d3.drag()"
-        h += ".on('start', dragStarted)"
-        h += ".on('drag', dragged)"
-        h += ".on('end', dragEnded));" + "\n"
+        #// Create a sankey layout
+        h += 'const sankey = d3.sankey()'
+        h += '.nodeId(({ index: i }) => N[i])'
+        h += '.nodeWidth(10)'
+        h += '.nodePadding(10)'
+        h += '.nodeAlign(d3.sankeyJustify)'
+        h += '.extent(['
+        h += '[marginLeft, marginTop],'
+        h += '[width - marginRight, height - marginBottom]'
+        h += ']);'
 
-        # 6. Add labels to the nodes
-        h += "const labels = svg.append('g')"
-        h += ".selectAll('.label')"
-        h += ".data(nodes)"
-        h += ".enter().append('text')"
-        h += ".style('font-family','Arial, sans-serif')"
-        h += ".style('font-size','12px')"
-        h += ".style('pointer-events','none')"
-        h += ".attr('dx', 25)"
-        h += ".attr('dy', '.35em')"
-        h += ".text(d => d.name);"  + "\n"
+        h += 'const { nodes: computedNodes, links: computedLinks } = sankey({'
+        h += 'nodes: nodes,'
+        h += 'links: links'
+        h += '});'
 
-        # 7. Place root nodes along the left side of the screen and freeze their positions
-        h += "const rootNodes = nodes.filter(n => n.typ === 'root');"
-        h += "rootNodes.forEach((node, index) => {"
-        h += "node.x = 100;" # Set all root nodes on the left (x = 100)
-        h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
-        h += "node.fx = node.x;"  # Freeze position
-        h += "node.fy = node.y;"  # Freeze position
-        h += "d3.selectAll('.node').filter(d => d.id === node.id).style('fill', 'red');"  # color red
-        h += "});"  + "\n"
+        #// Create the SVG container
+        h += 'const svg = d3.select("#svgchart20250128b")'
+        h += '.attr("width", width)'
+        h += '.attr("height", height)'
+        h += '.attr("viewBox", [0,0 , width, height])'
+        h += '.attr("style", "max-width: 100%; height: auto;  font: 10px sans-serif; height: intrinsic;");'
 
-        # 8. Define the tick function to update positions
-        h += "simulation.on('tick', function() {"
-        h += "link"
-        h += ".attr('x1', d => d.source.x)"
-        h += ".attr('y1', d => d.source.y)"
-        h += ".attr('x2', d => d.target.x)"
-        h += ".attr('y2', d => d.target.y);"  + "\n"
+        # // Add node elements (rectangles)
+        h += 'const node = svg'
+        h += '.append("g")'
+        h += '.attr("stroke", "currentColor")'
+        h += '.selectAll("rect")'
+        h += '.data(computedNodes)'
+        h += '.join("rect")'
+        h += '.attr("x", (d) => d.x0)'
+        h += '.attr("y", (d) => d.y0)'
+        h += '.attr("width", (d) => d.x1 - d.x0)'
+        h += '.attr("height", (d) => d.y1 - d.y0)'
+        h += '.attr("fill", "#1f77b4");'
 
-        # Update node positions
-        h += "node.attr('cx', d => d.x).attr('cy', d => d.y);"  + "\n"
+        #// Add labels to the nodes
+        h += 'svg'
+        h += '.append("g")'
+        h += '.attr("font-family", "sans-serif")'
+        h += '.attr("font-size", 10)'
+        h += '.selectAll("text")'
+        h += '.data(computedNodes)'
+        h += '.join("text")'
+        h += '.attr("x", (d) => (d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6))'
+        h += '.attr("y", (d) => (d.y1 + d.y0) / 2)'
+        h += '.attr("dy", "0.35em")'
+        h += '.attr("text-anchor", (d) => (d.x0 < width / 2 ? "start" : "end"))'
+        h += '.text((d) => d.id);'
 
-        # Update label positions
-        h += "labels.attr('x', d => d.x).attr('y', d => d.y);"
-        h += "});"  + "\n"
+        #// Add link elements (paths)
+        h += 'const link = svg'
+        h += '.append("g")'
+        h += '.attr("fill", "none")'
+        h += '.attr("stroke-opacity", 0.5)'
+        h += '.selectAll("g")'
+        h += '.data(computedLinks)'
+        h += '.join("g");'
 
-        # 9. Drag functions to allow node movement
-        h += "function dragStarted(event) {"
-        h += "if (!event.active) simulation.alphaTarget(0.3).restart();"
-        h += "event.subject.fx = event.subject.x;"
-        h += "event.subject.fy = event.subject.y;"
-        h += "}"  + "\n"
+        h += 'link'
+        h += '.append("path")'
+        h += '.attr("d", d3.sankeyLinkHorizontal())'
+        h += '.attr("stroke", "#ccc")'
+        h += '.attr("stroke-width", (d) => Math.max(1, d.width));'
 
-        h += "function dragged(event) {"
-        h += "event.subject.fx = event.x;"
-        h += "event.subject.fy = event.y;"
-        h += "}"  + "\n"
+        #// Add titles to the links
+        h += 'link'
+        h += '.append("title")'
+        h += '.text((d) => `${d.source.id} → ${d.target.id}\n${d.value}`);'
 
-        h += "function dragEnded(event) {"
-        h += "if (!event.active) simulation.alphaTarget(0);"
-        h += "event.subject.fx = null;"
-        h += "event.subject.fy = null;"
-        h += "}"  + "\n"
         h += "</script>"
 
-        #h += '</p>'
         h += '</div></div></div>'
     return h
 
