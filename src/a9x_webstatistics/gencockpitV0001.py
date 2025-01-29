@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
 from .gencockpitsubV0001 import *
     
-def runGenCockpitV0001(infile, outfile, domain, omit):
+def runGenCockpitV0001(infile, outfile, domain, omit, efeature=0):
 
     owndomain = domain.replace('http://','')
     owndomain = owndomain.replace('https://','')
@@ -359,6 +359,10 @@ def runGenCockpitV0001(infile, outfile, domain, omit):
 
         # navigation chart
         h += navchart(d, owndomain, omit)
+
+        # navigation chart as sankey diagram (experimental feature)
+        if efeature == 10:
+            h += navchartsankey(d, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
