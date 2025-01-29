@@ -2,8 +2,8 @@
 from operator import itemgetter
 import ipaddress
 
-# navigation chart:
-def navchart(d, owndomain, omit):
+# navigation chart as sankey diagram:
+def navchartsankey(d, owndomain, omit):
     h = ''
     links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
     nodes = []    # {'id': 'google.com', 'value':1}
@@ -145,19 +145,19 @@ def navchart(d, owndomain, omit):
         h += '.extent(['
         h += '[marginLeft, marginTop],'
         h += '[width - marginRight, height - marginBottom]'
-        h += ']);'
+        h += ']);'  + "\n"
 
         h += 'const { nodes: computedNodes, links: computedLinks } = sankey({'
         h += 'nodes: nodes,'
         h += 'links: links'
-        h += '});'
+        h += '});'  + "\n"
 
         #// Create the SVG container
         h += 'const svg = d3.select("#svgchart20250128b")'
         h += '.attr("width", width)'
         h += '.attr("height", height)'
         h += '.attr("viewBox", [0,0 , width, height])'
-        h += '.attr("style", "max-width: 100%; height: auto;  font: 10px sans-serif; height: intrinsic;");'
+        h += '.attr("style", "max-width: 100%; height: auto;  font: 10px sans-serif; height: intrinsic;");'  + "\n"
 
         # // Add node elements (rectangles)
         h += 'const node = svg'
@@ -170,7 +170,7 @@ def navchart(d, owndomain, omit):
         h += '.attr("y", (d) => d.y0)'
         h += '.attr("width", (d) => d.x1 - d.x0)'
         h += '.attr("height", (d) => d.y1 - d.y0)'
-        h += '.attr("fill", "#1f77b4");'
+        h += '.attr("fill", "#1f77b4");'  + "\n"
 
         #// Add labels to the nodes
         h += 'svg'
@@ -184,7 +184,7 @@ def navchart(d, owndomain, omit):
         h += '.attr("y", (d) => (d.y1 + d.y0) / 2)'
         h += '.attr("dy", "0.35em")'
         h += '.attr("text-anchor", (d) => (d.x0 < width / 2 ? "start" : "end"))'
-        h += '.text((d) => d.id);'
+        h += '.text((d) => d.id);'  + "\n"
 
         #// Add link elements (paths)
         h += 'const link = svg'
@@ -193,18 +193,18 @@ def navchart(d, owndomain, omit):
         h += '.attr("stroke-opacity", 0.5)'
         h += '.selectAll("g")'
         h += '.data(computedLinks)'
-        h += '.join("g");'
+        h += '.join("g");'  + "\n"
 
         h += 'link'
         h += '.append("path")'
         h += '.attr("d", d3.sankeyLinkHorizontal())'
         h += '.attr("stroke", "#ccc")'
-        h += '.attr("stroke-width", (d) => Math.max(1, d.width));'
+        h += '.attr("stroke-width", (d) => Math.max(1, d.width));'  + "\n"
 
         #// Add titles to the links
         h += 'link'
         h += '.append("title")'
-        h += '.text((d) => `${d.source.id} → ${d.target.id}\n${d.value}`);'
+        h += '.text((d) => `${d.source.id} → ${d.target.id}\n${d.value}`);'  + "\n"
 
         h += "</script>"
 
