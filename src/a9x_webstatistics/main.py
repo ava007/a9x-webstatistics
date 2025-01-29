@@ -69,7 +69,7 @@ def parseRec(rec, log_pattern, j, georeader):
     return r,j
 
 
-def runws(statfile, infile, geoip, verbosity, domain, expfeature):
+def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
 
     try: 
         georeader = geoip2.database.Reader(geoip)
@@ -182,9 +182,9 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--geoip", help="path/file to GeoIP2-Country.mmdb file")
     parser.add_argument("-v", "--verbose", help="increase output verbosity, 0=none, 1=increased verbosity", default="0")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
-    parser.add_argument("-ef", "--experimentalfeature", help="use experimentalfeature number, 0=none, 1-99=feature", default="0")
+    parser.add_argument("-ef", "--efeature", help="use experimentalfeature number, 0=none, 1-99=feature", default="0")
     args, unknown = parser.parse_known_args()
 
     migv0001(statfile=args.statfile)
-    runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, expfeature=args.experimentalfeature)
+    runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, efeature=args.efeature)
     delv0000(statfile=args.statfile)
