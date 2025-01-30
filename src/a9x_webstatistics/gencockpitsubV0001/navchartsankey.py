@@ -152,7 +152,7 @@ def navchartsankey(d, owndomain, omit):
     h += '});'  + "\n"
 
     #// Create the SVG container
-    h += 'const svg = d3.select("#svgchart20250128b")'
+    h += 'const svg = d3.select("#svgchart20250128")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
     h += '.attr("viewBox", [0,0 , width, height])'
