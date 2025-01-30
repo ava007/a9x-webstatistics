@@ -47,7 +47,7 @@ def navchartsankey(d, owndomain, omit):
                     tmpnode['name'] = n[i]
                     #if ('.com' in n[i] or
                     #       '.ru' in n[i]):
-                    if n[i][0:1] != '/'
+                    if n[i][0:1] != '/':
                         tmpnode['typ'] = 'root'
                     duplicate_found = False
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
