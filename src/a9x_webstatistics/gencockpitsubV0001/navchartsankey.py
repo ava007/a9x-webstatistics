@@ -38,6 +38,9 @@ def navchartsankey(d, owndomain, omit):
                         duplicate_found = True
                         li['value'] += sv
                         break
+                    if tmplink['target'] == li['source']:  # prevent circular links
+                        duplicate_found = True
+                        break
                 if duplicate_found == False:
                     links.append(tmplink)
 
@@ -89,6 +92,10 @@ def navchartsankey(d, owndomain, omit):
                             duplicate_found = True
                             li['value'] += tdv
                             break
+                        if tmplink['target'] == li['source']:  # prevent circular links
+                            duplicate_found = True
+                            break
+
                     if duplicate_found == False:
                         links.append(tmplink)
 
