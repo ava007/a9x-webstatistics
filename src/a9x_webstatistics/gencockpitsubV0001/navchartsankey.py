@@ -80,11 +80,13 @@ def navchartsankey(d, owndomain, omit):
                     continue
                 tmplink = {}
                 tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
-                tmplink['value'] = 0
+                tmplink['value'] = 1
                 for tdk,tdv in tv['target'].items():
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
                     tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
+                    if tmplink['target'] == '/':    # to avoid empty nb
+                        tmplink['target'] = owndomain
                     duplicate_found = False
                     for li in links:
                         if (li['source'] == tmplink['source']
@@ -99,8 +101,8 @@ def navchartsankey(d, owndomain, omit):
                     if duplicate_found == False:
                         links.append(tmplink)
 
-                    n[0] = tk
-                    n[1] = tdk
+                    n[0] = tmplink['source'] # tk
+                    n[1] = tmplink['target'] #tdk
                     for i in range(2):   # n[0] and n[1]
                         tmpnode = {}
                         tmpnode['name'] = n[i]
