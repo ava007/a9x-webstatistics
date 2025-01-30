@@ -142,8 +142,8 @@ def navchartsankey(d, owndomain, omit):
     h += '.nodePadding(10)'
     h += '.nodeAlign(d3.sankeyJustify)'
     h += '.extent(['
-    h += '[marginLeft, marginTop],'
-    h += '[width - marginRight, height - marginBottom]'
+    h += '[margin.left, margin.top],'
+    h += '[width - margin.right, height - margin.bottom]'
     h += ']);'  + "\n"
 
     h += 'const { nodes: computedNodes, links: computedLinks } = sankey({'
