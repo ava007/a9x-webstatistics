@@ -45,11 +45,11 @@ def navchartsankey(d, owndomain, omit):
                     links.append(tmplink)
 
                 # add nodes if not already in array:
+                n[0] = tmplink['source']
+                n[1] = tmplink['target']
                 for i in range(2):   # n[0] and n[1]
                     tmpnode = {}
                     tmpnode['name'] = n[i]
-                    #if ('.com' in n[i] or
-                    #       '.ru' in n[i]):
                     if n[i][0:1] != '/':
                         tmpnode['typ'] = 'root'
                     duplicate_found = False
