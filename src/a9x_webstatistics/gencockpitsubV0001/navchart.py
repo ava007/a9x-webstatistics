@@ -5,7 +5,7 @@ import ipaddress
 # navigation chart:
 def navchart(d, owndomain, omit):
     h = ''
-    links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
+    links = []    # [{'source': 'google.com', 'target': '/team/view/ax', 'cnt': 2, 'source': 'bing.com', 'target': '/team/viex/comp', 'cnt': 5}]
     nodes = []    # {'id': 'google.com', 'y':'root'}
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -109,7 +109,8 @@ def navchart(d, owndomain, omit):
                 if days > 31:
                     break
 
-                    
+    # Sort by 'cnt' descending and take the top 20
+    top_links = sorted(links, key=lambda x: x['cnt'], reverse=True)[:20]
  
     # d3js horizontal bubble char in case results are available:
     #if len(toplng) > 0:
@@ -122,7 +123,7 @@ def navchart(d, owndomain, omit):
         h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
         h += '<script type="module">' + "\n"
         h += 'const nodes = ' + str(nodes) + ';' + "\n"
-        h += 'const links = ' + str(links) + ';' + "\n"
+        h += 'const links = ' + str(top_links) + ';' + "\n"
         h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
