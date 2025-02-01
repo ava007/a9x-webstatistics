@@ -173,11 +173,11 @@ def navchart(d, owndomain, omit):
         h += ".attr('dx', 25)"
         h += ".attr('dy', '.35em')"
         h += ".text(d => {"
-        h += "  const lbl = d.name.substring(0,10);"
+        h += "  let lbl = d.name.substring(0,10);"
         h += "  if (d.name.length > 12) {"
         h += "    lbl = lbl + '...' + d.name.slice(-3);"
         h += "  }"
-        h += "  return lbl }"
+        h += "  return lbl; }"
         h += ");"  + "\n"
 
         # 7. Place root nodes along the left side of the screen and freeze their positions
