@@ -134,7 +134,7 @@ def navchart(d, owndomain, omit):
        
         # 3. Set up the D3 force simulation
         h += "const simulation = d3.forceSimulation(nodes)"
-        h += ".force('link', d3.forceLink(links).id(d => d.id).distance(150))"
+        h += ".force('link', d3.forceLink(links).id(d => d.id).distance(100))"
         h += ".force('charge', d3.forceManyBody().strength(-300))"
         h += ".force('center', d3.forceCenter(width / 2, height / 2));"  + "\n"
 
@@ -153,7 +153,7 @@ def navchart(d, owndomain, omit):
         h += ".data(nodes)"
         h += ".enter().append('circle')"
         h += ".attr('class', 'node')"
-        h += ".attr('r', 15)"
+        h += ".attr('r', 10)"
         h += ".style('fill','steelblue')"
         h += ".style('stroke','white')"
         h += ".style('stroke-width','1.5px')"
@@ -168,11 +168,17 @@ def navchart(d, owndomain, omit):
         h += ".data(nodes)"
         h += ".enter().append('text')"
         h += ".style('font-family','Arial, sans-serif')"
-        h += ".style('font-size','12px')"
+        h += ".style('font-size','10px')"
         h += ".style('pointer-events','none')"
         h += ".attr('dx', 25)"
         h += ".attr('dy', '.35em')"
-        h += ".text(d => d.name);"  + "\n"
+        h += ".text(d => {"
+        h += "  const lbl = d.name.substring(0,10);"
+        h += "  if (d.name.length > 12) {"
+        h += "    lbl = lbl + '...' + d.name.slice(-3);"
+        h += "  }"
+        h += "  return lbl }"
+        h += ");"  + "\n"
 
         # 7. Place root nodes along the left side of the screen and freeze their positions
         h += "const rootNodes = nodes.filter(n => n.typ === 'root');"
