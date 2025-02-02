@@ -163,6 +163,10 @@ def navchart(d, owndomain, omit):
                     tmpnode = {}
                     tmpnode['name'] = li['target']
                     tmpnode['id'] = li['target']
+                    for nn in nodes:
+                        if nn['id'] == li['target']:
+                            tmpnode['name'] = nn['name']
+                            break
                     chart_nodes.append(tmpnode)
  
     # d3js horizontal bubble char in case results are available:
@@ -226,7 +230,7 @@ def navchart(d, owndomain, omit):
     h += ".attr('dy', '.35em')"
     h += ".text(d => {"
     h += "  let lbl = d.name.substring(0,10);"
-    h += "  if (d.name.length > 14) {"
+    h += "  if (d.name.length > 15) {"
     h += "    let lbl = d.name.substring(0,10) + '...' + d.name.slice(-3);"
     h += "  } else {"
     h += "    let lbl = d.name;"
