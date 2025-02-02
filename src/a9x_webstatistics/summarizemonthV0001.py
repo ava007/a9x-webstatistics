@@ -65,7 +65,7 @@ def sumMonthV0001(d, statfile):
                 # external sources:
                 if 'externalFriendsHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendsHits'].items():
-                        #print("sum: externalFriendsHits: " + ck + ": " + str(cv) )
+                        print("sum: externalFriendsHits: ck: " + ck + " cv: " + str(cv) )
 
                         #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendsHits']))
                         if ck not in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
