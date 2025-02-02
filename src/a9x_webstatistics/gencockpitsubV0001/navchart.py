@@ -44,15 +44,25 @@ def navchart(d, owndomain, omit):
                 for i in range(2):   # n[0] and n[1]
                     tmpnode = {}
                     tmpnode['name'] = n[i]
+                    tmpnode['cnt_in'] = 0
+                    tmpnode['cnt_out'] = 0
                     if ('.com' in n[i] or
                            '.ru' in n[i]):
                         tmpnode['typ'] = 'root'
                     duplicate_found = False
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
+                    if i == 0:
+                        tmpnode['cnt_in'] = tmplink['cnt']
+                    else:
+                        tmpnode['cnt_out'] = tmplink['cnt']
                     
                     for no in nodes:
                         if (no['id'] == tmpnode['id']):
                             duplicate_found = True
+                            if i == 0:
+                                no['cnt_in'] += tmpnode['cnt_in']
+                            else:
+                                no['cnt_out'] += tmpnode['cnt_out']
                             break
                     
                     if duplicate_found == False:
@@ -96,12 +106,18 @@ def navchart(d, owndomain, omit):
                     for i in range(2):   # n[0] and n[1]
                         tmpnode = {}
                         tmpnode['name'] = n[i]
+                        tmpnode['cnt_in'] = 0
+                        tmpnode['cnt_out'] = 0
                         tmpnode['typ'] = 'root'
                         duplicate_found = False
                         tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
                         for no in nodes:
                             if (no['id'] == tmpnode['id']):
                                 duplicate_found = True
+                                if i == 0:
+                                    no['cnt_in'] += tmpnode['cnt_in']
+                                else:
+                                    no['cnt_out'] += tmpnode['cnt_out']
                                 break
                     
                         if duplicate_found == False:
