@@ -6,7 +6,7 @@ import ipaddress
 def navchart(d, owndomain, omit):
     h = ''
     links = []    # [{'source': 'google.com', 'target': '/team/view/ax', 'cnt': 2, 'source': 'bing.com', 'target': '/team/viex/comp', 'cnt': 5}]
-    nodes = []    # {'id': 'google.com', 'y':'root'}
+    nodes = []    # {'id': 'google.com', 'y':'root', 'cnt_in': 1, 'cnt_out': 2}
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         if len(k) < 8:   # not a day anymore
@@ -49,6 +49,7 @@ def navchart(d, owndomain, omit):
                         tmpnode['typ'] = 'root'
                     duplicate_found = False
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
+                    
                     for no in nodes:
                         if (no['id'] == tmpnode['id']):
                             duplicate_found = True
