@@ -111,6 +111,10 @@ def navchart(d, owndomain, omit):
 
     # Sort by 'cnt' descending and take the top 20
     top_links = sorted(links, key=lambda x: x['cnt'], reverse=True)[:20]
+
+    # todos:
+    # - consider only links departing from roots 
+    # - take only to 10 roots based on departing links!
  
     # d3js horizontal bubble char in case results are available:
     #if len(toplng) > 0:
