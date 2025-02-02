@@ -358,10 +358,11 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += '</div></div>' + "\n\n"   # end of row
 
         # navigation chart
-        h += navchart(d, owndomain, omit)
+        if efeature == '10':
+            h += navchart(d, owndomain, omit)
 
         # navigation chart as sankey diagram (experimental feature)
-        if efeature == '10':
+        if efeature == '11':
             h += navchartsankey(d, owndomain, omit)
         
         # Webstatistics for the last months
