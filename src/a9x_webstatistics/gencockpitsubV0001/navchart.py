@@ -189,8 +189,9 @@ def navchart(d, owndomain, omit):
     h += 'const svg = d3.select("#svgchart").attr("width", width).attr("height", height);'
       
     # 3. Set up the D3 force simulation
+    h += "const validLinks = links.filter(link => link.source && link.target);"
     h += "const simulation = d3.forceSimulation(nodes)"
-    h += ".force('link', d3.forceLink(links).id(d => d.id).distance(100))"
+    h += ".force('link', d3.forceLink(validLinks).id(d => d.id).distance(100))"
     h += ".force('charge', d3.forceManyBody().strength(-300))"
     h += ".force('center', d3.forceCenter(width / 2, height / 2));"  + "\n"
 
@@ -229,11 +230,11 @@ def navchart(d, owndomain, omit):
     h += ".attr('dx', 25)"
     h += ".attr('dy', '.35em')"
     h += ".text(d => {"
-    h += "  let lbl = d.name.substring(0,10);"
+    h += "  let lbl;"
     h += "  if (d.name.length > 15) {"
-    h += "    let lbl = d.name.substring(0,10) + '...' + d.name.slice(-3);"
+    h += "    lbl = d.name.substring(0,10) + '...' + d.name.slice(-3);"
     h += "  } else {"
-    h += "    let lbl = d.name;"
+    h += "    lbl = d.name;"
     h += "  }"
     h += "  return lbl; }"
     h += ");"  + "\n"
@@ -245,7 +246,7 @@ def navchart(d, owndomain, omit):
     h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
     h += "node.fx = node.x;"  # Freeze position
     h += "node.fy = node.y;"  # Freeze position
-    h += "d3.selectAll('.node').filter(d => d.id === node.id).style('fill', 'red');"  # color red
+    h += "d3.selectAll('circle.node').filter(d => d && d.id === node.id).style('fill', 'red');"  # color red
     h += "});"  + "\n"
 
     # 8. Define the tick function to update positions
