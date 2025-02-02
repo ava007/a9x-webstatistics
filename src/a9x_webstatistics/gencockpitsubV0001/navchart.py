@@ -144,7 +144,7 @@ def navchart(d, owndomain, omit):
                     if li['source'] == cn['id']:
                         cn_found = True
                 if cn_found == False:
-                    tmp_node = []
+                    tmp_node = {}
                     tmp_node['id'] = li['source']
                     chart_nodes.append[tmp_node]
                 # check target_node:
@@ -153,7 +153,7 @@ def navchart(d, owndomain, omit):
                     if li['target'] == cn['id']:
                         cn_found = True
                 if cn_found == False:
-                    tmp_node = []
+                    tmp_node = {}
                     tmp_node['id'] = li['target']
                     chart_nodes.append[tmp_node]
 
