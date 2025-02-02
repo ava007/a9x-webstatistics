@@ -173,7 +173,7 @@ def navchart(d, owndomain, omit):
         h += '<div id="navchart-container"><svg id="svgchart" width="600" height="400"></svg></div>'
         h += '<script type="module">' + "\n"
         h += 'const nodes = ' + str(chart_nodes) + ';' + "\n"
-        h += 'const links = ' + str(top_links) + ';' + "\n"
+        h += 'const links = ' + str(chart_links) + ';' + "\n"
         h += 'const rect = document.getElementById("navchart-container").getBoundingClientRect();'
         h += 'const margin = { top: 20, right: 20, bottom: 40, left: 100 };'
         h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
