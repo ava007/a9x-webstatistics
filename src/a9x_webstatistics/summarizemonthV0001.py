@@ -34,7 +34,7 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  = 0 
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] = 0 
 
-                    d['v0001']['days'][recMonth]['user']['externalFriendHits'] = {}
+                    d['v0001']['days'][recMonth]['user']['externalFriendsHits'] = {}
                     d['v0001']['days'][recMonth]['user']['topUrl'] = {}
                     d['v0001']['days'][recMonth]['user']['serverResponseCode'] = {}
                     d['v0001']['days'][recMonth]['robot'] = {}
