@@ -147,6 +147,10 @@ def navchart(d, owndomain, omit):
                     tmpnode = {}
                     tmpnode['id'] = li['source']
                     tmpnode['name'] = li['source']
+                    for nn in nodes:
+                        if nn['id'] == li['source']:
+                            tmpnode['name'] = nn['name']
+                            break
                     if n['root'] == 'y':
                         tmpnode['root'] = 'y'
                     chart_nodes.append(tmpnode)
@@ -160,11 +164,6 @@ def navchart(d, owndomain, omit):
                     tmpnode['name'] = li['target']
                     tmpnode['id'] = li['target']
                     chart_nodes.append(tmpnode)
-
-
-    # todos:
-    # - consider only links departing from roots 
-    # - take only to 10 roots based on departing links!
  
     # d3js horizontal bubble char in case results are available:
     #if len(toplng) > 0:
@@ -229,8 +228,10 @@ def navchart(d, owndomain, omit):
         h += ".attr('dy', '.35em')"
         h += ".text(d => {"
         h += "  let lbl = d.name.substring(0,10);"
-        h += "  if (d.name.length > 12) {"
-        h += "    lbl = lbl + '...' + d.name.slice(-3);"
+        h += "  if (d.name.length > 14) {"
+        h += "    let lbl = d.name.substring(0,10) + '...' + d.name.slice(-3);"
+        h += "  } else {"
+        h += "    let lbl = d.name;"
         h += "  }"
         h += "  return lbl; }"
         h += ");"  + "\n"
