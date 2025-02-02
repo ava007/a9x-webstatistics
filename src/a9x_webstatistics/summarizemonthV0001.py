@@ -68,7 +68,7 @@ def sumMonthV0001(d, statfile):
                         #print("sum: externalFriendsHits: " + ck + ": " + str(cv) )
 
                         #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendsHits']))
-                        if ck in d['v0001']['days'][x]['user']['externalFriendsHits']:
+                        if ck in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = cv;
