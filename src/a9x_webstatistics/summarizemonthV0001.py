@@ -68,10 +68,13 @@ def sumMonthV0001(d, statfile):
                         #print("sum: externalFriendsHits: " + ck + ": " + str(cv) )
 
                         #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendsHits']))
-                        if ck in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
-                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] += cv
-                        else:
-                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = cv;
+                        if ck not in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
+                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = {'cnt': 0, 'target': {} };
+                        for ct, cc in cv:
+                            if ct not in d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target']:
+                               d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] = 0
+                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] += cc
+                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['cnt'] += cc
                 
                 if 'robot' in dtmp['v0001']['days'][x]:
                     if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
