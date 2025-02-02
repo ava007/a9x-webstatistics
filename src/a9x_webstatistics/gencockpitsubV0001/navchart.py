@@ -146,6 +146,7 @@ def navchart(d, owndomain, omit):
                 if cn_found == False:
                     tmpnode = {}
                     tmpnode['id'] = li['source']
+                    tmpnode['name'] = li['source']
                     if n['root'] == 'y':
                         tmpnode['root'] = 'y'
                     chart_nodes.append(tmpnode)
@@ -156,6 +157,7 @@ def navchart(d, owndomain, omit):
                         cn_found = True
                 if cn_found == False:
                     tmpnode = {}
+                    tmpnode['name'] = li['target']
                     tmpnode['id'] = li['target']
                     chart_nodes.append(tmpnode)
 
