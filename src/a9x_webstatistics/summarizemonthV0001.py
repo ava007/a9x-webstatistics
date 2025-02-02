@@ -70,7 +70,7 @@ def sumMonthV0001(d, statfile):
                         #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendsHits']))
                         if ck not in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
                             d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = {'cnt': 0, 'target': {} };
-                        for ct, cc in cv['target']:
+                        for ct, cc in cv['target'].items():
                             if ct not in d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target']:
                                d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] = 0
                             d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] += cc
