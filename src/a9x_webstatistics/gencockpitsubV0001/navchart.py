@@ -144,18 +144,20 @@ def navchart(d, owndomain, omit):
                     if li['source'] == cn['id']:
                         cn_found = True
                 if cn_found == False:
-                    tmp_node = {}
-                    tmp_node['id'] = li['source']
-                    chart_nodes.append[tmp_node]
+                    tmpnode = {}
+                    tmpnode['id'] = li['source']
+                    if n['root'] == 'y':
+                        tmpnode['root'] = 'y'
+                    chart_nodes.append(tmpnode)
                 # check target_node:
                 cn_found = False
                 for cn in chart_nodes:
                     if li['target'] == cn['id']:
                         cn_found = True
                 if cn_found == False:
-                    tmp_node = {}
-                    tmp_node['id'] = li['target']
-                    chart_nodes.append[tmp_node]
+                    tmpnode = {}
+                    tmpnode['id'] = li['target']
+                    chart_nodes.append(tmpnode)
 
 
     # todos:
@@ -232,7 +234,7 @@ def navchart(d, owndomain, omit):
         h += ");"  + "\n"
 
         # 7. Place root nodes along the left side of the screen and freeze their positions
-        h += "const rootNodes = nodes.filter(n => n.typ === 'root');"
+        h += "const rootNodes = nodes.filter(n => n.root === 'y');"
         h += "rootNodes.forEach((node, index) => {"
         h += "node.x = 100;" # Set all root nodes on the left (x = 100)
         h += "node.y = 100 + index * 100;"   # Distribute vertically along a line
