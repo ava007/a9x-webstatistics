@@ -168,6 +168,30 @@ def navchart(d, owndomain, omit):
                             tmpnode['name'] = nn['name']
                             break
                     chart_nodes.append(tmpnode)
+
+    # find 2nd level links/nodes
+    if n2 in chart_nodes:
+        if 'root' in n2:
+            continue
+        for l2 in links:
+            if n2['id'] == li['source']:
+                tmplink = {}
+                tmplink['source'] =  li['source']
+                tmplink['target'] =  li['target']
+                tmplink['cnt'] = 1
+                chart_links.append(tmplink)
+                cn_found = False
+                for cn in chart_nodes:
+                    if li['target'] == cn['id']:
+                        cn_found = True
+                        break
+                if cn_found == False:
+                    tmpnode = {}
+                    tmpnode['id'] = li['target']
+                    tmpnode['name'] = li['target']
+                    chart_nodes.append(tmpnode)
+                break
+                           
  
     # d3js horizontal bubble char in case results are available:
     h += "\n\n"
