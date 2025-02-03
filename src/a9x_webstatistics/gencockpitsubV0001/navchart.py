@@ -220,13 +220,17 @@ def navchart(d, owndomain, omit):
     h += ".on('end', dragEnded));" + "\n"
 
     # 6. Add labels to the nodes
-    h += "const labels = svg.append('g')"
-    h += ".selectAll('.label')"
+    h += "const labels = svg.append('g').selectAll('.label')"
     h += ".data(nodes)"
-    h += ".enter().append('text')"
+    h += ".enter()"
+    h += ".append('a')"
+    h += ".attr('xlink:href', d => d.name.startsWith('http') ? d.name : `https://${d.name}`)"
+    h += ".attr('target', '_blank')"  # Open in new tab
+    h += ".append('text')"
     h += ".style('font-family','Arial, sans-serif')"
     h += ".style('font-size','10px')"
-    h += ".style('pointer-events','none')"
+    h += ".style('fill', 'blue')"  # Make it look like a link
+    h += ".style('text-decoration', 'underline')"
     h += ".attr('dx', 25)"
     h += ".attr('dy', '.35em')"
     h += ".text(d => {"
