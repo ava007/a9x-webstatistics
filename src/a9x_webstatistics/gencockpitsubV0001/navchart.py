@@ -170,7 +170,7 @@ def navchart(d, owndomain, omit):
                     chart_nodes.append(tmpnode)
 
     # find 2nd level links/nodes
-    if n2 in chart_nodes:
+    for n2 in chart_nodes:
         if 'root' in n2:
             continue
         for l2 in links:
