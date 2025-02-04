@@ -91,7 +91,7 @@ def navchart(d, owndomain, omit):
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
                     if tdk == '/':
-                        tmplink['target'] == owndomain
+                        tmplink['target'] = owndomain
                     else:
                         tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
                     duplicate_found = False
