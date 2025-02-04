@@ -220,7 +220,7 @@ def navchart(d, owndomain, omit):
     h += "const simulation = d3.forceSimulation(nodes)"
     h += ".force('link', d3.forceLink(validLinks).id(d => d.id).distance(100))"
     h += ".force('charge', d3.forceManyBody().strength(-300))"
-    h += ".force('center', d3.forceCenter(width / 2, height / 2));"  + "\n"
+    h += ".force('center', d3.forceCenter(width / 3, height / 2));"  + "\n"
 
     # 4. Create links (edges)
     h += "const link = svg.append('g')"
@@ -238,7 +238,7 @@ def navchart(d, owndomain, omit):
     h += ".enter().append('circle')"
     h += ".attr('class', 'node')"
     h += ".attr('r', 10)"
-    h += ".style('fill','steelblue')"
+    h += ".style('fill','lightskyblue')"
     h += ".style('stroke','white')"
     h += ".style('stroke-width','1.5px')"
     h += ".call(d3.drag()"
