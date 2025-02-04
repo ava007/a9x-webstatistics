@@ -8,6 +8,8 @@ def navchart(d, owndomain, omit):
     links = []    # [{'source': 'google.com', 'target': '/team/view/ax', 'cnt': 2, 'source': 'bing.com', 'target': '/team/viex/comp', 'cnt': 5}]
     nodes = []    # [{'id': 'google.com', 'root': 'y', 'cnt_in': 1, 'cnt_out': 2}, {'id': '/team/view/ax/', 'cnt_in': 2, 'cnt_out': 1}]
     days = 0
+
+    # create tmp array from all links from navigation
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         if len(k) < 8:   # not a day anymore
             break
@@ -75,8 +77,8 @@ def navchart(d, owndomain, omit):
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit months or years:
-        if len(k) <= 6:
-            continue
+        if len(k) < 8:
+            break
         days += 1
         if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
@@ -194,7 +196,6 @@ def navchart(d, owndomain, omit):
                     tmpnode['name'] = li['target']
                     chart_nodes.append(tmpnode)
                 break
-                           
  
     # d3js horizontal bubble char in case results are available:
     h += "\n\n"
