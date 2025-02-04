@@ -274,95 +274,95 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '</div>' + "\n\n"   # end of row
 
         # Navigation for the last 31 days:
-        topnav = {}   # nested dictionary!
-        days = 0
-        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-            if len(k) < 8:   # not a day anymore
-                break
-            if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
-                for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
-                    if sk not in topnav:
-                        topnav[sk]= sv
-                    else:
-                        topnav[sk] += sv
-            days += 1
-            if days > 31:
-                break
+        if efeature == '11':
+            topnav = {}   # nested dictionary!
+            days = 0
+            for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+                if len(k) < 8:   # not a day anymore
+                    break
+                if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
+                    for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
+                        if sk not in topnav:
+                            topnav[sk]= sv
+                        else:
+                            topnav[sk] += sv
+                days += 1
+                if days > 31:
+                    break
                             
-        if len(topnav) > 1:
-            h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
-            h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Navigation Analysis for ' + owndomain + '</h3>'
-            h += '<p class="card-text">User navigation or flows on internal links:</p>'
+            if len(topnav) > 1:
+                h += '<div class="row pt-3"><div class="col-md-12 col-lg-12 col-xxl-12">'
+                h += '<div class="card mt-2"><div class="card-body">'
+                h += '<h3 class="card-title">Navigation Analysis for ' + owndomain + '</h3>'
+                h += '<p class="card-text">User navigation or flows on internal links:</p>'
 
-            h += '<div id="navpath">'
-            h += '<div id="npath" class="vh-100"></div>'
-            h += '<script>'
-            h += 'var container = document.getElementById("npath");'
-            h += 'var dot = "dinetwork { node[shape=box]; '
+                h += '<div id="navpath">'
+                h += '<div id="npath" class="vh-100"></div>'
+                h += '<script>'
+                h += 'var container = document.getElementById("npath");'
+                h += 'var dot = "dinetwork { node[shape=box]; '
         
-            # loop through path beginning with the most traffic:
-            pcount = 0
-            navNodes = []
-            # setup root:  map(lambda...) for eliminating special characters
-            h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
+                # loop through path beginning with the most traffic:
+                pcount = 0
+                navNodes = []
+                # setup root:  map(lambda...) for eliminating special characters
+                h += "".join(map(lambda char: char if char.isalnum()  else "", owndomain) )  + '[ fontcolor=white, color=red, URL=\\"' + domain + '\\"];'
             
-            for pk, pv in sorted(topnav.items(), key=itemgetter(1), reverse=True):
-               if any(oelm in pk for oelm in omit):  # don not show parts of url 
-                   continue
+                for pk, pv in sorted(topnav.items(), key=itemgetter(1), reverse=True):
+                   if any(oelm in pk for oelm in omit):  # don not show parts of url 
+                       continue
 
-               if '?' in pk:   # skip wrong data
-                   continue
-               n = pk.split('(())') 
-               if n[0] == n[1]:
-                   continue
-               # allow only a-z and 0-9:
-               if n[0] == '/':    # to avoid empty na
-                  n[0] = owndomain
-               if n[1] == '/':    # to avoid empty nb
-                  n[1] = owndomain
-               na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
-               nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
-               if len(na) == 0:
-                   na = 'root'
-               if len(nb) == 0:
-                   nb = 'root'
-               h += na + ' -> ' + nb 
-               if pcount < 5:
-                   h += ' [penwidth=4,title=\\"Clicks: ' + str(pv) + '\\"]' 
-               elif pcount >= 5 and pcount < 10:
-                   h += ' [penwidth=2,title=\\"Clicks: ' + str(pv) + '\\"]' 
-               else:
-                   h += ' [title=\\"Clicks: ' + str(pv) + '\\"]' 
-               # [ label=" ",color="blue",arrowhead="dot" ];
-               h += ';'
+                   if '?' in pk:   # skip wrong data
+                       continue
+                   n = pk.split('(())') 
+                   if n[0] == n[1]:
+                       continue
+                   # allow only a-z and 0-9:
+                   if n[0] == '/':    # to avoid empty na
+                      n[0] = owndomain
+                   if n[1] == '/':    # to avoid empty nb
+                      n[1] = owndomain
+                   na = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) )
+                   nb = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) )
+                   if len(na) == 0:
+                       na = 'root'
+                   if len(nb) == 0:
+                       nb = 'root'
+                   h += na + ' -> ' + nb 
+                   if pcount < 5:
+                       h += ' [penwidth=4,title=\\"Clicks: ' + str(pv) + '\\"]' 
+                   elif pcount >= 5 and pcount < 10:
+                       h += ' [penwidth=2,title=\\"Clicks: ' + str(pv) + '\\"]' 
+                   else:
+                       h += ' [title=\\"Clicks: ' + str(pv) + '\\"]' 
+                   # [ label=" ",color="blue",arrowhead="dot" ];
+                   h += ';'
                          
-               # add nodes with their links:
-               if n[0] not in navNodes:
-                   navNodes.append(n[0])
-                   h += na + '[label=\\"' + n[0] + '\\"];'
-               if n[1] not in navNodes:
-                   navNodes.append(n[1])
-                   h += nb + '[label=\\"' + n[1] + '\\"];'
+                   # add nodes with their links:
+                   if n[0] not in navNodes:
+                       navNodes.append(n[0])
+                       h += na + '[label=\\"' + n[0] + '\\"];'
+                   if n[1] not in navNodes:
+                       navNodes.append(n[1])
+                       h += nb + '[label=\\"' + n[1] + '\\"];'
                    
-               pcount += 1
-               if pcount > 20:
-                   break
-            h += '}";'
-            h += 'var data = vis.parseDOTNetwork(dot);'
-            h += 'var network = new vis.Network(container, data);'
-            h += '</script>'
-            h += '</div>'   # end of navpath
+                   pcount += 1
+                   if pcount > 20:
+                       break
+                h += '}";'
+                h += 'var data = vis.parseDOTNetwork(dot);'
+                h += 'var network = new vis.Network(container, data);'
+                h += '</script>'
+                h += '</div>'   # end of navpath
 
-            h += '</div></div>'   # end of card
-            h += '</div></div>' + "\n\n"   # end of row
+                h += '</div></div>'   # end of card
+                h += '</div></div>' + "\n\n"   # end of row
 
         # navigation chart
-        if efeature == '10':
-            h += navchart(d, owndomain, omit)
+        h += navchart(d, owndomain, omit)
 
         # navigation chart as sankey diagram (experimental feature)
-        if efeature == '11':
+        if efeature == '10':
             h += navchartsankey(d, owndomain, omit)
         
         # Webstatistics for the last months
