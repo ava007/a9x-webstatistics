@@ -48,9 +48,9 @@ def navchart(d, owndomain, omit):
                     tmpnode['name'] = n[i]
                     tmpnode['cnt_in'] = 0
                     tmpnode['cnt_out'] = 0
-                    if ('.com' in n[i] or
-                           '.ru' in n[i]):
-                        tmpnode['root'] = 'y'
+                    #if ('.com' in n[i] or
+                    #       '.ru' in n[i]):
+                    #    tmpnode['root'] = 'y'
                     duplicate_found = False
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
                     if i == 0:
@@ -93,7 +93,7 @@ def navchart(d, owndomain, omit):
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
                     if tdk == '/':
-                        tmplink['target'] = owndomain
+                        tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", owndomain) ) # eliminate special chars
                     else:
                         tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
                     duplicate_found = False
