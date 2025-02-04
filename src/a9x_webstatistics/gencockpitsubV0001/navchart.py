@@ -251,7 +251,7 @@ def navchart(d, owndomain, omit):
     h += ".data(nodes)"
     h += ".enter()"
     h += ".append('a')"
-    h += ".attr('xlink:href', d => d.name.startsWith('http') ? d.name : `https://" + owndomain + "${d.name}`)"
+    h += ".attr('xlink:href', d => d.name.startsWith('/') ? `https://" + owndomain + "${d.name}` : 'https://' + d.name)"
     h += ".attr('target', '_blank')"  # Open in new tab
     h += ".append('text')"
     h += ".style('font-family','Arial, sans-serif')"
