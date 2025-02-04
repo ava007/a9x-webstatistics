@@ -3,7 +3,7 @@ from operator import itemgetter
 import ipaddress
 
 # navigation chart:
-def navchart(d, owndomain, omit):
+def navchart_tangledtree(d, owndomain, omit):
     h = ''
     #const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start'}]]
