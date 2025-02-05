@@ -23,7 +23,9 @@ def navchart_tangledtree(d, owndomain, omit):
                 tmp = {}
                 tmp['id'] = tk
                 tmp['parents'] = ['start']
-                levels.append(tmp)
+                parentlist = []
+                parentlist.append(tmp)
+                levels.append(parentlist)
                 
                 #for tdk,tdv in tv['target'].items():
                 #    if any(oelm in tdk for oelm in omit):  # don not show parts of url 
