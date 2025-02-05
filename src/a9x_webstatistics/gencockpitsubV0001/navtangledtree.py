@@ -228,7 +228,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'const node = graphGroup.selectAll(".node")'
     h += '.data(nodes);'
     h += 'node.exit().remove();'
-    h += 'const newNode = node.enter()
+    h += 'const newNode = node.enter()'
     h += '.append("g")'
     h += '.on("click", click)'
     h += '.attr("class", "node")'
