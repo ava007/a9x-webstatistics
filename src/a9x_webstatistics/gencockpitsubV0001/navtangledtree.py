@@ -21,9 +21,9 @@ def navchart_tangledtree(d, owndomain, omit):
                 if '[' in tk:    # hack for IPv6 addresses
                     continue
                 tmp = {}
-                tmplink['id'] = tk
-                tmplink['parents'] = ['start']
-                levels.append(tmplist)
+                tmp['id'] = tk
+                tmp['parents'] = ['start']
+                levels.append(tmp)
                 
                 #for tdk,tdv in tv['target'].items():
                 #    if any(oelm in tdk for oelm in omit):  # don not show parts of url 
