@@ -22,6 +22,7 @@ def navchart_tangledtree(d, owndomain, omit):
                     continue
                 tmp = {}
                 tmplink['id'] = tk
+                tmplink['parents'] = ['start']
                 levels.append(tmplist)
                 
                 #for tdk,tdv in tv['target'].items():
