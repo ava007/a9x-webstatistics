@@ -229,91 +229,88 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.data(nodes);'
     h += 'node.exit().remove();'
     h += 'const newNode = node.enter()
-    .append("g")
-    .on("click", click)
-    .attr("class", "node")
-    .append("a")
-    .attr("xlink:href", d => `/team/tag/{{ t.0.nick }}/${d.id}/`)
-    .attr("target", "_blank")  // Opens the link in a new tab
-;
+    h += '.append("g")'
+    h += '.on("click", click)'
+    h += '.attr("class", "node")'
+    h += '.append("a")'
+    h += '.attr("xlink:href", d => `/team/tag/{{ t.0.nick }}/${d.id}/`)'
+    h += '.attr("target", "_blank")  // Opens the link in a new tab'
+    h += ';'
 
-  newNode.append("path")
-    .attr("d", drawNodePath);
-  newNode.append("text")
-    .attr("dy", -3)
-    .attr("x", 6)
-   .style('font-size', '11px')    // AVA
-    .style('font-family', 'sans-serif,"Open Sans"');
+    h += 'newNode.append("path")'
+    h += '.attr("d", drawNodePath);'
+    h += 'newNode.append("text")'
+    h += '.attr("dy", -3)'
+    h += '.attr("x", 6)'
+    h += '.style("font-size", "11px")'
+    h += '.style("font-family", "sans-serif,Open Sans");'
 
-  newNode.merge(node)
-    .attr("transform", d => `translate(${d.y},${d.x})`)
-    .selectAll("text")
-    .text(d => d.id + (d.cnt ? ` (${d.cnt})` : ''));  // add cnt if available
-}
+    h += 'newNode.merge(node)'
+    h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
+    h += '.selectAll("text")'
+    h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ''));' # add cnt if available
+    h += '}' + "\n"
 
-const root = d3.stratify()
-  .parentId(d => d.parent)
-  (nodes);
+    h += 'const root = d3.stratify()'
+    h += '.parentId(d => d.parent)'
+    h += '(nodes);'
 
-// Map the different sets of parents,
-// assigning each parent an array of partners
-getLinks(root.descendants())
-  .filter(l => l.target.data.parents)
-  .forEach(l => {
-    const parentNames = l.target.data.parents;
-    if (parentNames.length > 1) {
-      const parentNodes = parentNames.map(p => nodes.find(n => n.id === p));
+    #// Map the different sets of parents,
+    #// assigning each parent an array of partners
+    h += 'getLinks(root.descendants())'
+    h += '.filter(l => l.target.data.parents)'
+    h += '.forEach(l => {'
+    h += 'const parentNames = l.target.data.parents;'
+    h += 'if (parentNames.length > 1) {'
+    h += 'const parentNodes = parentNames.map(p => nodes.find(n => n.id === p));'
 
-      parentNodes.forEach(p => {
-        if (!p.partners) {
-          p.partners = [];
-        }
-        parentNodes
-          .filter(n => n !== p && !p.partners.includes(n))
-          .forEach(n => {
-            p.partners.push(n);
-          });
-      });
-    }
-  });
+    h += 'parentNodes.forEach(p => {'
+    h += 'if (!p.partners) {'
+    h += 'p.partners = [];'
+    h += '}'
+    h += 'parentNodes'
+    h += '.filter(n => n !== p && !p.partners.includes(n))'
+    h += '.forEach(n => {'
+    h += 'p.partners.push(n);'
+    h += '});'
+    h += '});'
+    h += '}'
+    h += '});'
 
-// Take nodes with more partners first,
-// also counting the partners of the children
-root
-  .sum(d => (d.value || 0) + (d.partners || []).length)
-  .sort((a, b) => b.value - a.value);
+    #// Take nodes with more partners first,
+    #// also counting the partners of the children
+    h += 'root'
+    h += '.sum(d => (d.value || 0) + (d.partners || []).length)'
+    h += '.sort((a, b) => b.value - a.value);'
 
-const tree = d3.tree()
-  .size([height, width*24])
-  .separation((a, b) => {
-    // More separation between nodes with many children
-    const totalPartners = (a.data.partners || []).length + (b.data.partners || []).length;
-    return 1 + (totalPartners / 5);
-  });
+    h += 'const tree = d3.tree()'
+    h += '.size([height, width*24])'
+    h += '.separation((a, b) => {'
+    #// More separation between nodes with many children
+    h += 'const totalPartners = (a.data.partners || []).length + (b.data.partners || []).length;'
+    h += 'return 1 + (totalPartners / 5);'
+    h += '});'
 
-draw(tree(root));
+    h += 'draw(tree(root));' + "\n"
 
-function collapse(d) {
-  if (d.children) {
-    d._children = d.children;
-    d._children.forEach(collapse);
-    d.children = null;
-  }
-}
-function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-  update(d);
-} 
-
-    
+    h += 'function collapse(d) {'
+    h += 'if (d.children) {'
+    h += 'd._children = d.children;'
+    h += 'd._children.forEach(collapse);'
+    h += 'd.children = null;'
+    h += '}'
+    h += '}'
+    h += 'function click(d) {'
+    h += 'if (d.children) {'
+    h += 'd._children = d.children;'
+    h += 'd.children = null;'
+    h += '} else {'
+    h += 'd.children = d._children;'
+    h += 'd._children = null;'
+    h += '}'
+    h += 'update(d);'
+    h += '} '
     h += "</script>"
-
     h += '</div></div></div>'
     return h
 
