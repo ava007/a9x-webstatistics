@@ -228,7 +228,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.on("click", click)'
     h += '.attr("class", "node")'
     h += '.append("a")'
-    h += '.attr("xlink:href", d => `/team/tag/{{ t.0.nick }}/${d.id}/`)'
+    h += '.attr("xlink:href", d => `${d.id}/`)'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
     h += ';'
 
@@ -242,7 +242,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'newNode.merge(node)'
     h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
     h += '.selectAll("text")'
-    h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ''));' # add cnt if available
+    h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
     h += '}' + "\n"
 
     h += 'const root = d3.stratify().parentId(d => d.parent)(nodes);'
