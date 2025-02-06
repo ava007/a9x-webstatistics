@@ -50,15 +50,15 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '<div class="card mt-2"><div class="card-body">'
     h += '<h3 class="card-title">Navigation Chart</h3>'
     h += '<p class="card-text">User Navigation Chart for ' + owndomain + ':</p>'
-    h += '<div id="navchart-tangledtree-container"><svg id="svgchart" width="600" height="400"></svg></div>'
+    h += '<div id="navchart-tangledtree-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const levels = ' + str(levels) + ';' + "\n"
     h += 'const color = d3.scaleOrdinal(d3.schemeDark2);'
 
     h += 'const rect = document.getElementById("navchart-tangledtree-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
-    h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    h += 'const height = width;'  + "\n"   # make height at least as width
+    #h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
+    #h += 'const height = width;'  + "\n"   # make height at least as width
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height + margins.top + margins.bottom;'
     h += 'const svg = d3.select("#navchart-tangledtree-container")'
