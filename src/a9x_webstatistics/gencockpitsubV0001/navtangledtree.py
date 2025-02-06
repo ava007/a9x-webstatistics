@@ -103,7 +103,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'target: n'
     h += '})))'
     h += '.flat();'
-    h += '}'
+    h += '}'  + "\n"
 
     h += 'const offsetPerPartner = 30;'
     h += 'const drawNodePath = d => {'
@@ -113,7 +113,7 @@ def navchart_tangledtree(d, owndomain, omit):
     # // treat it the same as when it has zero
     h += 'const nPartners = (d.data.partners && d.data.partners.length > 1)'
     h += '? d.data.partners.length'
-    h += ': 0;'
+    h += ': 0;'  + "\n"
 
     #// We want to centre each node
     h += 'const straightLineOffset = (nPartners * offsetPerPartner) / 2;'
@@ -132,12 +132,12 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'const drawLinkCurve = (x0, y0, x1, y1, offset, radius) => {'
     h += 'const context = d3.path();'
     h += 'context.moveTo(x0, y0);'
-    h += 'context.lineTo(x1 - 2 * radius - offset, y0);'
+    h += 'context.lineTo(x1 - 2 * radius - offset, y0);'  + "\n"
 
     #// If there is not enough space to draw two corners, reduce the corner radius
     h += 'if (Math.abs(y0 - y1) < 2 * radius) {'
     h += 'radius = Math.abs(y0 - y1) / 2;'
-    h += '}'
+    h += '}'  + "\n"
 
     h += 'if (y0 < y1) {'
     h += 'context.arcTo(x1 - offset - radius, y0, x1 - offset - radius, y0 + radius, radius);'
@@ -188,7 +188,7 @@ def navchart_tangledtree(d, owndomain, omit):
     #// treat it the same as when it has zero
     h += 'const startOffset = (partners.length > 1)'
     h += '? -(partners.length * offsetPerPartner) / 2'
-    h += ': 0;'
+    h += ': 0;'  + "\n"
 
     h += 'const partner = partners.find(p => p.id === partnerId);'
 
@@ -211,7 +211,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'function draw(root) {'
     #// Now every node has had it's position set, we can draw them now
     h += 'const nodes = root.descendants().filter(n => !n.id.startsWith("pseudo-"));'
-    h += 'const links = getLinks(nodes).filter(l => !l.source.id.startsWith("pseudo-"));'
+    h += 'const links = getLinks(nodes).filter(l => !l.source.id.startsWith("pseudo-"));'  + "\n"
 
     h += 'const link = graphGroup.selectAll(".link").data(links);'
     h += 'link.exit().remove();'
@@ -220,7 +220,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.attr("class", "link")'
     h += '.merge(link)'
     h += '.attr("stroke", d => colours(d.target.data.parents.sort().join("-")))'
-    h += '.attr("d", linkFn);'
+    h += '.attr("d", linkFn);'  + "\n"
 
     h += 'const node = graphGroup.selectAll(".node").data(nodes);'
     h += 'node.exit().remove();'
@@ -230,14 +230,14 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.append("a")'
     h += '.attr("xlink:href", d => `${d.id}/`)'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
-    h += ';'
+    h += ';'  + "\n"
 
     h += 'newNode.append("path").attr("d", drawNodePath);'
     h += 'newNode.append("text")'
     h += '.attr("dy", -3)'
     h += '.attr("x", 6)'
     h += '.style("font-size", "11px")'
-    h += '.style("font-family", "sans-serif,Open Sans");'
+    h += '.style("font-family", "sans-serif,Open Sans");'  + "\n"
 
     h += 'newNode.merge(node)'
     h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
@@ -245,7 +245,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
     h += '}' + "\n"
 
-    h += 'const root = d3.stratify().parentId(d => d.parent)(nodes);'
+    h += 'const root = d3.stratify().parentId(d => d.parent)(nodes);'  + "\n"
 
     #// Map the different sets of parents,
     #// assigning each parent an array of partners
@@ -254,7 +254,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.forEach(l => {'
     h += 'const parentNames = l.target.data.parents;'
     h += 'if (parentNames.length > 1) {'
-    h += 'const parentNodes = parentNames.map(p => nodes.find(n => n.id === p));'
+    h += 'const parentNodes = parentNames.map(p => nodes.find(n => n.id === p));'  + "\n"
 
     h += 'parentNodes.forEach(p => {'
     h += 'if (!p.partners) {'
@@ -267,7 +267,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '});'
     h += '});'
     h += '}'
-    h += '});'
+    h += '});'  + "\n"
 
     #// Take nodes with more partners first,
     #// also counting the partners of the children
