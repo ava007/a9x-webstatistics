@@ -57,7 +57,7 @@ def navchart_tangledtree(d, owndomain, omit):
 
     h += 'const rect = document.getElementById("navchart-tangledtree-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
-    h += 'const width = Math.round(rect.width) - margin.left - margin.right;'
+    h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
     h += 'const height = width;'  + "\n"   # make height at least as width
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height + margins.top + margins.bottom;'
