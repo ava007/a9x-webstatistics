@@ -174,7 +174,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'return partnershipsPerLevel[level].push(partnershipId) - 1;'
     h += '}'
     h += 'return partnershipOffset;'
-    h += '}'
+    h += '}' + "\n"
 
     h += 'const lineRadius = 10;'
     h += 'const offsetStep = 5;'
@@ -196,7 +196,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'const nthPartner = partner !== undefined'
     h += '? partners.indexOf(partner)'
     h += ': (partners || []).length;'
-    h += 'const partnershipOffset = getPartnershipOffset(thisParent, partner);'
+    h += 'const partnershipOffset = getPartnershipOffset(thisParent, partner);' + "\n"
 
     h += 'return drawLinkCurve('
     h += 'thisParent.y,'
@@ -206,7 +206,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'offsetStep * partnershipOffset,'
     h += 'lineRadius'
     h += ');'
-    h += '};'
+    h += '};' + "\n"
 
     h += 'function draw(root) {'
     #// Now every node has had it's position set, we can draw them now
