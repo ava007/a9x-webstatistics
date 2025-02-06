@@ -210,13 +210,10 @@ def navchart_tangledtree(d, owndomain, omit):
 
     h += 'function draw(root) {'
     #// Now every node has had it's position set, we can draw them now
-    h += 'const nodes = root.descendants()'
-    h += '.filter(n => !n.id.startsWith("pseudo-"));'
-    h += 'const links = getLinks(nodes)'
-    h += '.filter(l => !l.source.id.startsWith("pseudo-"));'
+    h += 'const nodes = root.descendants().filter(n => !n.id.startsWith("pseudo-"));'
+    h += 'const links = getLinks(nodes).filter(l => !l.source.id.startsWith("pseudo-"));'
 
-    h += 'const link = graphGroup.selectAll(".link")'
-    h += '.data(links);'
+    h += 'const link = graphGroup.selectAll(".link").data(links);'
     h += 'link.exit().remove();'
     h += 'link.enter()'
     h += '.append("path")'
@@ -225,20 +222,17 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.attr("stroke", d => colours(d.target.data.parents.sort().join("-")))'
     h += '.attr("d", linkFn);'
 
-    h += 'const node = graphGroup.selectAll(".node")'
-    h += '.data(nodes);'
+    h += 'const node = graphGroup.selectAll(".node").data(nodes);'
     h += 'node.exit().remove();'
-    h += 'const newNode = node.enter()'
-    h += '.append("g")'
+    h += 'const newNode = node.enter().append("g")'
     h += '.on("click", click)'
     h += '.attr("class", "node")'
     h += '.append("a")'
     h += '.attr("xlink:href", d => `/team/tag/{{ t.0.nick }}/${d.id}/`)'
-    h += '.attr("target", "_blank")  // Opens the link in a new tab'
+    h += '.attr("target", "_blank")' # Opens the link in a new tab
     h += ';'
 
-    h += 'newNode.append("path")'
-    h += '.attr("d", drawNodePath);'
+    h += 'newNode.append("path").attr("d", drawNodePath);'
     h += 'newNode.append("text")'
     h += '.attr("dy", -3)'
     h += '.attr("x", 6)'
@@ -251,9 +245,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ''));' # add cnt if available
     h += '}' + "\n"
 
-    h += 'const root = d3.stratify()'
-    h += '.parentId(d => d.parent)'
-    h += '(nodes);'
+    h += 'const root = d3.stratify().parentId(d => d.parent)(nodes);'
 
     #// Map the different sets of parents,
     #// assigning each parent an array of partners
