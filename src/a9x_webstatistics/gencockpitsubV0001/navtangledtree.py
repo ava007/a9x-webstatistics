@@ -2,59 +2,39 @@
 from operator import itemgetter
 import ipaddress
 
-# navigation chart:
+# navigation chart in tangled tree visualization:
 def navchartTangledtree(nodes, links, owndomain, omit):
-    h = ''
-    #const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
+
+    # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start'}]]
-    
-    days = 0
-    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-        # omit months or years:
-        if len(k) < 8:
-            break
-        days += 1
-        if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
-            for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
-                if is_valid_ip(tk) == True:  # to suppress ip; ip is not a domain anyway    
-                    continue
-                if '[' in tk:    # hack for IPv6 addresses
-                    continue
-                tmp = {}
-                tmp['id'] = tk
-                tmp['parents'] = ['start']
-                parentlist = []
-                parentlist.append(tmp)
 
-                # check if entry already exists:
-                duplicate = False
-                for level in levels:
-                    for entry in level:
-                        if tmp['id'] == entry['id']:
-                            duplicate = True
-                            break
-                if duplicate == False:                            
-                    levels.append(parentlist)
-                
-                #for tdk,tdv in tv['target'].items():
-                #    if any(oelm in tdk for oelm in omit):  # don not show parts of url 
-                #        continue
-                #    if tdk == '/':
-                #        tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", owndomain) ) # eliminate special chars
-                #    else:
-                #        tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
-                #    duplicate_found = False
-                #    for li in links:
-                #        if (li['source'] == tmplink['source']
-                #                and li['target'] == tmplink['target']):
-                #            duplicate_found = True
-                #            li['cnt'] += tdv
-                #            break
-                #    if duplicate_found == False:
-                #        links.append(tmplink)
+    # append root nodes to levels:
+    for n1 in nodes:
+        found = False
+        for l1 in links:
+            if l1['id'] == n1['id']:
+                found = True
+                break
+        if found == False:
+            tmp = {}
+            tmp['id'] = n1
+            tmp['parents'] = ['start']
+            parentlist = []
+            parentlist.append(tmp)
 
-    # d3js horizontal bubble char in case results are available:
-    h += "\n\n"
+            # check if entry already exists:
+            duplicate = False
+            for level in levels:
+                for entry in level:
+                    if tmp['id'] == entry['id']:
+                        duplicate = True
+                        break
+            if duplicate == False:                            
+                levels.append(parentlist)
+       
+
+    # d3js horizontal bubble char in case results are available
+    h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
     h += '<div class="card mt-2"><div class="card-body">'
     h += '<h3 class="card-title">Navigation Chart</h3>'
