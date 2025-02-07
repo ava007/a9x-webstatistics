@@ -44,7 +44,7 @@ def addnode(nodes, node, owndomain):
     return nodes
     
 # navigation chart as sankey diagram:
-def makenodeslinks(d, owndomain, omit):
+def makeNodesLinks(d, owndomain, omit):
     links = []    # {'source': 'googlecom', 'target': 'teamviewax', 'c': 1}
     nodes = []    # {'id': 'googlecom', 'value':1, 'name': 'google.com'}
 
