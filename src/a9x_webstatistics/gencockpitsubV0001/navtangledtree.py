@@ -181,7 +181,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'const linkFn = link => {'
     h += 'const thisParent = link.source;'
     h += 'const partnerId = link.target.data.parents.find(p => p !== thisParent.id);'
-    h += 'const partners = thisParent.data.partners || [];'
+    h += 'const partners = thisParent.data.partners || [];' + "\n"
 
     #// Let the first link start with this negative offset
     #// But when a node has only one partner,
@@ -218,6 +218,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'link.enter()'
     h += '.append("path")'
     h += '.attr("class", "link")'
+    h += '.style("fill", "none")'  # from stylesheet
     h += '.merge(link)'
     h += '.attr("stroke", d => colours(d.target.data.parents.sort().join("-")))'
     h += '.attr("d", linkFn);'  + "\n"
@@ -227,6 +228,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += 'const newNode = node.enter().append("g")'
     h += '.on("click", click)'
     h += '.attr("class", "node")'
+    h += '.style("fill", "white")'   # from stylesheet
     h += '.append("a")'
     h += '.attr("xlink:href", d => `${d.id}/`)'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
