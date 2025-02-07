@@ -12,7 +12,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     for n1 in nodes:
         found = False
         for l1 in links:
-            if l1['id'] == n1['id']:
+            if l1['target'] == n1['id']:
                 found = True
                 break
         if found == False:
