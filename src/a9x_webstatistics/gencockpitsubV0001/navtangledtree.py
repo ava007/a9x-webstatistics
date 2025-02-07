@@ -33,17 +33,19 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             if duplicate == False:                            
                 levels.append(parentlist)
 
+    print("levels: " + str(levels) )
+
     # append nodes to levels L2:
     for li in links:
         found = False
         for lv in levels:
-            if lv['id'] == li['source']:
+            if lv[0]['id'] == li['source']:
                 found = True
                 break
         if found == False:
             tmp = {}
-            tmp['id'] = li['source']
-            tmp['name'] = li['source']   # to be changed to node['name']
+            tmp['id'] = li['target']
+            tmp['name'] = li['target']   # to be changed to node['name']
             tmp['parents'] = li['source']
             parentlist = []
             parentlist.append(tmp)
