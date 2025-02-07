@@ -221,6 +221,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.append("a")'
     h += '.attr("xlink:href", d => `${d.id}/`)'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
+    h += '.append("title").text(d => d.name);'
     h += ';'  + "\n"
 
     h += 'newNode.append("path").attr("d", drawNodePath);'
