@@ -2,7 +2,18 @@
 from operator import itemgetter
 import ipaddress
 
-def addlink(links, linkentry):
+def addlink(links, linkentry, owndomain, daysback=31):
+
+    if entrylink['target'] == li['source']:  # prevent circular links
+        return links
+
+    if entrylink['source'] == '/':
+        entrylink['source'] = owndomain
+
+    if entrylink['target'] == '/':
+        entrylink['target'] = owndomain
+
+    # check if links already exists:
     duplicate_found = False
     for li in links:
         if (li['source'] == linkentry['source']
@@ -10,12 +21,27 @@ def addlink(links, linkentry):
                 duplicate_found = True
                 li['value'] += linkentry['value']
                 break
-                if entrylink['target'] == li['source']:  # prevent circular links
-                    duplicate_found = True
-                    break
     if duplicate_found == False:
         links.append(entrylink)
     return links
+
+def addnode(nodes, node, owndomain):
+
+    if node['name'] == '/':
+        node['name'] = owndomain
+
+    if node['id'] == '/':
+        node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", owndomain) ) # eliminate special chars
+        
+    # check if node already exists:
+    duplicate_found = False
+    for no in nodes:
+        if (no['id'] == node['id']
+            duplicate_found = True
+            break
+    if duplicate_found == False:
+        nodes.append(node)
+    return nodes
     
 # navigation chart as sankey diagram:
 def makenodeslinks(d, owndomain, omit):
@@ -35,6 +61,12 @@ def makenodeslinks(d, owndomain, omit):
                     continue
                 if '[' in tk:    # hack for IPv6 addresses
                     continue
+
+                tmpnode = {}
+                tmpnode['name'] = tk
+                tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
+                tmpnode['typ'] = 'root'
+                nodes = addnode(nodes, tmpnodes)
                 tmplink = {}
                 tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmplink['value'] = 1
@@ -42,100 +74,56 @@ def makenodeslinks(d, owndomain, omit):
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
                     tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
-                    if tmplink['target'] == '/':    # to avoid empty nb
-                        tmplink['target'] = owndomain
-                    duplicate_found = False
-                    for li in links:
-                        if (li['source'] == tmplink['source']
-                                and li['target'] == tmplink['target']):
-                            duplicate_found = True
-                            li['value'] += tdv
-                            break
-                        if tmplink['target'] == li['source']:  # prevent circular links
-                            duplicate_found = True
-                            break
+                    links = addlink(links, tmplink, owndomain)
 
-                    if duplicate_found == False:
-                        links.append(tmplink)
+                    tmpnode = {}
+                    tmpnode['name'] = tdk
+                    tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
 
-                    n[0] = tmplink['source'] # tk
-                    n[1] = tmplink['target'] #tdk
-                    for i in range(2):   # n[0] and n[1]
-                        tmpnode = {}
-                        tmpnode['name'] = n[i]
-                        tmpnode['typ'] = 'root'
-                        duplicate_found = False
-                        tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
-                        for no in nodes:
-                            if (no['id'] == tmpnode['id']):
-                                duplicate_found = True
-                                break
-                    
-                        if duplicate_found == False:
-                            nodes.append(tmpnode)
+                    nodes = addnode(nodes, tmpnodes)
                 days += 1
-                if days > 31:
+                if days > daysback:
                     break
 
+        days = 0
+        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            if len(k) < 8:   # not a day anymore
+                break
+            if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
+                for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
+                    n = sk.split('(())') 
+                    if n[0] == n[1]:
+                        continue
+                    if len(n[0]) == 0 or len(n[1]) == 0:
+                        continue
+                    # allow only a-z and 0-9:
+                    if n[0] == '/':    # to avoid empty na
+                        n[0] = owndomain
+                    if n[1] == '/':    # to avoid empty nb
+                        n[1] = owndomain
+                    if any(oelm in n[0] for oelm in omit):  # do not show parts of url 
+                        continue
+                    if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
+                        continue
+                    tmplink = {}
+                    tmplink['source'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
+                    tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
+                    tmplink['value'] = sv
+                    links = addlink(links, tmplink, owndomain):
 
-    
-    days = 0
-    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-        if len(k) < 8:   # not a day anymore
-            break
-        if 'user' in d['v0001']['days'][k] and 'navigation' in d['v0001']['days'][k]['user']:
-            for sk,sv in d['v0001']['days'][k]['user']['navigation'].items():
-                n = sk.split('(())') 
-                if n[0] == n[1]:
-                    continue
-                if len(n[0]) == 0 or len(n[1]) == 0:
-                    continue
-                # allow only a-z and 0-9:
-                if n[0] == '/':    # to avoid empty na
-                    n[0] = owndomain
-                if n[1] == '/':    # to avoid empty nb
-                    n[1] = owndomain
-                if any(oelm in n[0] for oelm in omit):  # do not show parts of url 
-                    continue
-                if any(oelm in n[1] for oelm in omit):  # do not show parts of url 
-                    continue
-                tmplink = {}
-                tmplink['source'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
-                tmplink['target'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
-                tmplink['value'] = sv
-                duplicate_found = False
-                for li in links:
-                    if (li['source'] == tmplink['source']
-                            and li['target'] == tmplink['target']):
-                        duplicate_found = True
-                        li['value'] += sv
-                        break
-                    if tmplink['target'] == li['source']:  # prevent circular links
-                        duplicate_found = True
-                        break
-                if duplicate_found == False:
-                    links.append(tmplink)
+                    node = {}
+                    node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[0]) ) # eliminate special chars
+                    node['name'] = n[0]
+                    addnode(nodes, node, owndomain):
 
-                # add nodes if not already in array:
-                n[0] = tmplink['source']
-                n[1] = tmplink['target']
-                for i in range(2):   # n[0] and n[1]
-                    tmpnode = {}
-                    tmpnode['name'] = n[i]
-                    if n[i][0:1] != '/':
-                        tmpnode['typ'] = 'root'
-                    duplicate_found = False
-                    tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[i]) ) # eliminate special chars
-                    for no in nodes:
-                        if (no['id'] == tmpnode['id']):
-                            duplicate_found = True
-                            break
-                    
-                    if duplicate_found == False:
-                        nodes.append(tmpnode)
-            
-        days += 1
-        if days > 31:
-            break
+                    node = {}
+                    node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
+                    node['name'] = n[1]
+                    addnode(nodes, node, owndomain):
+                                      
+                
+            days += 1
+            if days > dayback:
+                break
 
     return nodes, links
