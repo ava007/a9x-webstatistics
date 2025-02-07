@@ -2,7 +2,7 @@
 from operator import itemgetter
 import ipaddress
 
-def addlink(links, linkentry, owndomain, daysback=31):
+def addlink(links, linkentry, owndomain):
 
     if linkentry['target'] == linkentry['source']:  # prevent circular links
         return links
@@ -44,7 +44,7 @@ def addnode(nodes, node, owndomain):
     return nodes
     
 # navigation chart as sankey diagram:
-def makeNodesLinks(d, owndomain, omit):
+def makeNodesLinks(d, owndomain, omit, daysback=31):
     links = []    # {'source': 'googlecom', 'target': 'teamviewax', 'c': 1}
     nodes = []    # {'id': 'googlecom', 'value':1, 'name': 'google.com'}
 
@@ -121,7 +121,7 @@ def makeNodesLinks(d, owndomain, omit):
                     addnode(nodes, node, owndomain)
                 
             days += 1
-            if days > dayback:
+            if days > daysback:
                 break
 
     return nodes, links
