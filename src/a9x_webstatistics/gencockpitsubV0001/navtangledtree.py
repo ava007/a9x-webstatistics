@@ -17,7 +17,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
                 break
         if found == False:
             tmp = {}
-            tmp['id'] = n1
+            tmp['id'] = n1['id']
+            tmp['name'] = n1['name']
             tmp['parents'] = ['start']
             parentlist = []
             parentlist.append(tmp)
