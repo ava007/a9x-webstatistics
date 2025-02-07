@@ -66,7 +66,7 @@ def makeNodesLinks(d, owndomain, omit):
                 tmpnode['name'] = tk
                 tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmpnode['typ'] = 'root'
-                nodes = addnode(nodes, tmpnodes)
+                nodes = addnode(nodes, tmpnode, owndomain)
                 tmplink = {}
                 tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmplink['value'] = 1
@@ -79,7 +79,7 @@ def makeNodesLinks(d, owndomain, omit):
                     tmpnode = {}
                     tmpnode['name'] = tdk
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
-                    nodes = addnode(nodes, tmpnodes)
+                    nodes = addnode(nodes, tmpnode, owndomain)
                 days += 1
                 if days > daysback:
                     break
@@ -119,7 +119,6 @@ def makeNodesLinks(d, owndomain, omit):
                     node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", n[1]) ) # eliminate special chars
                     node['name'] = n[1]
                     addnode(nodes, node, owndomain)
-                                      
                 
             days += 1
             if days > dayback:
