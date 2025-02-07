@@ -38,7 +38,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
 
     for l2 in levels:
         for li in links:
-            if li['source'] == l2['id']:
+            if li['source'] == l2[0]['id']:
                 tmp = {}
                 tmp['id'] = li['target']
                 tmp['name'] = li['target']   # to be changed to node['name']
