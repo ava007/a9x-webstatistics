@@ -65,6 +65,7 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                 tmpnode = {}
                 if tk == '/':
                     tk = owndomain
+                tmpnode['name'] = tk
                 tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmpnode['typ'] = 'root'
                 nodes = addnode(nodes, tmpnode, owndomain)
