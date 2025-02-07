@@ -63,7 +63,8 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                     continue
 
                 tmpnode = {}
-                tmpnode['name'] = tk
+                if tk == '/':
+                    tk = owndomain
                 tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
                 tmpnode['typ'] = 'root'
                 nodes = addnode(nodes, tmpnode, owndomain)
@@ -73,6 +74,8 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                 for tdk,tdv in tv['target'].items():
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
+                    if tdk == '/':
+                        tdk = owndomain
                     tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk) ) # eliminate special chars
                     links = addlink(links, tmplink, owndomain)
 
