@@ -7,10 +7,10 @@ def addlink(links, linkentry, owndomain):
     if linkentry['target'] == linkentry['source']:  # prevent circular links
         return links
 
-    if linkentry['source'] == '/':
+    if linkentry['source'] == '/' or len(linkentry['source']) == 0:
         linkentry['source'] = owndomain
 
-    if linkentry['target'] == '/':
+    if linkentry['target'] == '/' or len(linkentry['source']) == 0:
         linkentry['target'] = owndomain
 
     # check if links already exists:
@@ -27,10 +27,10 @@ def addlink(links, linkentry, owndomain):
 
 def addnode(nodes, node, owndomain):
 
-    if node['name'] == '/':
+    if node['name'] == '/' or len(node['name']) == 0:
         node['name'] = owndomain
 
-    if node['id'] == '/':
+    if node['id'] == '/'  or len(node['id']) == 0:
         node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", owndomain) ) # eliminate special chars
         
     # check if node already exists:
