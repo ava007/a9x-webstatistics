@@ -9,6 +9,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     levels = [[{'id': 'start'}]]
 
     # append root nodes to levels L1:
+    # nodes that never appear in target are roots!
     for n1 in nodes:
         found = False
         for l1 in links:
@@ -39,8 +40,10 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     for li in links:
         found = False
         for lv in levels:
+            print("level2: lv:" + lv[0]['id'] + " li-source:" + li['source'] + " li:" + str(li) + " lv:" + str(lv)
             if lv[0]['id'] == li['source']:
                 found = True
+                print("level2: found: " + lv[0]['id'] + " " + li['source'])
                 break
         if found == False:
             tmp = {}
