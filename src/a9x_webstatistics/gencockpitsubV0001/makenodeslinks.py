@@ -4,14 +4,14 @@ import ipaddress
 
 def addlink(links, linkentry, owndomain, daysback=31):
 
-    if entrylink['target'] == li['source']:  # prevent circular links
+    if linkentry['target'] == li['source']:  # prevent circular links
         return links
 
-    if entrylink['source'] == '/':
-        entrylink['source'] = owndomain
+    if linkentry['source'] == '/':
+        linkentry['source'] = owndomain
 
-    if entrylink['target'] == '/':
-        entrylink['target'] = owndomain
+    if linkentry['target'] == '/':
+        linkentry['target'] = owndomain
 
     # check if links already exists:
     duplicate_found = False
@@ -22,7 +22,7 @@ def addlink(links, linkentry, owndomain, daysback=31):
                 li['value'] += linkentry['value']
                 break
     if duplicate_found == False:
-        links.append(entrylink)
+        links.append(linkentry)
     return links
 
 def addnode(nodes, node, owndomain):
