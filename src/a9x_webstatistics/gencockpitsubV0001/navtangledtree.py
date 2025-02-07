@@ -9,7 +9,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     levels = [[{'id': 'start'}]]
 
     # append root nodes to levels L1:
-    # nodes that never appear in target are roots!
+    # rodes nodes are sources that never appear in target
     for n1 in nodes:
         found = False
         for l1 in links:
@@ -36,33 +36,56 @@ def navchartTangledtree(nodes, links, owndomain, omit):
 
     print("levels: " + str(levels) )
 
+    for l2 in levels:
+        for li in links:
+            if li['source'] == l2['id']:
+                tmp = {}
+                tmp['id'] = li['target']
+                tmp['name'] = li['target']   # to be changed to node['name']
+                tmp['parents'] = []
+                tmp['parents'].append(li['source'])
+                parentlist = []
+                parentlist.append(tmp)
+                print("parentlist: " + str(parentlist))
+                levels.append(parentlist)
+                
+        
     # append nodes to levels L2:
-    for li in links:
-        found = False
-        for lv in levels:
+    #for li in links:
+    #    found = False
+    #    for lv in levels:
             #print("level2: lv:" + lv[0]['id'] + " li-source:" + li['source'] + " li:" + str(li) + " lv:" + str(lv))
-            if lv[0]['id'] == li['source']:
-                found = True
+            # when source exists in level.id : add with source as parent
+    #        if lv[0]['id'] == li['source']:
+    #            tmp = {}
+    #            tmp['id'] = li['target']
+    #            tmp['name'] = li['target']   # to be changed to node['name']
+    #            tmp['parents'] = []
+    #            tmp['parents'].append(li['source'])
+    #            parentlist = []
+    #            parentlist.append(tmp)
+                
+    #            found = True
                 #print("level2: found: " + lv[0]['id'] + " " + li['source'])
-                break
-        if found == False:
-            tmp = {}
-            tmp['id'] = li['target']
-            tmp['name'] = li['target']   # to be changed to node['name']
-            tmp['parents'] = li['source']
-            parentlist = []
-            parentlist.append(tmp)
+    #            break
+    #    if found == False:
+    #        tmp = {}
+    #        tmp['id'] = li['target']
+    #        tmp['name'] = li['target']   # to be changed to node['name']
+    #        tmp['parents'] = li['source']
+    #        parentlist = []
+    #        parentlist.append(tmp)
 
             # check if entry already exists:
-            duplicate = False
-            for level in levels:
-                for entry in level:
-                    print("entry: " + str(entry) + " level: " + str(level))
-                    if tmp['id'] == entry['id']:
-                        duplicate = True
-                        break
-            if duplicate == False:                            
-                levels.append(parentlist)
+    #        duplicate = False
+    #        for level in levels:
+    #            for entry in level:
+    #                print("entry: " + str(entry) + " level: " + str(level))
+    #                if tmp['id'] == entry['id']:
+    #                    duplicate = True
+    #                    break
+    #        if duplicate == False:                            
+    #            levels.append(parentlist)
        
 
     # d3js horizontal bubble char in case results are available
