@@ -105,7 +105,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.flat();'
     h += '}'  + "\n"
 
-    h += 'const offsetPerPartner = 30;'
+    h += 'const offsetPerPartner = 3;'
     h += 'const drawNodePath = d => {'
     h += 'const radius = 5;'
     # // The number of partners determines the node height
@@ -276,7 +276,7 @@ def navchart_tangledtree(d, owndomain, omit):
     h += '.sort((a, b) => b.value - a.value);'
 
     h += 'const tree = d3.tree()'
-    h += '.size([height, width*24])'
+    h += '.size([height, width])'
     h += '.separation((a, b) => {'
     #// More separation between nodes with many children
     h += 'const totalPartners = (a.data.partners || []).length + (b.data.partners || []).length;'
