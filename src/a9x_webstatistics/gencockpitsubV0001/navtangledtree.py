@@ -8,7 +8,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start'}]]
 
-    # append root nodes to levels:
+    # append root nodes to levels L1:
     for n1 in nodes:
         found = False
         for l1 in links:
@@ -20,6 +20,31 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             tmp['id'] = n1['id']
             tmp['name'] = n1['name']
             tmp['parents'] = ['start']
+            parentlist = []
+            parentlist.append(tmp)
+
+            # check if entry already exists:
+            duplicate = False
+            for level in levels:
+                for entry in level:
+                    if tmp['id'] == entry['id']:
+                        duplicate = True
+                        break
+            if duplicate == False:                            
+                levels.append(parentlist)
+
+    # append nodes to levels L2:
+    for li in links:
+        found = False
+        for lv in levels:
+            if lv['id'] == li['source']:
+                found = True
+                break
+        if found == False:
+            tmp = {}
+            tmp['id'] = li['source']
+            tmp['name'] = li['source']   # to be changed to node['name']
+            tmp['parents'] = li['source']
             parentlist = []
             parentlist.append(tmp)
 
