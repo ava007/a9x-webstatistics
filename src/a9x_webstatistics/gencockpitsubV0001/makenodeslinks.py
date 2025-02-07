@@ -4,7 +4,7 @@ import ipaddress
 
 def addlink(links, linkentry, owndomain, daysback=31):
 
-    if linkentry['target'] == li['source']:  # prevent circular links
+    if linkentry['target'] == linkentry['source']:  # prevent circular links
         return links
 
     if linkentry['source'] == '/':
