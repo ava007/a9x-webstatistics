@@ -364,7 +364,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         # navigation chart as sankey diagram (experimental feature)
         if efeature == '10':
             nodes, links = makeNodesLinks(d, owndomain, omit)
-            h += navchartTangledtree(nodes, links owndomain, omit)
+            h += navchartTangledtree(nodes, links, owndomain, omit)
             h += navchartsankey(d, owndomain, omit)
         
         # Webstatistics for the last months
