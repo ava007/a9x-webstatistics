@@ -7,6 +7,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
 
     # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start'}]]
+    print("links: " + str(links))
 
     # append root nodes to levels L1:
     # rodes nodes are sources that never appear in target
