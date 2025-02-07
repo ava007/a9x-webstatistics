@@ -35,7 +35,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             if duplicate == False:                            
                 levels.append(parentlist)
 
-    print("levels: " + str(levels) )
+    print("levels1: " + str(levels) )
 
     for l2 in levels:
         for li in links:
@@ -49,6 +49,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
                 parentlist.append(tmp)
                 print("parentlist: " + str(parentlist))
                 levels.append(parentlist)
+    print("levels2: " + str(levels) )
+
                 
         
     # append nodes to levels L2:
