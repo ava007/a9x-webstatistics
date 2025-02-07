@@ -28,7 +28,6 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             duplicate = False
             for level in levels:
                 for entry in level:
-                    print("entry: " + str(entry) + " level: " + str(level))
                     if tmp['id'] == entry['id']:
                         duplicate = True
                         break
@@ -58,6 +57,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             duplicate = False
             for level in levels:
                 for entry in level:
+                    print("entry: " + str(entry) + " level: " + str(level))
                     if tmp['id'] == entry['id']:
                         duplicate = True
                         break
