@@ -36,7 +36,7 @@ def addnode(nodes, node, owndomain):
     # check if node already exists:
     duplicate_found = False
     for no in nodes:
-        if (no['id'] == node['id']:
+        if no['id'] == node['id']:
             duplicate_found = True
             break
     if duplicate_found == False:
