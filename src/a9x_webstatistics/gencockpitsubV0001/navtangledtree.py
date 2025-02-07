@@ -25,7 +25,16 @@ def navchart_tangledtree(d, owndomain, omit):
                 tmp['parents'] = ['start']
                 parentlist = []
                 parentlist.append(tmp)
-                levels.append(parentlist)
+
+                # check if entry already exists:
+                duplicate = False
+                for level in levels:
+                    for entry in level:
+                        if tmp['id'] == entry['id']:
+                            duplicate = True
+                            break
+                if duplicate == False:                            
+                    levels.append(parentlist)
                 
                 #for tdk,tdv in tv['target'].items():
                 #    if any(oelm in tdk for oelm in omit):  # don not show parts of url 
