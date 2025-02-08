@@ -289,18 +289,17 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'const newNode = node.enter().append("g")'
     h += '.on("click", click)'
     h += '.attr("class", "node")'
-    #h += '.style("fill", "white")'   # from stylesheet
     h += '.append("a")'
-    h += '.attr("xlink:href", d => d.data.name ? (d.data.name.startsWith("/") ? `https://'+ owndomain + '${d.data.name}` : `${d.data.name}/`) : "#")'
+    h += '.attr("xlink:href", d => d.data.name ? (d.data.name.startsWith("/") ? `https://'+ owndomain + '${d.data.name}` : `https://${d.data.name}`) : "#")'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
-    h += '.attr("title", d => `${d.name}`);'
+    h += '.attr("title", d => `${d.name}`)'
     h += ';'  + "\n"
 
     h += 'newNode.append("path").attr("d", drawNodePath);'
     h += 'newNode.append("text")'
     h += '.attr("dy", -3)'
     h += '.attr("x", 6)'
-    h += '.style("font-size", "11px")'
+    h += '.style("font-size", "10px")'
     h += '.style("font-family", "sans-serif,Open Sans");'  + "\n"
 
     h += 'newNode.merge(node)'
