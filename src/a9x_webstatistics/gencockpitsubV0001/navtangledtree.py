@@ -135,7 +135,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("height", totalHeight);' + "\n"
 
     h += 'const graphGroup = svg.append("g")'
-    h += '.attr("transform", "translate("20"," + margins.top + ")");'
+    h += '.attr("transform", "translate(20," + margins.top + ")");'
 
     h += 'levels.unshift([]);'
 
