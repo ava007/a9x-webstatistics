@@ -50,6 +50,10 @@ def navchartTangledtree(nodes, links, owndomain, omit):
                 tmp['id'] = li2['target']
                 tmp['name'] = li2['target']
                 tmp['parents'] = [l1['id']]
+                for n2 in nodes:
+                    if li2['target'] == n2['id']:
+                        tmp['name'] = n2['name']
+                        break
                 tmplevel2.append(tmp)
             
     levels.append(tmplevel2)
