@@ -29,8 +29,21 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     print("levels1: " + str(levels) )
 
     # 2nd Level:
+    tmplevel2 = []
     for l1 in tmplevel1:
         print("l1: " + str(l1))
+        found = False
+        for li2 in links:
+            if li2['target'] == l1['id']:
+                found = True
+                break
+        if found == True:
+            tmp = {}
+            tmp['id'] = li2['source']
+            tmp['name'] = li2['source']
+            tmp['parents'] = l1['id']
+            tmplevel2.append(tmp)
+    levels.append(tmplevel2)
         
 
     
@@ -276,8 +289,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("class", "node")'
     #h += '.style("fill", "white")'   # from stylesheet
     h += '.append("a")'
-    #h += '.attr("xlink:href", d => (d.data.name.startswithg("/") ? "https://' + owndomain + '${d.id}" : `${d.id}/`)   )'
-    h += '.attr("xlink:href", d => d.data.name ? (d.data.name.startsWith("/") ? `https://logikfabrik.com${d.data.name}` : `${d.data.name}/`) : "#")
+    h += '.attr("xlink:href", d => d.data.name ? (d.data.name.startsWith("/") ? `https://'+ owndomain + '${d.data.name}` : `${d.data.name}/`) : "#")'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
     h += '.attr("title", d => `${d.name}`);'
     h += ';'  + "\n"
