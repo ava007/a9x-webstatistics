@@ -41,7 +41,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             tmp = {}
             tmp['id'] = li2['target']
             tmp['name'] = li2['target']
-            tmp['parents'] = l1['id']
+            tmp['parents'] = [l1['id']]
             tmplevel2.append(tmp)
     levels.append(tmplevel2)
         
