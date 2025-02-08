@@ -43,7 +43,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             for l2a in tmplevel2:
                 if l2a['id'] == li2['target']:
                     parent_found = True
-                    l2a['parents'].add(l1['id'])
+                    l2a['parents'].append(l1['id'])
                     break
             if parent_found == False:
                 tmp = {}
