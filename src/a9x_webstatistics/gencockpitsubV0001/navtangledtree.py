@@ -276,7 +276,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("class", "node")'
     #h += '.style("fill", "white")'   # from stylesheet
     h += '.append("a")'
-    h += '.attr("xlink:href", d => (d.name.substring(0,1) == "/" ? "https://' + owndomain + '${d.id} : `${d.id}/`)   )'
+    h += '.attr("xlink:href", d => (d.name.substring(0,1) == "/" ? "https://' + owndomain + '${d.id}" : `${d.id}/`)   )'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
     h += '.attr("title", d => `${d.name}`);'
     h += ';'  + "\n"
