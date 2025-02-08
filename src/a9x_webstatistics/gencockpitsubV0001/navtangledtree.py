@@ -10,7 +10,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     print("links: " + str(links))
 
     # append root nodes to levels L1:
-    # rodes nodes are sources that never appear in target
+    # root nodes are sources that never appear in target
     for n1 in nodes:
         found = False
         for l1 in links:
@@ -50,7 +50,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
                     parentlist = []
                     parentlist.append(tmp)
                     print("parentlist: " + str(parentlist))
-                    levels.append(parentlist)
+                    #levels.append(parentlist)
     print("levels2: " + str(levels) )
 
                 
