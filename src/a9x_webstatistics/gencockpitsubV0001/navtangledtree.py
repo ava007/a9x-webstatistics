@@ -132,7 +132,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'const svg = d3.select("#navchart-tangledtree-container")'
     h += '.append("svg")'
     h += '.attr("width", totalWidth)'
-    h += '.attr("height", totalHeight);'
+    h += '.attr("height", totalHeight);' + "\n"
 
     h += 'const graphGroup = svg.append("g")'
     h += '.attr("transform", "translate(" + margins.left + "," + margins.top + ")");'
@@ -166,10 +166,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'function getLinks(nodes) {'
     h += 'return nodes'
     h += '.filter(n => n.data.parents !== undefined)'
-    h += '.map(n => n.data.parents.map(p => ({'
-    h += 'source: nodes.find(n => n.id === p),'
-    h += 'target: n'
-    h += '})))'
+    h += '.map(n => n.data.parents.map(p => ({ source: nodes.find(n => n.id === p), target: n  })))'
     h += '.flat();'
     h += '}'  + "\n"
 
@@ -179,9 +176,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     # // The number of partners determines the node height
     # // But when a node has only one partner,
     # // treat it the same as when it has zero
-    h += 'const nPartners = (d.data.partners && d.data.partners.length > 1)'
-    h += '? d.data.partners.length'
-    h += ': 0;'  + "\n"
+    h += 'const nPartners = (d.data.partners && d.data.partners.length > 1) ? d.data.partners.length : 0;'  + "\n"
 
     #// We want to centre each node
     h += 'const straightLineOffset = (nPartners * offsetPerPartner) / 2;'
@@ -195,7 +190,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'context.closePath();'
 
     h += 'return context + "";'
-    h += '};'
+    h += '};' + "\n"
 
     h += 'const drawLinkCurve = (x0, y0, x1, y1, offset, radius) => {'
     h += 'const context = d3.path();'
@@ -203,9 +198,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'context.lineTo(x1 - 2 * radius - offset, y0);'  + "\n"
 
     #// If there is not enough space to draw two corners, reduce the corner radius
-    h += 'if (Math.abs(y0 - y1) < 2 * radius) {'
-    h += 'radius = Math.abs(y0 - y1) / 2;'
-    h += '}'  + "\n"
+    h += 'if (Math.abs(y0 - y1) < 2 * radius) { radius = Math.abs(y0 - y1) / 2; }'  + "\n"
 
     h += 'if (y0 < y1) {'
     h += 'context.arcTo(x1 - offset - radius, y0, x1 - offset - radius, y0 + radius, radius);'
@@ -254,9 +247,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     #// Let the first link start with this negative offset
     #// But when a node has only one partner,
     #// treat it the same as when it has zero
-    h += 'const startOffset = (partners.length > 1)'
-    h += '? -(partners.length * offsetPerPartner) / 2'
-    h += ': 0;'  + "\n"
+    h += 'const startOffset = (partners.length > 1) ? -(partners.length * offsetPerPartner) / 2 : 0;'  + "\n"
 
     h += 'const partner = partners.find(p => p.id === partnerId);'
 
@@ -333,9 +324,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '}'
     h += 'parentNodes'
     h += '.filter(n => n !== p && !p.partners.includes(n))'
-    h += '.forEach(n => {'
-    h += 'p.partners.push(n);'
-    h += '});'
+    h += '.forEach(n => { p.partners.push(n); });'
     h += '});'
     h += '}'
     h += '});'  + "\n"
@@ -344,7 +333,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     #// also counting the partners of the children
     h += 'root'
     h += '.sum(d => (d.value || 0) + (d.partners || []).length)'
-    h += '.sort((a, b) => b.value - a.value);'
+    h += '.sort((a, b) => b.value - a.value);' + "\n"
 
     h += 'const tree = d3.tree()'
     h += '.size([height, width])'
@@ -352,7 +341,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     #// More separation between nodes with many children
     h += 'const totalPartners = (a.data.partners || []).length + (b.data.partners || []).length;'
     h += 'return 1 + (totalPartners / 5);'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'draw(tree(root));' + "\n"
 
