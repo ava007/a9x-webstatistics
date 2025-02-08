@@ -133,7 +133,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.append("svg")'
     h += '.attr("width", totalWidth)'
     h += '.attr("height", totalHeight)'
-    h += '.attr("viewBox", [0,0 , totalWidth, totalHeight]);' + "\n"
+    h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])' + "\n"
+    h += '.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");' + "\n"
 
     h += 'const graphGroup = svg.append("g");'
     #h += '.attr("transform", "translate(20," + margins.top + ")");'
