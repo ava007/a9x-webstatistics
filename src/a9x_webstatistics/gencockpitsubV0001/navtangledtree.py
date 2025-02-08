@@ -11,6 +11,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
 
     # append root nodes to levels L1:
     # root nodes are sources that never appear in target
+    tmplevel1 = []
     for n1 in nodes:
         found = False
         for l1 in links:
@@ -22,21 +23,17 @@ def navchartTangledtree(nodes, links, owndomain, omit):
             tmp['id'] = n1['id']
             tmp['name'] = n1['name']
             tmp['parents'] = ['start']
-            parentlist = []
-            parentlist.append(tmp)
-
-            # check if entry already exists:
-            duplicate = False
-            for level in levels:
-                for entry in level:
-                    if tmp['id'] == entry['id']:
-                        duplicate = True
-                        break
-            if duplicate == False:                            
-                levels.append(parentlist)
+            tmplevel1.append(tmp)
+    levels.append(tmplevel1)
 
     print("levels1: " + str(levels) )
 
+    # 2nd Level:
+    for l1 in tmplevel1:
+        print("l1: " + str(l1))
+        
+
+    
     tmplevels = levels
     for l2 in tmplevels:
         for li in links:
@@ -279,7 +276,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("class", "node")'
     #h += '.style("fill", "white")'   # from stylesheet
     h += '.append("a")'
-    h += '.attr("xlink:href", d => `${d.id}/`)'
+    h += '.attr("xlink:href", d => (d.name.substring(0,1) == "/" ? "https://"' + owndomain + ' ${d.id} : `${d.id}/`)   )'
     h += '.attr("target", "_blank")' # Opens the link in a new tab
     h += '.attr("title", d => `${d.name}`);'
     h += ';'  + "\n"
