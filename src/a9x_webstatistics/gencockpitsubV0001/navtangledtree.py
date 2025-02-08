@@ -34,13 +34,13 @@ def navchartTangledtree(nodes, links, owndomain, omit):
         print("l1: " + str(l1))
         found = False
         for li2 in links:
-            if li2['target'] == l1['id']:
+            if li2['source'] == l1['id']:
                 found = True
                 break
         if found == True:
             tmp = {}
-            tmp['id'] = li2['source']
-            tmp['name'] = li2['source']
+            tmp['id'] = li2['target']
+            tmp['name'] = li2['target']
             tmp['parents'] = l1['id']
             tmplevel2.append(tmp)
     levels.append(tmplevel2)
