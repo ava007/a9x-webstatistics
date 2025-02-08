@@ -302,8 +302,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.style("font-family", "sans-serif,Open Sans");'  + "\n"
 
     h += 'newNode.merge(node)'
-    #h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
-    h += '.attr("transform", d => `translate(${d.y - width / 2},${d.x})`)'
+    h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
+    #h += '.attr("transform", d => `translate(${d.y - width / 2},${d.x})`)'
     h += '.selectAll("text")'
     h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
     h += '}' + "\n"
