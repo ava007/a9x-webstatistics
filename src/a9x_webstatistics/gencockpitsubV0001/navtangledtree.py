@@ -47,21 +47,21 @@ def navchartTangledtree(nodes, links, owndomain, omit):
         
 
     
-    tmplevels = levels
-    for l2 in tmplevels:
-        for li in links:
-            if li['source'] == l2[0]['id']:
-                if li['target'] not in l2[0]['parents']:
-                    tmp = {}
-                    tmp['id'] = li['target']
-                    tmp['name'] = li['target']   # to be changed to node['name']
-                    tmp['parents'] = []
-                    tmp['parents'].append(li['source'])
-                    parentlist = []
-                    parentlist.append(tmp)
-                    print("parentlist: " + str(parentlist))
-                    #levels.append(parentlist)
-    print("levels2: " + str(levels) )
+    #tmplevels = levels
+    #for l2 in tmplevels:
+    #    for li in links:
+    #        if li['source'] == l2[0]['id']:
+    #            if li['target'] not in l2[0]['parents']:
+    #                tmp = {}
+    #                tmp['id'] = li['target']
+    #                tmp['name'] = li['target']   # to be changed to node['name']
+    #                tmp['parents'] = []
+    #                tmp['parents'].append(li['source'])
+    #                parentlist = []
+    #                parentlist.append(tmp)
+    #                print("parentlist: " + str(parentlist))
+    #                #levels.append(parentlist)
+    #print("levels2: " + str(levels) )
 
                 
         
