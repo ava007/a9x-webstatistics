@@ -132,10 +132,11 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += 'const svg = d3.select("#navchart-tangledtree-container")'
     h += '.append("svg")'
     h += '.attr("width", totalWidth)'
-    h += '.attr("height", totalHeight);' + "\n"
+    h += '.attr("height", totalHeight)'
+    h += '.attr("viewBox", [0,0 , totalWidth, totalHeight]);' + "\n"
 
-    h += 'const graphGroup = svg.append("g")'
-    h += '.attr("transform", "translate(20," + margins.top + ")");'
+    h += 'const graphGroup = svg.append("g");'
+    #h += '.attr("transform", "translate(20," + margins.top + ")");'
 
     h += 'levels.unshift([]);'
 
