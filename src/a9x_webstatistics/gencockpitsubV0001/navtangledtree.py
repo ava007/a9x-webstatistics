@@ -57,64 +57,37 @@ def navchartTangledtree(nodes, links, owndomain, omit):
                 tmplevel2.append(tmp)
             
     levels.append(tmplevel2)
-        
 
-    
-    #tmplevels = levels
-    #for l2 in tmplevels:
-    #    for li in links:
-    #        if li['source'] == l2[0]['id']:
-    #            if li['target'] not in l2[0]['parents']:
-    #                tmp = {}
-    #                tmp['id'] = li['target']
-    #                tmp['name'] = li['target']   # to be changed to node['name']
-    #                tmp['parents'] = []
-    #                tmp['parents'].append(li['source'])
-    #                parentlist = []
-    #                parentlist.append(tmp)
-    #                print("parentlist: " + str(parentlist))
-    #                #levels.append(parentlist)
-    #print("levels2: " + str(levels) )
-
-                
-        
-    # append nodes to levels L2:
-    #for li in links:
-    #    found = False
-    #    for lv in levels:
-            #print("level2: lv:" + lv[0]['id'] + " li-source:" + li['source'] + " li:" + str(li) + " lv:" + str(lv))
-            # when source exists in level.id : add with source as parent
-    #        if lv[0]['id'] == li['source']:
-    #            tmp = {}
-    #            tmp['id'] = li['target']
-    #            tmp['name'] = li['target']   # to be changed to node['name']
-    #            tmp['parents'] = []
-    #            tmp['parents'].append(li['source'])
-    #            parentlist = []
-    #            parentlist.append(tmp)
-                
-    #            found = True
-                #print("level2: found: " + lv[0]['id'] + " " + li['source'])
-    #            break
-    #    if found == False:
-    #        tmp = {}
-    #        tmp['id'] = li['target']
-    #        tmp['name'] = li['target']   # to be changed to node['name']
-    #        tmp['parents'] = li['source']
-    #        parentlist = []
-    #        parentlist.append(tmp)
-
-            # check if entry already exists:
-    #        duplicate = False
-    #        for level in levels:
-    #            for entry in level:
-    #                print("entry: " + str(entry) + " level: " + str(level))
-    #                if tmp['id'] == entry['id']:
-    #                    duplicate = True
-    #                    break
-    #        if duplicate == False:                            
-    #            levels.append(parentlist)
-       
+    # 3rd Level:
+    tmplevel3 = []
+    for l2 in tmplevel2:
+        print("l2: " + str(l2))
+        found = False
+        for li3 in links:
+            if li3['source'] == l2['id']:
+                found = True
+                break
+        if found == True:
+            # check if l2 is already there --> add to parents
+            parent_found = False
+            for l3a in tmplevel3:
+                if l3a['id'] == li3['target']:
+                    parent_found = True
+                    l3a['parents'].append(l2['id'])
+                    break
+            if parent_found == False:
+                tmp = {}
+                tmp['id'] = li3['target']
+                tmp['name'] = li3['target']
+                tmp['parents'] = [l2['id']]
+                for n3 in nodes:
+                    if li3['target'] == n3['id']:
+                        tmp['name'] = n3['name']
+                        break
+                tmplevel3.append(tmp)
+            
+    levels.append(tmplevel3)
+ 
 
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
