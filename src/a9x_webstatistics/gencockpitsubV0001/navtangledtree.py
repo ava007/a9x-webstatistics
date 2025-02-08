@@ -135,7 +135,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("height", totalHeight);' + "\n"
 
     h += 'const graphGroup = svg.append("g")'
-    h += '.attr("transform", "translate(" + margins.left + "," + margins.top + ")");'
+    h += '.attr("transform", "translate("20"," + margins.top + ")");'
 
     h += 'levels.unshift([]);'
 
@@ -302,7 +302,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.style("font-family", "sans-serif,Open Sans");'  + "\n"
 
     h += 'newNode.merge(node)'
-    h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
+    #h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
+    h += '.attr("transform", d => `translate(${d.y - width / 2},${d.x})`)'
     h += '.selectAll("text")'
     h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
     h += '}' + "\n"
@@ -335,8 +336,7 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.sum(d => (d.value || 0) + (d.partners || []).length)'
     h += '.sort((a, b) => b.value - a.value);' + "\n"
 
-    h += 'const tree = d3.tree()'
-    h += '.size([height, width])'
+    h += 'const tree = d3.tree().size([height, width * 1.2])'
     h += '.separation((a, b) => {'
     #// More separation between nodes with many children
     h += 'const totalPartners = (a.data.partners || []).length + (b.data.partners || []).length;'
