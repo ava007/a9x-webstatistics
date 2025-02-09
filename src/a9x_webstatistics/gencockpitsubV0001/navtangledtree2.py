@@ -237,7 +237,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'n.bundles_index = {};'
     h += 'n.bundles = [];'
     h += '}'
-    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)))'
+    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)));'
     h += 'n.bundles.forEach((b, i) => (b.i = i));'
     h += '});' + "\n"
 
@@ -261,9 +261,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const c = options.c;'
     h += 'options.bigc ||= node_width+c;' + "\n"
 
-    h += 'nodes.forEach('
-    h += 'n => (n.height = (Math.max(1, n.bundles.length) - 1) * metro_d)'
-    h += ');' + "\n"
+    h += 'nodes.forEach(n => (n.height = (Math.max(1, n.bundles.length) - 1) * metro_d));' + "\n"
 
     h += 'var x_offset = padding;'
     h += 'var y_offset = padding;'
