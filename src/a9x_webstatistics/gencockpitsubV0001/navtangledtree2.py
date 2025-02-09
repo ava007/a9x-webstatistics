@@ -269,7 +269,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '};' + "\n"
 
     h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
-    h += '}'
+    h += '};' + "\n"
 
     h += 'renderChart = (data, options={}) => {'
     h += 'options.color ||= (d, i) => color(i)'
