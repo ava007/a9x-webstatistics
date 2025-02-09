@@ -98,7 +98,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '<div id="navchart-tangledtree2-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const levels = ' + str(levels) + ';' + "\n"
-    h += 'document.getElementById("navchart-tangledtree2-container").innerHTML = renderChart(levels);'
 
     h += 'const color = d3.scaleOrdinal(d3.schemeDark2);'
 
@@ -318,7 +317,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += ')}'
     h += '</svg>`;'
     h += '}'
-        
+    h += 'document.getElementById("navchart-tangledtree2-container").innerHTML = renderChart(levels);'
     h += "</script>"
     h += '</div></div></div>'
     return h
