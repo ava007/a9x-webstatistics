@@ -137,7 +137,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("class", "link")'
     h += '.attr("d", d)'
     h += '.attr("stroke", options.color(b, i))'
-    h += '.attr("stroke-width", 2);'
+    h += '.attr("stroke-width", 2)'
+    h += '.style("fill", "none");'
     h += '});'  + "\n"
 
     h += 'tangleLayout.nodes.forEach(n => {'
@@ -168,7 +169,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("x", n.x + 4)'
     h += '.attr("y", n.y - n.height / 2 - 4)'
     h += '.style("pointer-events", "none")'
-    h += '.text(n.id);'
+    h += '.text(n.name);'
     h += '});'
     h += '}'  + "\n"
         
