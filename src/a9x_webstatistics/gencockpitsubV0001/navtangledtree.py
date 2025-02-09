@@ -283,7 +283,8 @@ def navchartTangledtree(nodes, links, owndomain, omit):
     h += '.attr("transform", d => `translate(${d.y},${d.x})`)'
     #h += '.attr("transform", d => `translate(${d.y - width / 2},${d.x})`)'
     h += '.selectAll("text")'
-    h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
+    #h += '.text(d => d.id + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
+    h += '.text(d => d.data.name + (d.cnt ? ` (${d.cnt})` : ""));' # add cnt if available
     h += '}' + "\n"
 
     h += 'const root = d3.stratify().parentId(d => d.parent)(nodes);'  + "\n"
