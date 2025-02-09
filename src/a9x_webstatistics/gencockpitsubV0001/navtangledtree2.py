@@ -145,13 +145,13 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("data-id", n.id)'
     h += '.attr("stroke", "black")'
     h += '.attr("stroke-width", 8)'
-    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'
+    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'   + "\n"
                 
     h += 'svg.append("path")'
     h += '.attr("class", "node")'
     h += '.attr("stroke", "white")'
     h += '.attr("stroke-width", 4)'
-    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'
+    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'   + "\n"
                 
     h += 'svg.append("text")'
     h += '.attr("class", "selectable")'
@@ -160,7 +160,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("y", n.y - n.height / 2 - 4)'
     h += '.attr("stroke", backgroundColor)'
     h += '.attr("stroke-width", 2)'
-    h += '.text(n.id);'
+    h += '.text(n.id);'   + "\n"
                 
     h += 'svg.append("text")'
     h += '.attr("x", n.x + 4)'
