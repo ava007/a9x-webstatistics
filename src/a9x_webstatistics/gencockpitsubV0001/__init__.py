@@ -5,4 +5,5 @@ from .performance import performance
 from .navchart import navchart
 from .navchartsankey import navchartsankey
 from .navtangledtree import navchartTangledtree
+from .navtangledtree2 import navchartTangledtree2
 from .makenodeslinks import makeNodesLinks
