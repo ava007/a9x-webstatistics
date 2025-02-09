@@ -99,9 +99,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '<script type="module">' + "\n"
     h += 'const levels = ' + str(levels) + ';' + "\n"
 
-
-<div id="navchart-tangledtree2-container"></div>
-<script type="module">
+    h += '<div id="navchart-tangledtree2-container"></div>'
+    h += '<script type="module">'
     h += 'function renderChart(data, options = {}) {'
     h += 'options.color = options.color || ((d, i) => d3.schemeCategory10[i % 10]);'
             
@@ -118,7 +117,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("width", totalWidth)'
     h += '.attr("height", totalHeight)'
     h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])'
-    h += '.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");'
+    h += '.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");' + "\n"
 
     h += 'tangleLayout.bundles.forEach((b, i) => {'
     h += 'let d = b.links.map(l => `'
@@ -128,20 +127,20 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'L${l.xb} ${l.ys - l.c2}'
     h += 'A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}'
     h += 'L${l.xs} ${l.ys}'
-    h += '`).join("");'
+    h += '`).join("");'  + "\n"
 
     h += 'svg.append("path")'
     h += '.attr("class", "link")'
     h += '.attr("d", d)'
     h += '.attr("stroke", backgroundColor)'
-    h += '.attr("stroke-width", 5);'
+    h += '.attr("stroke-width", 5);'  + "\n"
 
     h += 'svg.append("path")'
     h += '.attr("class", "link")'
     h += '.attr("d", d)'
     h += '.attr("stroke", options.color(b, i))'
     h += '.attr("stroke-width", 2);'
-    h += '});'
+    h += '});'  + "\n"
 
     h += 'tangleLayout.nodes.forEach(n => {'
     h += 'svg.append("path")'
@@ -172,7 +171,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.style("pointer-events", "none")'
     h += '.text(n.id);'
     h += '});'
-    h += '}'
+    h += '}'  + "\n"
         
     h += 'function constructTangleLayout(data, options) {'
     // precompute level depth
@@ -187,7 +186,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'd.parents = (d.parents === undefined ? [] : d.parents).map('
     h += 'p => nodes_index[p]'
     h += ');'
-    h += '});'
+    h += '});'  + "\n"
 
     // precompute bundles
     h += 'levels.forEach((l, i) => {'
@@ -195,7 +194,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.forEach(n => {'
     h += 'if (n.parents.length == 0) {'
     h += 'return;'
-    h += '}'
+    h += '}'  + "\n"
 
     h += 'var id = n.parents'
     h += '.map(d => d.id)'
@@ -210,14 +209,14 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '});'
     h += 'l.bundles = Object.keys(index).map(k => index[k]);'
     h += 'l.bundles.forEach((b, i) => (b.i = i));'
-    h += '});'
+    h += '});'  + "\n"
 
     h += 'var links = [];'
     h += 'nodes.forEach(d => {'
     h += 'd.parents.forEach(p =>'
     h += 'links.push({ source: d, bundle: d.bundle, target: p })'
     h += ');'
-    h += '});'
+    h += '});'  + "\n"
 
     h += 'var bundles = levels.reduce((a, x) => a.concat(x.bundles), []);'
 
