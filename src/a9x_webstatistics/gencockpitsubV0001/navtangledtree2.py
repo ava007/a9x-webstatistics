@@ -111,7 +111,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
     h += "\n\n"
     h += 'constructTangleLayout = (levels, options={}) => {'
-    h += '// precompute level depth'
+    # precompute level depth
     h += 'levels.forEach((l, i) => l.forEach(n => (n.level = i)));'
     h += 'var nodes = levels.reduce((a, x) => a.concat(x), []);'
     h += 'var nodes_index = {};'
@@ -122,7 +122,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '  p => nodes_index[p]'
     h += ');});' + "\n"
 
-    h += '// precompute bundles'
+    h += '// precompute bundles' + "\n"
     h += 'levels.forEach((l, i) => {'
     h += 'var index = {};'
     h += 'l.forEach(n => { if (n.parents.length == 0) { return;}'
@@ -150,7 +150,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
     h += 'var bundles = levels.reduce((a, x) => a.concat(x.bundles), []);'
 
-    h += '// reverse pointer from parent to bundles'
+    h += '// reverse pointer from parent to bundles'  + "\n"
     h += 'bundles.forEach(b =>'
     h += 'b.parents.forEach(p => {'
     h += 'if (p.bundles_index === undefined) {'
@@ -181,7 +181,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.bundle.links.push(l);'
     h += '});'
 
-    h += '// layout'
+    h += '// layout'  + "\n"
     h += 'const padding = 8;'
     h += 'const node_height = 22;'
     h += 'const node_width = 70;'
@@ -236,7 +236,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.ys = l.source.y;'
     h += '});'
   
-    h += '// compress vertical space'
+    h += '// compress vertical space'  + "\n"
     h += 'var y_negative_offset = 0;'
     h += 'levels.forEach(l => {'
     h += 'y_negative_offset +='
