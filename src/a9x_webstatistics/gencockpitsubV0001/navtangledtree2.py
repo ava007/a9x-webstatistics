@@ -102,64 +102,64 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
 <div id="navchart-tangledtree2-container"></div>
 <script type="module">
-     function renderChart(data, options = {}) {
-            options.color = options.color || ((d, i) => d3.schemeCategory10[i % 10]);
+    h += 'function renderChart(data, options = {}) {'
+    h += 'options.color = options.color || ((d, i) => d3.schemeCategory10[i % 10]);'
             
-            const tangleLayout = constructTangleLayout(JSON.parse(JSON.stringify(data)), options);
-            const backgroundColor = options.backgroundColor || "#fff";
+    h += 'const tangleLayout = constructTangleLayout(JSON.parse(JSON.stringify(data)), options);'
+    h += 'const backgroundColor = options.backgroundColor || "#fff";'
 
-            const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();
-            const margins = { top: 20, right: 20, bottom: 40, left: 100 };
-            const width = Math.round(rect.width) - margins.left - margins.right;
-            const height = width; // make height at least as width
-            const totalWidth = width + margins.left + margins.right;
-            const totalHeight = height + margins.top + margins.bottom;
-            const svg = d3.select("#navchart-tangledtree2-container").append("svg")
-            .attr("width", totalWidth)
-            .attr("height", totalHeight)
-            .attr("viewBox", [0,0 , totalWidth, totalHeight])
-            .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");
+    h += 'const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();'
+    h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
+    h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
+    h += 'const height = width; // make height at least as width'
+    h += 'const totalWidth = width + margins.left + margins.right;'
+    h += 'const totalHeight = height + margins.top + margins.bottom;'
+    h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
+    h += '.attr("width", totalWidth)'
+    h += '.attr("height", totalHeight)'
+    h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])'
+    h += '.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");'
 
-            tangleLayout.bundles.forEach((b, i) => {
-                let d = b.links.map(l => `
-                    M${l.xt} ${l.yt}
-                    L${l.xb - l.c1} ${l.yt}
-                    A${l.c1} ${l.c1} 90 0 1 ${l.xb} ${l.yt + l.c1}
-                    L${l.xb} ${l.ys - l.c2}
-                    A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}
-                    L${l.xs} ${l.ys}
-                `).join("");
+    h += 'tangleLayout.bundles.forEach((b, i) => {'
+    h += 'let d = b.links.map(l => `'
+    h += 'M${l.xt} ${l.yt}'
+    h += 'L${l.xb - l.c1} ${l.yt}'
+    h += 'A${l.c1} ${l.c1} 90 0 1 ${l.xb} ${l.yt + l.c1}'
+    h += 'L${l.xb} ${l.ys - l.c2}'
+    h += 'A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}'
+    h += 'L${l.xs} ${l.ys}'
+    h += '`).join("");'
 
-                svg.append("path")
-                    .attr("class", "link")
-                    .attr("d", d)
-                    .attr("stroke", backgroundColor)
-                    .attr("stroke-width", 5);
+    h += 'svg.append("path")'
+    h += '.attr("class", "link")'
+    h += '.attr("d", d)'
+    h += '.attr("stroke", backgroundColor)'
+    h += '.attr("stroke-width", 5);'
 
-                svg.append("path")
-                    .attr("class", "link")
-                    .attr("d", d)
-                    .attr("stroke", options.color(b, i))
-                    .attr("stroke-width", 2);
-            });
+    h += 'svg.append("path")'
+    h += '.attr("class", "link")'
+    h += '.attr("d", d)'
+    h += '.attr("stroke", options.color(b, i))'
+    h += '.attr("stroke-width", 2);'
+    h += '});'
 
-            tangleLayout.nodes.forEach(n => {
-                svg.append("path")
-                    .attr("class", "selectable node")
-                    .attr("data-id", n.id)
-                    .attr("stroke", "black")
-                    .attr("stroke-width", 8)
-                    .attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);
+    h += 'tangleLayout.nodes.forEach(n => {'
+    h += 'svg.append("path")'
+    h += '.attr("class", "selectable node")'
+    h += '.attr("data-id", n.id)'
+    h += '.attr("stroke", "black")'
+    h += '.attr("stroke-width", 8)'
+    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'
                 
-                svg.append("path")
-                    .attr("class", "node")
-                    .attr("stroke", "white")
-                    .attr("stroke-width", 4)
-                    .attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);
+    h += 'svg.append("path")'
+    h += '.attr("class", "node")'
+    h += '.attr("stroke", "white")'
+    h += '.attr("stroke-width", 4)'
+    h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'
                 
-                svg.append("text")
-                    .attr("class", "selectable")
-                    .attr("data-id", n.id)
+    h += 'svg.append("text")'
+    h += '.attr("class", "selectable")'
+    h += '.attr("data-id", n.id)'
     h += '.attr("x", n.x + 4)'
     h += '.attr("y", n.y - n.height / 2 - 4)'
     h += '.attr("stroke", backgroundColor)'
