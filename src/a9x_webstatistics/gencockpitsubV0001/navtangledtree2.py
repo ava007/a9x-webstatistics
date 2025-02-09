@@ -109,7 +109,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const totalHeight = height + margins.top + margins.bottom;'
 
     h += "\n\n"
-    h += 'constructTangleLayout = (levels, options={}) => {'
+    h += 'function constructTangleLayout = (levels, options={}) => {'
     # precompute level depth
     h += 'levels.forEach((l, i) => l.forEach(n => (n.level = i)));'
     h += 'var nodes = levels.reduce((a, x) => a.concat(x), []);'
@@ -270,7 +270,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
     h += '};' + "\n"
 
-    h += 'renderChart = (data, options={}) => {'
+    h += 'function renderChart = (data, options={}) => {'
     h += 'options.color ||= (d, i) => color(i);'
     h += 'const tangleLayout = constructTangleLayout(_.cloneDeep(data), options);'
     h += '  return svg`<svg width="${tangleLayout.layout.width}" height="${'
