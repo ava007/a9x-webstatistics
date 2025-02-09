@@ -99,36 +99,108 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '<script type="module">' + "\n"
     h += 'const levels = ' + str(levels) + ';' + "\n"
 
-    h += 'const color = d3.scaleOrdinal(d3.schemeDark2);'
 
-    h += 'const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();'
-    h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
-    h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    h += 'const height = width;'  + "\n"   # make height at least as width
-    h += 'const totalWidth = width + margins.left + margins.right;'
-    h += 'const totalHeight = height + margins.top + margins.bottom;'
+<div id="navchart-tangledtree2-container"></div>
+<script type="module">
+     function renderChart(data, options = {}) {
+            options.color = options.color || ((d, i) => d3.schemeCategory10[i % 10]);
+            
+            const tangleLayout = constructTangleLayout(JSON.parse(JSON.stringify(data)), options);
+            const backgroundColor = options.backgroundColor || "#fff";
 
-    h += "\n\n"
-    h += 'function constructTangleLayout = (levels, options={}) => {'
-    # precompute level depth
+            const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();
+            const margins = { top: 20, right: 20, bottom: 40, left: 100 };
+            const width = Math.round(rect.width) - margins.left - margins.right;
+            const height = width; // make height at least as width
+            const totalWidth = width + margins.left + margins.right;
+            const totalHeight = height + margins.top + margins.bottom;
+            const svg = d3.select("#navchart-tangledtree2-container").append("svg")
+            .attr("width", totalWidth)
+            .attr("height", totalHeight)
+            .attr("viewBox", [0,0 , totalWidth, totalHeight])
+            .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");
+
+            tangleLayout.bundles.forEach((b, i) => {
+                let d = b.links.map(l => `
+                    M${l.xt} ${l.yt}
+                    L${l.xb - l.c1} ${l.yt}
+                    A${l.c1} ${l.c1} 90 0 1 ${l.xb} ${l.yt + l.c1}
+                    L${l.xb} ${l.ys - l.c2}
+                    A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}
+                    L${l.xs} ${l.ys}
+                `).join("");
+
+                svg.append("path")
+                    .attr("class", "link")
+                    .attr("d", d)
+                    .attr("stroke", backgroundColor)
+                    .attr("stroke-width", 5);
+
+                svg.append("path")
+                    .attr("class", "link")
+                    .attr("d", d)
+                    .attr("stroke", options.color(b, i))
+                    .attr("stroke-width", 2);
+            });
+
+            tangleLayout.nodes.forEach(n => {
+                svg.append("path")
+                    .attr("class", "selectable node")
+                    .attr("data-id", n.id)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 8)
+                    .attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);
+                
+                svg.append("path")
+                    .attr("class", "node")
+                    .attr("stroke", "white")
+                    .attr("stroke-width", 4)
+                    .attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);
+                
+                svg.append("text")
+                    .attr("class", "selectable")
+                    .attr("data-id", n.id)
+    h += '.attr("x", n.x + 4)'
+    h += '.attr("y", n.y - n.height / 2 - 4)'
+    h += '.attr("stroke", backgroundColor)'
+    h += '.attr("stroke-width", 2)'
+    h += '.text(n.id);'
+                
+    h += 'svg.append("text")'
+    h += '.attr("x", n.x + 4)'
+    h += '.attr("y", n.y - n.height / 2 - 4)'
+    h += '.style("pointer-events", "none")'
+    h += '.text(n.id);'
+    h += '});'
+    h += '}'
+        
+    h += 'function constructTangleLayout(data, options) {'
+    // precompute level depth
     h += 'levels.forEach((l, i) => l.forEach(n => (n.level = i)));'
+
     h += 'var nodes = levels.reduce((a, x) => a.concat(x), []);'
     h += 'var nodes_index = {};'
     h += 'nodes.forEach(d => (nodes_index[d.id] = d));'
-    h += '// objectification'
+
+    // objectification
     h += 'nodes.forEach(d => {'
     h += 'd.parents = (d.parents === undefined ? [] : d.parents).map('
-    h += '  p => nodes_index[p]'
-    h += ');});' + "\n"
+    h += 'p => nodes_index[p]'
+    h += ');'
+    h += '});'
 
-    # precompute bundles
+    // precompute bundles
     h += 'levels.forEach((l, i) => {'
     h += 'var index = {};'
-    h += 'l.forEach(n => { if (n.parents.length == 0) { return;}'
+    h += 'l.forEach(n => {'
+    h += 'if (n.parents.length == 0) {'
+    h += 'return;'
+    h += '}'
+
     h += 'var id = n.parents'
     h += '.map(d => d.id)'
     h += '.sort()'
-    h += '.join("-X-");'
+    h += ".join('-X-');"
     h += 'if (id in index) {'
     h += 'index[id].parents = index[id].parents.concat(n.parents);'
     h += '} else {'
@@ -138,18 +210,18 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '});'
     h += 'l.bundles = Object.keys(index).map(k => index[k]);'
     h += 'l.bundles.forEach((b, i) => (b.i = i));'
-    h += '});' + "\n"
+    h += '});'
 
     h += 'var links = [];'
     h += 'nodes.forEach(d => {'
     h += 'd.parents.forEach(p =>'
     h += 'links.push({ source: d, bundle: d.bundle, target: p })'
     h += ');'
-    h += '});' + "\n"
+    h += '});'
 
     h += 'var bundles = levels.reduce((a, x) => a.concat(x.bundles), []);'
 
-    # reverse pointer from parent to bundles
+    // reverse pointer from parent to bundles
     h += 'bundles.forEach(b =>'
     h += 'b.parents.forEach(p => {'
     h += 'if (p.bundles_index === undefined) {'
@@ -169,9 +241,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'n.bundles_index = {};'
     h += 'n.bundles = [];'
     h += '}'
-    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)));'
+    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)))'
     h += 'n.bundles.forEach((b, i) => (b.i = i));'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'links.forEach(l => {'
     h += 'if (l.bundle.links === undefined) {'
@@ -180,7 +252,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.bundle.links.push(l);'
     h += '});' + "\n"
 
-    # layout
+    // layout
     h += 'const padding = 8;'
     h += 'const node_height = 22;'
     h += 'const node_width = 70;'
@@ -208,7 +280,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
     h += 'y_offset += node_height + n.height;'
     h += '});'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'var i = 0;'
     h += 'levels.forEach(l => {'
@@ -220,7 +292,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'b.y = i * node_height;'
     h += '});'
     h += 'i += l.length;'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'links.forEach(l => {'
     h += 'l.xt = l.target.x;'
@@ -235,7 +307,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.ys = l.source.y;'
     h += '});' + "\n"
   
-    # compress vertical space
+    // compress vertical space
     h += 'var y_negative_offset = 0;'
     h += 'levels.forEach(l => {'
     h += 'y_negative_offset +='
@@ -244,7 +316,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'd3.min(b.links, link => link.ys - 2*c - (link.yt + c))'
     h += ') || 0;'
     h += 'l.forEach(n => (n.y -= y_negative_offset));'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'links.forEach(l => {'
     h += 'l.yt ='
@@ -265,50 +337,12 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'bundle_width,'
     h += 'level_y_padding,'
     h += 'metro_d'
-    h += '};' + "\n"
+    h += '  };' + "\n"
 
-    h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
-    h += '};' + "\n"
-
-    h += 'function renderChart = (data, options={}) => {'
-    h += 'options.color ||= (d, i) => color(i);'
-    h += 'const tangleLayout = constructTangleLayout(_.cloneDeep(data), options);'
-    h += '  return svg`<svg width="${tangleLayout.layout.width}" height="${'
-    h += 'tangleLayout.layout.height'
-    h += '}" style="background-color: ${background_color}">'
-    h += '<style>'
-    h += 'text { font-family: sans-serif; font-size: 10px;}'
-    h += '.node { stroke-linecap: round; }'
-    h += '.link { fill: none; }'
-    h += '</style>'
-
-    h += '${tangleLayout.bundles.map((b, i) => {'
-    h += 'let d = b.links'
-    h += '.map('
-    h += 'l => `'
-    h += 'M${l.xt} ${l.yt}'
-    h += 'L${l.xb - l.c1} ${l.yt}'
-    h += 'A${l.c1} ${l.c1} 90 0 1 ${l.xb} ${l.yt + l.c1}'
-    h += 'L${l.xb} ${l.ys - l.c2}'
-    h += 'A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}'
-    h += 'L${l.xs} ${l.ys}`'
-    h += ').join("");'
-    h += 'return `'
-    h += '<path class="link" d="${d}" stroke="${background_color}" stroke-width="5"/>'
-    h += '<path class="link" d="${d}" stroke="${options.color(b, i)}" stroke-width="2"/>'
-    h += '`;'
-    h += '})}' + "\n"
-    h += '${tangleLayout.nodes.map('
-    h += 'n => `<path class="selectable node" data-id="${n.id}" stroke="black" stroke-width="8" d="M${n.x} ${n.y - n.height / 2} L${'
-    h += 'n.x'
-    h += '} ${n.y + n.height / 2}"/>'
-    h += '<path class="node" stroke="white" stroke-width="4" d="M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}"/>'
-    h += '<text class="selectable" data-id="${n.id}" x="${n.x + 4}" y="${n.y - n.height / 2 -'
-    h += '4}" stroke="${background_color}" stroke-width="2">${n.id}</text>'
-    h += '<text x="${n.x + 4}" y="${n.y - n.height / 2 - 4}" style="pointer-events: none;">${n.id}</text>'
-    h += '`)}</svg>`;'
-    h += '}' + "\n"
-    h += 'document.getElementById("navchart-tangledtree2-container").innerHTML = renderChart(levels);'
+    h += '  return { levels, nodes, nodes_index, links, bundles, layout };'
+    h += '}'
+    h += 'const levels ='
+    h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });'
     h += "</script>"
     h += '</div></div></div>'
     return h
