@@ -152,6 +152,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("class", "node")'
     h += '.attr("stroke", "white")'
     h += '.attr("stroke-width", 4)'
+    h += '.style("fill", "none")'
     h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'   + "\n"
                 
     h += 'svg.append("text")'
