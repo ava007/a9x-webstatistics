@@ -98,9 +98,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '<div id="navchart-tangledtree2-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const levels = ' + str(levels) + ';' + "\n"
-
-    h += '<div id="navchart-tangledtree2-container"></div>'
-    h += '<script type="module">'
     h += 'function renderChart(data, options = {}) {'
     h += 'options.color = options.color || ((d, i) => d3.schemeCategory10[i % 10]);'
             
