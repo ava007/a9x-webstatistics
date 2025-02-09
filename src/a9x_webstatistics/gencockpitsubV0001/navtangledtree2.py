@@ -130,6 +130,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("class", "link")'
     h += '.attr("d", d)'
     h += '.attr("stroke", backgroundColor)'
+    h += '.style("fill", "none")'
     h += '.attr("stroke-width", 5);'  + "\n"
 
     h += 'svg.append("path")'
@@ -331,9 +332,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'bundle_width,'
     h += 'level_y_padding,'
     h += 'metro_d'
-    h += '  };' + "\n"
-
-    h += '  return { levels, nodes, nodes_index, links, bundles, layout };'
+    h += '};' + "\n"
+    h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
     h += '}'
     h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });'
     h += "</script>"
