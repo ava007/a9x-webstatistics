@@ -129,7 +129,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'var id = n.parents'
     h += '.map(d => d.id)'
     h += '.sort()'
-    h += '.join('-X-');'
+    h += '.join("-X-");'
     h += 'if (id in index) {'
     h += 'index[id].parents = index[id].parents.concat(n.parents);'
     h += '} else {'
