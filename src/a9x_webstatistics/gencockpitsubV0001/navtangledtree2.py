@@ -340,7 +340,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
     h += '  return { levels, nodes, nodes_index, links, bundles, layout };'
     h += '}'
-    h += 'const levels ='
     h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });'
     h += "</script>"
     h += '</div></div></div>'
