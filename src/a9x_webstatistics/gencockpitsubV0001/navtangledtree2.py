@@ -107,7 +107,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    h += 'const height = width; // make height at least as width'
+    h += 'const height = width;'
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height + margins.top + margins.bottom;'
     h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
