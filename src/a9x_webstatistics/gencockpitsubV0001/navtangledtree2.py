@@ -272,7 +272,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '};' + "\n"
 
     h += 'renderChart = (data, options={}) => {'
-    h += 'options.color ||= (d, i) => color(i)'
+    h += 'options.color ||= (d, i) => color(i);'
     h += 'const tangleLayout = constructTangleLayout(_.cloneDeep(data), options);'
     h += '  return svg`<svg width="${tangleLayout.layout.width}" height="${'
     h += 'tangleLayout.layout.height'
