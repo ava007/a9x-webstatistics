@@ -170,7 +170,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'n.bundles_index = {};'
     h += 'n.bundles = [];'
     h += '}'
-    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)))'
+    h += 'n.bundles.sort((a,b) => d3.descending(d3.max(a, d => d.span), d3.max(b, d => d.span)));'
     h += 'n.bundles.forEach((b, i) => (b.i = i));'
     h += '});'
 
