@@ -14,7 +14,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     tmplevel1 = []
     for n1 in nodes:
         found = False
-        if ':' in n1['id']:   // IP with ports
+        if ':' in n1['id']:   # IP with ports
             continue
         for l1 in links:
             if l1['target'] == n1['id']:
