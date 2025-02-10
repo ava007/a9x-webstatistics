@@ -93,9 +93,36 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
                         tmp['name'] = n3['name']
                         break
                 tmplevel3.append(tmp)
-            
     levels.append(tmplevel3)
- 
+
+    # 4rd Level:
+    tmplevel4 = []
+    for l3 in tmplevel3:
+        print("l3: " + str(l3))
+        found = False
+        for li4 in links:
+            if li4['source'] == l3['id']:
+                found = True
+                break
+        if found == True:
+            # check if l3 is already there --> add to parents
+            parent_found = False
+            for l4a in tmplevel4:
+                if l4a['id'] == li4['target']:
+                    parent_found = True
+                    l4a['parents'].append(l3['id'])
+                    break
+            if parent_found == False:
+                tmp = {}
+                tmp['id'] = li4['target']
+                tmp['name'] = li4['target']
+                tmp['parents'] = [l2['id']]
+                for n3 in nodes:
+                    if li3['target'] == n4['id']:
+                        tmp['name'] = n4['name']
+                        break
+                tmplevel4.append(tmp)
+    levels.append(tmplevel4)
 
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
