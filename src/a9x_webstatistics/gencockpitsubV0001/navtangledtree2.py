@@ -172,22 +172,28 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     #h += '.attr("stroke", backgroundColor)'
     #h += '.attr("stroke-width", 2)'
     #h += '.text(n.id);'  
-    h += 'svg.append("a")'
+    #h += 'svg.append("text")'
+    #h += '.attr("x", n.x + 4)'
+    #h += '.attr("y", n.y - n.height / 2 - 4)'
+    #h += '.style("pointer-events", "none")'
+    #h += '.text(n.name);'
+    
+    h += 'const nlink = svg.append("a")'
     h += '.attr("class", "selectable")'
     h += '.attr("data-id", n.id)'
-    h += '.attr("x", n.x + 4)'
-    h += '.attr("y", n.y - n.height / 2 - 4)'
-    h += '.attr("stroke", backgroundColor)'
-    h += '.attr("stroke-width", 2)'
-    h += '.attr("xlink:href", d => n.name ? (n.name.startsWith("/") ? `https://'+ owndomain + '${n.name}` : `https://${n.name}`) : "#")'
+    h += '.attr("xlink:href", d => n.name ? (n.name.startsWith("/") ? `https://'+ owndomain + '${n.name}` : `https://${n.name}`) : "#")
+    h += '.attr("href", n.name ? (n.name.startsWith("/") ? `https://logikfabrik.com${n.name}` : `https://${n.name}`) : "#")'
     h += '.attr("target", "_blank")' 
     h += '.attr("title", d => `${n.name}`);'
-                
-    h += 'svg.append("text")'
+
+    h += 'nlink.append("text")'
     h += '.attr("x", n.x + 4)'
     h += '.attr("y", n.y - n.height / 2 - 4)'
-    h += '.style("pointer-events", "none")'
+    h += '.attr("fill", "blue")'
+    h += '.attr("text-decoration", "underline")'
     h += '.text(n.name);'
+                
+    
     h += '});'
     h += '}'  + "\n"
         
