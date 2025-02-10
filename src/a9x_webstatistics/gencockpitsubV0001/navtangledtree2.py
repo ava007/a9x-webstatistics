@@ -105,7 +105,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
                 found = True
                 break
         if found == True:
-            # check if l3 is already there --> add to parents
+            # check if l4 is already there --> add to parents
             parent_found = False
             for l4a in tmplevel4:
                 if l4a['id'] == li4['target']:
@@ -116,7 +116,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
                 tmp = {}
                 tmp['id'] = li4['target']
                 tmp['name'] = li4['target']
-                tmp['parents'] = [l2['id']]
+                tmp['parents'] = [l3['id']]
                 for n4 in nodes:
                     if li4['target'] == n4['id']:
                         tmp['name'] = n4['name']
