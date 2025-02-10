@@ -117,8 +117,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
                 tmp['id'] = li4['target']
                 tmp['name'] = li4['target']
                 tmp['parents'] = [l2['id']]
-                for n3 in nodes:
-                    if li3['target'] == n4['id']:
+                for n4 in nodes:
+                    if li4['target'] == n4['id']:
                         tmp['name'] = n4['name']
                         break
                 tmplevel4.append(tmp)
