@@ -171,7 +171,10 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("y", n.y - n.height / 2 - 4)'
     h += '.attr("stroke", backgroundColor)'
     h += '.attr("stroke-width", 2)'
-    h += '.text(n.id);'   + "\n"
+    h += '.text(n.id)'  
+    h += '.attr("xlink:href", d => d.name ? (d.name.startsWith("/") ? `https://'+ owndomain + '${d.name}` : `https://${d.name}`) : "#")'
+    h += '.attr("target", "_blank")' 
+    h += '.attr("title", d => `${d.name}`);'
                 
     h += 'svg.append("text")'
     h += '.attr("x", n.x + 4)'
