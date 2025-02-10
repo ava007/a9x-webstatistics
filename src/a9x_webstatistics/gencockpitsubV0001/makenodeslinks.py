@@ -61,6 +61,8 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                     continue
                 if '[' in tk:    # hack for IPv6 addresses
                     continue
+                if ':' in tk:    # hack for IPv6 addresses/ports
+                    continue
 
                 tmpnode = {}
                 if tk == '/':
