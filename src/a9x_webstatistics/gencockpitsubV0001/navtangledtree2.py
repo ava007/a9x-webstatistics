@@ -7,7 +7,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
 
     # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start', 'name': 'user'}]]
-    levels = []
+    
     print("links: " + str(links))
 
     # append root nodes to levels L1:
