@@ -23,6 +23,7 @@ def addlink(links, linkentry, owndomain):
                 break
     if duplicate_found == False:
         links.append(linkentry)
+    print("linkadd: " + str(duplicate_found) + " " + str(tmpentry) )
     return links
 
 def addnode(nodes, node, owndomain):
@@ -83,8 +84,7 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                     tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk2) ) # eliminate special chars
                     tmplink['value'] = tdv
                     links = addlink(links, tmplink, owndomain)
-                    print("linkadd: " str(tmplink))
-
+                    
                     tmpnode = {}
                     tmpnode['name'] = tdk2
                     tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tdk2) ) # eliminate special chars
