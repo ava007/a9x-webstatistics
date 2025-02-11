@@ -23,7 +23,7 @@ def addlink(links, linkentry, owndomain):
                 break
     if duplicate_found == False:
         links.append(linkentry)
-    print("linkadd: " + str(duplicate_found) + " " + str(tmpentry) )
+    print("linkadd: " + str(duplicate_found) + " " + str(linkentry) )
     return links
 
 def addnode(nodes, node, owndomain):
