@@ -35,33 +35,28 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
         found = False
         for li2 in links:
             if li2['source'] == l1['id']:
-                found = True
-                break
-        if found == True:
-            # check if l1 is already there --> add to parents
-            parent_found = False
-            
-            if any(oelm in li2['source'] for oelm in omit):  # do not show parts of url 
-                continue
-            if any(oelm in li2['target'] for oelm in omit):  # do not show parts of url 
-                continue
-
-            for l2a in tmplevel2:
-                if l2a['id'] == li2['target']:
-                    parent_found = True
-                    l2a['parents'].append(l1['id'])
-                    break
-            if parent_found == False:
-                tmp = {}
-                tmp['id'] = li2['target']
-                tmp['name'] = li2['target']
-                tmp['parents'] = [l1['id']]
-                for n2 in nodes:
-                    if li2['target'] == n2['id']:
-                        tmp['name'] = n2['name']
+                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
+                    continue
+                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
+                    continue
+                parent_found = False
+                for l2a in tmplevel2:
+                    if l2a['id'] == li2['target']:
+                        parent_found = True
+                        l2a['parents'].append(l1['id'])
                         break
-                tmplevel2.append(tmp)
-    levels.append(tmplevel2)
+                if parent_found == False:
+                    tmp = {}
+                    tmp['id'] = li2['target']
+                    tmp['name'] = li2['target']
+                    tmp['parents'] = [l1['id']]
+                    for n2 in nodes:
+                        if li2['target'] == n2['id']:
+                            tmp['name'] = n2['name']
+                            break
+                    tmplevel2.append(tmp)
+    if len(tmplevel2) > 0:
+        levels.append(tmplevel2)
 
     # 3rd Level:
     tmplevel3 = []
@@ -69,27 +64,29 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
         found = False
         for li3 in links:
             if li3['source'] == l2['id']:
-                found = True
-                break
-        if found == True:
-            # check if l2 is already there --> add to parents
-            parent_found = False
-            for l3a in tmplevel3:
-                if l3a['id'] == li3['target']:
-                    parent_found = True
-                    l3a['parents'].append(l2['id'])
-                    break
-            if parent_found == False:
-                tmp = {}
-                tmp['id'] = li3['target']
-                tmp['name'] = li3['target']
-                tmp['parents'] = [l2['id']]
-                for n3 in nodes:
-                    if li3['target'] == n3['id']:
-                        tmp['name'] = n3['name']
+                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
+                    continue
+                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
+                    continue
+                # check if l2 is already there --> add to parents
+                parent_found = False
+                for l3a in tmplevel3:
+                    if l3a['id'] == li3['target']:
+                        parent_found = True
+                        l3a['parents'].append(l2['id'])
                         break
-                tmplevel3.append(tmp)
-    levels.append(tmplevel3)
+                if parent_found == False:
+                    tmp = {}
+                    tmp['id'] = li3['target']
+                    tmp['name'] = li3['target']
+                    tmp['parents'] = [l2['id']]
+                    for n3 in nodes:
+                        if li3['target'] == n3['id']:
+                            tmp['name'] = n3['name']
+                            break
+                    tmplevel3.append(tmp)
+    if len(tmplevel3) > 0:
+        levels.append(tmplevel3)
 
     # 4rd Level:
     tmplevel4 = []
@@ -97,27 +94,30 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
         found = False
         for li4 in links:
             if li4['source'] == l3['id']:
-                found = True
-                break
-        if found == True:
-            # check if l4 is already there --> add to parents
-            parent_found = False
-            for l4a in tmplevel4:
-                if l4a['id'] == li4['target']:
-                    parent_found = True
-                    l4a['parents'].append(l3['id'])
-                    break
-            if parent_found == False:
-                tmp = {}
-                tmp['id'] = li4['target']
-                tmp['name'] = li4['target']
-                tmp['parents'] = [l3['id']]
-                for n4 in nodes:
-                    if li4['target'] == n4['id']:
-                        tmp['name'] = n4['name']
+                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
+                    continue
+                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
+                    continue
+
+                # check if l4 is already there --> add to parents
+                parent_found = False
+                for l4a in tmplevel4:
+                    if l4a['id'] == li4['target']:
+                        parent_found = True
+                        l4a['parents'].append(l3['id'])
                         break
-                tmplevel4.append(tmp)
-    levels.append(tmplevel4)
+                if parent_found == False:
+                    tmp = {}
+                    tmp['id'] = li4['target']
+                    tmp['name'] = li4['target']
+                    tmp['parents'] = [l3['id']]
+                    for n4 in nodes:
+                        if li4['target'] == n4['id']:
+                            tmp['name'] = n4['name']
+                            break
+                    tmplevel4.append(tmp)
+    if len(tmplevel4) > 0:
+        levels.append(tmplevel4)
 
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
