@@ -8,8 +8,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
     levels = [[{'id': 'start', 'name': 'user'}]]
     
-    print("links: " + str(links))
-
     # append root nodes to levels L1:
     # root nodes are sources that never appear in target
     tmplevel1 = []
@@ -185,20 +183,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("stroke-width", 4)'
     h += '.style("fill", "none")'
     h += '.attr("d", `M${n.x} ${n.y - n.height / 2} L${n.x} ${n.y + n.height / 2}`);'   + "\n"
-                
-    #h += 'svg.append("text")'
-    #h += '.attr("class", "selectable")'
-    #h += '.attr("data-id", n.id)'
-    #h += '.attr("x", n.x + 4)'
-    #h += '.attr("y", n.y - n.height / 2 - 4)'
-    #h += '.attr("stroke", backgroundColor)'
-    #h += '.attr("stroke-width", 2)'
-    #h += '.text(n.id);'  
-    #h += 'svg.append("text")'
-    #h += '.attr("x", n.x + 4)'
-    #h += '.attr("y", n.y - n.height / 2 - 4)'
-    #h += '.style("pointer-events", "none")'
-    #h += '.text(n.name);'
     
     h += 'const nlink = svg.append("a")'
     h += '.attr("class", "selectable")'
@@ -214,7 +198,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     #h += '.attr("fill", "blue")'
     #h += '.attr("text-decoration", "underline")'
     h += '.text(n.name);'
-                
     
     h += '});'
     h += '}'  + "\n"
