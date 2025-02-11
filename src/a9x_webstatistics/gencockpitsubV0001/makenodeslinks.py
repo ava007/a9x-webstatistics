@@ -68,11 +68,11 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                 tmpnode['name'] = tk
                 if tmpnode['name'] == '/': 
                     tmpnode['name'] = owndomain
-                tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
+                tmpnode['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode['name']) ) # eliminate special chars
                 tmpnode['typ'] = 'root'
                 nodes = addnode(nodes, tmpnode, owndomain)
                 tmplink = {}
-                tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tk) ) # eliminate special chars
+                tmplink['source'] =  "".join(map(lambda char: char if char.isalnum()  else "", tmpnode['name']) ) # eliminate special chars
                 for tdk,tdv in tv['target'].items():
                     if any(oelm in tdk for oelm in omit):  # don not show parts of url 
                         continue
@@ -83,6 +83,7 @@ def makeNodesLinks(d, owndomain, omit, daysback=31):
                     tmplink['target'] =  "".join(map(lambda char: char if char.isalnum()  else "", tdk2) ) # eliminate special chars
                     tmplink['value'] = tdv
                     links = addlink(links, tmplink, owndomain)
+                    print("linkadd: " str(tmplink))
 
                     tmpnode = {}
                     tmpnode['name'] = tdk2
