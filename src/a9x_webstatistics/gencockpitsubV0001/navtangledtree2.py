@@ -6,7 +6,7 @@ import ipaddress
 def navchartTangledtree2(nodes, links, owndomain, omit):
 
     # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
-    #levels = [[{'id': 'start', 'name': 'start'}]]
+    levels = [[{'id': 'start', 'name': 'user'}]]
     levels = []
     print("links: " + str(links))
 
@@ -25,16 +25,13 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
             tmp = {}
             tmp['id'] = n1['id']
             tmp['name'] = n1['name']
-            #tmp['parents'] = ['start']
+            tmp['parents'] = ['start']
             tmplevel1.append(tmp)
     levels.append(tmplevel1)
-
-    print("levels1: " + str(levels) )
 
     # 2nd Level:
     tmplevel2 = []
     for l1 in tmplevel1:
-        print("l1: " + str(l1))
         found = False
         for li2 in links:
             if li2['source'] == l1['id']:
@@ -64,13 +61,11 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
                         tmp['name'] = n2['name']
                         break
                 tmplevel2.append(tmp)
-            
     levels.append(tmplevel2)
 
     # 3rd Level:
     tmplevel3 = []
     for l2 in tmplevel2:
-        print("l2: " + str(l2))
         found = False
         for li3 in links:
             if li3['source'] == l2['id']:
@@ -99,7 +94,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     # 4rd Level:
     tmplevel4 = []
     for l3 in tmplevel3:
-        print("l3: " + str(l3))
         found = False
         for li4 in links:
             if li4['source'] == l3['id']:
@@ -217,8 +211,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'nlink.append("text")'
     h += '.attr("x", n.x + 4)'
     h += '.attr("y", n.y - n.height / 2 - 4)'
-    h += '.attr("fill", "blue")'
-    h += '.attr("text-decoration", "underline")'
+    #h += '.attr("fill", "blue")'
+    #h += '.attr("text-decoration", "underline")'
     h += '.text(n.name);'
                 
     
