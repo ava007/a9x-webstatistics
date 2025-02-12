@@ -190,7 +190,16 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("xlink:href", d => n.name ? (n.name.startsWith("/") ? `https://'+ owndomain + '${n.name}` : `https://${n.name}`) : "#")'
     h += '.attr("href", n.name ? (n.name.startsWith("/") ? `https://logikfabrik.com${n.name}` : `https://${n.name}`) : "#")'
     h += '.attr("target", "_blank")' 
-    h += '.attr("title", d => `${n.name}`);'
+    #h += '.attr("title", d => `${n.name}`);'
+    h += '.attr("title", d => {'
+    h += '  let lbl;'
+    h += '  if (n.name.length > 15) {'
+    h += '    lbl = n.name.substring(0,10) + "..." + n.name.slice(-3);'
+    h += '  } else {'
+    h += '    lbl = n.name;'
+    h += '  }'
+    h += '  return lbl; }'
+    h += ');'  + "\n"
 
     h += 'nlink.append("text")'
     h += '.attr("x", n.x + 4)'
