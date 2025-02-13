@@ -366,7 +366,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += navchartTangledtree2(nodes, links, owndomain, omit)
         if efeature == '10':
             #h += navchartTangledtree(nodes, links, owndomain, omit)
-            h += navchartsankey(nodes, links, owndomain, omit):
+            h += navchartsankey(nodes, links, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
