@@ -21,6 +21,13 @@ def addlink(links, linkentry, owndomain):
                 duplicate_found = True
                 li['value'] += linkentry['value']
                 break
+    
+    # check for circular links:  ie. new target must not be in existing source
+    for li in links:
+        if (li['source'] == linkentry['target']:
+            duplicate_found = True
+            break
+    
     if duplicate_found == False:
         links.append(linkentry)
     #print("linkadd: " + str(duplicate_found) + " " + str(linkentry) )
