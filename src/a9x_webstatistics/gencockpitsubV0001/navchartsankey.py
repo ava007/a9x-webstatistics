@@ -3,14 +3,13 @@ from operator import itemgetter
 import ipaddress
 
 # navigation chart as sankey diagram:
-#def navchartsankey(d, owndomain, omit):
 def navchartsankey(nodes, links, owndomain, omit):
-    
-    h = ''
-    links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
-    nodes = []    # {'id': 'google.com', 'value':1}
+
+    # links = []    # {'source': 'google.com', 'target': '/team/view/ax', 'c': 1}
+    # nodes = []    # {'id': 'google.com', 'value':1}
  
     # d3js horizontal bubble char in case results are available:
+    h = "\n\n"
     h += '<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>'
     h += "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
