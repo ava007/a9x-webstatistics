@@ -100,6 +100,5 @@ def cockpitLanguages(d, owndomain):
         h += '  .attr("text-anchor", "end")'
         h += '  .text(d => d.lang);'
         h += '</script>'
-        #h += '</p>'
         h += '</div></div></div>'  + "\n" 
     return h
