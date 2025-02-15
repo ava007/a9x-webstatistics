@@ -223,9 +223,10 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '}'  + "\n"
         
     h += 'function constructTangleLayout(data, options) {'
-    # precompute level depth
+    # precompute level depth and assign a level for each node:
     h += 'levels.forEach((l, i) => l.forEach(n => (n.level = i)));'
 
+    # nodes will contain all nodes:
     h += 'var nodes = levels.reduce((a, x) => a.concat(x), []);'
     h += 'var nodes_index = {};'
     h += 'nodes.forEach(d => (nodes_index[d.id] = d));'
@@ -237,18 +238,14 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += ');'
     h += '});'  + "\n"
 
-    # precompute bundles
+    # precompute bundles for shared parent relationship:
     h += 'levels.forEach((l, i) => {'
     h += 'var index = {};'
     h += 'l.forEach(n => {'
     h += 'if (n.parents.length == 0) {'
     h += 'return;'
     h += '}'  + "\n"
-
-    h += 'var id = n.parents'
-    h += '.map(d => d.id)'
-    h += '.sort()'
-    h += ".join('-X-');"
+    h += 'var id = n.parents.map(d => d.id).sort().join('-X-');"
     h += 'if (id in index) {'
     h += 'index[id].parents = index[id].parents.concat(n.parents);'
     h += '} else {'
@@ -260,6 +257,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.bundles.forEach((b, i) => (b.i = i));'
     h += '});'  + "\n"
 
+    # create links between nodes and parents:
     h += 'var links = [];'
     h += 'nodes.forEach(d => {'
     h += 'd.parents.forEach(p =>'
