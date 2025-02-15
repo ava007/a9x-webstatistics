@@ -154,12 +154,13 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'L${l.xs} ${l.ys}'
     h += '`).join("");'  + "\n"
 
-    h += 'svg.append("path")'
-    h += '.attr("class", "link")'
-    h += '.attr("d", d)'
-    h += '.attr("stroke", backgroundColor)'
-    h += '.style("fill", "none")'
-    h += '.attr("stroke-width", 5);'  + "\n"
+    # 20250215: not relevant code
+    #h += 'svg.append("path")'
+    #h += '.attr("class", "link")'
+    #h += '.attr("d", d)'
+    #h += '.attr("stroke", backgroundColor)'
+    #h += '.style("fill", "none")'
+    #h += '.attr("stroke-width", 5);'  + "\n"
 
     h += 'svg.append("path")'
     h += '.attr("class", "link")'
