@@ -332,7 +332,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'levels.forEach(l => {'
     h += 'l.bundles.forEach(b => {'
     h += 'b.x = d3.max(b.parents, d => d.x) + node_width +'
-    h += '(l.bundles.length - l - b.i) * bundle_width;'
+    h += '(l.bundles.length - 1 - b.i) * bundle_width;'
     h += 'b.y = i * node_height;'
     h += '});'
     h += 'i += l.length;'
