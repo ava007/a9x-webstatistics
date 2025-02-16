@@ -139,6 +139,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;'
     h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
+    h += '.attr("id","tt20250216")'
     h += '.attr("width", totalWidth)'
     h += '.attr("height", totalHeight)'
     h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])'
@@ -361,6 +362,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
     h += '}'
     h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });'
+    h += 'const SVGgroupElement = document.querySelector("#tt20250216");'
+    h += 'const bboxGroup = SVGgroupElement.getBBox();'
+    h += 'console.log("height bboxGroup: " + bboxGroup.height);'
     h += "</script>"
     h += '</div></div></div>'
     return h
