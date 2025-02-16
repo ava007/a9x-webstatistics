@@ -228,7 +228,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'if (n.parents.length == 0) {'
     h += 'return;'
     h += '}'  + "\n"
-    h += 'var id = n.parents.map(d => d.id).sort().join('-X-');"
+    h += 'var id = n.parents.map(d => d.id).sort().join("-X-");'
     h += 'if (id in index) {'
     h += 'index[id].parents = index[id].parents.concat(n.parents);'
     h += '} else {'
@@ -275,9 +275,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '});' + "\n"
 
     h += 'links.forEach(l => {'
-    h += 'if (l.bundle.links === undefined) {'
-    h += 'l.bundle.links = [];'
-    h += '}'
+    h += 'if (l.bundle.links === undefined) { l.bundle.links = []; }'
     h += 'l.bundle.links.push(l);'
     h += '});' + "\n"
 
@@ -289,7 +287,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const level_y_padding = 16;'
     h += 'const metro_d = 4;'
     h += 'const min_family_height = 22;'
-  
     h += 'options.c ||= 16;'
     h += 'const c = options.c;'
     h += 'options.bigc ||= node_width+c;' + "\n"
@@ -304,7 +301,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'l.forEach((n, i) => {'
     h += 'n.x = n.level * node_width + x_offset;'
     h += 'n.y = node_height + y_offset + n.height / 2;'
-
     h += 'y_offset += node_height + n.height;'
     h += '});'
     h += '});' + "\n"
