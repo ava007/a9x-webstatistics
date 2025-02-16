@@ -365,7 +365,8 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const SVGgroupElement = document.querySelector("#tt20250216");'
     h += 'const bboxGroup = SVGgroupElement.getBBox();'
     h += 'console.log("height bboxGroup: " + bboxGroup.height);'
-    h += 'const svg = d3.select("#tt20250216").attr("height", bboxGroup.height);'
+    h += 'const svg = d3.select("#tt20250216").attr("height", bboxGroup.height).attr("viewBox", [0,0 , bboxGroup.width, bboxGroup.height]);'
+    
     h += "</script>"
     h += '</div></div></div>'
     return h
