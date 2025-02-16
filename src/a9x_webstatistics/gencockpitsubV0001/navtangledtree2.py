@@ -361,10 +361,11 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '};' + "\n"
     h += 'return { levels, nodes, nodes_index, links, bundles, layout };'
     h += '}'
-    h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });'
+    h += 'renderChart(levels, { backgroundColor: "#f8f8f8" });' + "\n"
     h += 'const SVGgroupElement = document.querySelector("#tt20250216");'
     h += 'const bboxGroup = SVGgroupElement.getBBox();'
     h += 'console.log("height bboxGroup: " + bboxGroup.height);'
+    h += 'const svg = d3.select("#tt20250216").attr("height", bboxGroup.height);'
     h += "</script>"
     h += '</div></div></div>'
     return h
