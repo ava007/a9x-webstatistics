@@ -133,11 +133,11 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const backgroundColor = options.backgroundColor || "#fff";'
 
     h += 'const rect = document.getElementById("navchart-tangledtree2-container").getBoundingClientRect();'
-    h += 'const margins = { top: 20, right: 20, bottom: 40, left: 100 };'
+    h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    h += 'const height = width;'
+    h += 'const height = Math.round(width*0.9);'
     h += 'const totalWidth = width + margins.left + margins.right;'
-    h += 'const totalHeight = height + margins.top + margins.bottom;'
+    h += 'const totalHeight = height;'
     h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
     h += '.attr("width", totalWidth)'
     h += '.attr("height", totalHeight)'
@@ -154,14 +154,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'A${l.c2} ${l.c2} 90 0 0 ${l.xb + l.c2} ${l.ys}'
     h += 'L${l.xs} ${l.ys}'
     h += '`).join("");'  + "\n"
-
-    # 20250215: not relevant code
-    #h += 'svg.append("path")'
-    #h += '.attr("class", "link")'
-    #h += '.attr("d", d)'
-    #h += '.attr("stroke", backgroundColor)'
-    #h += '.style("fill", "none")'
-    #h += '.attr("stroke-width", 5);'  + "\n"
 
     h += 'svg.append("path")'
     h += '.attr("class", "link")'
@@ -193,15 +185,6 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("href", n.name ? (n.name.startsWith("/") ? `https://logikfabrik.com${n.name}` : `https://${n.name}`) : "#")'
     h += '.attr("target", "_blank")' 
     h += '.attr("title", d => `${n.name}`);'
-    #h += '.attr("title", d => {'
-    #h += '  let lbl;'
-    #h += '  if (n.name.length > 15) {'
-    #h += '    lbl = n.name.substring(0,10) + "..." + n.name.slice(-3);'
-    #h += '  } else {'
-    #h += '    lbl = n.name;'
-    #h += '  }'
-    #h += '  return lbl; }'
-    #h += ');'  + "\n"
 
     h += 'nlink.append("text")'
     h += '.attr("x", n.x + 4)'
