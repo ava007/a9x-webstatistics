@@ -142,7 +142,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += '.attr("width", totalWidth)'
     h += '.attr("height", totalHeight)'
     h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])'
-    h += '.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;");' + "\n"
+    h += '.attr("style", "max-width: 100%; height: 100vh; font: 10px sans-serif;");' + "\n"
 
     # M: MoveTo,   L: LineTo,    A: Elliptical arc curve
     h += 'tangleLayout.bundles.forEach((b, i) => {'
