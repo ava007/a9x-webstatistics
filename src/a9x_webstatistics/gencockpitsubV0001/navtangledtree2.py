@@ -141,9 +141,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
     h += '.attr("id","tt20250216")'
     h += '.attr("width", totalWidth)'
-    h += '.attr("height", totalHeight)'
+    #h += '.attr("height", totalHeight)'
     h += '.attr("viewBox", [0,0 , totalWidth, totalHeight])'
-    h += '.attr("style", "max-width: 100%; height: 100vh; font: 10px sans-serif;");' + "\n"
+    h += '.attr("style", "max-width: 100%; font: 10px sans-serif;");' + "\n"
 
     # M: MoveTo,   L: LineTo,    A: Elliptical arc curve
     h += 'tangleLayout.bundles.forEach((b, i) => {'
