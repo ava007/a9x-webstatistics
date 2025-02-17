@@ -358,15 +358,14 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                 h += '</div></div>'   # end of card
                 h += '</div></div>' + "\n\n"   # end of row
 
-        # navigation chart
-        h += navchart(d, owndomain, omit)
-
         # navigation chart as sankey diagram (experimental feature)
         nodes, links = makeNodesLinks(d, owndomain, omit)
         h += navchartTangledtree2(nodes, links, owndomain, omit)
         if efeature == '10':
             #h += navchartTangledtree(nodes, links, owndomain, omit)
             h += navchartsankey(nodes, links, owndomain, omit)
+            # navigation chart - old version until 1.4.68 -20250217
+            h += navchart(d, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
