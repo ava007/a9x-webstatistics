@@ -1,4 +1,4 @@
-__version__ = "1.4.68"
+__version__ = "1.4.69"
 
 from .module1 import *
 from .updatestatistics import upd
