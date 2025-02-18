@@ -94,7 +94,7 @@ def migv0001sub0001(
                             d['v0001']['days'][k]['user']['nav'].append(tmprec)
                 del d['v0001']['days'][k]['user']['navigation']
     # write updated statistic file:
-    migstat = statfile.replace('.json','v0001sub0001after.json')
+    migfile = statfile.replace('.json','v0001sub0001after.json')
     with open(migfile, "w") as sf:
        json.dump(d,sf)
 
