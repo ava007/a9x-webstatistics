@@ -65,12 +65,15 @@ def migv0001sub0001(
                         print("tmprec: " + str(tmprec))
                         # check if source and target already exists:
                         #if next(item for item in d['v0001']['days'][x]['user']['nav'] if item['s'] == tmprec['s] and item['t'] == tmprec['t']):
+                        found = False
                         for e in d['v0001']['days'][lastDay]['user']['nav']:
                             if (e['s'] == tmprec['s']
                                     and e['t'] == tmprec['t']):
                                 e['c'] += tmprec['c']
-                            else:
-                                d['v0001']['days'][lastDay]['user']['nav'].append(tmprec)
+                                found = True
+                                break
+                        if found == False:
+                            d['v0001']['days'][lastDay]['user']['nav'].append(tmprec)
                 del d['v0001']['days'][k]['user']['externalFriendsHits']
 
             if 'navigation' in d['v0001']['days'][k]['user']:
@@ -86,12 +89,15 @@ def migv0001sub0001(
                     tmprec['t'] = n[1]    # Target
                     #tmprec['p'] = 'i'     # type: e=external source, i=internal source
                     tmprec['c'] = int(nv) # count
+                    found = False
                     for e in d['v0001']['days'][k]['user']['nav']:
                         if (e['s'] == tmprec['s']
                                 and e['t'] == tmprec['t']):
                             e['c'] += tmprec['c']
-                        else:
-                            d['v0001']['days'][k]['user']['nav'].append(tmprec)
+                            found = True
+                            break
+                    if found == False:
+                        d['v0001']['days'][k]['user']['nav'].append(tmprec)
                 del d['v0001']['days'][k]['user']['navigation']
     # write updated statistic file:
     migfile = statfile.replace('.json','v0001sub0001after.json')
