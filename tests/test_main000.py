@@ -5,7 +5,7 @@ from a9x_webstatistics.main import *
 from a9x_webstatistics.updatestatistics import upd
 #from a9x_webstatistics.migrateV0001.migrateV0001sub0001 import *
 #from a9x_webstatistics.migrateV0001.migrateV0001sub0001 import migv0001sub0001
-from a9x_webstatistics.migrateV0001 import migrateV0001sub0001
+from a9x_webstatistics.migV0001 import migrateV0001sub0001
 from subprocess import run
 
 class TestMain(unittest.TestCase):
