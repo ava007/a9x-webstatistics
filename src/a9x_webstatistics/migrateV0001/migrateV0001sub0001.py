@@ -17,9 +17,10 @@ from operator import itemgetter
 #
 #
 #  Migrationsteps:
-#  a)  Build Chart based on user->Nav with fixed experimental data   ---> Prod (if domain = logikfabrik.com)
+#  a)  this function works and writes to separate external file
+#  a)  Build Chart based on user->Nav with fixed experimental data and experimental feature   ---> Prod (if domain = logikfabrik.com)
 #  b)  New Data goes into user->Nav    ---> Beta
-#  c)  Migrate using this function    ---> Beta
+#  c)  activate this migration function, write to production file    ---> Beta
 #  d)  Discard old Navigation         ---> Prod
 
 def migv0001sub0001(
@@ -70,7 +71,8 @@ def migv0001sub0001(
                                 e['c'] += tmprec['c']
                             else:
                                 d['v0001']['days'][lastDay]['user']['nav'].append(tmprec)
-                #todo:  delete externalFriendsHits
+                del d['v0001']['days'][x]['user']['externalFriendsHits']
+
             if 'navigation' in d['v0001']['days'][k]['user']:
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
                     d['v0001']['days'][lastDay]['user']['nav'] = []
@@ -90,10 +92,10 @@ def migv0001sub0001(
                             e['c'] += tmprec['c']
                         else:
                             d['v0001']['days'][k]['user']['nav'].append(tmprec)
-                #todo:  delete navgation
-
+                del d['v0001']['days'][x]['user']['navigation']
     # write updated statistic file:
-    #with open(statfile, "w") as sf:
-    #   json.dump(d,sf)
+    migstat = statfile.replace('.json','v0001sub0001after.json')
+    with open(migfile, "w") as sf:
+       json.dump(d,sf)
 
     return        
