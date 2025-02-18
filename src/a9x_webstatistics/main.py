@@ -10,6 +10,7 @@ from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from .migratev0001 import delv0000
+from .migrateV0001.migrateV0001sub0001 import migv0001sub0001
 from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
@@ -186,5 +187,7 @@ if __name__ == "__main__":
     args, unknown = parser.parse_known_args()
 
     migv0001(statfile=args.statfile)
+    if args.efeature == '90':
+        migv0001sub0001(args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, efeature=args.efeature)
     delv0000(statfile=args.statfile)
