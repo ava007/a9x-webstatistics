@@ -13,7 +13,8 @@ from .migratev0001 import delv0000
 # from migrateV0001.migrateV0001sub0001 import migv0001sub0001   # -->  No module named 'migrateV0001'
 #from .migrateV0001.migrateV0001sub0001 import migv0001sub0001   # No module named 'a9x_webstatistics.migrateV0001'
 #import migrateV0001.migrateV0001sub0001  #No module named 'migrateV0001'
-import .migrateV0001.migrateV0001sub0001
+#import .migrateV0001.migrateV0001sub0001
+from .migrateV0001 import migrateV0001sub0001
 from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
