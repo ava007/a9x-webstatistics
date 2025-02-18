@@ -3,6 +3,7 @@ from pathlib import Path
 
 from a9x_webstatistics.main import *
 from a9x_webstatistics.updatestatistics import upd
+from a9x_webstatistics.migrateV0001 import *
 from subprocess import run
 
 class TestMain(unittest.TestCase):
