@@ -10,7 +10,8 @@ from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
 from .migratev0001 import migv0001
 from .migratev0001 import delv0000
-from migrateV0001.migrateV0001sub0001 import migv0001sub0001
+# from migrateV0001.migrateV0001sub0001 import migv0001sub0001  no module "migrateV001" found
+from .migrateV0001.migrateV0001sub0001 import migv0001sub0001
 from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
