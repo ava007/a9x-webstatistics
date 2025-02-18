@@ -71,7 +71,7 @@ def migv0001sub0001(
                                 e['c'] += tmprec['c']
                             else:
                                 d['v0001']['days'][lastDay]['user']['nav'].append(tmprec)
-                del d['v0001']['days'][x]['user']['externalFriendsHits']
+                del d['v0001']['days'][k]['user']['externalFriendsHits']
 
             if 'navigation' in d['v0001']['days'][k]['user']:
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
@@ -92,7 +92,7 @@ def migv0001sub0001(
                             e['c'] += tmprec['c']
                         else:
                             d['v0001']['days'][k]['user']['nav'].append(tmprec)
-                del d['v0001']['days'][x]['user']['navigation']
+                del d['v0001']['days'][k]['user']['navigation']
     # write updated statistic file:
     migstat = statfile.replace('.json','v0001sub0001after.json')
     with open(migfile, "w") as sf:
