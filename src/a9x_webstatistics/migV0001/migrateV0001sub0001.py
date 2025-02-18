@@ -66,7 +66,7 @@ def migv0001sub0001(
                         # check if source and target already exists:
                         #if next(item for item in d['v0001']['days'][x]['user']['nav'] if item['s'] == tmprec['s] and item['t'] == tmprec['t']):
                         for e in d['v0001']['days'][lastDay]['user']['nav']:
-                            if e['s'] == tmprec['s']
+                            if e['s'] == tmprec['s']:
                                     and e['t'] = tmprec['t']:
                                 e['c'] += tmprec['c']
                             else:
@@ -87,7 +87,7 @@ def migv0001sub0001(
                     #tmprec['p'] = 'i'     # type: e=external source, i=internal source
                     tmprec['c'] = int(nv) # count
                     for e in d['v0001']['days'][k]['user']['nav']:
-                        if e['s'] == tmprec['s']
+                        if e['s'] == tmprec['s']:
                                 and e['t'] = tmprec['t']:
                             e['c'] += tmprec['c']
                         else:
