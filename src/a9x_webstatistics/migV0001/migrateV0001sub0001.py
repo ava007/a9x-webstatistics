@@ -23,6 +23,22 @@ from operator import itemgetter
 #  c)  activate this migration function, write to production file    ---> Beta
 #  d)  Discard old Navigation         ---> Prod
 
+def addnav(d, lday, trec):
+    found = False
+    if (trec['s'] is None 
+            or trec['t'] is None):
+        return d
+    for e in d['v0001']['days'][lday]['user']['nav']:
+        if (e['s'] == trec['s']
+                and e['t'] == trec['t']):
+            e['c'] += trec['c']
+            found = True
+            break
+    if found == False:
+        d['v0001']['days'][lday]['user']['nav'].append(trec)
+
+    return d
+
 def migv0001sub0001(
     statfile
     ):
@@ -36,6 +52,13 @@ def migv0001sub0001(
         print("-s json file is not valid")
         return
 
+    # make sure that migration runs only once!!!
+    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0)):
+         if 'user' in d['v0001']['days'][k]:
+             if 'nav' in d['v0001']['days'][k]['user']:
+                 return
+
+    print("start migration v0001sub0001")
     # save
     tstat = statfile.replace('.json','v0001sub0001before.json')
     with open(tstat, "w") as sf:
@@ -63,17 +86,7 @@ def migv0001sub0001(
                         tmprec['p'] = 'e'  # type: e=external source, i=internal source
                         tmprec['c'] = int(tdv)   # count
                         print("tmprec: " + str(tmprec))
-                        # check if source and target already exists:
-                        #if next(item for item in d['v0001']['days'][x]['user']['nav'] if item['s'] == tmprec['s] and item['t'] == tmprec['t']):
-                        found = False
-                        for e in d['v0001']['days'][lastDay]['user']['nav']:
-                            if (e['s'] == tmprec['s']
-                                    and e['t'] == tmprec['t']):
-                                e['c'] += tmprec['c']
-                                found = True
-                                break
-                        if found == False:
-                            d['v0001']['days'][lastDay]['user']['nav'].append(tmprec)
+                        d = addnav(d, lastDay, tmprec)
                 del d['v0001']['days'][k]['user']['externalFriendsHits']
 
             if 'navigation' in d['v0001']['days'][k]['user']:
@@ -87,18 +100,10 @@ def migv0001sub0001(
                     tmprec = {}
                     tmprec['s'] = n[0]    # Source
                     tmprec['t'] = n[1]    # Target
-                    #tmprec['p'] = 'i'     # type: e=external source, i=internal source
                     tmprec['c'] = int(nv) # count
-                    found = False
-                    for e in d['v0001']['days'][k]['user']['nav']:
-                        if (e['s'] == tmprec['s']
-                                and e['t'] == tmprec['t']):
-                            e['c'] += tmprec['c']
-                            found = True
-                            break
-                    if found == False:
-                        d['v0001']['days'][k]['user']['nav'].append(tmprec)
+                    d = addnav(d, lastDay, tmprec)
                 del d['v0001']['days'][k]['user']['navigation']
+                
     # write updated statistic file:
     migfile = statfile.replace('.json','v0001sub0001after.json')
     with open(migfile, "w") as sf:
