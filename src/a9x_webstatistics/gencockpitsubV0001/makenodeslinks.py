@@ -50,6 +50,59 @@ def addnode(nodes, node, owndomain):
     if duplicate_found == False:
         nodes.append(node)
     return nodes
+
+# make nodes and links based on nav 20250221:
+def makeNodesLinks2(d, owndomain, omit, daysback=31):
+    # temporary and for testing only:
+    d['v0001'] = {}
+    d['v0001']['days'] = {}
+    d['v0001']['days']['20250228'] = {}
+    d['v0001']['days']['20250228']['user'] = {}
+    d['v0001']['days']['20250228']['user']['nav'] = [{"s": "pypi.org", "t": "/webstatsLF24.html", "p": "e", "c": 1}, {"s": "/", "t": "/kl/add/", "c": 1}, {"s": "/", "t": "/team/login/", "c": 1}, {"s": "/", "t": "/team/view/comparison%20team/", "c": 1}, {"s": "/", "t": "/kl/view/526f7142-abb1-4374-8020-e0c05266a988/", "c": 1}, {"s": "/xadm/log/a", "t": "/xadm/log/c", "c": 1}, {"s": "www.google.com", "t": "/", "c": 1}, {"s": "/", "t": "/kl/view/ef936637-2e83-482c-ac23-a3a7ffa10e17/", "c": 1}, {"s": "/", "t": "/kl/view/3deec972-5839-4a71-bd70-e2c886b83fda/", "c": 1}, {"s": "/", "t": "/kl/view/39575f54-e28f-4d97-bd6d-c7330cfd9d3c/", "c": 1}, {"s": "/", "t": "/kl/search/", "c": 1}, {"s": "/kl/search/", "t": "/", "c": 1}, {"s": "/team/viewtangledtree/ax/", "t": "/team/tag/ax/health/", "c": 1}, {"s": "/team/tag/ax/health/", "t": "/kl/view/bb0cd53a-cbf2-4fa2-9ae2-3a20fa7cc43f/", "c": 1}, {"s": "/kl/view/bb0cd53a-cbf2-4fa2-9ae2-3a20fa7cc43f/", "t": "/team/tag/ax/top10/", "c": 1}, {"s": "/team/tag/ax/top10/", "t": "/kl/view/f95c0c51-5f00-42f6-ae4c-50abb30ed665/", "c": 1}, {"s": "/", "t": "/kl/view/6c503f98-135e-4ade-81f0-9db92cc1fb05/", "c": 1}, {"s": "/xadm/sts", "t": "/xadm/log/a", "c": 2}, {"s": "/", "t": "/team/view/ax/", "c": 2}, {"s": "/", "t": "/kl/view/a05898ce-e766-4450-b0de-35a35c321097/", "c": 3}, {"s": "/team/view/ax/", "t": "/team/viewtangledtree/ax/", "c": 3}, {"s": "", "t": "/", "c": 56}, {"s": "google.com", "t": "/kl/view/a05898ce-e766-4450-b0de-35a35c321097/", "p": "e", "c": 5}, {"s": "google.de", "t": "/kl/view/6c503f98-135e-4ade-81f0-9db92cc1fb05/", "p": "e", "c": 1}, {"s": "cityfitness-eisenberg.de", "t": "/", "p": "e", "c": 1}, {"s": "google.com", "t": "/kl/view/3deec972-5839-4a71-bd70-e2c886b83fda/", "p": "e", "c": 5}, {"s": "google.com", "t": "/kl/view/39575f54-e28f-4d97-bd6d-c7330cfd9d3c/", "p": "e", "c": 1}, {"s": "google.com", "t": "/kl/view/abc909f2-10f6-4390-a153-ce597291a8db/", "p": "e", "c": 4}, {"s": "quora.com", "t": "/", "p": "e", "c": 1}, {"s": "yandex.ru", "t": "/kl/view/ef936637-2e83-482c-ac23-a3a7ffa10e17/", "p": "e", "c": 2}, {"s": "github.com", "t": "/webstatsLF24.html", "p": "e", "c": 1}, {"s": "google.de", "t": "/kl/view/abc909f2-10f6-4390-a153-ce597291a8db/", "p": "e", "c": 1}, {"s": "google.com", "t": "/", "p": "e", "c": 2}]
+        
+    links = []    # {'source': 'googlecom', 'target': 'teamviewax', 'c': 1}
+    nodes = []    # {'id': 'googlecom', 'value':1, 'name': 'google.com'}
+
+    days = 0
+    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+        # omit months or years:
+        if len(k) <= 6:
+            continue
+        days += 1
+        if 'nav' in d['v0001']['days'][k]['user']:
+            for e in d['v0001']['days'][k]['user']['nav']:
+                if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
+                    continue
+                if '[' in e['s']:    # hack for IPv6 addresses
+                    continue
+                if ':' in e['s']:    # hack for IPv6 addresses/ports
+                    continue
+
+                tmpnode1 = {}
+                tmpnode1['name'] = e['s']
+                if tmpnode1['name'] == '/': 
+                    tmpnode1['name'] = owndomain
+                tmpnode1['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode1['name']) ) # eliminate special chars
+                nodes = addnode(nodes, tmpnode1, owndomain)
+
+                tmpnode2 = {}
+                tmpnode2['name'] = e['t']
+                if tmpnode2['name'] == '/': 
+                    tmpnode2['name'] = owndomain
+                tmpnode2['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode2['name']) ) # eliminate special chars
+                nodes = addnode(nodes, tmpnode1, owndomain)
+                
+                tmplink = {}
+                tmplink['source'] = tmpnode1['id']
+                tmplink['target'] = tmpnode2['id']
+                tmplink['value'] = e['c']
+                links = addlink(links, tmplink, owndomain)
+                    
+        days += 1
+        if days > daysback:
+            break
+
+    return nodes, links
     
 # navigation chart as sankey diagram:
 def makeNodesLinks(d, owndomain, omit, daysback=31):
