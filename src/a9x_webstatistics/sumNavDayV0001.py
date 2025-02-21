@@ -40,7 +40,7 @@ def sumNavDayV0001(d):
         # prep youngest day:
         if 'user' not in d['v0001']['days'][lastDay]:
             d['v0001']['days'][lastDay]['user'] = {}
-        if 'nav' not in d['v0001][lastDay]['days']['user']:
+        if 'nav' not in d['v0001'][lastDay]['days']['user']:
             d['v0001']['days'][lastDay]['user']['nav'] = {}
 
         # iterate though previous days
