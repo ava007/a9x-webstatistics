@@ -11,7 +11,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     # append root nodes to levels L1:
     # root nodes are sources that never appear in target
     tmplevel1 = []
-    for n1 in nodes:
+    i = 0
+    for n1 in sorted(nodes, key=itemgetter('co'), reverse=True)
+    #for n1 in nodes:
         found = False
         if ':' in n1['id']:   # IP with ports
             continue
@@ -25,6 +27,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
             tmp['name'] = n1['name']
             tmp['parents'] = ['start']
             tmplevel1.append(tmp)
+            i += 1
+            if i > 10:
+                break
     levels.append(tmplevel1)
 
     # 2nd Level:
