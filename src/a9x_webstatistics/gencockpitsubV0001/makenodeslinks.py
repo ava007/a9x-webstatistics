@@ -40,6 +40,10 @@ def addnode(nodes, node, owndomain):
 
     if node['id'] == '/'  or len(node['id']) == 0:
         node['id'] = "".join(map(lambda char: char if char.isalnum()  else "", owndomain) ) # eliminate special chars
+
+    # assert for sorting:
+    if 'co' not in node:  
+        node['co'] = 0
         
     # check if node already exists:
     duplicate_found = False
