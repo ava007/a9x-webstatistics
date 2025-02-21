@@ -12,8 +12,7 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     # root nodes are sources that never appear in target
     tmplevel1 = []
     i = 0
-    for n1 in sorted(nodes, key=itemgetter('co'), reverse=True)
-    #for n1 in nodes:
+    for n1 in sorted(nodes, key=itemgetter('co'), reverse=True):
         found = False
         if ':' in n1['id']:   # IP with ports
             continue
