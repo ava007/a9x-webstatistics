@@ -83,6 +83,7 @@ def makeNodesLinks2(dz, owndomain, omit, daysback=31):
                 if tmpnode1['name'] == '/': 
                     tmpnode1['name'] = owndomain
                 tmpnode1['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode1['name']) ) # eliminate special chars
+                tmpnode1['co'] = e['c']
                 nodes = addnode(nodes, tmpnode1, owndomain)
 
                 tmpnode2 = {}
@@ -90,6 +91,7 @@ def makeNodesLinks2(dz, owndomain, omit, daysback=31):
                 if tmpnode2['name'] == '/': 
                     tmpnode2['name'] = owndomain
                 tmpnode2['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode2['name']) ) # eliminate special chars
+                tmpnode1['ci'] = e['c']
                 nodes = addnode(nodes, tmpnode1, owndomain)
                 
                 tmplink = {}
