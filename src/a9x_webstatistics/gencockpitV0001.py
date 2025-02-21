@@ -359,23 +359,20 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                 h += '</div></div>' + "\n\n"   # end of row
 
         # navigation chart as sankey diagram (experimental feature)
-        nodes, links = makeNodesLinks(d, owndomain, omit)
-        h += navchartTangledtree2(nodes, links, owndomain, omit)
         if efeature == '10':
-            #h += navchartTangledtree(nodes, links, owndomain, omit)
+            nodes, links = makeNodesLinks(d, owndomain, omit)
             h += navchartsankey(nodes, links, owndomain, omit)
             # navigation chart - old version until 1.4.68 -20250217
+        if efeature == '90':
             h += navchart(d, owndomain, omit)
 
-        if efeature == '90':
-            nodes, links = makeNodesLinks2(d, owndomain, omit)
-            h += navchartTangledtree2(nodes, links, owndomain, omit)
+        nodes, links = makeNodesLinks2(d, owndomain, omit)
+        h += navchartTangledtree2(nodes, links, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
         tlr_first = tlr.replace(day=1)
         tlr_last_month = tlr_first - timedelta(days=1)
-        #print("webstats last months; last is month: " + tlr_last_month.strftime("%Y%m"))
 
         maxYearMonth = tlr_last_month.strftime("%Y%m")
         prevYearMonth = '999912'
