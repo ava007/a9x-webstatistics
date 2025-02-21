@@ -584,15 +584,16 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                 yth_usr_tablet.append(0)
                 yth_usr_bots.append(0)
                 yth_usr_visits.append(0)
-                    
-            if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-                yth_usr_desktop[-1] += d['v0001']['days'][k]['user']['deviceHits']['desktop']
-            if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
-                yth_usr_mobile[-1] += d['v0001']['days'][k]['user']['deviceHits']['mobile']
-            if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
-                yth_usr_tablet[-1] += d['v0001']['days'][k]['user']['deviceHits']['tablet']
-            if 'robotHits' in d['v0001']['days'][k]['robot']:
-                yth_usr_bots[-1] += d['v0001']['days'][k]['robot']['robotHits']
+
+            if 'deviceHits' in d['v0001']['days'][k]['user']:
+                if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
+                    yth_usr_desktop[-1] += d['v0001']['days'][k]['user']['deviceHits']['desktop']
+                if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
+                    yth_usr_mobile[-1] += d['v0001']['days'][k]['user']['deviceHits']['mobile']
+                if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
+                    yth_usr_tablet[-1] += d['v0001']['days'][k]['user']['deviceHits']['tablet']
+                if 'robotHits' in d['v0001']['days'][k]['robot']:
+                    yth_usr_bots[-1] += d['v0001']['days'][k]['robot']['robotHits']
 
             # visits:
             if 'visits' in d['v0001']['days'][k]['user']:
