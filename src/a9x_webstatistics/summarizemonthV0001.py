@@ -34,7 +34,7 @@ def sumMonthV0001(d, statfile):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  = 0 
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] = 0 
 
-                    d['v0001']['days'][recMonth]['user']['externalFriendsHits'] = {}
+                    #d['v0001']['days'][recMonth]['user']['externalFriendsHits'] = {}
                     d['v0001']['days'][recMonth]['user']['topUrl'] = {}
                     d['v0001']['days'][recMonth]['user']['serverResponseCode'] = {}
                     d['v0001']['days'][recMonth]['robot'] = {}
@@ -117,20 +117,25 @@ def sumMonthV0001(d, statfile):
                         else:
                             d['v0001']['days'][recMonth]['quality'][ck] = cv
 
+                # nav   - nav is stored on the last day of month
+                if 'nav' in dtmp['v0001']['days'][x]['user']:
+                    if 'nav' not in d['v0001']['days'][recMonth]['user']:
+                        d['v0001']['days'][recMonth]['user']['nav'] = dtmp['v0001']['days'][x]['user']['nav']
+                        
                 # navigation:
-                if 'navigation' in dtmp['v0001']['days'][x]['user']:
-                    if 'navigation' not in d['v0001']['days'][recMonth]['user']:
-                        d['v0001']['days'][recMonth]['user']['navigation'] = {}
-                    for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-                        if nk[0:7] == 'https://':
-                            continue
-                        if nk[0:6] == 'http://':
-                            continue
+                #if 'navigation' in dtmp['v0001']['days'][x]['user']:
+                #    if 'navigation' not in d['v0001']['days'][recMonth]['user']:
+                #        d['v0001']['days'][recMonth]['user']['navigation'] = {}
+                #    for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
+                #        if nk[0:7] == 'https://':
+                #            continue
+                #        if nk[0:6] == 'http://':
+                #            continue
 
-                        if nk in d['v0001']['days'][recMonth]['user']['navigation']:
-                            d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
-                        else:
-                            d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
+                #      if nk in d['v0001']['days'][recMonth]['user']['navigation']:
+                #            d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
+                #        else:
+                #            d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
 
                 # language - optional KPI:
                 if 'language' in dtmp['v0001']['days'][x]['user']:
