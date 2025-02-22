@@ -41,7 +41,7 @@ def sumNavDayV0001(d):
         if 'user' not in d['v0001']['days'][lastDay]:
             d['v0001']['days'][lastDay]['user'] = {}
         if 'nav' not in d['v0001']['days'][lastDay]['user']:
-            d['v0001']['days'][lastDay]['user']['nav'] = {}
+            d['v0001']['days'][lastDay]['user']['nav'] = []
 
         # iterate though previous days
         if 'nav' in d['v0001']['days'][k]['user']:
