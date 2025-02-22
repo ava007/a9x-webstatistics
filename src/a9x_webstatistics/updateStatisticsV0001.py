@@ -89,10 +89,16 @@ def updV0001(
             d['v0001']['days'][dt]['user']['topUrl'][req.path] += 1
 
         # update nav:
-        if (i['status'] == '200' and len(i['referer']) > 1):
+        if (i['status'] == '200' 
+            and len(i['referer']) > 1 
+            and devCla in ('desktop','mobile','tablet') ):
             refurl = urlparse(i['referer']).netloc
             if 'nav' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['nav'] = {}
+            tmpnav = {}
+            tmpnav['t'] = req.path  # Target
+            tmpnav['c'] = 1   count
+            
             # external nav
             if (i['referer'][0:4] == 'http'):
                 rdomain = refurl.removeprefix('www.')
@@ -102,31 +108,48 @@ def updV0001(
                     and is_valid_ip(rdomain) == False):
                     rdomain_ar = rdomain.split('.')
                     rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
+                    tmpnav['s'] = rdomain   # Source
+                    tmpnav['p'] = 'e'  # type: e=external source, i=internal source
+            
             # internal nav
             else:
-                print("internal nav")
+                #tmpnav['p'] = 'i'  # type: e=external source, i=internal source
+                tmpnav['s'] = req.path   # Source
+
+            if (tmpnav['s'] is not None 
+                and tmpnav['t'] is not None):
+                found = False        
+                for e in d['v0001']['days'][dt]['user']['nav']:
+                    if (e['s'] == tmpnav['s']
+                        and e['t'] == tmpnav['t']):
+                        e['c'] += tmpnav['c']
+                        found = True
+                        break
+                if found == False:
+                    d['v0001']['days'][dt]['user']['nav'].append(tmpnav)
+
             
         # update friends:
-        if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
-            refurl = urlparse(i['referer']).netloc
-            rdomain = refurl.removeprefix('www.')
-            rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
+        #if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
+        #    refurl = urlparse(i['referer']).netloc
+        #    rdomain = refurl.removeprefix('www.')
+        #    rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
             # omit subdomains:
-            if (rdomain.count('.') > 1 
-                    and is_valid_ip(rdomain) == False):
-                rdomain_ar = rdomain.split('.')
-                rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
+        #    if (rdomain.count('.') > 1 
+        #            and is_valid_ip(rdomain) == False):
+        #        rdomain_ar = rdomain.split('.')
+        #        rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
                 
-            if (is_valid_ip(rdomain) == False 
-                    and '[' not in rdomain):  # to suppress ip; ip is not a domain anyway
-                if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
-                    d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
-                if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
-                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
-                if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
-                    d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] = 0
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] += 1
-                d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
+        #    if (is_valid_ip(rdomain) == False 
+        #            and '[' not in rdomain):  # to suppress ip; ip is not a domain anyway
+        #        if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
+        #            d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
+        #        if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
+        #            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
+        #        if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
+        #            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] = 0
+        #        d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] += 1
+        #        d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
          
     # update statistics for ROBOTS:
     if devCla not in ('desktop','mobile','tablet'):
@@ -182,18 +205,18 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
 
     # accumulate user navigation 
-    if (len(i['referer']) > 1 
-            and i['status'] == '200'
-            and devCla in ('desktop','mobile','tablet')):
-        oref = urlparse(i['referer'])   # remove query string...
-        oreq = urlparse(i['request'])   # remove query string...
+    #if (len(i['referer']) > 1 
+    #        and i['status'] == '200'
+    #        and devCla in ('desktop','mobile','tablet')):
+    #    oref = urlparse(i['referer'])   # remove query string...
+    #    oreq = urlparse(i['request'])   # remove query string...
             
-        if 'navigation' not in d['v0001']['days'][dt]['user']:
-           d['v0001']['days'][dt]['user']['navigation'] = {}
-        nkey = oref.path + '(())' + oreq.path
-        if nkey not in d['v0001']['days'][dt]['user']['navigation']:
-           d['v0001']['days'][dt]['user']['navigation'][nkey] = 0
-        d['v0001']['days'][dt]['user']['navigation'][nkey] += 1
+    #    if 'navigation' not in d['v0001']['days'][dt]['user']:
+    #       d['v0001']['days'][dt]['user']['navigation'] = {}
+    #    nkey = oref.path + '(())' + oreq.path
+    #    if nkey not in d['v0001']['days'][dt]['user']['navigation']:
+    #       d['v0001']['days'][dt]['user']['navigation'][nkey] = 0
+    #    d['v0001']['days'][dt]['user']['navigation'][nkey] += 1
 
         # cleanup: delete entry from long tail...
         #z = 1
