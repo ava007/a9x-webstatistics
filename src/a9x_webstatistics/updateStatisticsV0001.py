@@ -88,6 +88,24 @@ def updV0001(
                 d['v0001']['days'][dt]['user']['topUrl'][req.path] = 0
             d['v0001']['days'][dt]['user']['topUrl'][req.path] += 1
 
+        # update nav:
+        if (i['status'] == '200' and len(i['referer']) > 1):
+            refurl = urlparse(i['referer']).netloc
+            if 'nav' not in d['v0001']['days'][dt]['user']:
+                d['v0001']['days'][dt]['user']['nav'] = {}
+            # external nav
+            if (i['referer'][0:4] == 'http'):
+                rdomain = refurl.removeprefix('www.')
+                rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
+                # omit subdomains:
+                if (rdomain.count('.') > 1 
+                    and is_valid_ip(rdomain) == False):
+                    rdomain_ar = rdomain.split('.')
+                    rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
+            # internal nav
+            else:
+                print("internal nav")
+            
         # update friends:
         if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
             refurl = urlparse(i['referer']).netloc
