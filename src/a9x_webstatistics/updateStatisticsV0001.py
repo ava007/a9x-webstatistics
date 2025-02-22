@@ -96,6 +96,7 @@ def updV0001(
             if 'nav' not in d['v0001']['days'][dt]['user']:
                 d['v0001']['days'][dt]['user']['nav'] = {}
             tmpnav = {}
+            tmpnav['s'] = None       # Source
             tmpnav['t'] = req.path  # Target
             tmpnav['c'] = 1         # count
             
@@ -108,8 +109,8 @@ def updV0001(
                     and is_valid_ip(rdomain) == False):
                     rdomain_ar = rdomain.split('.')
                     rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
-                    tmpnav['s'] = rdomain   # Source
-                    tmpnav['p'] = 'e'  # type: e=external source, i=internal source
+                tmpnav['s'] = rdomain   # Source
+                tmpnav['p'] = 'e'  # type: e=external source, i=internal source
             
             # internal nav
             else:
