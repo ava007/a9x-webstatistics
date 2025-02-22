@@ -94,7 +94,7 @@ def updV0001(
             and devCla in ('desktop','mobile','tablet') ):
             refurl = urlparse(i['referer']).netloc
             if 'nav' not in d['v0001']['days'][dt]['user']:
-                d['v0001']['days'][dt]['user']['nav'] = {}
+                d['v0001']['days'][dt]['user']['nav'] = []
             tmpnav = {}
             tmpnav['s'] = None       # Source
             tmpnav['t'] = req.path  # Target
