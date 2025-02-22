@@ -97,7 +97,7 @@ def updV0001(
                 d['v0001']['days'][dt]['user']['nav'] = {}
             tmpnav = {}
             tmpnav['t'] = req.path  # Target
-            tmpnav['c'] = 1   count
+            tmpnav['c'] = 1         # count
             
             # external nav
             if (i['referer'][0:4] == 'http'):
