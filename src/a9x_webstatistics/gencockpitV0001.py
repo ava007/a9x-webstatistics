@@ -63,6 +63,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                 if 'nav' in d['v0001']['days'][k]['user']:
                     # sort by count e['c'] desc:
                     for e in sorted(d['v0001']['days'][k]['user']['nav'], key=lambda x: x['c'], reverse=True):
+                        print("Tsource e: " + str(e))
                         if 'p' not in e:   # internal links
                             continue
                         if e['s'] or e['t'] in omit:
