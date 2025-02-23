@@ -474,16 +474,20 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             tsource = {}
             for y in d['v0001']['days']:
                 curYearMonth = y[0:6]
-                if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-                    for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-                        # prevent IP or domains with special characters:
-                        if any( x in sk for x in {'[', ']', ':'} ):
+
+                if 'nav' in d['v0001']['days'][y]['user']:
+                    # sort by count e['c'] desc:
+                    for e in sorted(d['v0001']['days'][y]['user']['nav'], key=lambda x: x['c'], reverse=True):
+                        if 'p' not in e:   # internal links
                             continue
-                        if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
+                        if e['s'] in omit:
                             continue
-                        if sk not in tsource:
-                            tsource[sk] = 0
-                        tsource[sk] += sv['cnt']
+                        if e['t'] in omit:
+                            continue
+                        if e['s'] not in tsource:
+                            tsource[e['s']] = 0
+                        tsource[e['s']] += e['c']
+                
             h += '<div class="row"><div class="col-md-12 col-lg-6 col-xxl-4">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Top 10 Domains</h3>'
@@ -656,17 +660,23 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         # Top 10 Domains on year basis
         tsource = {}
         for y in d['v0001']['days']:
-            if 'externalFriendsHits' in d['v0001']['days'][y]['user']:
-                for sk,sv in d['v0001']['days'][y]['user']['externalFriendsHits'].items():
-                    # prevent IP or domains with special characters:
-                    if any( x in sk for x in {'[', ']', ':'} ):
+            if 'nav' in d['v0001']['days'][y]['user']:
+                # sort by count e['c'] desc:
+                for e in sorted(d['v0001']['days'][y]['user']['nav'], key=lambda x: x['c'], reverse=True):
+                    if 'p' not in e:   # internal links
                         continue
-                    if is_valid_ip(sk) == True:  # to suppress ip; ip is not a domain anyway    
+                    if e['s'] in omit:
                         continue
-                    if sk not in tsource:
-                        tsource[sk] = 0
-                    tsource[sk] += sv['cnt']
-
+                    if e['t'] in omit:
+                        continue
+                    if any( x in e['s'] for x in {'[', ']', ':'} ):
+                        continue
+                    if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
+                        continue
+                     if e['s'] not in tsource:
+                        tsource[e['s']] = 0
+                    tsource[e['s']] += e['c']
+ 
         h += '<div class="row mt-4"><div class="col-md-12 col-lg-6 col-xxl-4"><div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top 10 Domains</h3>'
         h += '<p class="card-text">Incoming traffic (user hits) for the last years by external source domain:</p>'
