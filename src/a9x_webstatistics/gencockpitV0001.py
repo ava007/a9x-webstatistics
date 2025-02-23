@@ -60,13 +60,15 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                     day_usr_visits.append(0)
 
                 # top 10 source domains:
-                if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
-                    for sk,sv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
-                        if sk in omit:
+                if 'nav' in d['v0001']['days'][k]['user']:
+                    for e in sorted(d['v0001']['days'][k]['user']['nav'].items(), key=itemgetter(3), reverse=True):
+                        if 'p' not in e:   # internal links
                             continue
-                        if sk not in tsource:
-                            tsource[sk] = 0
-                        tsource[sk] += sv['cnt']
+                        if e['s'] or e['t'] in omit:
+                            continue
+                        if e['s'] not in tsource:
+                            tsource[e['s']] = 0
+                        tsource[e['s']] += sv['cnt']
                         
                 # top 10 countries:
                 if 'countryHits' in d['v0001']['days'][k]['user']:
