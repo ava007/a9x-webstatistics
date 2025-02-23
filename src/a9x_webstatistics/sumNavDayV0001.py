@@ -31,17 +31,19 @@ def sumNavDayV0001(d):
         # consider only days:
         if len(k) < 8:
             continue
+
         # change of month or first iteration:
         if (lastDay is None 
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
-            continue    # skip youngest day
 
-        # prep youngest day:
-        if 'user' not in d['v0001']['days'][lastDay]:
-            d['v0001']['days'][lastDay]['user'] = {}
-        if 'nav' not in d['v0001']['days'][lastDay]['user']:
-            d['v0001']['days'][lastDay]['user']['nav'] = []
+        # prepare last day and do not process it!
+        if lastDay == k:
+            if 'user' not in d['v0001']['days'][lastDay]:
+                d['v0001']['days'][lastDay]['user'] = {}
+            if 'nav' not in d['v0001']['days'][lastDay]['user']:
+                d['v0001']['days'][lastDay]['user']['nav'] = []
+            continue
 
         # iterate though previous days
         if 'nav' in d['v0001']['days'][k]['user']:
