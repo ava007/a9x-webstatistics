@@ -69,7 +69,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                             continue
                         if e['s'] not in tsource:
                             tsource[e['s']] = 0
-                        tsource[e['s']] += sv['cnt']
+                        tsource[e['s']] += e['c']
+                    print("Tsource: " + str(tsource))
                         
                 # top 10 countries:
                 if 'countryHits' in d['v0001']['days'][k]['user']:
