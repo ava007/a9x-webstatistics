@@ -58,7 +58,7 @@ def migv0001sub0001(
              if 'nav' in d['v0001']['days'][k]['user']:
                  return
 
-    print(" v0001sub0001 start migration")
+    print("v0001sub0001 start migration")
     # save
     tstat = statfile.replace('.json','v0001sub0001before.json')
     with open(tstat, "w") as sf:
