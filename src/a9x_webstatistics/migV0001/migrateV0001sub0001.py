@@ -58,12 +58,13 @@ def migv0001sub0001(
              if 'nav' in d['v0001']['days'][k]['user']:
                  return
 
-    print("start migration v0001sub0001")
+    print(" v0001sub0001 start migration")
     # save
     tstat = statfile.replace('.json','v0001sub0001before.json')
     with open(tstat, "w") as sf:
        json.dump(d,sf)
 
+    navcount = 0
     # iterate on days reverse and consolidate nav data on the last day of the month:
     lastDay = ''
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -87,6 +88,7 @@ def migv0001sub0001(
                         tmprec['c'] = int(tdv)   # count
                         #print("tmprec: " + str(tmprec))
                         d = addnav(d, lastDay, tmprec)
+                        navcount += 1
                 del d['v0001']['days'][k]['user']['externalFriendsHits']
 
             if 'navigation' in d['v0001']['days'][k]['user']:
@@ -102,11 +104,14 @@ def migv0001sub0001(
                     tmprec['t'] = n[1]    # Target
                     tmprec['c'] = int(nv) # count
                     d = addnav(d, lastDay, tmprec)
+                    navcount += 1
                 del d['v0001']['days'][k]['user']['navigation']
-                
+
     # write updated statistic file:
     #migfile = statfile.replace('.json','v0001sub0001after.json')
     with open(statfile, "w") as sf:
        json.dump(d,sf)
+
+    print("v0001sub0001 end migration: " + str(navcount) + " items processed")
 
     return        
