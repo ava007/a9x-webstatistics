@@ -61,7 +61,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
 
                 # top 10 source domains:
                 if 'nav' in d['v0001']['days'][k]['user']:
-                    for e in sorted(d['v0001']['days'][k]['user']['nav'].items(), key=itemgetter(3), reverse=True):
+                    for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter(3), reverse=True):
                         if 'p' not in e:   # internal links
                             continue
                         if e['s'] or e['t'] in omit:
