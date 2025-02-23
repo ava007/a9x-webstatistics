@@ -66,7 +66,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                         print("Tsource e: " + str(e))
                         if 'p' not in e:   # internal links
                             continue
-                        if e['s'] or e['t'] in omit:
+                        if e['s'] in omit:
+                            continue
+                        if e['t'] in omit:
                             continue
                         if e['s'] not in tsource:
                             tsource[e['s']] = 0
