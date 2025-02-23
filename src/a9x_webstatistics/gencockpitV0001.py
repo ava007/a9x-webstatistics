@@ -673,7 +673,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
                         continue
                     if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
                         continue
-                     if e['s'] not in tsource:
+                    if e['s'] not in tsource:
                         tsource[e['s']] = 0
                     tsource[e['s']] += e['c']
  
