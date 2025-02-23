@@ -78,14 +78,14 @@ def migv0001sub0001(
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
                     d['v0001']['days'][lastDay]['user']['nav'] = []
                 for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
-                    print("tk: " + str(tk) + " tv: " + str(tv))
+                    #print("tk: " + str(tk) + " tv: " + str(tv))
                     for tdk,tdv in tv['target'].items():
                         tmprec = {}
                         tmprec['s'] = tk   # Source
                         tmprec['t'] = tdk  # Target
                         tmprec['p'] = 'e'  # type: e=external source, i=internal source
                         tmprec['c'] = int(tdv)   # count
-                        print("tmprec: " + str(tmprec))
+                        #print("tmprec: " + str(tmprec))
                         d = addnav(d, lastDay, tmprec)
                 del d['v0001']['days'][k]['user']['externalFriendsHits']
 
@@ -93,7 +93,7 @@ def migv0001sub0001(
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
                     d['v0001']['days'][lastDay]['user']['nav'] = []
                 for nk, nv in d['v0001']['days'][k]['user']['navigation'].items():
-                    print("navigation nk: " + str(nk) + " nv: " + str(nv))
+                    #print("navigation nk: " + str(nk) + " nv: " + str(nv))
                     n = nk.split('(())') 
                     if n[0] == n[1]:
                         continue
