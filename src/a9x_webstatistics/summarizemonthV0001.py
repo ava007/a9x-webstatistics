@@ -229,5 +229,8 @@ def compMonthV0001(d):
                              break
                          d['v0001']['days'][x]['user']['topUrl'][k] = v
                      del tmpTopUrl
-    print("\ncompMonthV0001 20250224->user: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+    try:
+        print("\ncompMonthV0001 20250224->user: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+    except KeyError:
+        pass   # do nothing
     return d
