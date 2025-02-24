@@ -59,6 +59,7 @@ def migv0001sub0001(
                  return
 
     print("v0001sub0001 start migration")
+    dtmp = deepcopy(d)
     # save
     tstat = statfile.replace('.json','v0001sub0001before.json')
     with open(tstat, "w") as sf:
@@ -67,18 +68,18 @@ def migv0001sub0001(
     navcount = 0
     # iterate on days reverse and consolidate nav data on the last day of the month:
     lastDay = ''
-    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+    for k, v in sorted(dtmp['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # change of month:
         if lastDay is not None and lastDay[0:6] != k[0:6]:
             lastDay = k
         if lastDay is None:  # inital call
             lastDay = k
         
-        if 'user' in d['v0001']['days'][k]:
-            if 'externalFriendsHits' in d['v0001']['days'][k]['user']:
+        if 'user' in dtmp['v0001']['days'][k]:
+            if 'externalFriendsHits' in dtmp['v0001']['days'][k]['user']:
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
                     d['v0001']['days'][lastDay]['user']['nav'] = []
-                for tk, tv in d['v0001']['days'][k]['user']['externalFriendsHits'].items():
+                for tk, tv in dtmp['v0001']['days'][k]['user']['externalFriendsHits'].items():
                     #print("tk: " + str(tk) + " tv: " + str(tv))
                     for tdk,tdv in tv['target'].items():
                         tmprec = {}
@@ -91,10 +92,10 @@ def migv0001sub0001(
                         navcount += 1
                 del d['v0001']['days'][k]['user']['externalFriendsHits']
 
-            if 'navigation' in d['v0001']['days'][k]['user']:
+            if 'navigation' in dtmp['v0001']['days'][k]['user']:
                 if 'nav' not in d['v0001']['days'][lastDay]['user']:
                     d['v0001']['days'][lastDay]['user']['nav'] = []
-                for nk, nv in d['v0001']['days'][k]['user']['navigation'].items():
+                for nk, nv in dtmp['v0001']['days'][k]['user']['navigation'].items():
                     #print("navigation nk: " + str(nk) + " nv: " + str(nv))
                     n = nk.split('(())') 
                     if n[0] == n[1]:
@@ -108,7 +109,6 @@ def migv0001sub0001(
                 del d['v0001']['days'][k]['user']['navigation']
 
     # write updated statistic file:
-    #migfile = statfile.replace('.json','v0001sub0001after.json')
     with open(statfile, "w") as sf:
        json.dump(d,sf)
 
