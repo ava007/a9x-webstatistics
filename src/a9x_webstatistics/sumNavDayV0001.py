@@ -5,8 +5,9 @@ from operator import itemgetter
 def sumNavDayV0001(d):
     
     # nav: accumulate nav on the last day of month:
+    dtmp = deepcopy(d)
     lastDay = None
-    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+    for k, v in sorted(dtmp['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # consider only days:
         if len(k) < 8:
             continue
@@ -26,8 +27,8 @@ def sumNavDayV0001(d):
             continue
 
         # iterate though previous days
-        if 'nav' in d['v0001']['days'][k]['user']:
-            for e in d['v0001']['days'][k]['user']['nav']:
+        if 'nav' in dtmp['v0001']['days'][k]['user']:
+            for e in dtmp['v0001']['days'][k]['user']['nav']:
                 found = False
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
                     if (e['s'] == f['s']
