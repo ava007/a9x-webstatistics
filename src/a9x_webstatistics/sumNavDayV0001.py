@@ -3,8 +3,7 @@ from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
 def sumNavDayV0001(d):
-    return d
-
+    
     # nav: accumulate nav on the last day of month:
     lastDay = None
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
