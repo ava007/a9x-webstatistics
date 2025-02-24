@@ -16,7 +16,7 @@ def sumNavDayV0001(d):
         if (lastDay is None 
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
-            print("sumNavDay: lastDay is: " + str(lastDay) )
+        #    print("sumNavDay: lastDay is: " + str(lastDay) )
 
         # do not process lastDay!
         if str(lastDay) == str(k):
@@ -32,7 +32,7 @@ def sumNavDayV0001(d):
         if 'nav' in dtmp['v0001']['days'][k]['user']:
             for e in dtmp['v0001']['days'][k]['user']['nav']:
                 found = False
-                print("e: " + str(k) + " " + str(e))
+    #            print("e: " + str(k) + " " + str(e))
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
                     if (e['s'] == f['s']
                         and e['t'] == f['t']):
@@ -40,16 +40,16 @@ def sumNavDayV0001(d):
                         found = True
                         break
                 if found == False:
-                    print("e: appended: " + str(k) + " " + str(e))
+    #                print("e: appended: " + str(k) + " " + str(e))
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
-            print("sumNavDayV0001: deleted: " + str(k))
-    try:
-        print("\nsumNavDayV0001.py 20250223->user->nav: " + "\n " + str(dtmp['v0001']['days']['20250223']['user']['nav']) )
-    except KeyError:
-        pass
-    try:
-        print("\nsumNavDayV0001.py 20250224->user->nav: " + "\n " + str(d['v0001']['days']['20250224']['user']['nav']) )
-    except KeyError:
-        pass   # do nothing
+    #        print("sumNavDayV0001: deleted: " + str(k))
+    #try:
+    #    print("\nsumNavDayV0001.py 20250223->user->nav: " + "\n " + str(dtmp['v0001']['days']['20250223']['user']['nav']) )
+    #except KeyError:
+    #    pass
+    #try:
+    #    print("\nsumNavDayV0001.py 20250224->user->nav: " + "\n " + str(d['v0001']['days']['20250224']['user']['nav']) )
+    #except KeyError:
+    #    pass   # do nothing
     return d
