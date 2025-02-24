@@ -3,7 +3,7 @@ from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
 def sumNavDayV0001(d):
-    return
+    return d
 
     # nav: accumulate nav on the last day of month:
     lastDay = None
