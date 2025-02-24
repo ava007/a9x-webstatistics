@@ -311,7 +311,7 @@ def updV0001(
                 if lng not in d['v0001']['days'][dt]['user']['language']:
                     d['v0001']['days'][dt]['user']['language'][lng] = 0
                 d['v0001']['days'][dt]['user']['language'][lng] += 1
-    print("d: " + str(d['v0001']['days'][dt])) 
+    print("\nd: " + str(dt) + " " str(d['v0001']['days'][dt])) 
                 
     return d, visitIP
 
