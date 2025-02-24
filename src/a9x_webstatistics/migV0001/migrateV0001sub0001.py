@@ -115,7 +115,7 @@ def migv0001sub0001(
     print("v0001sub0001 end migration: " + str(navcount) + " items processed")
 
     try:
-        print("\nmigrateV001sub0001.py 20250224: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+        print("\nmigrateV001sub0001.py 20250223: " + "\n " + str(d['v0001']['days']['20250223']['user']) )
     except KeyError:
         pass   # do nothing
 
