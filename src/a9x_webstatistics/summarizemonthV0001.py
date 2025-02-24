@@ -207,7 +207,7 @@ def sumMonthV0001(d, statfile):
                         break
                     d['v0001']['days'][x]['user']['navigation'][k] = v
                 del tmpNav
-   
+    print("\n SummarizeMonthV001 202402024: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
     return d
 
 def compMonthV0001(d):
