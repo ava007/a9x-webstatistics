@@ -3,27 +3,6 @@ from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
 def sumNavDayV0001(d):
-    tmpNav = {}
-    prevMonth = None
-    for x in d['v0001']['days']:
-        if prevMonth is None:
-            prevMonth = x[0:6]
-        if prevMonth != x[0:6]:
-            if len(tmpNav) > 1:
-                d['v0001']['days'][x]['user']['navigation'] = tmpNav
-                tmpNav = {}
-        if len(x) == 8 and 'navigation' in d['v0001']['days'][x]['user']:
-            for ck,cv in sorted(d['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1),reverse=False):
-                if ck not in tmpNav:
-                    tmpNav[ck] = cv
-                else:
-                    tmpNav[ck] += cv
-                del d['v0001']['days'][x]['user']['navigation'][ck]
-            del d['v0001']['days'][x]['user']['navigation']
-
-    if len(tmpNav) > 1:
-        d['v0001']['days'][x]['user']['navigation'] = tmpNav
-
 
     # nav: accumulate nav on the last day of month:
     lastDay = None
@@ -36,6 +15,7 @@ def sumNavDayV0001(d):
         if (lastDay is None 
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
+            print("sumNavDay: lastDay is: " + str(lastDay))
 
         # prepare last day and do not process it!
         if lastDay == k:
