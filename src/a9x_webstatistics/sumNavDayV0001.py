@@ -20,12 +20,14 @@ def sumNavDayV0001(d):
 
         # prepare last day and do not process it!
         if lastDay == k:
-            if 'user' not in d['v0001']['days'][lastDay]:
-                d['v0001']['days'][lastDay]['user'] = {}
-            if 'nav' not in d['v0001']['days'][lastDay]['user']:
-                d['v0001']['days'][lastDay]['user']['nav'] = []
             continue
 
+        # prepare nav (might be at midnight!!)
+        if 'user' not in d['v0001']['days'][lastDay]:
+            d['v0001']['days'][lastDay]['user'] = {}
+        if 'nav' not in d['v0001']['days'][lastDay]['user']:
+            d['v0001']['days'][lastDay]['user']['nav'] = []
+        
         # iterate though previous days
         if 'nav' in dtmp['v0001']['days'][k]['user']:
             for e in dtmp['v0001']['days'][k]['user']['nav']:
@@ -39,9 +41,12 @@ def sumNavDayV0001(d):
                 if found == False:
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
-        #print("\n sumNavDay user " + str(lastDay) + "\n "  + str(d['v0001']['days'][lastDay]['user']) )
     try:
-        print("\nsumNavDayV0001.py 20250224: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+        print("\nsumNavDayV0001.py 20250223->user->nav: " + "\n " + str(dtmp['v0001']['days']['20250223']['user']['nav']) )
+    except KeyError:
+        pass
+    try:
+        print("\nsumNavDayV0001.py 20250224->user->nav: " + "\n " + str(d['v0001']['days']['20250224']['user']['nav']) )
     except KeyError:
         pass   # do nothing
     return d
