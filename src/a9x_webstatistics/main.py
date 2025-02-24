@@ -159,7 +159,7 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
     d = sumNavDayV0001(d)
     
     # summarize previous months
-    d = summonth(d)
+    #d = summonth(d)
     d = sumMonthV0001(d, statfile)
      
     # write updated statistic file:
