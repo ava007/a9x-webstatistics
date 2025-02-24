@@ -43,7 +43,7 @@ def addnode(nodes, node, owndomain):
 
     # assert for sorting:
     if 'co' not in node:  
-        node['co'] = 0
+        node['co'] = 0     # count outgoing
         
     # check if node already exists:
     duplicate_found = False
@@ -87,7 +87,7 @@ def makeNodesLinks2(dz, owndomain, omit, daysback=31):
                 if tmpnode1['name'] == '/': 
                     tmpnode1['name'] = owndomain
                 tmpnode1['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode1['name']) ) # eliminate special chars
-                tmpnode1['co'] = e['c']
+                tmpnode1['co'] = e['c']   # count outgoing
                 nodes = addnode(nodes, tmpnode1, owndomain)
 
                 tmpnode2 = {}
@@ -95,7 +95,7 @@ def makeNodesLinks2(dz, owndomain, omit, daysback=31):
                 if tmpnode2['name'] == '/': 
                     tmpnode2['name'] = owndomain
                 tmpnode2['id'] = "".join(map(lambda char: char if char.isalnum()  else "", tmpnode2['name']) ) # eliminate special chars
-                tmpnode1['ci'] = e['c']
+                tmpnode1['ci'] = e['c']  # count incoming
                 nodes = addnode(nodes, tmpnode1, owndomain)
                 
                 tmplink = {}
