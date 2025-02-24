@@ -40,5 +40,8 @@ def sumNavDayV0001(d):
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
         #print("\n sumNavDay user " + str(lastDay) + "\n "  + str(d['v0001']['days'][lastDay]['user']) )
-    print("\nsumNavDayV0001.py 20250224: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+    try:
+        print("\nsumNavDayV0001.py 20250224: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+    except KeyError:
+        pass   # do nothing
     return d
