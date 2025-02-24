@@ -32,6 +32,7 @@ def sumNavDayV0001(d):
         if 'nav' in dtmp['v0001']['days'][k]['user']:
             for e in dtmp['v0001']['days'][k]['user']['nav']:
                 found = False
+                print("e: " + str(k) + " " + str(e))
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
                     if (e['s'] == f['s']
                         and e['t'] == f['t']):
@@ -39,6 +40,7 @@ def sumNavDayV0001(d):
                     found = True
                     break
                 if found == False:
+                    print("e: appended: " + str(k) + " " + str(e))
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
             print("sumNavDayV0001: deleted: " + str(k))
