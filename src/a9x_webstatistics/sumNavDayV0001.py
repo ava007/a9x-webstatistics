@@ -37,8 +37,8 @@ def sumNavDayV0001(d):
                     if (e['s'] == f['s']
                         and e['t'] == f['t']):
                         f['c'] += e['c']
-                    found = True
-                    break
+                        found = True
+                        break
                 if found == False:
                     print("e: appended: " + str(k) + " " + str(e))
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
