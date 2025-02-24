@@ -13,9 +13,11 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
     tmplevel1 = []
     i = 0
     for n1 in sorted(nodes, key=itemgetter('co'), reverse=True):
-        found = False
+        if any(oelm in n1['name'] for oelm in omit):  # omit parts of url
+            continue
         if ':' in n1['id']:   # IP with ports
             continue
+        found = False
         for l1 in links:
             if l1['target'] == n1['id']:
                 found = True
@@ -37,9 +39,9 @@ def navchartTangledtree2(nodes, links, owndomain, omit):
         found = False
         for li2 in links:
             if li2['source'] == l1['id']:
-                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
+                if any(oelm in li2['source'] for oelm in omit):  # omit parts of url
                     continue
-                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
+                if any(oelm in li2['target'] for oelm in omit):  # omit parts of url
                     continue
                 parent_found = False
                 for l2a in tmplevel2:
