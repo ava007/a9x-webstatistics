@@ -16,10 +16,10 @@ def sumNavDayV0001(d):
         if (lastDay is None 
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
-            print("sumNavDay: lastDay is: " + str(lastDay))
+            print("sumNavDay: lastDay is: " + str(lastDay) )
 
-        # prepare last day and do not process it!
-        if lastDay == k:
+        # do not process lastDay!
+        if str(lastDay) == str(k):
             continue
 
         # prepare nav (might be at midnight!!)
@@ -35,12 +35,13 @@ def sumNavDayV0001(d):
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
                     if (e['s'] == f['s']
                         and e['t'] == f['t']):
-                        e['c'] += f['c']
+                        f['c'] += e['c']
                     found = True
                     break
                 if found == False:
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
+            print("sumNavDayV0001: deleted: " + str(k))
     try:
         print("\nsumNavDayV0001.py 20250223->user->nav: " + "\n " + str(dtmp['v0001']['days']['20250223']['user']['nav']) )
     except KeyError:
