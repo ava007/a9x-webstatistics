@@ -207,7 +207,11 @@ def sumMonthV0001(d, statfile):
                         break
                     d['v0001']['days'][x]['user']['navigation'][k] = v
                 del tmpNav
-    print("\nsummarizemonthV0001 20250224->user: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
+    
+    try:
+        print("\nsummarizemonthV0001 20250223->user: " + "\n " + str(d['v0001']['days']['20250223']['user']) )
+    except KeyError:
+        pass   # do nothing
     return d
 
 def compMonthV0001(d):
@@ -229,8 +233,5 @@ def compMonthV0001(d):
                              break
                          d['v0001']['days'][x]['user']['topUrl'][k] = v
                      del tmpTopUrl
-    try:
-        print("\ncompMonthV0001 20250224->user: " + "\n " + str(d['v0001']['days']['20250224']['user']) )
-    except KeyError:
-        pass   # do nothing
+
     return d
