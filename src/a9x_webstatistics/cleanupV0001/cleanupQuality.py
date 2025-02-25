@@ -8,8 +8,8 @@ def cleanupQualityV0001(d):
     # delete quality older than 92 days:
 
     clnupUntilDay = datetime.now() - timedelta(days=92)
-    clnupTill = sumUntilDay.strftime("%Y%m")
-    print("cleanupQualityV0001: accumulate including month: "  + clnupTill)
+    clnupTill = clnupUntilDay.strftime("%Y%m")
+    print("cleanupQualityV0001: accumulate including month: "  + str(clnupTill))
     
     # iterate over days to accumulate months:
     dtmp = deepcopy(d)
