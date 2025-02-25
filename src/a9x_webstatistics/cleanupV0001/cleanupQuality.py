@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from operator import itemgetter
 import json
 
-def cleanupQualityV0001(d, statfile):
+def cleanupQualityV0001(d):
     
     # delete quality older than 92 days:
 
