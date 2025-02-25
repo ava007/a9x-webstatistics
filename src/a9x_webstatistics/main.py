@@ -11,7 +11,7 @@ from .summarizemonthV0001 import sumMonthV0001
 #from .migratev0001 import migv0001
 #from .migratev0001 import delv0000
 from .migV0001 import migv0001sub0001
-from .cleanupV0001 import cleanupQuality
+from .cleanupV0001 import cleanupQualityV0001
 from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
