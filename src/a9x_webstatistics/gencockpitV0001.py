@@ -371,6 +371,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         if efeature == '90':
             h += navchart(d, owndomain, omit)
 
+        if efeature == '91':
+            h += navChord(d, owndomain, omit)
+
         nodes, links = makeNodesLinks2(d, owndomain, omit)
         h += navchartTangledtree2(nodes, links, owndomain, omit)
         
