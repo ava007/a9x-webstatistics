@@ -2,128 +2,24 @@
 from operator import itemgetter
 import ipaddress
 
-# navigation chart in tangled tree visualization:
+# navigation chart in chord-dependency diagram:
+# https://observablehq.com/@d3/chord-dependency-diagram/2
+
 def navChord(nodes, links, owndomain, omit):
+    data = []
 
-    # const levels = [[{'id': 'start'}], [{'id': 'business', 'parents': ['start']}], [{'id': 'comparison', 'parents': ['start']}]
-    # const data = [{'source': "a", 'target': 'b'}]
-    levels = [[{'id': 'start', 'name': 'user'}]]
+    for li in links:
+        if any(oelm in li['source'] for oelm in omit):  # omit parts of url
+            continue
+        if any(oelm in li['target'] for oelm in omit):  # omit parts of url
+            continue
+        tmp = {}
+        tmp['source'] = li['source']
+        tmp['target'] = li['target']
+        tmp['value'] = li['c']
+        data.append(tmp)
+
     
-    # append root nodes to levels L1:
-    # root nodes are sources that never appear in target
-    tmplevel1 = []
-    i = 0
-    for n1 in sorted(nodes, key=itemgetter('co'), reverse=True):
-        if any(oelm in n1['name'] for oelm in omit):  # omit parts of url
-            continue
-        if ':' in n1['id']:   # IP with ports
-            continue
-        found = False
-        for l1 in links:
-            if l1['target'] == n1['id']:
-                found = True
-                break
-        if found == False:
-            tmp = {}
-            tmp['id'] = n1['id']
-            tmp['name'] = n1['name'] + " [" + str(n1['co']) + "]"
-            tmp['parents'] = ['start']
-            tmplevel1.append(tmp)
-            i += 1
-            if i > 10:
-                break
-    levels.append(tmplevel1)
-
-    # 2nd Level:
-    tmplevel2 = []
-    for l1 in tmplevel1:
-        found = False
-        for li2 in links:
-            if li2['source'] == l1['id']:
-                if any(oelm in li2['source'] for oelm in omit):  # omit parts of url
-                    continue
-                if any(oelm in li2['target'] for oelm in omit):  # omit parts of url
-                    continue
-                parent_found = False
-                for l2a in tmplevel2:
-                    if l2a['id'] == li2['target']:
-                        parent_found = True
-                        l2a['parents'].append(l1['id'])
-                        break
-                if parent_found == False:
-                    tmp = {}
-                    tmp['id'] = li2['target']
-                    tmp['name'] = li2['target']
-                    tmp['parents'] = [l1['id']]
-                    for n2 in nodes:
-                        if li2['target'] == n2['id']:
-                            tmp['name'] = n2['name']
-                            break
-                    tmplevel2.append(tmp)
-    if len(tmplevel2) > 0:
-        levels.append(tmplevel2)
-
-    # 3rd Level:
-    tmplevel3 = []
-    for l2 in tmplevel2:
-        found = False
-        for li3 in links:
-            if li3['source'] == l2['id']:
-                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
-                    continue
-                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
-                    continue
-                # check if l2 is already there --> add to parents
-                parent_found = False
-                for l3a in tmplevel3:
-                    if l3a['id'] == li3['target']:
-                        parent_found = True
-                        l3a['parents'].append(l2['id'])
-                        break
-                if parent_found == False:
-                    tmp = {}
-                    tmp['id'] = li3['target']
-                    tmp['name'] = li3['target']
-                    tmp['parents'] = [l2['id']]
-                    for n3 in nodes:
-                        if li3['target'] == n3['id']:
-                            tmp['name'] = n3['name']
-                            break
-                    tmplevel3.append(tmp)
-    if len(tmplevel3) > 0:
-        levels.append(tmplevel3)
-
-    # 4rd Level:
-    tmplevel4 = []
-    for l3 in tmplevel3:
-        found = False
-        for li4 in links:
-            if li4['source'] == l3['id']:
-                if any(oelm in li2['source'] for oelm in omit):  # omitted parts of url
-                    continue
-                if any(oelm in li2['target'] for oelm in omit):  # omitted parts of url
-                    continue
-
-                # check if l4 is already there --> add to parents
-                parent_found = False
-                for l4a in tmplevel4:
-                    if l4a['id'] == li4['target']:
-                        parent_found = True
-                        l4a['parents'].append(l3['id'])
-                        break
-                if parent_found == False:
-                    tmp = {}
-                    tmp['id'] = li4['target']
-                    tmp['name'] = li4['target']
-                    tmp['parents'] = [l3['id']]
-                    for n4 in nodes:
-                        if li4['target'] == n4['id']:
-                            tmp['name'] = n4['name']
-                            break
-                    tmplevel4.append(tmp)
-    if len(tmplevel4) > 0:
-        levels.append(tmplevel4)
-
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
@@ -132,7 +28,7 @@ def navChord(nodes, links, owndomain, omit):
     h += '<p class="card-text">User Navigation Chord Chart for ' + owndomain + ':</p>'
     h += '<div id="navchart-chord-container"></div>'
     h += '<script type="module">' + "\n"
-    h += 'const levels = ' + str(levels) + ';' + "\n"
+    h += 'const data = ' + str(data) + ';' + "\n"
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("navchart-chord-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
