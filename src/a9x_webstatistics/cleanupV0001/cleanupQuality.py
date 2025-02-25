@@ -9,7 +9,7 @@ def cleanupQualityV0001(d):
 
     clnupUntilDay = datetime.now() - timedelta(days=92)
     clnupTill = clnupUntilDay.strftime("%Y%m")
-    print("cleanupQualityV0001: accumulate including month: "  + str(clnupTill))
+    print("cleanupQualityV0001: purge quality entries before "  + str(clnupTill))
     
     # iterate over days to accumulate months:
     dtmp = deepcopy(d)
@@ -20,6 +20,6 @@ def cleanupQualityV0001(d):
         if x >= clnupTill:
             continue
         if 'quality' in dtmp['v0001']['days'][x]:
-            print("cleanupQuality: delete quality in: " + str(x))
+            print("cleanupQuality: purged quality entries for " + str(x))
+            del d['v0001']['days'][x]['quality']
     return d
-            
