@@ -8,3 +8,4 @@ from .navtangledtree import navchartTangledtree
 from .navtangledtree2 import navchartTangledtree2
 from .makenodeslinks import makeNodesLinks
 from .makenodeslinks import makeNodesLinks2
+from .navChord import navChord
