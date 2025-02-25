@@ -161,6 +161,8 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
     # summarize previous months
     #d = summonth(d)
     d = sumMonthV0001(d, statfile)
+
+    d = cleanupQualityV0001(d)
      
     # write updated statistic file:
     with open(statfile, "w") as sf:
