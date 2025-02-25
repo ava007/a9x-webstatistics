@@ -8,9 +8,10 @@ from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
 from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
-from .migratev0001 import migv0001
-from .migratev0001 import delv0000
+#from .migratev0001 import migv0001
+#from .migratev0001 import delv0000
 from .migV0001 import migv0001sub0001
+from .cleanupV0001 import cleanupQuality
 from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
@@ -190,4 +191,4 @@ if __name__ == "__main__":
     #migv0001(statfile=args.statfile)
     migv0001sub0001(args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, efeature=args.efeature)
-    delv0000(statfile=args.statfile)
+    #delv0000(statfile=args.statfile)
