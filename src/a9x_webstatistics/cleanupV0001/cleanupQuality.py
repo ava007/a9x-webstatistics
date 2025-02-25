@@ -7,9 +7,9 @@ def cleanupQualityV0001(d, statfile):
     
     # delete quality older than 92 days:
 
-    clupUntilDay = datetime.now() - timedelta(days=92)
-    clupTill = sumUntilDay.strftime("%Y%m")
-    print("cleanupQualityV0001: accumulate including month: "  + clupTill)
+    clnupUntilDay = datetime.now() - timedelta(days=92)
+    clnupTill = sumUntilDay.strftime("%Y%m")
+    print("cleanupQualityV0001: accumulate including month: "  + clnupTill)
     
     # iterate over days to accumulate months:
     dtmp = deepcopy(d)
@@ -17,9 +17,9 @@ def cleanupQualityV0001(d, statfile):
         # if date has a day:
         if len(x) > 6:
             continue
-        if x >= clupTill:
+        if x >= clnupTill:
             continue
         if 'quality' in dtmp['v0001']['days'][x]:
             print("cleanupQuality: delete quality in: " + str(x))
-
+    return d
             
