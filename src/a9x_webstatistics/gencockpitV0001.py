@@ -774,6 +774,8 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     parser.add_argument("-t", "--omit", help="omits path ie. will not display these path in generated cockpit", action="append")
+    parser.add_argument("-v", "--verbose", help="increase output verbosity, 0=none, 1=increased verbosity", default="0")
+    parser.add_argument("-ef", "--efeature", help="use experimentalfeature number, 0=none, 1-99=feature", default="0")
     args, unknown = parser.parse_known_args()
 
     if args.omit is None:
