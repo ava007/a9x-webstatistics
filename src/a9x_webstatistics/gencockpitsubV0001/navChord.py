@@ -31,11 +31,11 @@ def navChord(d, owndomain, omit):
 
                 tmplink = {}
                 tmplink['source'] = e['s']
-                if tmplink['source'] == '/' or tmplink['source'] == None:
+                if tmplink['source'] == '/' or tmplink['source'] == None or tmplink['source'] == '':
                     tmplink['source'] = owndomain
                     
                 tmplink['target'] = e['t']
-                if tmplink['target'] == '/' or tmplink['target'] == None:
+                if tmplink['target'] == '/' or tmplink['target'] == None or tmplink['target'] == '':
                     tmplink['target'] = owndomain
                     
                 tmplink['value'] = e['c']
