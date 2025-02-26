@@ -5,21 +5,47 @@ import ipaddress
 # navigation chart in chord-dependency diagram:
 # https://observablehq.com/@d3/chord-dependency-diagram/2
 
-def navChord(nodes, links, owndomain, omit):
+def navChord(d, owndomain, omit):
     data = []
 
-    for li in links:
-        if any(oelm in li['source'] for oelm in omit):  # omit parts of url
+    days = 0
+    for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+        # omit months or years:
+        if len(k) <= 6:
             continue
-        if any(oelm in li['target'] for oelm in omit):  # omit parts of url
-            continue
-        tmp = {}
-        tmp['source'] = li['source']
-        tmp['target'] = li['target']
-        tmp['value'] = li['c']
-        data.append(tmp)
+        days += 1
+        if 'nav' in d['v0001']['days'][k]['user']:
+            for e in d['v0001']['days'][k]['user']['nav']:
+                if any(oelm in e['s'] for oelm in omit):  # omit parts of url
+                    continue
+                if any(oelm in e['t'] for oelm in omit):  # omit parts of url
+                    continue
 
-    
+                if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
+                    continue
+                if '[' in e['s']:    # hack for IPv6 addresses
+                    continue
+                if ':' in e['s']:    # hack for IPv6 addresses/ports
+                    continue
+                
+                tmplink = {}
+                tmplink['source'] = e['s']
+                tmplink['target'] = e['t']
+                tmplink['value'] = e['c']
+                duplicate_found = False
+                for li in data:
+                    if (li['source'] == tmplink['s']
+                        and li['target'] == tmplink['t']):
+                        duplicate_found = True
+                        li['value'] += tmplink['value']
+                        break
+                if dublicate_found == False:
+                    data.append(tmplink)
+                    
+        days += 1
+        if days > 31:
+            break
+   
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
