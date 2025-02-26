@@ -35,13 +35,13 @@ def navChord(nodes, links, owndomain, omit):
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
     h += 'const height = Math.round(width*0.9);'
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
-    h += 'const outerRadius = innerRadius + 10;'
+    h += 'const outerRadius = innerRadius + 10;' + "\n"
 
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
     h += 'const index = new Map(names.map((name, i) => [name, i]));'
     h += 'const matrix = Array.from(index, () => new Array(names.length).fill(0));'
-    h += 'for (const {source, target, value} of data) matrix[index.get(source)][index.get(target)] += value;'
+    h += 'for (const {source, target, value} of data) matrix[index.get(source)][index.get(target)] += value;' + "\n"
 
     h += 'const chord = d3.chordDirected().padAngle(10 / innerRadius)'
     h += '.sortSubgroups(d3.descending).sortChords(d3.descending);' + "\n"
@@ -57,11 +57,11 @@ def navChord(nodes, links, owndomain, omit):
     h += '.attr("width", width)'
     h += '.attr("height", height)'
     h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
-    h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'
+    h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
     h += 'const chords = chord(matrix);'
 
     h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");'
-    h += 'group.append("path").attr("fill", d => colors[d.index]).attr("d", arc);'
+    h += 'group.append("path").attr("fill", d => colors[d.index]).attr("d", arc);' + "\n"
 
     h += 'group.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
@@ -72,12 +72,12 @@ def navChord(nodes, links, owndomain, omit):
     h += '${d.angle > Math.PI ? "rotate(180)" : ""}'
     h += '`)'
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
-    h += '.text(d => names[d.index]);'
+    h += '.text(d => names[d.index]);'  + "\n"
 
     h += 'group.append("title")'
     h += '.text(d => `${names[d.index]}'
     h += '${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →'
-    h += '${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);'
+    h += '${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);' + "\n"
 
     h += 'svg.append("g")'
     h += '.attr("fill-opacity", 0.75)'
@@ -89,7 +89,8 @@ def navChord(nodes, links, owndomain, omit):
     h += '.attr("d", ribbon)'
     h += '.append("title")'
     h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
-    h += '}'
+    h += '}' + "\n"
+    h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
     h += '</div></div></div>' + "\n"
     return h
