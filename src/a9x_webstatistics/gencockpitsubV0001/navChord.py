@@ -39,7 +39,7 @@ def navChord(d, owndomain, omit):
                     tmplink['target'] = owndomain
                     
                 tmplink['value'] = e['c']
-                if tmplink['source'] == tmplink['target']
+                if tmplink['source'] == tmplink['target']:
                     continue
                 
                 duplicate_found = False
