@@ -34,8 +34,8 @@ def navChord(d, owndomain, omit):
                 tmplink['value'] = e['c']
                 duplicate_found = False
                 for li in data:
-                    if (li['source'] == tmplink['s']
-                        and li['target'] == tmplink['t']):
+                    if (li['source'] == tmplink['source']
+                        and li['target'] == tmplink['target']):
                         duplicate_found = True
                         li['value'] += tmplink['value']
                         break
