@@ -43,31 +43,24 @@ def navChord(nodes, links, owndomain, omit):
     h += 'const matrix = Array.from(index, () => new Array(names.length).fill(0));'
     h += 'for (const {source, target, value} of data) matrix[index.get(source)][index.get(target)] += value;'
 
-    h += 'const chord = d3.chordDirected()'
-    h += '      .padAngle(10 / innerRadius)'
-    h += '.sortSubgroups(d3.descending)'
-    h += '.sortChords(d3.descending);'
+    h += 'const chord = d3.chordDirected().padAngle(10 / innerRadius)'
+    h += '.sortSubgroups(d3.descending).sortChords(d3.descending);' + "\n"
 
-    h += 'const arc = d3.arc()'
-    h += '.innerRadius(innerRadius)'
-    h += '.outerRadius(outerRadius);'
-     
+    h += 'const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);'
     h += 'const ribbon = d3.ribbonArrow().radius(innerRadius - 1).padAngle(1 / innerRadius);'
-    h += 'const colors = d3.quantize(d3.interpolateRainbow, names.length);'
+    h += 'const colors = d3.quantize(d3.interpolateRainbow, names.length);' + "\n"
 
     h += 'const totalWidth = width + margins.left + margins.right;'
-    h += 'const totalHeight = height;'
+    h += 'const totalHeight = height;' + "\n"
     h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
     h += '.attr("id","tt20250225")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
     h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
     h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'
-
     h += 'const chords = chord(matrix);'
 
     h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");'
-
     h += 'group.append("path").attr("fill", d => colors[d.index]).attr("d", arc);'
 
     h += 'group.append("text")'
@@ -96,7 +89,7 @@ def navChord(nodes, links, owndomain, omit):
     h += '.attr("d", ribbon)'
     h += '.append("title")'
     h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
-
+    h += '}'
     h += "</script>"
     h += '</div></div></div>' + "\n"
     return h
