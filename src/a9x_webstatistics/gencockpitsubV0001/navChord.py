@@ -39,7 +39,7 @@ def navChord(d, owndomain, omit):
                         duplicate_found = True
                         li['value'] += tmplink['value']
                         break
-                if dublicate_found == False:
+                if duplicate_found == False:
                     data.append(tmplink)
                     
         days += 1
