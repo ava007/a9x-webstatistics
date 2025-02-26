@@ -16,7 +16,7 @@ def navChord(d, owndomain, omit):
         days += 1
         if 'nav' in d['v0001']['days'][k]['user']:
             cnt = 0
-            for e in sorted(d['v0001']['days'][k]['user']['nav'],, key=itemgetter('c'), reverse=True):
+            for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if any(oelm in e['s'] for oelm in omit):  # omit parts of url
                     continue
                 if any(oelm in e['t'] for oelm in omit):  # omit parts of url
