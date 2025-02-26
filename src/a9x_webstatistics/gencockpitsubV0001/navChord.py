@@ -28,11 +28,20 @@ def navChord(d, owndomain, omit):
                     continue
                 if ':' in e['s']:    # hack for IPv6 addresses/ports
                     continue
-                
+
                 tmplink = {}
                 tmplink['source'] = e['s']
+                if tmplink['source'] == '/':
+                    tmplink['source'] = owndomain
+                    
                 tmplink['target'] = e['t']
+                if tmplink['target'] == '/':
+                    tmplink['target'] = owndomain
+                    
                 tmplink['value'] = e['c']
+                if tmplink['source'] == tmplink['target']
+                    continue
+                
                 duplicate_found = False
                 for li in data:
                     if (li['source'] == tmplink['source']
