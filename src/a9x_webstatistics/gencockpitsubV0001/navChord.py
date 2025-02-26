@@ -15,7 +15,8 @@ def navChord(d, owndomain, omit):
             continue
         days += 1
         if 'nav' in d['v0001']['days'][k]['user']:
-            for e in d['v0001']['days'][k]['user']['nav']:
+            cnt = 0
+            for e in sorted(d['v0001']['days'][k]['user']['nav'],, key=itemgetter('c'), reverse=True):
                 if any(oelm in e['s'] for oelm in omit):  # omit parts of url
                     continue
                 if any(oelm in e['t'] for oelm in omit):  # omit parts of url
@@ -41,6 +42,9 @@ def navChord(d, owndomain, omit):
                         break
                 if duplicate_found == False:
                     data.append(tmplink)
+                    cnt += 1
+                if cnt > 30:  # top 30 entries
+                    break
                     
         days += 1
         if days > 31:
@@ -78,7 +82,7 @@ def navChord(d, owndomain, omit):
 
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;' + "\n"
-    h += 'const svg = d3.select("#navchart-tangledtree2-container").append("svg")'
+    h += 'const svg = d3.select("#navchart-chord-container").append("svg")'
     h += '.attr("id","tt20250225")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
