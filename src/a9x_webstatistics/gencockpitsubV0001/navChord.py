@@ -17,9 +17,9 @@ def navChord(d, owndomain, omit):
         if 'nav' in d['v0001']['days'][k]['user']:
             cnt = 0
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
-                if any(oelm in e['s'] for oelm in omit):  # omit parts of url
+                if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
                     continue
-                if any(oelm in e['t'] for oelm in omit):  # omit parts of url
+                if any(oelmstartswith(e['t']) for oelm in omit):  # omit parts of url
                     continue
 
                 if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
