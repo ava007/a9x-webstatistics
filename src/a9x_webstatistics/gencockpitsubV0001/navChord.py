@@ -44,7 +44,7 @@ def navChord(d, owndomain, omit):
                     continue
                 if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
                     continue
-                if any(oelmstartswith(e['t']) for oelm in omit):  # omit parts of url
+                if any(oelm.startswith(e['t']) for oelm in omit):  # omit parts of url
                     continue
 
                 data,cnt = addLinkChord(data, e, cnt)
