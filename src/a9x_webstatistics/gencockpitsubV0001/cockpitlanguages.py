@@ -40,7 +40,7 @@ def cockpitLanguages(d, owndomain):
         h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Top Browser Languages</h3>'
         h += '<p class="card-text">Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':</p>'
-        h += '<div id="browserlanguages-container"><svg width="600" height="400"></svg></div>'
+        h += '<div id="browserlanguages-container"><svg id="svglng" width="600" height="400"></svg></div>'
         h += '<script type="module">'
         h += 'const languages = ' + str(language_array) + ';'
         h += 'const rect = document.getElementById("browserlanguages-container").getBoundingClientRect();'
@@ -49,7 +49,7 @@ def cockpitLanguages(d, owndomain):
         h += 'const height = 400 - margin.top - margin.bottom;'
 
         # Create SVG container
-        h += 'const svg = d3.select("svg")'
+        h += 'const svg = d3.select("#svglng")'
         h += '  .attr("width", width + margin.left + margin.right)'
         h += '  .attr("height", height + margin.top + margin.bottom)'
         h += '  .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;")'
