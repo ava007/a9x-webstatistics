@@ -16,7 +16,12 @@ def navChord(d, owndomain, omit):
         days += 1
         if 'nav' in d['v0001']['days'][k]['user']:
             cnt = 0
+            # entries only
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
+                if 'p' not in e:
+                    continue
+                if e['c'] < 1:
+                    continue
                 if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
                     continue
                 if any(oelmstartswith(e['t']) for oelm in omit):  # omit parts of url
@@ -29,30 +34,21 @@ def navChord(d, owndomain, omit):
                 if ':' in e['s']:    # hack for IPv6 addresses/ports
                     continue
 
-                tmplink = {}
-                tmplink['source'] = e['s']
-                if tmplink['source'] == '/' or tmplink['source'] == None or tmplink['source'] == '':
-                    tmplink['source'] = owndomain
-                    
-                tmplink['target'] = e['t']
-                if tmplink['target'] == '/' or tmplink['target'] == None or tmplink['target'] == '':
-                    tmplink['target'] = owndomain
-                    
-                tmplink['value'] = e['c']
-                if tmplink['source'] == tmplink['target']:
-                    continue
-                
-                duplicate_found = False
-                for li in data:
-                    if (li['source'] == tmplink['source']
-                        and li['target'] == tmplink['target']):
-                        duplicate_found = True
-                        li['value'] += tmplink['value']
-                        break
-                if duplicate_found == False:
-                    data.append(tmplink)
-                    cnt += 1
+                data,cnt = addLinkChord(data, entry, cnt)
                 if cnt > 30:  # top 30 entries
+                    break
+
+             # internal traffic only
+            for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
+                if 'p' in e:
+                    continue
+                if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
+                    continue
+                if any(oelmstartswith(e['t']) for oelm in omit):  # omit parts of url
+                    continue
+
+                data,cnt = addLinkChord(data, entry, cnt)
+                if cnt > 70:  # top 70 entries
                     break
                     
         days += 1
@@ -133,6 +129,31 @@ def navChord(d, owndomain, omit):
     h += "</script>"
     h += '</div></div></div>' + "\n"
     return h
+def addLinkChord(data, entry, cnt):
+    tmplink = {}
+    tmplink['source'] = e['s']
+    if tmplink['source'] == '/' or tmplink['source'] == None or tmplink['source'] == '':
+        tmplink['source'] = owndomain
+                    
+    tmplink['target'] = e['t']
+    if tmplink['target'] == '/' or tmplink['target'] == None or tmplink['target'] == '':
+        tmplink['target'] = owndomain
+                    
+    tmplink['value'] = e['c']
+    if tmplink['source'] == tmplink['target']:
+       return data, cnt
+                
+    duplicate_found = False
+    for li in data:
+        if (li['source'] == tmplink['source']
+            and li['target'] == tmplink['target']):
+            duplicate_found = True
+            li['value'] += tmplink['value']
+            break
+    if duplicate_found == False:
+        data.append(tmplink)
+        cnt += 1
+    return data, cnt
 
 def is_valid_ip(address):
     try: 
