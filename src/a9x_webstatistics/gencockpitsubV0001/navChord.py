@@ -34,7 +34,7 @@ def navChord(d, owndomain, omit):
                 if ':' in e['s']:    # hack for IPv6 addresses/ports
                     continue
 
-                data,cnt = addLinkChord(data, e, cnt)
+                data,cnt = addLinkChord(data, e, cnt, owndomain)
                 if cnt > 30:  # top 30 entries
                     break
 
@@ -42,12 +42,12 @@ def navChord(d, owndomain, omit):
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' in e:
                     continue
-                if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
+                if any(e['s'].startswith(om) for om in omit):  # omit parts of url
                     continue
-                if any(oelm.startswith(e['t']) for oelm in omit):  # omit parts of url
+                if any(e['t'].startswith(om) for om in omit):  # omit parts of url
                     continue
 
-                data,cnt = addLinkChord(data, e, cnt)
+                data,cnt = addLinkChord(data, e, cnt, owndomain)
                 if cnt > 70:  # top 70 entries
                     break
                     
@@ -129,7 +129,8 @@ def navChord(d, owndomain, omit):
     h += "</script>"
     h += '</div></div></div>' + "\n"
     return h
-def addLinkChord(data, e, cnt):
+    
+def addLinkChord(data, e, cnt, owndomain):
     tmplink = {}
     tmplink['source'] = e['s']
     if tmplink['source'] == '/' or tmplink['source'] == None or tmplink['source'] == '':
