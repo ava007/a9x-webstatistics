@@ -22,9 +22,9 @@ def navChord(d, owndomain, omit):
                     continue
                 if e['c'] < 1:
                     continue
-                if any(oelm.startswith(e['s']) for oelm in omit):  # omit parts of url
+                if any(e['s'].startswith(om) for om in omit):  # omit parts of url
                     continue
-                if any(oelm.startswith(e['t']) for oelm in omit):  # omit parts of url
+                if any(e['t'].startswith(om) for om in omit):  # omit parts of url
                     continue
 
                 if is_valid_ip(e['s']) == True:  # to suppress ip; ip is not a domain anyway    
