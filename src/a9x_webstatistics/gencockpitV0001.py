@@ -148,6 +148,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += "dctx.update();"
         h += '</script>'
         h += '</div></div>' + "\n\n"  # end of col and row
+
+        h += navChord(d, owndomain, omit)
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
@@ -372,10 +374,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += navchart(d, owndomain, omit)
 
         if efeature == '91':
-            h += navChord(d, owndomain, omit)
-
-        nodes, links = makeNodesLinks2(d, owndomain, omit)
-        h += navchartTangledtree2(nodes, links, owndomain, omit)
+            nodes, links = makeNodesLinks2(d, owndomain, omit)
+            h += navchartTangledtree2(nodes, links, owndomain, omit)
         
         # Webstatistics for the last months
         tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
