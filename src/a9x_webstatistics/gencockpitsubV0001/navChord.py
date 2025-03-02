@@ -60,7 +60,7 @@ def navChord(d, owndomain, omit):
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
     h += '<div class="card mt-2"><div class="card-body">'
     h += '<h3 class="card-title">User Navigation Diagram</h3>'
-    h += '<p class="card-text">User Navigation Chord Chart for ' + owndomain + ':</p>'
+    h += '<p class="card-text">Chord Chart for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
     h += '<div id="navchart-chord-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
