@@ -63,7 +63,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '<p class="card-text">User hits and visits for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
     h += '<div id="dhvchart-container"></div>'
     h += '<script type="module">' + "\n"
-    h += 'const data = ' + str(sdata) + ';' + "\n"
+    h += 'const sdata = ' + str(sdata) + ';' + "\n"
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("dhvchart-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
