@@ -94,7 +94,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.unknown("#ccc");'  + "\n"
 
     #// A function to format the value in the tooltip.
-    h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")'
+    h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
 
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;' + "\n"
