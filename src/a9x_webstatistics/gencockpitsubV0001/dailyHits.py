@@ -24,19 +24,17 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             break
         days += 1
         day_lbl.append(k)
+        tmp = {}
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            tmp = {}
             tmp['d'] = k
             tmp['t'] = 'desk'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['desktop']
             sdata.append(tmp)
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
-            tmp = {}
             tmp['d'] = k
             tmp['t'] = 'mob'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['mobile']
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
-            tmp = {}
             tmp['d'] = k
             tmp['t'] = 'tab'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['tablet']
@@ -134,7 +132,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.call(g => g.selectAll(".domain").remove());'
 
     h += '}' + "\n"
-    h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
+    h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
     h += '</div></div></div>' + "\n"
     return h
