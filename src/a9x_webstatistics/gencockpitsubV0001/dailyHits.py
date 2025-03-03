@@ -34,10 +34,12 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             tmp['d'] = k
             tmp['t'] = 'mob'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['mobile']
+            sdata.append(tmp)
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             tmp['d'] = k
             tmp['t'] = 'tab'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['tablet']
+            sdata.append(tmp)
         if 'robotHits' in d['v0001']['days'][k]['robot']:
             day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
         else:
@@ -87,7 +89,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.rangeRound([height - marginBottom, marginTop]);'  + "\n"
 
     h += 'const color = d3.scaleOrdinal()'
-    h += '.domain(series.map(d => d.key))'
+    h += '.domain(series.map(d => d.d))'
     h += '.range(d3.schemeSpectral[series.length])'
     h += '.unknown("#ccc");'  + "\n"
 
@@ -110,14 +112,14 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.join("g")'
     h += '.attr("fill", d => color(d.key))'
     h += '.selectAll("rect")'
-    h += '.data(D => D.map(d => (d.key = D.key, d)))'
+    h += '.data(D => D.map(d => (d.key = D.d, d)))'
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data[0]))'
     h += '.attr("y", d => y(d[1]))'
     h += '.attr("height", d => y(d[0]) - y(d[1]))'
     h += '.attr("width", x.bandwidth())'
     h += '.append("title")'
-    h += '.text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).population)}`);'
+    h += '.text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).c)}`);'
 
     # Append the horizontal axis.
     h += 'svg.append("g")'
