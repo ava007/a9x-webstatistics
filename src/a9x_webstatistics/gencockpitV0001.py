@@ -149,6 +149,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '</script>'
         h += '</div></div>' + "\n\n"  # end of col and row
 
+        if efeature == '93':
+            h += dailyHitsVisitsChart(d, owndomain, omit)
+
         h += navChord(d, owndomain, omit)
         
         lastDate = list(d['v0001']['days'].keys())[-1]
