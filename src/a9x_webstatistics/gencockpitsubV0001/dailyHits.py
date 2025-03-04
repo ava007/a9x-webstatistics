@@ -79,17 +79,17 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const series = d3.stack()'
     h += '.keys(d3.union(sdata.map(d => d.t)))'    # distinct series keys, in input order
     h += '.value(([, D], key) => D.get(key).c)'    # get value for each series key and stack
-    h += '(d3.index(sdata, d => d.d, d => d.t));'  # group by stack then series key
+    h += '(d3.index(sdata, d => d.d, d => d.t));' + "\n"  # group by stack then series key
 
     # Prepare the scales for positional and color encodings.
     h += 'const x = d3.scaleBand()'
     h += '.domain(d3.groupSort(sdata, D => -d3.sum(D, d => d.c), d => d.d))'
-    h += '.range([marginLeft, width - marginRight])'
+    h += '.range([margins.left, width - margins.right])'
     h += '.padding(0.1);'  + "\n"
 
     h += 'const y = d3.scaleLinear()'
     h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
-    h += '.rangeRound([height - marginBottom, marginTop]);'  + "\n"
+    h += '.rangeRound([height - margins.bottom, margins.top]);'  + "\n"
 
     h += 'const color = d3.scaleOrdinal()'
     h += '.domain(series.map(d => d.d))'
