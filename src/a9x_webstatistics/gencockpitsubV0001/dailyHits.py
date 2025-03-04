@@ -126,13 +126,13 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     # Append the horizontal axis.
     h += 'svg.append("g")'
-    h += '.attr("transform", `translate(0,${height - marginBottom})`)'
+    h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
     # Append the vertical axis.
     h += 'svg.append("g")'
-    h += '.attr("transform", `translate(${marginLeft},0)`)'
+    h += '.attr("transform", `translate(${margins.left},0)`)'
     h += '.call(d3.axisLeft(y).ticks(null, "s"))'
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
