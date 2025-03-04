@@ -26,20 +26,23 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         day_lbl.append(k)
         tmp = {}
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            tmp['d'] = k
-            tmp['t'] = 'desk'
-            tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['desktop']
-            sdata.append(tmp)
+            #tmp['d'] = k
+            #tmp['t'] = 'desk'
+            #tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['desktop']
+            sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             tmp['d'] = k
             tmp['t'] = 'mob'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['mobile']
-            sdata.append(tmp)
+            #sdata.append(tmp)
+            sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
+            
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             tmp['d'] = k
             tmp['t'] = 'tab'
             tmp['c'] = d['v0001']['days'][k]['user']['deviceHits']['tablet']
-            sdata.append(tmp)
+            #sdata.append(tmp)
+            sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         if 'robotHits' in d['v0001']['days'][k]['robot']:
             day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
         else:
