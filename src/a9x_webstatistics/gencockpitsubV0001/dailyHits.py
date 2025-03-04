@@ -115,26 +115,26 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.join("g")'
     h += '.attr("fill", d => color(d.key))'
     h += '.selectAll("rect")'
-    h += '.data(D => D.map(d => (d.key = D.d, d)))'
+    h += '.data(D => D.map(d => (d.key = D.key, d)))'
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data[0]))'
     h += '.attr("y", d => y(d[1]))'
     h += '.attr("height", d => y(d[0]) - y(d[1]))'
     h += '.attr("width", x.bandwidth())'
     h += '.append("title")'
-    h += '.text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).c)}`);'
+    h += '.text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).c)}`);' + "\n"
 
     # Append the horizontal axis.
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - marginBottom})`)'
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
-    h += '.call(g => g.selectAll(".domain").remove());'
+    h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
     # Append the vertical axis.
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${marginLeft},0)`)'
     h += '.call(d3.axisLeft(y).ticks(null, "s"))'
-    h += '.call(g => g.selectAll(".domain").remove());'
+    h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
