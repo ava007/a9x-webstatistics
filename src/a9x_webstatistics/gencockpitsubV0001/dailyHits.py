@@ -92,7 +92,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.rangeRound([height - margins.bottom, margins.top]);'  + "\n"
 
     h += 'const color = d3.scaleOrdinal()'
-    h += '.domain(series.map(d => d.d))'
+    h += '.domain(series.map(d => d.key))'
     h += '.range(d3.schemeSpectral[series.length])'
     h += '.unknown("#ccc");'  + "\n"
 
