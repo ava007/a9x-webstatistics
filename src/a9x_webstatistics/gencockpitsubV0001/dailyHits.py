@@ -43,7 +43,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const rect = document.getElementById("dhvchart-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    h += 'const height = rect.height;' + "\n"
+    #h += 'const height = rect.height;' + "\n"
+    h += 'const height = 500px;' + "\n"
 
     # Determine the series that need to be stacked.
     h += 'const series = d3.stack()'
