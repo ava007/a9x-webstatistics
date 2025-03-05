@@ -23,7 +23,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
-         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
+        if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         if 'robotHits' in d['v0001']['days'][k]['robot']:
             day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
