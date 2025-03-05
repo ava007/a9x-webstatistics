@@ -8,7 +8,6 @@ import ipaddress
 
 def dailyHitsVisitsChart(d, owndomain, omit):
     sdata = []
-
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit months or years:
@@ -54,7 +53,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     # Prepare the scales for positional and color encodings.
     h += 'const x = d3.scaleBand()'
-    h += '.domain(d3.groupSort(sdata, D => -d3.sum(D, d => d.c), d => d.d))'
+    h += '.domain(d3.groupSort(sdata, D => d3.sum(D, d => d.d), d => d.d))'
     h += '.range([margins.left, width - margins.right])'
     h += '.padding(0.1);'  + "\n"
 
@@ -67,7 +66,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range(d3.schemeSpectral[series.length])'
     h += '.unknown("#ccc");'  + "\n"
 
-    #// A function to format the value in the tooltip.
+    # A function to format the value in the tooltip.
     h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
 
     h += 'const totalWidth = width + margins.left + margins.right;'
@@ -75,7 +74,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("id","tt20250303")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
-    h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
+    h += '.attr("viewBox", [0, 0, width, height])'
     h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
 
     # Append a group for each series, and a rect for each element in the series.
