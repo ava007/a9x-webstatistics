@@ -17,18 +17,16 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         if days >= 31:
             break
         days += 1
-        day_lbl.append(k)
-        tmp = {}
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
-        if 'robotHits' in d['v0001']['days'][k]['robot']:
-            day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
-        else:
-            day_robot_hits.append(0)
+        #if 'robotHits' in d['v0001']['days'][k]['robot']:
+        #    day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
+        #else:
+        #    day_robot_hits.append(0)
 
     #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
    
