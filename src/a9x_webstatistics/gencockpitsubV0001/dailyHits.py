@@ -8,6 +8,7 @@ import ipaddress
 
 def dailyHitsVisitsChart(d, owndomain, omit):
     sdata = []
+    vdata = []
     days = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit months or years:
@@ -22,11 +23,9 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
-        #if 'robotHits' in d['v0001']['days'][k]['robot']:
-        #    day_robot_hits.append(d['v0001']['days'][k]['robot']['robotHits'])
-        #else:
-        #    day_robot_hits.append(0)
-
+        if 'robotHits' in d['v0001']['days'][k]['robot']:
+            vdata.append({'d': k, 'c': d['v0001']['days'][k]['user']['deviceHits']['robot']})
+        
     #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
    
     # d3js horizontal bubble char in case results are available
@@ -43,7 +42,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
     #h += 'const height = rect.height;' + "\n"
-    h += 'const height = 500px;' + "\n"
+    h += 'const height = width * 0.5;' + "\n"
 
     # Determine the series that need to be stacked.
     h += 'const series = d3.stack()'
@@ -65,6 +64,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.domain(series.map(d => d.key))'
     h += '.range(d3.schemeSpectral[series.length])'
     h += '.unknown("#ccc");'  + "\n"
+
+    #h += 'const visitline = d3.svg.line()'
+	#h += '.x(function (d) { return x(d.d) + x.rangeBand()/2; })'
+	#h += '.y(function (d) { return y(d.t); });'
 
     # A function to format the value in the tooltip.
     h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
