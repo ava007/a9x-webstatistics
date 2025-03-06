@@ -19,12 +19,20 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         days += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
+        else:
+            sdata.append({'d': k, 't': 'desk', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
+        else:
+            sdata.append({'d': k, 't': 'mob', 'c': 0})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
+        else:
+            sdata.append({'d': k, 't': 'tab', 'c': 0})
         if 'robotHits' in d['v0001']['days'][k]['robot']:
             vdata.append({'d': k, 'c': d['v0001']['days'][k]['user']['deviceHits']['robot']})
+        else:
+            vdata.append({'d': k, 'c': 0})
         
     #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
    
@@ -65,9 +73,9 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range(d3.schemeSpectral[series.length])'
     h += '.unknown("#ccc");'  + "\n"
 
-    #h += 'const visitline = d3.svg.line()'
-	#h += '.x(function (d) { return x(d.d) + x.rangeBand()/2; })'
-	#h += '.y(function (d) { return y(d.t); });'
+    h += 'const visitline = d3.svg.line()'
+	h += '.x(function (d) { return x(d.d) + x.rangeBand()/2; })'
+	h += '.y(function (d) { return y(d.t); });'
 
     # A function to format the value in the tooltip.
     h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
@@ -107,6 +115,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("transform", `translate(${margins.left},0)`)'
     h += '.call(d3.axisLeft(y).ticks(null, "s"))'
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
+
+    h += 'svg.append("path").attr("d", visitline(sdata));' + "\n"
 
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
