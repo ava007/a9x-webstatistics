@@ -74,8 +74,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.unknown("#ccc");'  + "\n"
 
     h += 'const visitline = d3.svg.line()'
-	h += '.x(function (d) { return x(d.d) + x.rangeBand()/2; })'
-	h += '.y(function (d) { return y(d.t); });'
+    h += '.x(function (d) { return x(d.d) + x.rangeBand()/2; })'
+    h += '.y(function (d) { return y(d.t); });'
 
     # A function to format the value in the tooltip.
     h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
