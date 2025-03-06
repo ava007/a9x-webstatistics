@@ -30,7 +30,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         else:
             sdata.append({'d': k, 't': 'tab', 'c': 0})
         if 'robotHits' in d['v0001']['days'][k]['robot']:
-            vdata.append({'d': k, 'c': d['v0001']['days'][k]['user']['robot']['robotHits']})
+            vdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['robotHits']})
         else:
             vdata.append({'d': k, 'c': 0})
         
