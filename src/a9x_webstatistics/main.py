@@ -154,6 +154,8 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
                 continue
             d, visitIP = updV0001(d, recparsed, visitIP, domain)
             j['records_processed_for_statistic'] += 1
+        if verbosity == 99:
+            print("main: last recparsed:" + str(recparsed) )
             
 
     # sum navigation
