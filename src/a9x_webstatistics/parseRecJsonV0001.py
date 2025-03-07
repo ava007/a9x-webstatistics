@@ -1,7 +1,8 @@
 import ast
+import geoip2.database
 from datetime import datetime
 
-def parseRecJsonV0001(rec):
+def parseRecJsonV0001(rec, georeader):
     r = ast.literal_eval(rec)    # parse rec to dict
 
     # local time:
@@ -81,9 +82,14 @@ def parseRecJsonV0001(rec):
     if 'al' in r:
         ret['accept_language'] = parse_accept_language(r['al'])
    
+    if georeader:
+        try:
+            grrsp = georeader.country(ip_address)
+            ret['country'] = grrsp.country.name
+        except geoip2.errors.AddressNotFoundError:
+            pass     # ie. do nothing
+   
     return ret
-
-#import re
 
 # 'da, en-gb;q=0.8, en;q=0.7'  meaning: "I prefer Danish, but will accept British English and other types of English"
 # 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'
