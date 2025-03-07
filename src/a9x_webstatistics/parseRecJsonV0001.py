@@ -84,7 +84,7 @@ def parseRecJsonV0001(rec, georeader):
    
     if georeader:
         try:
-            grrsp = georeader.country(ip_address)
+            grrsp = georeader.country(ret['ip'])
             ret['country'] = grrsp.country.name
         except geoip2.errors.AddressNotFoundError:
             pass     # ie. do nothing
