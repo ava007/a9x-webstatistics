@@ -8,8 +8,6 @@ from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
 from .summarizemonth import summonth
 from .summarizemonthV0001 import sumMonthV0001
-#from .migratev0001 import migv0001
-#from .migratev0001 import delv0000
 from .migV0001 import migv0001sub0001
 from .cleanupV0001 import cleanupQualityV0001
 from .parseRecJsonV0001 import parseRecJsonV0001
@@ -25,7 +23,7 @@ def parseRec(rec, log_pattern, j, georeader):
         return r,j
 
     if rec[0:2] == '{"':
-        r = parseRecJsonV0001(rec)
+        r = parseRecJsonV0001(rec, georeader)
     else:
         data = re.search(log_pattern, rec)
 
