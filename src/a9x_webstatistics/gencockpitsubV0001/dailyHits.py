@@ -48,9 +48,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
-    h += '<div class="card mt-2"><div class="card-body">'
-    h += '<h3 class="card-title">User Hits and Visits</h3>'
-    h += '<p class="card-text">User hits and visits for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
+    h += '<h3>User Hits and Visits</h3>'
+    h += '<p>User hits and visits for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
     h += '<div id="dhvchart-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
@@ -87,10 +86,14 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
 
+    #h += 'const color = d3.scaleOrdinal()'
+    #h += '.domain(series.map(d => d.key))'
+    #h += '.range(d3.schemeSpectral[series.length])'
+    #h += '.unknown("#ccc");'  + "\n"
+
     h += 'const color = d3.scaleOrdinal()'
-    h += '.domain(series.map(d => d.key))'
-    h += '.range(d3.schemeSpectral[series.length])'
-    h += '.unknown("#ccc");'  + "\n"
+    h += '.domain(["desk", "mob", "tab"])'
+    h += '.range(["#1f77b4", "#ff7f0e", "#2ca02c"]);' + "\n" # Blue for desk, orange for mobile, green for tablet
 
     h += 'const visitline = d3.line()'
     h += '.x(d => x(d.d) + x.bandwidth()/2 )'
@@ -157,5 +160,5 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
-    h += '</div></div></div>' + "\n"
+    h += '</div>' + "\n"
     return h
