@@ -118,7 +118,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
-    h += '.call(g => g.selectAll(".domain").remove());'
+    h += '.call(g => g.selectAll(".domain").remove())'
     h += '.selectAll("text")'   # Select axis labels
     h += '.attr("transform", "rotate(45)")'  # Rotate text 45 degrees
     h += '.style("text-anchor", "start")'  # Adjust alignment
@@ -137,9 +137,14 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("stroke", "red")'
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
-    
-    h += 'svg.append("path").attr("d", visitline(rdata));' + "\n"
 
+    h += 'svg.append("path")'
+    h += '.datum(rdata)' # Bind data properly
+    h += '.attr("fill", "none")'
+    h += '.attr("stroke", "grey")'
+    h += '.attr("stroke-width", 2)'
+    h += '.attr("d", visitline);' + "\n"
+        
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
