@@ -7,6 +7,7 @@ import ipaddress
 # https://observablehq.com/@d3/stacked-bar-chart/2
 
 def dailyHitsVisitsChart(d, owndomain, omit):
+    rdata = []
     sdata = []
     vdata = []
     days = 0
@@ -29,10 +30,18 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         else:
             sdata.append({'d': k, 't': 'tab', 'c': 0})
-        if 'robotHits' in d['v0001']['days'][k]['robot']:
-            vdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['robotHits']})
+
+        # visits:
+        if 'visits' in d['v0001']['days'][k]['user']:
+            vdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['visits']})
         else:
             vdata.append({'d': k, 'c': 0})
+
+        # robots
+        if 'robotHits' in d['v0001']['days'][k]['robot']:
+            rdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['robotHits']})
+        else:
+            rdata.append({'d': k, 'c': 0})
         
     #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
    
@@ -108,6 +117,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     # Append the horizontal axis.
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
+    h += '.attr("transform", "rotate(45)")'
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
@@ -117,7 +127,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.call(d3.axisLeft(y).ticks(null, "s"))'
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
-    h += 'svg.append("path").attr("d", visitline(sdata));' + "\n"
+    h += 'svg.append("path").attr("d", visitline(vdata));' + "\n"
+    h += 'svg.append("path").attr("d", visitline(rdata));' + "\n"
 
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
