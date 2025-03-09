@@ -54,7 +54,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '<div id="dhvchart-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
-    h += 'const sdata = ' + str(vdata) + ';' + "\n"
+    h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const sdata = ' + str(rdata) + ';' + "\n"
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("dhvchart-container").getBoundingClientRect();'
