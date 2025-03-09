@@ -75,8 +75,14 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range([margins.left, width - margins.right])'
     h += '.padding(0.1);'  + "\n"
 
+    # getting maxx from series,vdata and sdata:
+    h += 'const yMax = Math.max('
+    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    h += 'd3.max(vdata, d => d.c),'
+    h += 'd3.max(rdata, d => d.c)'
+    h += ');' + "\n"
     h += 'const y = d3.scaleLinear()'
-    h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
+    h += '.domain([0, yMax])'
     h += '.rangeRound([height - margins.bottom, margins.top]);'  + "\n"
 
     h += 'const color = d3.scaleOrdinal()'
@@ -85,8 +91,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.unknown("#ccc");'  + "\n"
 
     h += 'const visitline = d3.line()'
-    h += '.x(function (d) { return x(d.d) + x.bandwidth()/2; })'
-    h += '.y(function (d) { return y(d.c); });'
+    h += '.x(d => x(d.d) + x.bandwidth()/2 )'
+    h += '.y(d => y(d.c));'
 
     # A function to format the value in the tooltip.
     h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
