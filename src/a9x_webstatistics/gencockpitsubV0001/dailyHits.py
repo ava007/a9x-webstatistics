@@ -81,9 +81,11 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
     h += ');' + "\n"
-    h += 'const y = d3.scaleLinear()'
-    h += '.domain([0, yMax])'
-    h += '.rangeRound([height - margins.bottom, margins.top]);'  + "\n"
+    
+    h += 'const y = d3.scaleLog()'
+    h += '.domain([1, yMax])'
+    h += '.range([height - margins.bottom, margins.top])'
+    h += '.nice();'  + "\n"
 
     h += 'const color = d3.scaleOrdinal()'
     h += '.domain(series.map(d => d.key))'
@@ -135,7 +137,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     # Append the vertical axis.
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${margins.left},0)`)'
-    h += '.call(d3.axisLeft(y).ticks(null, "s"))'
+    h += '.call(d3.axisLeft(y).ticks(5,",.0f"))'  # format number for log scale
     h += '.call(g => g.selectAll(".domain").remove());' + "\n"
 
     h += 'svg.append("path")'
