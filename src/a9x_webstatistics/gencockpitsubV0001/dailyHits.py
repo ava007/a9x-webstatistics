@@ -70,7 +70,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     # Prepare the scales for positional and color encodings.
     h += 'const x = d3.scaleBand()'
-    h += '.domain(d3.groupSort(sdata, D => d3.sum(D, d => d.d), d => d.d))'
+    h += '.domain(d3.groupSort(sdata, D => d3.sum(D, d => d.c), d => d.d))'
     h += '.range([margins.left, width - margins.right])'
     h += '.padding(0.1);'  + "\n"
 
