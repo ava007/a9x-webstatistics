@@ -55,6 +55,71 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
+
+    h += 'const groupedData = d3.rollup(sdata, 'v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'
+
+    # Convert to array with missing categories filled as 0
+    h += 'const dates = Array.from(groupedData.keys()).sort();'
+    h += 'const categories = ["desk", "mob", "tab"];'
+
+    h += 'const transformedData = dates.map(d => {'
+    h += 'let entry = { d };'
+    h += 'categories.forEach(c => entry[c] = groupedData.get(d)?.[c] || 0);'
+    h += 'return entry;'
+    h += '});'
+
+    #// Stack generator
+    h += 'const stack = d3.stack().keys(categories);'
+    h += 'const series = stack(transformedData);'
+
+    h += 'const container = document.getElementById("dhvchart-container");'
+    h += 'const { width } = container.getBoundingClientRect();'
+    h += 'const height = width * 0.5;'
+
+    h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
+    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'
+    h += 'const y = d3.scaleLinear()'
+    h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
+    h += '.range([height - margins.bottom, margins.top]);'
+
+    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#1f77b4", "#ff7f0e", "#2ca02c"]);'
+
+    h += 'const svg = d3.select("#dhvchart-container")'
+    h += '.append("svg")'
+    h += '.attr("width", width)'
+    h += '.attr("height", height)'
+    h += '.attr("viewBox", [0, 0, width, height]);'
+
+    #// Add bars
+    h += 'svg.append("g")'
+    h += '.selectAll("g")'
+    h += '.data(series)'
+    h += '.join("g")'
+    h += '.attr("fill", d => color(d.key))'
+    h += '.selectAll("rect")'
+    h += '.data(d => d)'
+    h += '.join("rect")'
+    h += '.attr("x", d => x(d.data.d))'
+    h += '.attr("y", d => y(d[1]))'
+    h += '.attr("height", d => y(d[0]) - y(d[1]))'
+    h += '.attr("width", x.bandwidth());'
+
+    #// X-Axis
+    h += 'svg.append("g")'
+    h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
+    h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
+    h += '.selectAll("text")'
+    h += '.attr("transform", "rotate(45)")'
+    h += '.style("text-anchor", "start");'
+
+    #// Y-Axis
+    h += 'svg.append("g")'
+    h += '.attr("transform", `translate(${margins.left},0)`)'
+    h += '.call(d3.axisLeft(y).ticks(5));'
+
+
+
+    '''
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("dhvchart-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
@@ -159,6 +224,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         
     h += '}' + "\n"
     h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
+    '''
     h += "</script>"
     h += '</div>' + "\n"
     return h
