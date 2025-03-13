@@ -56,7 +56,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
 
-    h += 'const groupedData = d3.rollup(sdata, 'v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'
+    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'
 
     # Convert to array with missing categories filled as 0
     h += 'const dates = Array.from(groupedData.keys()).sort();'
