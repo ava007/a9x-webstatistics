@@ -112,6 +112,20 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("height", d => y(d[0]) - y(d[1]))'
     h += '.attr("width", x.bandwidth());'
 
+    h += 'svg.append("path")'
+    h += '.datum(vdata)' # Bind data properly
+    h += '.attr("fill", "none")'
+    h += '.attr("stroke", "red")'
+    h += '.attr("stroke-width", 2)'
+    h += '.attr("d", visitline);' + "\n"
+
+    h += 'svg.append("path")'
+    h += '.datum(rdata)' # Bind data properly
+    h += '.attr("fill", "none")'
+    h += '.attr("stroke", "grey")'
+    h += '.attr("stroke-width", 2)'
+    h += '.attr("d", visitline);' + "\n"
+
     #// X-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
