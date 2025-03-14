@@ -370,7 +370,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
 
         # navigation chart as sankey diagram (experimental feature)
         if efeature == '10':
-            nodes, links = makeNodesLinks(d, owndomain, omit)
+            nodes, links = makeNodesLinks2(d, owndomain, omit)
             h += navchartsankey(nodes, links, owndomain, omit)
             # navigation chart - old version until 1.4.68 -20250217
         if efeature == '90':
