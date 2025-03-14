@@ -114,7 +114,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data.d))'
     h += '.attr("y", d => y(d[1]))'
-    h += '.attr("height", d => y(d[0]) - y(d[1]))'
+    #h += '.attr("height", d => y(d[0]) - y(d[1]))'
+    h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
     h += '.attr("width", x.bandwidth());' + "\n"
 
     h += 'const visitline = d3.line()'
