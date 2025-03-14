@@ -96,7 +96,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
 
-    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#f5a742", "#42f5aa"]);'
+    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42f5aa", "#42c5f5", "#f5a742"]);' + "\n"
 
     h += 'const svg = d3.select("#dhvchart-container")'
     h += '.append("svg")'
@@ -104,7 +104,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("height", height)'
     h += '.attr("viewBox", [0, 0, width, height]);' + "\n"
 
-    #// Add bars
+    # Add bars
     h += 'svg.append("g")'
     h += '.selectAll("g")'
     h += '.data(series)'
@@ -114,20 +114,15 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.data(d => d)'
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data.d))'
-    #h += '.attr("y", d => y(d[1]))'
-    #h += '.attr("y", d => y(Math.max(1,d[1])))'  # ensure no zero values for log scale
-    #h += '.attr("height", d => y(d[0]) - y(d[1]))'
-    #h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
     h += '.attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))'
-    #h += '.attr("height", d => isNaN(d[0]) || isNaN(d[1]) ? 0 : Math.max(0, y(d[0]) - y(d[1])))'
     h += '.attr("height", d => Math.max(0, Math.abs(y(d[0]) - y(d[1]))))'
-
     h += '.attr("width", x.bandwidth());' + "\n"
 
     h += 'const visitline = d3.line()'
     h += '.x(d => x(d.d) + x.bandwidth()/2 )'
     h += '.y(d => y(d.c));' + "\n"
 
+    # Visits
     h += 'svg.append("path")'
     h += '.datum(vdata)' # Bind data properly
     h += '.attr("fill", "none")'
@@ -135,6 +130,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
 
+    # Robots
     h += 'svg.append("path")'
     h += '.datum(rdata)' # Bind data properly
     h += '.attr("fill", "none")'
@@ -142,7 +138,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
 
-    #// X-Axis
+    # X-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
@@ -150,123 +146,13 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("transform", "rotate(45)")'
     h += '.style("text-anchor", "start");' + "\n"
 
-    #// Y-Axis
+    # Y-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${margins.left},0)`)'
     h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
 
-    h += 'console.log("Transformed Data:", transformedData);'
-    h += 'console.log("Stacked Data:", stack(transformedData));'
-
-
-
-
-    '''
-    h += 'function renderChart(data, options = {}) {'
-    h += 'const rect = document.getElementById("dhvchart-container").getBoundingClientRect();'
-    h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
-    h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
-    #h += 'const height = rect.height;' + "\n"
-    h += 'const height = width * 0.5;' + "\n"
-
-    # Determine the series that need to be stacked.
-    h += 'const series = d3.stack()'
-    h += '.keys(d3.union(sdata.map(d => d.t)))'    # distinct series keys, in input order
-    h += '.value(([, D], key) => D.get(key).c)'    # get value for each series key and stack
-    h += '(d3.index(sdata, d => d.d, d => d.t));' + "\n"  # group by stack then series key
-
-    # Prepare the scales for positional and color encodings.
-    h += 'const x = d3.scaleBand()'
-    h += '.domain(d3.groupSort(sdata, D => d3.sum(D, d => d.c), d => d.d))'
-    h += '.range([margins.left, width - margins.right])'
-    h += '.padding(0.1);'  + "\n"
-
-    # getting maxx from series,vdata and sdata:
-    h += 'const yMax = Math.max('
-    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
-    h += 'd3.max(vdata, d => d.c),'
-    h += 'd3.max(rdata, d => d.c)'
-    h += ');' + "\n"
-    
-    h += 'const y = d3.scaleLog()'
-    h += '.domain([1, yMax])'
-    h += '.range([height - margins.bottom, margins.top])'
-    h += '.nice();'  + "\n"
-
-    #h += 'const color = d3.scaleOrdinal()'
-    #h += '.domain(series.map(d => d.key))'
-    #h += '.range(d3.schemeSpectral[series.length])'
-    #h += '.unknown("#ccc");'  + "\n"
-
-    h += 'const color = d3.scaleOrdinal()'
-    h += '.domain(["desk", "mob", "tab"])'
-    h += '.range(["#1f77b4", "#ff7f0e", "#2ca02c"]);' + "\n" # Blue for desk, orange for mobile, green for tablet
-
-    h += 'const visitline = d3.line()'
-    h += '.x(d => x(d.d) + x.bandwidth()/2 )'
-    h += '.y(d => y(d.c));'
-
-    # A function to format the value in the tooltip.
-    h += 'const formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en");'
-
-    h += 'const totalWidth = width + margins.left + margins.right;'
-    h += 'const svg = d3.select("#dhvchart-container").append("svg")'
-    h += '.attr("id","tt20250303")'
-    h += '.attr("width", width)'
-    h += '.attr("height", height)'
-    h += '.attr("viewBox", [0, 0, width, height])'
-    h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
-
-    # Append a group for each series, and a rect for each element in the series.
-    h += 'svg.append("g")'
-    h += '.selectAll()'
-    h += '.data(series)'
-    h += '.join("g")'
-    h += '.attr("fill", d => color(d.key))'
-    h += '.selectAll("rect")'
-    h += '.data(D => D.map(d => (d.key = D.key, d)))'
-    h += '.join("rect")'
-    h += '.attr("x", d => x(d.data[0]))'
-    h += '.attr("y", d => y(d[1]))'
-    h += '.attr("height", d => y(d[0]) - y(d[1]))'
-    h += '.attr("width", x.bandwidth())'
-    h += '.append("title")'
-    h += '.text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).c)}`);' + "\n"
-
-    # Append the horizontal axis.
-    h += 'svg.append("g")'
-    h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
-    h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
-    h += '.call(g => g.selectAll(".domain").remove())'
-    h += '.selectAll("text")'   # Select axis labels
-    h += '.attr("transform", "rotate(45)")'  # Rotate text 45 degrees
-    h += '.style("text-anchor", "start")'  # Adjust alignment
-    h += '.attr("x", 10)'   # Fine-tune position
-    h += '.attr("y", 5);' + "\n"
-
-    # Append the vertical axis.
-    h += 'svg.append("g")'
-    h += '.attr("transform", `translate(${margins.left},0)`)'
-    h += '.call(d3.axisLeft(y).ticks(5,",.0f"))'  # format number for log scale
-    h += '.call(g => g.selectAll(".domain").remove());' + "\n"
-
-    h += 'svg.append("path")'
-    h += '.datum(vdata)' # Bind data properly
-    h += '.attr("fill", "none")'
-    h += '.attr("stroke", "red")'
-    h += '.attr("stroke-width", 2)'
-    h += '.attr("d", visitline);' + "\n"
-
-    h += 'svg.append("path")'
-    h += '.datum(rdata)' # Bind data properly
-    h += '.attr("fill", "none")'
-    h += '.attr("stroke", "grey")'
-    h += '.attr("stroke-width", 2)'
-    h += '.attr("d", visitline);' + "\n"
-        
-    h += '}' + "\n"
-    h += 'renderChart(sdata, { backgroundColor: "#f8f8f8" });' + "\n"
-    '''
+    #h += 'console.log("Transformed Data:", transformedData);'
+    #h += 'console.log("Stacked Data:", stack(transformedData));'
     h += "</script>"
     h += '</div>' + "\n"
     return h
