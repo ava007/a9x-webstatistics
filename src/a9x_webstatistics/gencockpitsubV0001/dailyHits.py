@@ -68,17 +68,17 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'return entry;'
     h += '});'
 
-    # getting maxx from series,vdata and sdata:
+    #// Stack generator
+    h += 'const stack = d3.stack().keys(categories);'
+    h += 'const series = stack(transformedData);'
+    
+    # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
     h += 'd3.max(series, d => d3.max(d, d => d[1])),'
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
     h += ');' + "\n"
-
-    #// Stack generator
-    h += 'const stack = d3.stack().keys(categories);'
-    h += 'const series = stack(transformedData);'
-
+    
     h += 'const container = document.getElementById("dhvchart-container");'
     h += 'const { width } = container.getBoundingClientRect();'
     h += 'const height = width * 0.5;'
