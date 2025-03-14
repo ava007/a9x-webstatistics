@@ -66,8 +66,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'let entry = { d };'
     h += 'let values = groupedData.get(d) || {};'  # Ensure it's always an object
     h += 'categories.forEach(c => entry[c] = values[c] ?? 0);'  # Use Nullish coalescing to handle undefined
-    #h += 'categories.forEach(c => entry[c] = groupedData.get(d)?.[c] || 0);'
-    #h += 'return entry;'
+    h += 'return entry;'
     h += '});'
 
     #// Stack generator
