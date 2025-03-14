@@ -91,8 +91,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     #h += '.domain([0, yMax])'
     #h += '.range([height - margins.bottom, margins.top]);'
 
-    h += 'const y = d3.scaleLog()'
-    h += '.domain([1, yMax])'   # Log scale cannot have 0
+    h += 'const y = d3.scaleSymLog()'
+    h += '.domain([0.1, yMax])'   # Log scale cannot have 0
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
 
@@ -119,7 +119,9 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     #h += '.attr("height", d => y(d[0]) - y(d[1]))'
     #h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
     h += '.attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))'
-    h += '.attr("height", d => isNaN(d[0]) || isNaN(d[1]) ? 0 : Math.max(0, y(d[0]) - y(d[1])))'
+    #h += '.attr("height", d => isNaN(d[0]) || isNaN(d[1]) ? 0 : Math.max(0, y(d[0]) - y(d[1])))'
+    h += '.attr("height", d => Math.max(0, Math.abs(y(d[0]) - y(d[1]))))'
+
     h += '.attr("width", x.bandwidth());' + "\n"
 
     h += 'const visitline = d3.line()'
