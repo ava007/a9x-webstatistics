@@ -64,8 +64,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     h += 'const transformedData = dates.map(d => {'
     h += 'let entry = { d };'
-    h += 'categories.forEach(c => entry[c] = groupedData.get(d)?.[c] || 0);'
-    h += 'return entry;'
+    h += 'let values = groupedData.get(d) || {};'  # Ensure it's always an object
+    h += 'categories.forEach(c => entry[c] = values[c] ?? 0);'  # Use Nullish coalescing to handle undefined
+    #h += 'categories.forEach(c => entry[c] = groupedData.get(d)?.[c] || 0);'
+    #h += 'return entry;'
     h += '});'
 
     #// Stack generator
@@ -114,9 +116,11 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data.d))'
     #h += '.attr("y", d => y(d[1]))'
-    h += '.attr("y", d => y(Math.max(1,d[1])))'  # ensure no zero values for log scale
+    #h += '.attr("y", d => y(Math.max(1,d[1])))'  # ensure no zero values for log scale
     #h += '.attr("height", d => y(d[0]) - y(d[1]))'
-    h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
+    #h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
+    h += '.attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))'
+    h += '.attr("height", d => isNaN(d[0]) || isNaN(d[1]) ? 0 : Math.max(0, y(d[0]) - y(d[1])))'
     h += '.attr("width", x.bandwidth());' + "\n"
 
     h += 'const visitline = d3.line()'
@@ -149,6 +153,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${margins.left},0)`)'
     h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
+
+    h += 'console.log("Transformed Data:", transformedData);'
+    h += 'console.log("Stacked Data:", stack(transformedData));'
+
 
 
 
