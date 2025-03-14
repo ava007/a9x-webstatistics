@@ -81,14 +81,19 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     
     h += 'const container = document.getElementById("dhvchart-container");'
     h += 'const { width } = container.getBoundingClientRect();'
-    h += 'const height = width * 0.5;'
+    h += 'const height = width * 0.5;' + "\n"
 
     h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
-    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'
-    h += 'const y = d3.scaleLinear()'
-    #h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
+    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'  + "\n"
+    
+    #h += 'const y = d3.scaleLinear()'
+    #h += '.domain([0, yMax])'
+    #h += '.range([height - margins.bottom, margins.top]);'
+
+    h += 'const y = d3.scaleLog()'
     h += '.domain([0, yMax])'
-    h += '.range([height - margins.bottom, margins.top]);'
+    h += '.range([height - margins.bottom, margins.top])'
+    h += '.nice();'  + "\n"
 
     h += 'const color = d3.scaleOrdinal().domain(categories).range(["#1f77b4", "#ff7f0e", "#2ca02c"]);'
 
@@ -96,7 +101,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.append("svg")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
-    h += '.attr("viewBox", [0, 0, width, height]);'
+    h += '.attr("viewBox", [0, 0, width, height]);' + "\n"
 
     #// Add bars
     h += 'svg.append("g")'
@@ -110,11 +115,11 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("x", d => x(d.data.d))'
     h += '.attr("y", d => y(d[1]))'
     h += '.attr("height", d => y(d[0]) - y(d[1]))'
-    h += '.attr("width", x.bandwidth());'
+    h += '.attr("width", x.bandwidth());' + "\n"
 
     h += 'const visitline = d3.line()'
     h += '.x(d => x(d.d) + x.bandwidth()/2 )'
-    h += '.y(d => y(d.c));'
+    h += '.y(d => y(d.c));' + "\n"
 
     h += 'svg.append("path")'
     h += '.datum(vdata)' # Bind data properly
@@ -136,12 +141,12 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
     h += '.selectAll("text")'
     h += '.attr("transform", "rotate(45)")'
-    h += '.style("text-anchor", "start");'
+    h += '.style("text-anchor", "start");' + "\n"
 
     #// Y-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${margins.left},0)`)'
-    h += '.call(d3.axisLeft(y).ticks(5));'
+    h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
 
 
 
