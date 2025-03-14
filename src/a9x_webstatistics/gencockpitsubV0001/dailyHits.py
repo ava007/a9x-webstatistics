@@ -112,6 +112,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("height", d => y(d[0]) - y(d[1]))'
     h += '.attr("width", x.bandwidth());'
 
+    h += 'const visitline = d3.line()'
+    h += '.x(d => x(d.d) + x.bandwidth()/2 )'
+    h += '.y(d => y(d.c));'
+
     h += 'svg.append("path")'
     h += '.datum(vdata)' # Bind data properly
     h += '.attr("fill", "none")'
