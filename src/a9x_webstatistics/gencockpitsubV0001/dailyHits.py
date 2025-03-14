@@ -91,7 +91,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     #h += '.domain([0, yMax])'
     #h += '.range([height - margins.bottom, margins.top]);'
 
-    h += 'const y = d3.scaleSymLog()'
+    h += 'const y = d3.scaleSymlog()'
     h += '.domain([0.1, yMax])'   # Log scale cannot have 0
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
