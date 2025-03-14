@@ -113,7 +113,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.data(d => d)'
     h += '.join("rect")'
     h += '.attr("x", d => x(d.data.d))'
-    h += '.attr("y", d => y(d[1]))'
+    #h += '.attr("y", d => y(d[1]))'
+    h += '.attr("y", d => y(Math.max(1,d[1])))'  # ensure no zero values for log scale
     #h += '.attr("height", d => y(d[0]) - y(d[1]))'
     h += '.attr("height", d => Math.max(0, y(d[0]) - y(d[1])))'  # avoid negatives using max()
     h += '.attr("width", x.bandwidth());' + "\n"
