@@ -68,6 +68,13 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'return entry;'
     h += '});'
 
+    # getting maxx from series,vdata and sdata:
+    h += 'const yMax = Math.max('
+    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    h += 'd3.max(vdata, d => d.c),'
+    h += 'd3.max(rdata, d => d.c)'
+    h += ');' + "\n"
+
     #// Stack generator
     h += 'const stack = d3.stack().keys(categories);'
     h += 'const series = stack(transformedData);'
@@ -79,7 +86,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
     h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'
     h += 'const y = d3.scaleLinear()'
-    h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
+    #h += '.domain([0, d3.max(series, d => d3.max(d, d => d[1]))])'
+    h += '.domain([0, yMax])'
     h += '.range([height - margins.bottom, margins.top]);'
 
     h += 'const color = d3.scaleOrdinal().domain(categories).range(["#1f77b4", "#ff7f0e", "#2ca02c"]);'
