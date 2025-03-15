@@ -96,7 +96,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
 
-    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42f5aa", "#42c5f5", "#f5a742"]);' + "\n"
+    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#42f5aa", "#f5a742"]);' + "\n"
 
     h += 'const svg = d3.select("#dhvchart-container")'
     h += '.append("svg")'
