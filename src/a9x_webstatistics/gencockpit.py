@@ -404,8 +404,8 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--infile", help="json file that contains calculated statistics", default="webstat.json")
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
-    parser.add_argument("-t", "--omit", help="omits path in generated html-cockpit", action="append")
-    parser.add_argument("-ef", "--efeature", help="use experimental feature number, 0=none, 1-99=feature", action="append")
+    parser.add_argument("-t", "--omit", help="omits path in generated html-cockpit (can be used multiple times)", action="append")
+    parser.add_argument("-ef", "--efeature", help="use experimental feature number, 0=none, 1-99=feature (can be used multiple times)", action="append", type=str)
     args, unknown = parser.parse_known_args()
 
     # avoid untyped variable
