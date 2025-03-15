@@ -151,6 +151,27 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("transform", `translate(${margins.left},0)`)'
     h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
 
+    # Create a tooltip div
+    h += 'const tooltip = d3.select("#dhvchart-container")'
+    h += '.append("div")'
+    h += '.style("position", "absolute")'
+    h += '.style("background", "white")'
+    h += '.style("padding", "5px")'
+    h += '.style("border", "1px solid black")'
+    h += '.style("border-radius", "5px")'
+    h += '.style("visibility", "hidden")'
+    h += '.style("pointer-events", "none");' + "\n"
+
+    # Add tooltip functionality to bars
+    h += 'svg.selectAll("rect")'
+    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible"); })'
+    h += '.on("mousemove", (event, d) => {'
+    h += 'tooltip.html(`Date: ${d.data.d}<br>Category: ${d3.select(event.target.parentNode).datum().key}<br>Count: ${d[1] - d[0]}`)'
+    h += '.style("top", `${event.pageY - 10}px`)'
+    h += '.style("left", `${event.pageX + 10}px`);'
+    h += '})'
+    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });'
+    
     #h += 'console.log("Transformed Data:", transformedData);'
     #h += 'console.log("Stacked Data:", stack(transformedData));'
     h += "</script>"
