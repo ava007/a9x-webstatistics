@@ -138,6 +138,24 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
 
+    # Function to add points to a line
+    h += 'function addPoints(data, color) {'
+    h += 'svg.selectAll(`.point-${color}`)'
+    h += '.data(data)'
+    h += '.enter()'
+    h += '.append("circle")'
+    h += '.attr("cx", d => x(d.d) + x.bandwidth() / 2)'
+    h += '.attr("cy", d => y(d.c))'
+    h += '.attr("r", 4)' # Adjust size of the points
+    h += '.attr("fill", color)'
+    h += '.attr("stroke", "white")'
+    h += '.attr("stroke-width", 1);'
+    h += '}'
+
+    # Add points to the red and grey lines
+    h += 'addPoints(vdata, "red");'
+    h += 'addPoints(rdata, "grey");'
+
     # X-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
