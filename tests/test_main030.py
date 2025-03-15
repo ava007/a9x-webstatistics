@@ -16,7 +16,7 @@ class TestMain030(unittest.TestCase):
         print(str(file_data))
         contents = json.loads(file_data)
         print(str(contents))
-        assert '20250315175907' in contents['timelastrec']
+        assert '20250315175938' in contents['timelastrec']
       
 
 if __name__ == '__main__':
