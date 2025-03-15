@@ -15,6 +15,7 @@ class TestMain030(unittest.TestCase):
             file_data = f.read()  
         print(str(file_data))
         contents = json.loads(file_data)
+        print(str(contents))
         assert '20250315175907' in contents['timelastrec']
       
 
