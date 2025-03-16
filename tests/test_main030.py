@@ -19,7 +19,7 @@ class TestMain030(unittest.TestCase):
         assert '20250315175938' in contents['timelastrec']
 
         # see first access log:
-        assert 'bing.com' in contents['v0001']['days']['202309']['user']['nav']
+        assert any(entry['s'] == 'bing' for entry in contents['v0001']['days']['202309']['user']['nav']), "No entry with 's' == 'bing'"
       
 
 if __name__ == '__main__':
