@@ -1,4 +1,4 @@
-2a02:aa10:e979:d180:96c6:91ff:fe9e:7c46 - - [23/Sep/2023:16:56:26 +0000] "GET / HTTP/2.0" 200 2540 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
+2a02:aa10:e979:d180:96c6:91ff:fe9e:7c46 - - [23/Sep/2023:16:56:26 +0000] "GET / HTTP/2.0" 200 2540 "https://www.bing.com/" "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
 2a02:aa10:e979:d180:96c6:91ff:fe9e:7c46 - - [23/Sep/2023:16:56:32 +0000] "GET /team/view/ax/ HTTP/2.0" 200 22853 "https://www.logikfabrik.com/" "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
 2a02:aa10:e979:d180:96c6:91ff:fe9e:7c46 - - [23/Sep/2023:16:56:39 +0000] "GET /team/tag/ax/music70/ HTTP/2.0" 200 5100 "https://www.logikfabrik.com/team/view/ax/" "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
 2a02:aa10:e979:d180:96c6:91ff:fe9e:7c46 - - [23/Sep/2023:16:56:45 +0000] "GET /team/view/ax/ HTTP/2.0" 200 22853 "https://www.logikfabrik.com/team/tag/ax/music70/" "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
