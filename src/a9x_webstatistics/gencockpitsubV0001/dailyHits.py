@@ -19,17 +19,17 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             break
         days += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
+            sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
-            sdata.append({'d': k, 't': 'desk', 'c': 0})
+            sdata.append({'d': k, 't': 'desktop', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
+            sdata.append({'d': k, 't': 'mobile', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         else:
-            sdata.append({'d': k, 't': 'mob', 'c': 0})
+            sdata.append({'d': k, 't': 'mobile', 'c': 0})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
+            sdata.append({'d': k, 't': 'tablet', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         else:
-            sdata.append({'d': k, 't': 'tab', 'c': 0})
+            sdata.append({'d': k, 't': 'tablet', 'c': 0})
 
         # visits:
         if 'visits' in d['v0001']['days'][k]['user']:
@@ -60,7 +60,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     # Convert to array with missing categories filled as 0
     h += 'const dates = Array.from(groupedData.keys()).sort();'
-    h += 'const categories = ["desk", "mob", "tab"];'
+    h += 'const categories = ["desktop", "mobile", "tablet"];'
 
     h += 'const transformedData = dates.map(d => {'
     h += 'let entry = { d };'
@@ -96,7 +96,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
 
-    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#42f5aa", "#f5a742"]);' + "\n"
+    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42f5aa", "#42c5f5", "#f5a742"]);' + "\n"
 
     h += 'const svg = d3.select("#dhvchart-container")'
     h += '.append("svg")'
