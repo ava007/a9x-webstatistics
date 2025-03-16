@@ -20,7 +20,7 @@ class TestMain030(unittest.TestCase):
 
         # see first access log:
         print(str(contents['v0001']['days']['202309']['user']['nav']))
-        #assert any(d['s'] == 'bing' for d in contents['v0001']['days']['202309']['user']['nav']), "No dictionary has 's' equal to 'bing'"
+        assert any(d['s'] == 'bing' for d in contents['v0001']['days']['202309']['user']['nav']), "No dictionary has 's' equal to 'bing'"
       
 
 if __name__ == '__main__':
