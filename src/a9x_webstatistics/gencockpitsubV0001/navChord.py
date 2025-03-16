@@ -57,9 +57,8 @@ def navChord(d, owndomain, omit):
    
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
-    h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
-    h += '<div class="card mt-2"><div class="card-body">'
-    h += '<h3 class="card-title">User Navigation Diagram</h3>'
+    h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
+    h += '<h3>User Navigation Diagram</h3>'
     h += '<p class="card-text">Chord Chart for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
     h += '<div id="navchart-chord-container"></div>'
     h += '<script type="module">' + "\n"
@@ -127,7 +126,7 @@ def navChord(d, owndomain, omit):
     h += '}' + "\n"
     h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
-    h += '</div></div></div>' + "\n"
+    h += '</div>' + "\n"
     return h
     
 def addLinkChord(data, e, cnt, owndomain):
