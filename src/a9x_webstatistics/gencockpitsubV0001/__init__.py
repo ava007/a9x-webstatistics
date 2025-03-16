@@ -1,5 +1,6 @@
 from .cockpitlanguages import cockpitLanguages
 from .dailyHits import dailyHitsVisitsChart
+from .monthlyHits import monthlyHitsVisitsChart
 from .externalfriends import externalFriends
 from .genheader import genHeader
 from .makenodeslinks import makeNodesLinks
