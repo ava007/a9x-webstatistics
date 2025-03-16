@@ -36,10 +36,9 @@ def cockpitLanguages(d, owndomain):
     # d3js horizontal bubble char in case results are available:
     if len(toplng) > 0:
         h += "\n\n"
-        h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
-        h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top Browser Languages</h3>'
-        h += '<p class="card-text">Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':</p>'
+        h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
+        h += '<h3>Top Browser Languages</h3>'
+        h += '<p>Webbrowser languages for the last ' + str(toplngcnt) + ' days by based on user hits  on ' + owndomain + ':</p>'
         h += '<div id="browserlanguages-container"><svg id="svglng" width="600" height="400"></svg></div>'
         h += '<script type="module">'
         h += 'const languages = ' + str(language_array) + ';'
