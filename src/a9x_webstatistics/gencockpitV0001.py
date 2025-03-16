@@ -476,6 +476,9 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += "</script>"
             h += '</div></div>' + "\n\n"  # end of col and row
 
+            if '94' in efeature:
+                h += monthlyHitsVisitsChart(d, owndomain, omit)
+
             # Top 10 Domains on monthly basis
             tsource = {}
             for y in d['v0001']['days']:
