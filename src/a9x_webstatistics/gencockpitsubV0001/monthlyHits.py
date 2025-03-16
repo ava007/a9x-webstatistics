@@ -88,7 +88,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#42f5aa", "#f5a742"]);' + "\n"
 
-    h += 'const svg = d3.select("#dhvchart-container")'
+    h += 'const svg = d3.select("#mhvchart-container")'
     h += '.append("svg")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
