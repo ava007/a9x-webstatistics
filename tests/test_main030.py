@@ -17,6 +17,9 @@ class TestMain030(unittest.TestCase):
         contents = json.loads(file_data)
         print(str(contents))
         assert '20250315175938' in contents['timelastrec']
+
+        # see first access log:
+        assert 'bing.com' in contents['v0001']['days']['202309']['user']['nav']
       
 
 if __name__ == '__main__':
