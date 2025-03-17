@@ -176,9 +176,9 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.call(d3.axisLeft(y)'
     h += '.tickValues(tickValues)'
     h += '.tickSize(-width + margins.left + margins.right)'
-    h += '.tickFormat(d3.format("~s")));' # Format numbers neatly
+    h += '.tickFormat(d3.format("~s")))' # Format numbers neatly
     h += '.selectAll("line")'
-    h += '.style("stroke", "lightgrey");'  # Set gridline color
+    h += '.style("stroke", "lightgrey")'  # Set gridline color
     h += '.style("stroke-opacity", 0.5);'  + "\n"
     #h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
     #h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
