@@ -188,7 +188,31 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.style("top", `${event.pageY - 10}px`)'
     h += '.style("left", `${event.pageX + 10}px`);'
     h += '})'
-    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });'
+    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
+
+
+    # Add legend
+    h += 'const legend = svg.append("g")'
+    h += '.attr("transform", `translate(${width - margins.right - 120}, ${margins.top})`);'
+
+    h += 'legend.selectAll(".legend-item")'
+    h += '.data(categories)'
+    h += '.enter()'
+    h += '.append("g")'
+    h += '.attr("class", "legend-item")'
+    h += '.attr("transform", (d, i) => `translate(0, ${i * 20})`)'
+    h += '.each(function(d, i) {'
+    h += 'const item = d3.select(this);'
+    h += 'item.append("rect")'
+    h += '.attr("width", 18)'
+    h += '.attr("height", 18)'
+    h += '.attr("fill", color(d));'
+    h += 'item.append("text")'
+    h += '.attr("x", 24)'
+    h += '.attr("y", 9)'
+    h += '.attr("dy", "0.35em")'
+    h += '.text(d);'
+    h += '});'  + "\n" 
     
     #h += 'console.log("Transformed Data:", transformedData);'
     #h += 'console.log("Stacked Data:", stack(transformedData));'
