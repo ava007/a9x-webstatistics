@@ -170,11 +170,12 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.tickFormat(d => `${d} units`);' + "\n" #  Format the labels to include "units"
 
     # Y-Axis
+    h += 'const tickValues = [1, 10, 50, 100, 200, 500,1000,2000,5000,10000,yMax];' 
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(${margins.left},0)`)'
+    h += '.call(d3.axisLeft(y).tickValues(tickValues). .tickSize(-width + margins.left + margins.right).tickFormat(d3.format("~s")));' # Format numbers neatly
     #h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
-    h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
-
+    #h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
 
     # Create a tooltip div
     h += 'const tooltip = d3.select("#dhvchart-container")'
