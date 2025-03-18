@@ -22,7 +22,7 @@ def dailyTopUrl(d, owndomain, omit):
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
-                if tk not in ttopurl:
+                if tk not in topurl:
                     topurl[tk] = 0
                 topurl[tk] += tv
    
