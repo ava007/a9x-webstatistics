@@ -234,6 +234,13 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += '</table>'
             h += '</div></div></div>'   # end of card and col
 
+        # row for top domains and urls:
+        if '95' in efeature:
+            h += '<div class="row pt-3">'
+            h += dailyTopDomains(d, owndomain, omit)
+            h += '</div>'
+        
+
         # accepted language by browser:
         h += cockpitLanguages(d, owndomain)
         
