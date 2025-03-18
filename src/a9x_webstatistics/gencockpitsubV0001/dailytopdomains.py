@@ -30,7 +30,8 @@ def dailyTopDomains(d, owndomain, omit):
   if len(tsource) == 0:
     return ''
   # Top 10 Domains on daily basis
-  h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
+  # row needs to be decleared in the calling function h+= '<div class="row pt-3">'
+  h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
   h += '<h3 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h3>'
   h += '<p class="card-text">User hits refering to external domain:</p>'
   h += '<table class="table">'
@@ -45,7 +46,7 @@ def dailyTopDomains(d, owndomain, omit):
     if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
       continue
     h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-      i += 1
+    i += 1
     if i > 10:
       break
     h += '</table>'
