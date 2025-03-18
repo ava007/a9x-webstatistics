@@ -52,14 +52,14 @@ def navChord(d, owndomain, omit):
                     break
                     
         days += 1
-        if days > 31:
+        if days >= 31:
             break
    
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
-    h += '<h3>User Navigation Diagram</h3>'
-    h += '<p>Chord Chart for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
+    h += '<h3>Daily User Navigation</h3>'
+    h += '<p>Chord diagram showing user navigation for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
     h += '<div id="navchart-chord-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
