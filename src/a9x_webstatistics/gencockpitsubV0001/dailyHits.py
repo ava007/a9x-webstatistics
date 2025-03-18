@@ -233,3 +233,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += "</script>"
     h += '</div>' + "\n"
     return h
+    
+def is_valid_ip(address):
+    try: 
+        x = ipaddress.ip_address(address)
+        return True
+    except:
+        return False
