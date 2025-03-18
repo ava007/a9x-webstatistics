@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from operator import itemgetter
-from validip import is_valid_ip
+from .validip import is_valid_ip
 import ipaddress
 
 def dailyTopDomains(d, owndomain, omit):
