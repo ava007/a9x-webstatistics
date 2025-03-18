@@ -238,6 +238,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         if '95' in efeature:
             h += '<div class="row pt-3">'
             h += dailyTopDomains(d, owndomain, omit)
+            h += dailyTopUrl(d, owndomain, omit)
             h += '</div>'
         
 
