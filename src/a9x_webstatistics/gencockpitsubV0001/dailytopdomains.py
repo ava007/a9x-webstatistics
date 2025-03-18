@@ -31,7 +31,7 @@ def dailyTopDomains(d, owndomain, omit):
     return ''
   # Top 10 Domains on daily basis
   # row needs to be decleared in the calling function h+= '<div class="row pt-3">'
-  h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
+  h = "\n" + '<div class="col-md-12 col-lg-6 col-xxl-6">'
   h += '<h3 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h3>'
   h += '<p class="card-text">User hits refering to external domain:</p>'
   h += '<table class="table">'
