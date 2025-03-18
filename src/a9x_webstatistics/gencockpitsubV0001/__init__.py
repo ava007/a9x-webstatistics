@@ -1,5 +1,6 @@
 from .cockpitlanguages import cockpitLanguages
 from .dailyHits import dailyHitsVisitsChart
+from .dailytopdomains import dailyTopDomains
 from .monthlyHits import monthlyHitsVisitsChart
 from .externalfriends import externalFriends
 from .genheader import genHeader
