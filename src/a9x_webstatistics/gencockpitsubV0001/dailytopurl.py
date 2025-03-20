@@ -33,7 +33,7 @@ def dailyTopUrl(d, owndomain, omit):
     h += '<h3>Top 10 URL</h3>'
     h += '<p>User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
     h += '<table class="table">'
-    h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
+    h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
     for k, v in sorted(topurl.items(), key=itemgetter(1), reverse=True):
         if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
