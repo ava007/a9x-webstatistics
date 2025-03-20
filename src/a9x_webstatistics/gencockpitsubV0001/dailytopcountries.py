@@ -4,16 +4,15 @@ from .validip import is_valid_ip
 
 def dailyTopCountries(d, owndomain, omit):
     tcountries = {}
+    tcnt = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # consider only days:
         if len(k) < 8:
             continue
-        if any(oelm in k for oelm in omit):  # don not show parts of url 
-            continue
         # show at max 31 days:
-        if topurlcnt >= 31:
+        if tcnt >= 31:
             break
-        topurlcnt += 1
+        tcnt += 1
 
         if 'countryHits' in d['v0001']['days'][k]['user']:
             for co,cv in d['v0001']['days'][k]['user']['countryHits'].items():
