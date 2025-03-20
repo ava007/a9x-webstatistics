@@ -39,7 +39,7 @@ def dailyTopDomains(d, owndomain, omit):
     h += '<h3>Top 10 Domains for the last ' + str(day_usr_i) + ' days</h3>'
     h += '<p>User hits refering to external domain:</p>'
     h += '<table class="table">'
-    h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
+    h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
     for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
         if owndomain in k:
