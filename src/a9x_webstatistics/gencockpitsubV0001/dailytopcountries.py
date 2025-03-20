@@ -2,7 +2,7 @@
 from operator import itemgetter
 from .validip import is_valid_ip
 
-def dailyTopUrl(d, owndomain, omit):
+def dailyTopCountries(d, owndomain, omit):
     tcountries = {}
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # consider only days:
