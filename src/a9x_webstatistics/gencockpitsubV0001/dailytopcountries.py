@@ -25,7 +25,7 @@ def dailyTopCountries(d, owndomain, omit):
     
     h = "\n" + '<div class="col-md-12 col-lg-6 col-xxl-6 pt-3">'
     h += '<h3>Top 10 Countries</h3>'
-    h += '<p>User hits from countries for the last ' + str(topurlcnt) + ' days on ' + owndomain + ':'
+    h += '<p>User hits from countries for the last ' + str(tcnt) + ' days on ' + owndomain + ':'
     h += '<table class="table">'
     h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
