@@ -33,9 +33,7 @@ def performance(d):
     h = ''
     if time_count > 0 or cache_miss > 0:                
         h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
-        h += '<div class="card mt-2"><div class="card-body">'
         h += '<h3 class="card-title">Performance for the last ' + str(ic) + ' days</h3>'
-        #h += '<p class="card-text">User hits refering to external domain:</p>'
         h += '<table class="table">'
         if time_count > 0:
             h += '<tr>'
@@ -46,5 +44,5 @@ def performance(d):
             h += '<td>Cache Hit Ratio:</td><td>{:.0%}</td>'.format(cache_hit / (cache_hit+cache_miss+cache_unknown) )
             h += '</tr>'
         h += '</table>'
-        h += '</div></div></div>'
+        h += '</div>'
     return h
