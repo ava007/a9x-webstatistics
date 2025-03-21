@@ -108,11 +108,11 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '<a href="#hdMonth" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
         h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
         h += '</div></div>'
-        h += "\n" + '<div class="row pt-3"><div class="col-12">'
+        h += "\n" + '<div class="row pt-4"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
         h += "<p><small>Last record included in statistic: <script>document.write(DT2Locale('" + d['timelastrec'] + "'));</script></small></p>"
         h += '</div></div>'
-        h += "\n" + '<div class="row"><div class="col-12">'
+        h += "\n" + '<div class="row pt-4"><div class="col-12">'
         h += '<h3>Hits and Visits for the last 31 days</h3>'
         h += '<div><canvas id="myChart"></canvas></div>'
         h += '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
@@ -173,13 +173,13 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += cockpitLanguages(d, owndomain)
         h += '</div>'
 
-        h += '<div class="row pt-3">'
         # cache, response_time:
-        h += performance(d)
-        h += '</div>'
+        h += '<div class="row pt-3">' + performance(d) + '</div>'
        
         # top external landings (friends):
+        h += '<div class="row pt-3">'
         h += externalFriends(d, owndomain, omit)
+        h += '</div>'
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
