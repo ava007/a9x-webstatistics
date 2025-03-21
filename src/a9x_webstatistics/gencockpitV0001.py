@@ -150,104 +150,33 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '</div></div>' + "\n\n"  # end of col and row
 
         if '93' in efeature:
+            h += '<div class="row pt-3">'
             h += dailyHitsVisitsChart(d, owndomain, omit)
+            h += '</div>'
 
+        h += '<div class="row pt-3">'
         h += navChord(d, owndomain, omit)
+        h += '</div>'
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
-        # Top 10 Domains on daily basis
-        h += '<div class="row pt-3"><div class="col-md-12 col-lg-6 col-xxl-6">'
-        h += '<div class="card mt-2"><div class="card-body">'
-        h += '<h3 class="card-title">Top 10 Domains for the last ' + str(day_usr_i) + ' days</h3>'
-        h += '<p class="card-text">User hits refering to external domain:</p>'
-        h += '<table class="table">'
-        h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
-        i = 1
-        for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
-             if owndomain in k:
-                 continue
-             # prevent IP or domains with special characters:
-             if any( x in k for x in {'[', ']', ':'} ):
-                 continue
-             if is_valid_ip(k) == True:  # to suppress ip; ip is not a domain anyway    
-                 continue
-             h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-             i += 1
-             if i > 10:
-                 break
-        h += '</table>'
-        h += '</div></div></div>'  + "\n"   # end of col and card
-
-        # Top Countries
-        if len(tcountries) > 0:
-            h += '<div class="col-md-12 col-lg-6 col-xxl-6">'
-            h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 Countries for the last ' + str(day_usr_i) + ' days</h3>'
-            h += '<p class="card-text">User hits by country for the last ' + str(day_usr_i) + ' days:</p>'
-            h += '<table class="table">'
-            h += '<thead><tr><th>Rank</th><th scope="col" style="text-align: left">Country</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
-            i = 1
-            for k, v in sorted(tcountries.items(), key=itemgetter(1), reverse=True):
-                h += '<tr><td>' +str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-                i += 1
-                if i > 10:
-                    break
-            h += '</table>'
-            h += '</div></div></div>'    # end of card and col 
-
-        # top urls for the last 31 days:
-        ttopurl = {}
-        topurlcnt = 0
-        for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-            # dont take months in account:
-            if len(k) <= 6:
-                continue
-            if any(oelm in k for oelm in omit):  # don not show parts of url 
-                continue
-            if topurlcnt >= 31:
-                break
-            topurlcnt += 1
-            if 'topUrl' in d['v0001']['days'][k]['user']:
-                for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
-                    # check if url is blocked for display:
-                    if any(oelm in tk for oelm in omit):  # don not show parts of url 
-                        continue
-                    if tk not in ttopurl:
-                        ttopurl[tk] = 0
-                    ttopurl[tk] += tv
-        if len(ttopurl) > 0:
-            h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
-            h += '<div class="card mt-2"><div class="card-body">'
-            h += '<h3 class="card-title">Top 10 URL</h3>'
-            h += '<p class="card-text">User hits for the last ' + str(topurlcnt) + ' days by internal URL on ' + owndomain + ':'
-            h += '<table class="table">'
-            h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">URL</th><th scope="col" style="text-align: right">Hit Count</th></tr></thead>'
-            i = 1
-            for k, v in sorted(ttopurl.items(), key=itemgetter(1), reverse=True):
-                if not k.endswith('.css') and not k.endswith('.json') and not k.endswith('.ico'):
-                    h += '<tr><td>' + str(i) + '.</td><td>' + str(k) + '</td><td style="text-align: right">' + str(format(v, ',')) + '</td></tr>'
-                    i += 1
-                if i > 10:
-                    break
-            h += '</table>'
-            h += '</div></div></div>'   # end of card and col
-
         # row for top domains and urls:
-        if '95' in efeature:
-            h += '<div class="row pt-3">'
-            h += dailyTopDomains(d, owndomain, omit)
-            h += dailyTopUrl(d, owndomain, omit)
-            h += dailyTopCountries(d, owndomain, omit)
-            h += '</div>'
+        h += '<div class="row pt-3">'
+        h += dailyTopDomains(d, owndomain, omit)
+        h += dailyTopUrl(d, owndomain, omit)
+        h += dailyTopCountries(d, owndomain, omit)
+        h += '</div>'
         
-
+        h += '<div class="row pt-3">'
         # accepted language by browser:
         h += cockpitLanguages(d, owndomain)
-        
+        h += '</div>'
+
+        h += '<div class="row pt-3">'
         # cache, response_time:
         h += performance(d)
+        h += '</div>'
        
         # top external landings (friends):
         h += externalFriends(d, owndomain, omit)
