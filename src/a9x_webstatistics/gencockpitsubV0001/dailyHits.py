@@ -50,7 +50,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>Daily User Hits and Visits</h3>'
     h += '<p>User hits and visits for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
-    h += '<div id="dhvchart-container"></div>'
+    h += '<div id="dhvchart-container"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
@@ -69,7 +69,15 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'return entry;'
     h += '});'
 
-    #// Stack generator
+    # Sort the categories within each date by count in ascending order
+    h += 'transformedData.forEach(entry => {'
+    h += 'const sortedCategories = categories.slice().sort((a, b) => entry[a] - entry[b]);'
+    h += 'const sortedEntry = {};'
+    h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
+    h += 'Object.assign(entry, sortedEntry);'
+    h += '});'
+
+    # Stack generator
     h += 'const stack = d3.stack().keys(categories);'
     h += 'const series = stack(transformedData);'
     
