@@ -8,6 +8,7 @@ from .externalfriends import externalFriends
 from .genheader import genHeader
 from .makenodeslinks import makeNodesLinks
 from .makenodeslinks import makeNodesLinks2
+from .monthlytopdomains import monthlyTopDomains
 from .navchart import navchart
 from .navchartsankey import navchartsankey
 from .navtangledtree import navchartTangledtree
