@@ -75,6 +75,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const sortedEntry = {};'
     h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
     h += 'Object.assign(entry, sortedEntry);'
+    #h += 'console.log("sortedEntry: ", sortedEntry, entry);'
     h += '});'
 
     # Stack generator
