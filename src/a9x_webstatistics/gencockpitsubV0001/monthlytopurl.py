@@ -2,7 +2,7 @@
 from operator import itemgetter
 from .validip import is_valid_ip
 
-def montlyTopUrl(d, owndomain, omit):
+def monthlyTopUrl(d, owndomain, omit):
     topurlcnt = 0
     topurl = {}
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
