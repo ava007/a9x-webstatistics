@@ -181,6 +181,11 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += externalFriends(d, owndomain, omit)
         h += '</div>'
 
+        h += '<h2 id="LongTerm">Long Term statistics for ' + owndomain + '</h2>'
+        h += '<div class="row pt-3">' + monthlyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
+        h += '<div class="row pt-3">' + monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
+
+
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
             curYearMonth = k[0:6]
@@ -414,9 +419,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += "</script>"
             h += '</div></div>' + "\n\n"  # end of col and row
 
-            h += '<div class="row pt-3">' + monthlyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
-            h += '<div class="row pt-3">' + monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
-
+         
             # Top 10 Domains on monthly basis
             tsource = {}
             for y in d['v0001']['days']:
