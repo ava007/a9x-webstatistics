@@ -42,8 +42,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
-    h += '<h3>User Hits and Visits by Month</h3>'
-    h += '<p>User hits and visits for the last ' + str(mcount) + ' days on ' + owndomain + ':</p>'
+    h += '<h3>User Hits and Visits Long Term (> one month)</h3>'
+    h += '<p>User hits and visits on ' + owndomain + ':</p>'
     h += '<div id="mhvchart-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
