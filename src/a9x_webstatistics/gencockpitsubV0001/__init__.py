@@ -10,6 +10,7 @@ from .makenodeslinks import makeNodesLinks
 from .makenodeslinks import makeNodesLinks2
 from .monthlytopdomains import monthlyTopDomains
 from .monthlytopurl import monthlyTopUrl
+from .monthlytopcountries import monthlyTopCountries
 from .navchart import navchart
 from .navchartsankey import navchartsankey
 from .navtangledtree import navchartTangledtree
