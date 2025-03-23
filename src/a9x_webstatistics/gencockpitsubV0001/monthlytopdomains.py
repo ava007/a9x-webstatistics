@@ -7,7 +7,7 @@ def monthlyTopDomains(d, owndomain, omit):
     tsource = {}
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # consider monthy only:
-        if len(k) != 6:
+        if len(k) > 6:
             continue
         if any(oelm in k for oelm in omit):  # don not show parts of url 
             continue
