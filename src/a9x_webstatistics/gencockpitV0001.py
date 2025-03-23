@@ -177,14 +177,12 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '<div class="row pt-3">' + performance(d) + '</div>'
        
         # top external landings (friends):
-        h += '<div class="row pt-3">'
-        h += externalFriends(d, owndomain, omit)
-        h += '</div>'
+        h += '<div class="row pt-3">' +externalFriends(d, owndomain, omit) + '</div>'  + "\n"
 
         h += '<h2 id="LongTerm">Long Term statistics for ' + owndomain + '</h2>'
         h += '<div class="row pt-3">' + monthlyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
         h += '<div class="row pt-3">' + monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
-
+        h += '<div class="row pt-3">' + monthlyTopUrl(d, owndomain, omit) + '</div>' + "\n"
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
