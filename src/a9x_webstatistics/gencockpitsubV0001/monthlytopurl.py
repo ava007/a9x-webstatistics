@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from .validip import is_valid_ip
 
 def monthlyTopUrl(d, owndomain, omit):
-    topurlcnt = 0
     topurl = {}
 
     # calc month preceeding timelastrec:
@@ -15,12 +14,12 @@ def monthlyTopUrl(d, owndomain, omit):
       
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         curPeriodYM = k[0:6]
-        if curPeriodYM > maxPeriodYM:
+        if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
             continue
         if any(oelm in k for oelm in omit):  # don not show parts of url 
             continue
         # show at max 31 days:
-        if topurlcnt >= 50:
+        if len(topurl) >= 50:
             break
    
         # top 10 source domains:
@@ -31,7 +30,6 @@ def monthlyTopUrl(d, owndomain, omit):
                     continue
                 if tk not in topurl:
                     topurl[tk] = 0
-                    topurlcnt += 1
                 topurl[tk] += tv
    
     if len(topurl) == 0:
