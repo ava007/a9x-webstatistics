@@ -149,41 +149,38 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '</script>'
         h += '</div></div>' + "\n\n"  # end of col and row
 
-        if '93' in efeature:
-            h += '<div class="row pt-3">'
-            h += dailyHitsVisitsChart(d, owndomain, omit)
-            h += '</div>'
+        h += '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
 
-        h += '<div class="row pt-3">' + navChord(d, owndomain, omit) + '</div>' + "\n"
+        h += '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
         
         # row for top domains and urls:
-        h += '<div class="row pt-3">'
+        h += '<div class="row pt-4">'
         h += dailyTopDomains(d, owndomain, omit)
         h += dailyTopUrl(d, owndomain, omit)
         h += dailyTopCountries(d, owndomain, omit)
         h += '</div>'
 
         # accepted languages by browser:
-        h += '<div class="row pt-3">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
+        h += '<div class="row pt-4">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
 
         # cache, response_time:
-        h += '<div class="row pt-3">' + performance(d) + '</div>'
+        h += '<div class="row pt-4">' + performance(d) + '</div>'
        
         # top external landings (friends):
-        h += '<div class="row pt-3">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
+        h += '<div class="row pt-4">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
 
-        h += '<h2 id="LongTerm">Long Term statistics for ' + owndomain + '</h2>'
+        h += '<h2 id="LongTerm" class="pt-4">Long Term statistics for ' + owndomain + '</h2>'
         
-        h += '<div class="row pt-3">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
+        h += '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
         h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
         
-        h += '<div class="row pt-3">' + monthlyTopUrl(d, owndomain, omit) + "\n"
+        h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit) + "\n"
         h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
 
-        h += '<div class="row pt-3">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
+        h += '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
