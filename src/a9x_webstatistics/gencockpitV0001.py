@@ -154,9 +154,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
             h += dailyHitsVisitsChart(d, owndomain, omit)
             h += '</div>'
 
-        h += '<div class="row pt-3">'
-        h += navChord(d, owndomain, omit)
-        h += '</div>'
+        h += '<div class="row pt-3">' + navChord(d, owndomain, omit) + '</div>' + "\n"
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
