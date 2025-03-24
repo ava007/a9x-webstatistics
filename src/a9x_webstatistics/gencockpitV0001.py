@@ -165,17 +165,15 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += dailyTopUrl(d, owndomain, omit)
         h += dailyTopCountries(d, owndomain, omit)
         h += '</div>'
-        
-        h += '<div class="row pt-3">'
-        # accepted language by browser:
-        h += cockpitLanguages(d, owndomain)
-        h += '</div>'
+
+        # accepted languages by browser:
+        h += '<div class="row pt-3">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
 
         # cache, response_time:
         h += '<div class="row pt-3">' + performance(d) + '</div>'
        
         # top external landings (friends):
-        h += '<div class="row pt-3">' +externalFriends(d, owndomain, omit) + '</div>'  + "\n"
+        h += '<div class="row pt-3">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
 
         h += '<h2 id="LongTerm">Long Term statistics for ' + owndomain + '</h2>'
         
@@ -184,6 +182,8 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         
         h += '<div class="row pt-3">' + monthlyTopUrl(d, owndomain, omit) + "\n"
         h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
+
+        h += '<div class="row pt-3">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
