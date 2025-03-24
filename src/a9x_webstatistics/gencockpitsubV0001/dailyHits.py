@@ -111,7 +111,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.append("svg")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
-    h += '.attr("viewBox", [0, 0, width, height]);' + "\n"
+    h += '.attr("viewBox", [0, 0, width, height])'
+    h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
 
     # Add bars
     h += 'svg.append("g")'
