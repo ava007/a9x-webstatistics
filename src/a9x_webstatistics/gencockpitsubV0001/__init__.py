@@ -16,5 +16,6 @@ from .navchartsankey import navchartsankey
 from .navtangledtree import navchartTangledtree
 from .navtangledtree2 import navchartTangledtree2
 from .navChord import navChord
+from .nav_chord_longterm import navChordLongterm
 from .validip import is_valid_ip
 from .performance import performance
