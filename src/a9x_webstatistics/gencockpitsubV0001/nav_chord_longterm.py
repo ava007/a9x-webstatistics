@@ -35,7 +35,7 @@ def navChordLongterm(d, owndomain, omit):
                     continue
 
                 data,cnt = addLinkChord(data, e, cnt, owndomain)
-                if cnt > 30:  # top 30 entries
+                if cnt > 30:  # top 30 entry domains
                     break
 
              # internal traffic only
