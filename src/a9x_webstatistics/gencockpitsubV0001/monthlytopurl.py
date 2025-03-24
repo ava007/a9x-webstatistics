@@ -11,7 +11,7 @@ def monthlyTopUrl(d, owndomain, omit):
     tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
     tlr_first = tlr.replace(day=1)
     tlr_last_period = tlr_first - timedelta(days=1)
-    maxPeriodYM = tlr_last_month.strftime("%Y%m")
+    maxPeriodYM = tlr_last_period.strftime("%Y%m")
       
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         curPeriodYM = k[0:6]
