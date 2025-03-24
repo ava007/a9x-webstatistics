@@ -124,7 +124,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'svg.append("path")'
     h += '.datum(rdata)' # Bind data properly
     h += '.attr("fill", "none")'
-    h += '.attr("stroke", "grey")'
+    h += '.attr("stroke", "lightgrey")'
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
 
@@ -144,7 +144,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Add points to the red and grey lines
     h += 'addPoints(vdata, "red");'
-    h += 'addPoints(rdata, "grey");'
+    h += 'addPoints(rdata, "lightgrey");'
 
     # X-Axis
     h += 'svg.append("g")'
