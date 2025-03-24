@@ -86,8 +86,8 @@ def navChordLongterm(d, owndomain, omit):
 
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;' + "\n"
-    h += 'const svg = d3.select("#navchart-chord-container").append("svg")'
-    h += '.attr("id","tt20250225")'
+    h += 'const svg = d3.select("navchartlongterm-chord-container").append("svg")'
+    h += '.attr("id","tt20250324")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
     h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
