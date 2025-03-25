@@ -6,23 +6,20 @@ from .validip import is_valid_ip
 def monthlyTopUrl(d, owndomain, omit):
     topurl = {}
 
-    # calc month preceeding timelastrec:
+    # calc month preceeding to timelastrec:
     tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
-    tlr_first = tlr.replace(day=1)
-    tlr_last_period = tlr_first - timedelta(days=1)
+    tlr_first_day = tlr.replace(day=1)
+    tlr_last_period = tlr_first_day - timedelta(days=1)
     maxPeriodYM = tlr_last_period.strftime("%Y%m")
       
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         curPeriodYM = k[0:6]
         if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
             continue
-        if any(oelm in k for oelm in omit):  # don not show parts of url 
-            continue
-        # show at max 31 days:
-        if len(topurl) >= 50:
+        # consider the first 200 urls at first step:
+        if len(topurl) >= 200:
             break
    
-        # top 10 source domains:
         if 'topUrl' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
                 # check if url is blocked for display:
