@@ -60,11 +60,11 @@ def navChordLongterm(d, owndomain, omit):
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>User Navigation - Long Term</h3>'
     h += '<p>This chart shows the user navigation on ' + owndomain + ':</p>'
-    h += '<div id="navchartlongterm-chord-container"></div>'
+    h += '<div id="navchart-lt-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
     h += 'function renderChart(data, options = {}) {'
-    h += 'const rect = document.getElementById("navchartlongterm-chord-container").getBoundingClientRect();'
+    h += 'const rect = document.getElementById("navchart-lt-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
     h += 'const width = Math.round(rect.width) - margins.left - margins.right;'
     h += 'const height = Math.round(width*0.9);'
@@ -86,7 +86,7 @@ def navChordLongterm(d, owndomain, omit):
 
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;' + "\n"
-    h += 'const svg = d3.select("navchartlongterm-chord-container").append("svg")'
+    h += 'const svg = d3.select("navchart-lt-container").append("svg")'
     h += '.attr("id","tt20250324")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
