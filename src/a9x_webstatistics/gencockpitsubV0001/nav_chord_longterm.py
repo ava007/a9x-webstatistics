@@ -86,7 +86,7 @@ def navChordLongterm(d, owndomain, omit):
 
     h += 'const totalWidth = width + margins.left + margins.right;'
     h += 'const totalHeight = height;' + "\n"
-    h += 'const svg = d3.select("navchart-lt-container").append("svg")'
+    h += 'const svg = d3.select("#navchart-lt-container").append("svg")'
     h += '.attr("id","tt20250324")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
