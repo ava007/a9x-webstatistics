@@ -16,16 +16,25 @@ def monthlyTopUrl(d, owndomain, omit):
         curPeriodYM = k[0:6]
         if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
             continue
+
+        # skip irrelvent files:
+        if k.endswith('.css') or k.endswith('.json') or k.endswith('.ico') or owndomain in k:
+            continue
+            
         # consider the first 200 urls at first step:
         if len(topurl) >= 200:
-            break
+            continue
    
         if 'topUrl' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
+                    
                 if tk not in topurl:
+                    # consider the first 200 urls at first step:
+                    if len(topurl) >= 200:
+                        continue
                     topurl[tk] = 0
                 topurl[tk] += tv
    
