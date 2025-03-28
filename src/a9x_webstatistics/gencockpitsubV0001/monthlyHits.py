@@ -44,7 +44,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>User Hits and Visits Long Term (> one month)</h3>'
     h += '<p>User hits and visits on ' + owndomain + ':</p>'
-    h += '<div id="mhvchart-container"></div>'
+    h += '<div id="mhvchart-container"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
@@ -178,7 +178,30 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.style("top", `${event.pageY - 10}px`)'
     h += '.style("left", `${event.pageX + 10}px`);'
     h += '})'
-    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });'
+    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
+
+
+    # Add legend
+    h += 'const legend = svg.append("g")'
+    h += '.attr("transform", `translate(${width - margins.right - 120}, ${margins.top})`);'
+
+    h += 'const legendItems = legend.selectAll(".legend-item")'
+    h += '.data(categories);'
+
+    h += 'const legendItem = legendItems.enter().append("g")'
+    h += '.attr("class", "legend-item")'
+    h += '.attr("transform", (d, i) => `translate(0, ${i * 20})`);'
+
+    h += 'legendItem.append("rect")'
+    h += '.attr("width", 18)'
+    h += '.attr("height", 18)'
+    h += '.attr("fill", d => color(d));'
+
+    h += 'legendItem.append("text")'
+    h += '.attr("x", 24)'
+    h += '.attr("y", 9)'
+    h += '.attr("dy", "0.35em")'
+    h += '.text(d => d);'
     
     #h += 'console.log("Transformed Data:", transformedData);'
     #h += 'console.log("Stacked Data:", stack(transformedData));'
