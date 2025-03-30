@@ -12,11 +12,13 @@ def monthlyTopDomains(d, owndomain, omit):
     maxPeriodYM = tlr_last_period.strftime("%Y%m")
     
     cnt = 0
+    startPeriod = None
+    endPeriod = None
     tsource = {}
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         curPeriodYM = k[0:6]
 
-        # skipp current month data
+        # skip current month data
         if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
             continue
  
@@ -34,7 +36,14 @@ def monthlyTopDomains(d, owndomain, omit):
                     if len(tsource) > 40:
                         continue
                     tsource[e['s']] = 0
+       
                 tsource[e['s']] += e['c']
+                
+                # record start / end period to be displayed on chart:
+                if startPeriod is None or curPeriod < startPeriod:
+                    startPeriod = curPeriodYM
+                if endPeriod is None:
+                    endPeriod = curPeriodYM
     
     if len(tsource) == 0:
         return ''
@@ -42,8 +51,8 @@ def monthlyTopDomains(d, owndomain, omit):
     # Top 10 Domains on daily basis
     # row needs to be decleared in the calling function h+= '<div class="row pt-3">'
     h = "\n" + '<div class="col-md-12 col-lg-6 col-xxl-6">'
-    h += '<h3>Top 10 Domains for the last ' + str(cnt) + ' months.</h3>'
-    h += '<p>User hits refering to external domains:</p>'
+    h += '<h3>Top 10 Domains - Long Term</h3>'
+    h += '<p>User hits refering to external domains from ' + startPeriod ' + ' to ' + endPeriod + ':</p>'
     h += '<table class="table">'
     h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
