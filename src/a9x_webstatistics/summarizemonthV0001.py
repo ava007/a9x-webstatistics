@@ -124,7 +124,7 @@ def sumMonthV0001(d, statfile):
                     # take to top 20 external:
                     cnt = 0
                     for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
-                        if e['t'] != 'e':  # external only
+                        if 'p' not in e or e['p'] != 'e':  # not external nav
                             continue
                         print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
@@ -135,7 +135,7 @@ def sumMonthV0001(d, statfile):
                     # take to top 50 internal:
                     cnt = 0
                     for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
-                        if e['t'] == 'e':  # omit external
+                        if 'p' in e and e['p'] == 'e':  # omit external
                             continue
                         print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
