@@ -18,7 +18,7 @@ def monthlyTopUrl(d, owndomain, omit, verbosity):
             continue
     
         if 'topUrl' in d['v0001']['days'][k]['user']:
-            for tk, tv in sorted(d['v0001']['days'][k]['user']['topUrl'].items(), key=itemgetter(1), reserve=True):
+            for tk, tv in sorted(d['v0001']['days'][k]['user']['topUrl'].items(), key=itemgetter(1), reverse=True):
                 if verbosity == 99:
                     print("monthlytopurl: k: " + str(k) + " tk: " + str(tk)  + " tv: " + str(tv) + " curPeriodYM: " + str(curPeriodYM) ) 
 
