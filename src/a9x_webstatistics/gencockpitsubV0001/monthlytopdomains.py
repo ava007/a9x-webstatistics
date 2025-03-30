@@ -33,7 +33,7 @@ def monthlyTopDomains(d, owndomain, omit):
                 if e['t'] in omit:
                     continue
                 if e['s'] not in tsource:
-                    if len(tsource) > 40:
+                    if len(tsource) > 80:
                         continue
                     tsource[e['s']] = 0
        
