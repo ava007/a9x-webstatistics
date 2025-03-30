@@ -405,6 +405,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--outfile", help="html file that contains html cockpit", default="webstat.html")
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     parser.add_argument("-t", "--omit", help="omits path in generated html-cockpit (can be used multiple times)", action="append")
+    parser.add_argument("-v", "--verbose", help="increase output verbosity, 0=none, 1=increased verbosity", default="0")
     parser.add_argument("-ef", "--efeature", help="use experimental feature number, 0=none, 1-99=feature (can be used multiple times)", action="append", type=str)
     args, unknown = parser.parse_known_args()
 
@@ -417,6 +418,6 @@ if __name__ == "__main__":
     with open(args.infile) as json_file:
         d = json.load(json_file) 
         if 'v0001' in d:
-            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omit=args.omit, efeature=args.efeature)
+            runGenCockpitV0001(infile=args.infile, outfile=args.outfile, verbosity=args.verbose, domain=args.domain, omit=args.omit, efeature=args.efeature)
         else:
             runGenCockpit(infile=args.infile, outfile=args.outfile, domain=args.domain)
