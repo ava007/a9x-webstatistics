@@ -16,17 +16,18 @@ def monthlyTopUrl(d, owndomain, omit, verbosity):
         curPeriodYM = k[0:6]
         if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
             continue
-
-        # skip irrelvent files:
-        if v.endswith('.css') or v.endswith('.json') or v.endswith('.ico') or owndomain in v:
-            continue
-  
+    
         if 'topUrl' in d['v0001']['days'][k]['user']:
             for tk, tv in sorted(d['v0001']['days'][k]['user']['topUrl'].items(), key=itemgetter(1), reserve=True):
                 if verbosity == 99:
                     print("monthlytopurl: k: " + str(k) + " tk: " + str(tk)  + " tv: " + str(tv) + " curPeriodYM: " + str(curPeriodYM) ) 
+
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
+                    continue
+
+                # skip irrelevant files:
+                if tk.endswith('.css') or tk.endswith('.json') or tk.endswith('.ico') or owndomain in tk:
                     continue
                     
                 if tk not in topurl:
