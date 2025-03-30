@@ -10,7 +10,7 @@ def sumMonthV0001(d, statfile):
     # 2024.08.30 => 2024.06
     # 2024.08.31 => 2024.07
 
-    sumUntilDay = datetime.now() - timedelta(days=62)
+    sumUntilDay = datetime.now() - timedelta(days=32)
     sumTill = sumUntilDay.strftime("%Y%m")
     print("sumMonthV0001: accumulate including month: "  + sumTill)   # 202312
     
