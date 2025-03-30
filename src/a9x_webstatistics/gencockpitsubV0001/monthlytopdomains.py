@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 from operator import itemgetter
+from datetime import datetime, timedelta
 from .validip import is_valid_ip
 
 def monthlyTopDomains(d, owndomain, omit):
+    
+    # calc month preceeding to timelastrec:
+    tlr = datetime.strptime(d['timelastrec'] + " +0000","%Y%m%d%H%M%S %z")
+    tlr_first_day_of_month = tlr.replace(day=1)
+    tlr_last_period = tlr_first_day_of_month - timedelta(days=1)
+    maxPeriodYM = tlr_last_period.strftime("%Y%m")
+    
     cnt = 0
     tsource = {}
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
-        # consider monthy only:
-        if len(k) > 6:
-            continue
-        if any(oelm in k for oelm in omit):  # don not show parts of url 
-            continue
-        # show at max 31 days:
-        if cnt >= 20:
-            break
-        cnt += 1
+        curPeriodYM = k[0:6]
 
+        # skipp current month data
+        if len(curPeriodYM) == 6 and curPeriodYM > maxPeriodYM:
+            continue
+ 
         # top 10 source domains:
         if 'nav' in d['v0001']['days'][k]['user']:
             # sort by count e['c'] desc:
@@ -27,6 +31,8 @@ def monthlyTopDomains(d, owndomain, omit):
                 if e['t'] in omit:
                     continue
                 if e['s'] not in tsource:
+                    if len(tsource) > 40:
+                        continue
                     tsource[e['s']] = 0
                 tsource[e['s']] += e['c']
     
