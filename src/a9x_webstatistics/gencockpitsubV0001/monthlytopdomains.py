@@ -26,7 +26,7 @@ def monthlyTopDomains(d, owndomain, omit):
         if 'nav' in d['v0001']['days'][k]['user']:
             # sort by count e['c'] desc:
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=lambda x: x['c'], reverse=True):
-                if 'p' not in e:   # internal links
+                if 'e' not in e['p']:   # internal links
                     continue
                 if e['s'] in omit:
                     continue
