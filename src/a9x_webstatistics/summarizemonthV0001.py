@@ -120,22 +120,28 @@ def sumMonthV0001(d, statfile):
                 # nav   - nav is stored on the last day of month
                 if 'nav' in dtmp['v0001']['days'][x]['user']:
                     if 'nav' not in d['v0001']['days'][recMonth]['user']:
-                        d['v0001']['days'][recMonth]['user']['nav'] = dtmp['v0001']['days'][x]['user']['nav']
-                        
-                # navigation:
-                #if 'navigation' in dtmp['v0001']['days'][x]['user']:
-                #    if 'navigation' not in d['v0001']['days'][recMonth]['user']:
-                #        d['v0001']['days'][recMonth]['user']['navigation'] = {}
-                #    for nk, nv in sorted(dtmp['v0001']['days'][x]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-                #        if nk[0:7] == 'https://':
-                #            continue
-                #        if nk[0:6] == 'http://':
-                #            continue
+                        d['v0001']['days'][recMonth]['user']['nav'] = []
+                    # take to top 20 external:
+                    cnt = 0
+                    for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+                        if e['t'] != 'e':  # external only
+                            continue
+                        print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
+                        d['v0001']['days'][recMonth]['user']['nav'].append(e)
+                        cnt += 1
+                        if cnt > 20
+                            break
 
-                #      if nk in d['v0001']['days'][recMonth]['user']['navigation']:
-                #            d['v0001']['days'][recMonth]['user']['navigation'][nk] += nv
-                #        else:
-                #            d['v0001']['days'][recMonth]['user']['navigation'][nk] = nv
+                    # take to top 50 internal:
+                    cnt = 0
+                    for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+                        if e['t'] == 'e':  # omit external
+                            continue
+                        print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
+                        d['v0001']['days'][recMonth]['user']['nav'].append(e)
+                        cnt += 1
+                        if cnt > 50
+                            break
 
                 # language - optional KPI:
                 if 'language' in dtmp['v0001']['days'][x]['user']:
