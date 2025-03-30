@@ -3,7 +3,7 @@ from operator import itemgetter
 from datetime import datetime, timedelta
 from .validip import is_valid_ip
 
-def monthlyTopUrl(d, owndomain, omit):
+def monthlyTopUrl(d, owndomain, omit, verbosity):
     topurl = {}
 
     # calc month preceeding to timelastrec:
@@ -27,6 +27,8 @@ def monthlyTopUrl(d, owndomain, omit):
    
         if 'topUrl' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
+                 if verbosity == 99:
+                    print("monthlytopurl: tk: " + str(tk)  + " tv: " + str(tv)) 
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
                     continue
