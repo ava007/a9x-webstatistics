@@ -14,7 +14,7 @@ class TestGencockpit010(unittest.TestCase):
         print(cmddata.stdout) 
         
         # calling runws expecting return 0
-        assert runGenCockpitV0001(infile="webstat.json",outfile="webstat.html",verbose=99,domain="https://logikfabrik.com", omit='', efeature='') == 0
+        assert runGenCockpitV0001(infile="webstat.json",outfile="webstat.html",verbosity=99,domain="https://logikfabrik.com", omit='', efeature='') == 0
         with open('webstat.html') as f:  
             file_data = f.read()  
         print(str(file_data))
