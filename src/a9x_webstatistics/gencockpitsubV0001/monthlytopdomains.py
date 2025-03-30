@@ -40,7 +40,7 @@ def monthlyTopDomains(d, owndomain, omit):
                 tsource[e['s']] += e['c']
                 
                 # record start / end period to be displayed on chart:
-                if startPeriod is None or curPeriod < startPeriod:
+                if startPeriod is None or curPeriodYM < startPeriod:
                     startPeriod = curPeriodYM
                 if endPeriod is None:
                     endPeriod = curPeriodYM
@@ -52,7 +52,7 @@ def monthlyTopDomains(d, owndomain, omit):
     # row needs to be decleared in the calling function h+= '<div class="row pt-3">'
     h = "\n" + '<div class="col-md-12 col-lg-6 col-xxl-6">'
     h += '<h3>Top 10 Domains - Long Term</h3>'
-    h += '<p>User hits refering to external domains from ' + startPeriod ' + ' to ' + endPeriod + ':</p>'
+    h += '<p>User hits refering to external domains from ' + startPeriod  + ' to ' + endPeriod + ':</p>'
     h += '<table class="table">'
     h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
