@@ -129,7 +129,7 @@ def sumMonthV0001(d, statfile):
                         print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
                         cnt += 1
-                        if cnt > 20
+                        if cnt > 20:
                             break
 
                     # take to top 50 internal:
