@@ -27,7 +27,7 @@ def monthlyTopUrl(d, owndomain, omit, verbosity):
    
         if 'topUrl' in d['v0001']['days'][k]['user']:
             for tk, tv in d['v0001']['days'][k]['user']['topUrl'].items():
-                 if verbosity == 99:
+                if verbosity == 99:
                     print("monthlytopurl: tk: " + str(tk)  + " tv: " + str(tv)) 
                 # check if url is blocked for display:
                 if any(oelm in tk for oelm in omit):  # don not show parts of url 
