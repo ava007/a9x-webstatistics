@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
 from .gencockpitsubV0001 import *
     
-def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
+def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
     owndomain = domain.replace('http://','')
     owndomain = owndomain.replace('https://','')
@@ -177,7 +177,7 @@ def runGenCockpitV0001(infile, outfile, domain, omit, efeature):
         h += '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
         h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
         
-        h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit) + "\n"
+        h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
         h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
 
         h += '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
@@ -574,4 +574,4 @@ if __name__ == "__main__":
     if args.omit is None:
         args.omit = []        
 
-    runGenCockpitV0001(infile=args.infile, outfile=args.outfile, domain=args.domain, omit=args.omit)
+    runGenCockpitV0001(infile=args.infile, outfile=args.outfile, verbosity=args.verbose, domain=args.domain, omit=args.omit)
