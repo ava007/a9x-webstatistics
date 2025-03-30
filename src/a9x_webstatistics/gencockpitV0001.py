@@ -201,6 +201,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
+            h += '<div class="row pt-4">' 
             h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
@@ -219,9 +220,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
                 if i == 10:
                     break
             h += '</table>'
-            h += '</div></div></div>'   # end of card and col
-        
-        h += '</div>' + "\n\n"   # end of row
+            h += '</div></div></div></div>' + "\n\n"   # end of card and col
  
         h += '<footer class="row bg-light py-4 mt-4">'
         h += '<div class="col"><h2>About</h2>'
