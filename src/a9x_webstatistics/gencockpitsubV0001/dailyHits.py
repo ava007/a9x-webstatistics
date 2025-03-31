@@ -11,6 +11,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     sdata = []
     vdata = []
     days = 0
+    startPeriod = None
+    endPeriod = None
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit months or years:
         if len(k) <= 6:
@@ -42,6 +44,12 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             rdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['robotHits']})
         else:
             rdata.append({'d': k, 'c': 0})
+
+        # record start / end period to be displayed on chart:
+        if startPeriod is None or k < startPeriod:
+            startPeriod = k
+        if endPeriod is None:
+            endPeriod = k
         
     #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
    
@@ -49,7 +57,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>Daily User Hits and Visits</h3>'
-    h += '<p>User hits and visits for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
+    h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
     h += '<div id="dhvchart-container"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
