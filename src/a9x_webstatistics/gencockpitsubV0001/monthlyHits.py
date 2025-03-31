@@ -209,7 +209,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.data(categories);'
     h += '.enter().append("g")'
     h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(${i * 100},0)`);' // Arrange horizontally
+    h += '.attr("transform", (d, i) => `translate(${i * 100},0)`);' # Arrange horizontally
 
     h += 'legendItem.append("rect")'
     h += '.attr("width", 18)'
