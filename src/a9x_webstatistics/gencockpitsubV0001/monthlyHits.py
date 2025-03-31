@@ -71,6 +71,14 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'return entry;'
     h += '});'
 
+    # Sort the categories within each date by count in ascending order
+    h += 'transformedData.forEach(entry => {'
+    h += 'const sortedCategories = categories.slice().sort((a, b) => entry[a] - entry[b]);'
+    h += 'const sortedEntry = {};'
+    h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
+    h += 'Object.assign(entry, sortedEntry);'
+    h += '});'
+
     # Stack generator
     h += 'const stack = d3.stack().keys(categories);'
     h += 'const series = stack(transformedData);'
@@ -152,7 +160,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Add points to the red and grey lines
     h += 'addPoints(vdata, "red");'
-    h += 'addPoints(rdata, "lightgrey");'
+    h += 'addPoints(rdata, "lightgrey");' + "\n"
 
     # X-Axis
     h += 'svg.append("g")'
@@ -161,6 +169,11 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.selectAll("text")'
     h += '.attr("transform", "rotate(45)")'
     h += '.style("text-anchor", "start");' + "\n"
+
+    # Customize y-axis ticks and labels
+    h += 'const yAxis = d3.axisLeft(y)'
+    h += '.ticks(12)'  # Specify the number of ticks you want
+    h += '.tickFormat(d => `${d} units`);' + "\n" #  Format the labels to include "units"
 
     # Y-Axis
     h += 'svg.append("g")'
