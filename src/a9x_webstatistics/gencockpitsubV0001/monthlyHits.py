@@ -201,10 +201,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '})'
     h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
 
-
     # Add legend
     h += 'const legend = svg.append("g")'
-    h += '.attr("transform", `translate(${width - margins.right - 120}, ${margins.top})`);'
+    h += '.attr("transform", `translate(${width / 2}, 20)`);'  # Position at the top center
 
     h += 'const legendItems = legend.selectAll(".legend-item")'
     h += '.data(categories);'
