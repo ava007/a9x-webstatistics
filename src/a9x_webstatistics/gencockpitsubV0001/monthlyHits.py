@@ -203,13 +203,13 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Add legend
     h += 'const legend = svg.append("g")'
-    h += '.attr("transform", `translate(${width / 2}, 20)`);'  # Position at the top center
+    h += '.attr("transform", `translate(${width / 2}, 20)`);' + "\n" # Position at the top center
 
     h += 'const legendItems = legend.selectAll(".legend-item")'
-    h += '.data(categories);'
+    h += '.data(categories)'
     h += '.enter().append("g")'
     h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(${i * 100},0)`);' # Arrange horizontally
+    h += '.attr("transform", (d, i) => `translate(${i * 100},0)`);' + "\n" # Arrange horizontally
 
     h += 'legendItem.append("rect")'
     h += '.attr("width", 18)'
