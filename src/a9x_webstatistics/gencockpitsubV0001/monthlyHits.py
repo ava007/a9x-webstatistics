@@ -62,7 +62,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
 
-    h += '
+    h += '''
     function prepareData(sdata) {
   const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])), d => d.d);
   const dates = Array.from(groupedData.keys()).sort();
@@ -216,7 +216,7 @@ drawChart(svg, { width, height, margins }, { transformedData, dates, categories 
 
 console.log("Transformed Data:", transformedData);
 console.log("Stacked Data:", d3.stack().keys(categories)(transformedData));
-    '
+    '''
 
     h += "</script>"
     h += '</div>' + "\n"
