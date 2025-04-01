@@ -46,6 +46,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             startPeriod = k
         if endPeriod is None:
             endPeriod = k
+
+    # first run / first day:
+    if len(sdata) == 0):
+        return ''
         
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
@@ -222,8 +226,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("dy", "0.35em")'
     h += '.text(d => d);'
     
-    #h += 'console.log("Transformed Data:", transformedData);'
-    #h += 'console.log("Stacked Data:", stack(transformedData));'
+    h += 'console.log("Transformed Data:", transformedData);'
+    h += 'console.log("Stacked Data:", stack(transformedData));'
     h += "</script>"
     h += '</div>' + "\n"
     return h
