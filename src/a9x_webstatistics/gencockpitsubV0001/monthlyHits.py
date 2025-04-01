@@ -17,17 +17,17 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             break
         mcount += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'desk', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
+            sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
-            sdata.append({'d': k, 't': 'desk', 'c': 0})
+            sdata.append({'d': k, 't': 'desktop', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'mob', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
+            sdata.append({'d': k, 't': 'mobile', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         else:
-            sdata.append({'d': k, 't': 'mob', 'c': 0})
+            sdata.append({'d': k, 't': 'mobile', 'c': 0})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
-            sdata.append({'d': k, 't': 'tab', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
+            sdata.append({'d': k, 't': 'tablet', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         else:
-            sdata.append({'d': k, 't': 'tab', 'c': 0})
+            sdata.append({'d': k, 't': 'tablet', 'c': 0})
 
         # visits:
         if 'visits' in d['v0001']['days'][k]['user']:
