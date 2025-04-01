@@ -48,7 +48,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             endPeriod = k
 
     # first run / first day:
-    if len(sdata) == 0):
+    if len(sdata) == 0:
         return ''
         
     # d3js horizontal bubble char in case results are available
