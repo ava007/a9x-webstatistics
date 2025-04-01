@@ -68,7 +68,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const dates = Array.from(groupedData.keys()).sort();'
     h += 'const categories = ["desk", "mob", "tab"];'
 
-    h += 'const transformedData = dates.map(d => {'
+    h += 'const sortedCategories = dates.map(d => {'
     h += 'let entry = { d };'
     h += 'let values = groupedData.get(d) || {};'  # Ensure it's always an object
     h += 'return categories.slice().sort((a, b) => (values[a] || 0) - (values[b] || 0));'
