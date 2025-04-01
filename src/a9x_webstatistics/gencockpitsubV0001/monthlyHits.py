@@ -68,24 +68,16 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const dates = Array.from(groupedData.keys()).sort();'
     h += 'const categories = ["desk", "mob", "tab"];'
 
-    h += 'const sortedCategories = dates.map(d => {'
-    h += 'let entry = { d };'
-    h += 'let values = groupedData.get(d) || {};'  # Ensure it's always an object
-    h += 'return categories.slice().sort((a, b) => (values[a] || 0) - (values[b] || 0));'
+    h += 'const sortedCategoriesPerDate = sdata.map(d => '
+    h += '  categories.slice().sort((a, b) => (d[a] || 0) - (d[b] || 0));'
+    h += ');'
+
+    # Transform data into stacked format
+    h += 'const sortedStackedData = data.map((d, i) => {'
+    h += 'let sortedObj = {};'
+    h += 'sortedCategoriesPerDate[i].forEach(c => sortedObj[c] = d[c]);'
+    h += 'return { date: d.date, ...sortedObj };'
     h += '});'
-
-    # Sort the categories within each date by count in ascending order (smallest in the bottom):
-    #h += 'transformedData.forEach(entry => {'
-    #h += 'const sortedCategories = categories.slice().sort((a, b) => entry[b] - entry[a]);'
-    #h += 'const sortedEntry = {};'
-    #h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
-    #h += 'Object.assign(entry, sortedEntry);'
-
-    h += 'transformedData.forEach((entry, index) => {'
-    h += 'let sortedEntry = {};'
-    h += 'sortedCategories[index].forEach(c => sortedEntry[c] = entry[c]);'
-    h += 'Object.assign(entry, sortedEntry);'
-    h += '});' + "\n"
 
     # Stack generator
     h += 'const stack = d3.stack().keys(categories).order(d3.stackOrderNone).offset(d3.stackOffsetNone);'
@@ -103,9 +95,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const height = width * 0.5;' + "\n"
 
     h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
-    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'  + "\n"
+    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.2);'  + "\n"
 
-    h += 'const y = d3.scaleSymlog()'
+    h += 'const y = d3.scaleLinear()'
     h += '.domain([0.1, yMax])'   # Log scale cannot have 0
     h += '.range([height - margins.bottom, margins.top])'
     h += '.nice();'  + "\n"
