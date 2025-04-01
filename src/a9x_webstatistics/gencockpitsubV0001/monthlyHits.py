@@ -69,11 +69,11 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const categories = ["desk", "mob", "tab"];'
 
     h += 'const sortedCategoriesPerDate = sdata.map(d => '
-    h += '  categories.slice().sort((a, b) => (d[a] || 0) - (d[b] || 0));'
+    h += '  categories.slice().sort((a, b) => (d[a] || 0) - (d[b] || 0))'
     h += ');'
 
     # Transform data into stacked format
-    h += 'const sortedStackedData = data.map((d, i) => {'
+    h += 'const sortedStackedData = sdata.map((d, i) => {'
     h += 'let sortedObj = {};'
     h += 'sortedCategoriesPerDate[i].forEach(c => sortedObj[c] = d[c]);'
     h += 'return { date: d.date, ...sortedObj };'
