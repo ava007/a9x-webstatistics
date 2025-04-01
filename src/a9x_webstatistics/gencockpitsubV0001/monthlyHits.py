@@ -81,7 +81,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Stack generator
     h += 'const stack = d3.stack().keys(categories).order(d3.stackOrderNone).offset(d3.stackOffsetNone);'
-    h += 'const series = stack(transformedData);' + "\n"
+    h += 'const series = stack(sortedStackedData);' + "\n"
     
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
