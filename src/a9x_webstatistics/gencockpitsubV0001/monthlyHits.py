@@ -62,22 +62,22 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
 
-    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'
+    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'  + "\n"
 
     # Convert to array with missing categories filled as 0
-    h += 'const dates = Array.from(groupedData.keys()).sort();'
-    h += 'const categories = ["desk", "mob", "tab"];'
+    h += 'const dates = Array.from(groupedData.keys()).sort();'  + "\n"
+    h += 'const categories = ["desk", "mob", "tab"];'  + "\n"
 
     h += 'const sortedCategoriesPerDate = sdata.map(d => '
     h += '  categories.slice().sort((a, b) => (d[a] || 0) - (d[b] || 0))'
-    h += ');'
+    h += ');'  + "\n"
 
     # Transform data into stacked format
     h += 'const sortedStackedData = sdata.map((d, i) => {'
     h += 'let sortedObj = {};'
     h += 'sortedCategoriesPerDate[i].forEach(c => sortedObj[c] = d[c]);'
     h += 'return { date: d.date, ...sortedObj };'
-    h += '});'
+    h += '});'  + "\n"
 
     # Stack generator
     h += 'const stack = d3.stack().keys(categories).order(d3.stackOrderNone).offset(d3.stackOffsetNone);'
@@ -156,7 +156,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("fill", color)'
     h += '.attr("stroke", "white")'
     h += '.attr("stroke-width", 1);'
-    h += '}'
+    h += '}'  + "\n"
 
     # Add points to the red and grey lines
     h += 'addPoints(vdata, "red");'
@@ -222,8 +222,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("dy", "0.35em")'
     h += '.text(d => d);'
     
-    h += 'console.log("Transformed Data:", transformedData);'
-    h += 'console.log("Stacked Data:", stack(transformedData));'
+    h += 'console.log("SortedStackedData:", sortedStackedData);'
+    h += 'console.log("Stacked Data:", stack(sortedStackedData));'
     h += "</script>"
     h += '</div>' + "\n"
     return h
