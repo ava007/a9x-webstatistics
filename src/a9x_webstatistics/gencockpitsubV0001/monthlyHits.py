@@ -75,9 +75,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'return entry;'
     h += '});'
 
-    # Sort the categories within each date by count in ascending order
+    # Sort the categories within each date by count in ascending order (smallest in the bottom):
     h += 'transformedData.forEach(entry => {'
-    h += 'const sortedCategories = categories.slice().sort((a, b) => entry[a] - entry[b]);'
+    h += 'const sortedCategories = categories.slice().sort((a, b) => entry[b] - entry[a]);'
     h += 'const sortedEntry = {};'
     h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
     h += 'Object.assign(entry, sortedEntry);'
