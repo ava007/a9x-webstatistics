@@ -56,7 +56,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>User Hits and Visits - Long Term</h3>'
     h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
-    h += '<div id="mhvchart-container"></div>' + "\n"
+    h += '<div id="mhvchart"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
@@ -95,7 +95,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'd3.max(rdata, d => d.c)'
     h += ');' + "\n"
     
-    h += 'const container = document.getElementById("dhvchart-container");'
+    h += 'const container = document.getElementById("mhvchart");'
     h += 'const { width } = container.getBoundingClientRect();'
     h += 'const height = width * 0.5;' + "\n"
 
@@ -113,7 +113,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42f5aa", "#42c5f5", "#f5a742"]);' + "\n"
 
-    h += 'const svg = d3.select("#dhvchart-container")'
+    h += 'const svg = d3.select("#mhvchart")'
     h += '.append("svg")'
     h += '.attr("width", width)'
     h += '.attr("height", height)'
