@@ -62,168 +62,162 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
 
-    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'  + "\n"
+    h += '
+    function prepareData(sdata) {
+  const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])), d => d.d);
+  const dates = Array.from(groupedData.keys()).sort();
+  const categories = ["desk", "mob", "tab"];
+  const transformedData = dates.map(d => {
+    let entry = { d };
+    let values = groupedData.get(d) || {};
+    categories.forEach(c => entry[c] = values[c] ?? 0);
+    return entry;
+  });
+  transformedData.forEach(entry => {
+    const sortedCategories = categories.slice().sort((a, b) => entry[b] - entry[a]);
+    const sortedEntry = {};
+    sortedCategories.forEach(c => sortedEntry[c] = entry[c]);
+    Object.assign(entry, sortedEntry);
+  });
+  return { transformedData, dates, categories };
+}
 
-    # Convert to array with missing categories filled as 0
-    h += 'const dates = Array.from(groupedData.keys()).sort();'  + "\n"
-    h += 'const categories = ["desk", "mob", "tab"];'  + "\n"
+function setupSVG(container) {
+  const { width } = container.getBoundingClientRect();
+  const height = width * 0.5;
+  const margins = { top: 20, right: 20, bottom: 50, left: 40 };
+  const svg = d3.select(container).append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height]);
+  return { width, height, margins, svg };
+}
 
-    h += 'const sortedCategoriesPerDate = sdata.map(d => '
-    h += '  categories.slice().sort((a, b) => (d[a] || 0) - (d[b] || 0))'
-    h += ');'  + "\n"
+function drawChart(svg, { width, height, margins }, { transformedData, dates, categories }, vdata, rdata) {
+  const stack = d3.stack().keys(categories);
+  const series = stack(transformedData);
+  const yMax = Math.max(d3.max(series, d => d3.max(d, d => d[1])), d3.max(vdata, d => d.c), d3.max(rdata, d => d.c));
 
-    # Transform data into stacked format
-    h += 'const sortedStackedData = sdata.map((d, i) => {'
-    h += 'let sortedObj = {};'
-    h += 'sortedCategoriesPerDate[i].forEach(c => sortedObj[c] = d[c]);'
-    h += 'return { date: d.date, ...sortedObj };'
-    h += '});'  + "\n"
+  const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);
+  const y = d3.scaleSymlog().domain([0.1, yMax]).range([height - margins.bottom, margins.top]).nice();
+  const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#42f5aa", "#f5a742"]);
 
-    # Stack generator
-    h += 'const stack = d3.stack().keys(categories).order(d3.stackOrderNone).offset(d3.stackOffsetNone);'
-    h += 'const series = stack(sortedStackedData);' + "\n"
-    
-    # getting max from series,vdata and sdata:
-    h += 'const yMax = Math.max('
-    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
-    h += 'd3.max(vdata, d => d.c),'
-    h += 'd3.max(rdata, d => d.c)'
-    h += ');' + "\n"
-    
-    h += 'const container = document.getElementById("mhvchart-container");'
-    h += 'const { width } = container.getBoundingClientRect();'
-    h += 'const height = width * 0.5;' + "\n"
+  svg.append("g")
+    .selectAll("g")
+    .data(series)
+    .join("g")
+    .attr("fill", d => color(d.key))
+    .selectAll("rect")
+    .data(d => d)
+    .join("rect")
+    .attr("x", d => x(d.data.d))
+    .attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))
+    .attr("height", d => Math.max(0, Math.abs(y(d[0]) - y(d[1]))))
+    .attr("width", x.bandwidth());
 
-    h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
-    h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.2);'  + "\n"
+  const visitline = d3.line().x(d => x(d.d) + x.bandwidth() / 2).y(d => y(d.c));
 
-    h += 'const y = d3.scaleLinear()'
-    h += '.domain([0.1, yMax])'   # Log scale cannot have 0
-    h += '.range([height - margins.bottom, margins.top])'
-    h += '.nice();'  + "\n"
+  svg.append("path")
+    .datum(vdata)
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 2)
+    .attr("d", visitline);
 
-    h += 'const color = d3.scaleOrdinal().domain(categories).range(["#42c5f5", "#42f5aa", "#f5a742"]);' + "\n"
+  svg.append("path")
+    .datum(rdata)
+    .attr("fill", "none")
+    .attr("stroke", "lightgrey")
+    .attr("stroke-width", 2)
+    .attr("d", visitline);
 
-    h += 'const svg = d3.select("#mhvchart-container")'
-    h += '.append("svg")'
-    h += '.attr("width", width)'
-    h += '.attr("height", height)'
-    h += '.attr("viewBox", [0, 0, width, height]);' + "\n"
+  addPoints(svg, vdata, "red");
+  addPoints(svg, rdata, "lightgrey");
 
-    # Add bars
-    h += 'svg.append("g")'
-    h += '.selectAll("g")'
-    h += '.data(series)'
-    h += '.join("g")'
-    h += '.attr("fill", d => color(d.key))'
-    h += '.selectAll("rect")'
-    h += '.data(d => d)'
-    h += '.join("rect")'
-    h += '.attr("x", d => x(d.data.d))'
-    h += '.attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))'
-    h += '.attr("height", d => Math.max(0, Math.abs(y(d[0]) - y(d[1]))))'
-    h += '.attr("width", x.bandwidth());' + "\n"
+  svg.append("g")
+    .attr("transform", `translate(0,${height - margins.bottom})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .selectAll("text")
+    .attr("transform", "rotate(45)")
+    .style("text-anchor", "start");
 
-    h += 'const visitline = d3.line()'
-    h += '.x(d => x(d.d) + x.bandwidth()/2 )'
-    h += '.y(d => y(d.c));' + "\n"
+  svg.append("g")
+    .attr("transform", `translate(${margins.left},0)`)
+    .call(d3.axisLeft(y).ticks(5));
 
-    # Visits
-    h += 'svg.append("path")'
-    h += '.datum(vdata)' # Bind data properly
-    h += '.attr("fill", "none")'
-    h += '.attr("stroke", "red")'
-    h += '.attr("stroke-width", 2)'
-    h += '.attr("d", visitline);' + "\n"
+  addTooltip(svg, x, y);
+  addLegend(svg, width, color, categories);
+}
 
-    # Robots
-    h += 'svg.append("path")'
-    h += '.datum(rdata)' # Bind data properly
-    h += '.attr("fill", "none")'
-    h += '.attr("stroke", "lightgrey")'
-    h += '.attr("stroke-width", 2)'
-    h += '.attr("d", visitline);' + "\n"
+function addPoints(svg, data, color) {
+  svg.selectAll(`.point-${color}`)
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", d => x(d.d) + x.bandwidth() / 2)
+    .attr("cy", d => y(d.c))
+    .attr("r", 4)
+    .attr("fill", color)
+    .attr("stroke", "white")
+    .attr("stroke-width", 1);
+}
 
-    # Function to add points to a line
-    h += 'function addPoints(data, color) {'
-    h += 'svg.selectAll(`.point-${color}`)'
-    h += '.data(data)'
-    h += '.enter()'
-    h += '.append("circle")'
-    h += '.attr("cx", d => x(d.d) + x.bandwidth() / 2)'
-    h += '.attr("cy", d => y(d.c))'
-    h += '.attr("r", 4)' # Adjust size of the points
-    h += '.attr("fill", color)'
-    h += '.attr("stroke", "white")'
-    h += '.attr("stroke-width", 1);'
-    h += '}'  + "\n"
+function addTooltip(svg, x, y) {
+  const tooltip = d3.select("#mhvchart-container").append("div")
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("padding", "5px")
+    .style("border", "1px solid black")
+    .style("border-radius", "5px")
+    .style("visibility", "hidden")
+    .style("pointer-events", "none");
 
-    # Add points to the red and grey lines
-    h += 'addPoints(vdata, "red");'
-    h += 'addPoints(rdata, "lightgrey");' + "\n"
+  svg.selectAll("rect")
+    .on("mouseover", (event, d) => {
+      tooltip.style("visibility", "visible");
+    })
+    .on("mousemove", (event, d) => {
+      tooltip.html(`Date: ${d.data.d}<br>Category: ${d3.select(event.target.parentNode).datum().key}<br>Count: ${d[1] - d[0]}`)
+        .style("top", `${event.pageY - 10}px`)
+        .style("left", `${event.pageX + 10}px`);
+    })
+    .on("mouseleave", () => {
+      tooltip.style("visibility", "hidden");
+    });
+}
 
-    # X-Axis
-    h += 'svg.append("g")'
-    h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
-    h += '.call(d3.axisBottom(x).tickSizeOuter(0))'
-    h += '.selectAll("text")'
-    h += '.attr("transform", "rotate(45)")'
-    h += '.style("text-anchor", "start");' + "\n"
+function addLegend(svg, width, color, categories) {
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width / 2}, 20)`);
 
-    # Customize y-axis ticks and labels
-    h += 'const yAxis = d3.axisLeft(y)'
-    h += '.ticks(12)'  # Specify the number of ticks you want
-    h += '.tickFormat(d => `${d} units`);' + "\n" #  Format the labels to include "units"
+  const legendItem = legend.selectAll(".legend-item")
+    .data(categories)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", (d, i) => `translate(${i * 100},0)`);
 
-    # Y-Axis
-    h += 'svg.append("g")'
-    h += '.attr("transform", `translate(${margins.left},0)`)'
-    h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
+  legendItem.append("rect")
+    .attr("width", 18)
+    .attr("height", 18)
+    .attr("fill", d => color(d));
 
-    # Create a tooltip div
-    h += 'const tooltip = d3.select("#mhvchart-container")'
-    h += '.append("div")'
-    h += '.style("position", "absolute")'
-    h += '.style("background", "white")'
-    h += '.style("padding", "5px")'
-    h += '.style("border", "1px solid black")'
-    h += '.style("border-radius", "5px")'
-    h += '.style("visibility", "hidden")'
-    h += '.style("pointer-events", "none");' + "\n"
+  legendItem.append("text")
+    .attr("x", 24)
+    .attr("y", 9)
+    .attr("dy", "0.35em")
+    .text(d => d);
+}
 
-    # Add tooltip functionality to bars
-    h += 'svg.selectAll("rect")'
-    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible"); })'
-    h += '.on("mousemove", (event, d) => {'
-    h += 'tooltip.html(`Date: ${d.data.d}<br>Category: ${d3.select(event.target.parentNode).datum().key}<br>Count: ${d[1] - d[0]}`)'
-    h += '.style("top", `${event.pageY - 10}px`)'
-    h += '.style("left", `${event.pageX + 10}px`);'
-    h += '})'
-    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
+const container = document.getElementById("mhvchart-container");
+const { transformedData, dates, categories } = prepareData(sdata);
+const { svg, width, height, margins } = setupSVG(container);
+drawChart(svg, { width, height, margins }, { transformedData, dates, categories }, vdata, rdata);
 
-    # Add legend
-    h += 'const legend = svg.append("g")'
-    h += '.attr("transform", `translate(${width / 2}, 20)`);' + "\n" # Position at the top center
+console.log("Transformed Data:", transformedData);
+console.log("Stacked Data:", d3.stack().keys(categories)(transformedData));
+    '
 
-    h += 'const legendItem = legend.selectAll(".legend-item")'
-    h += '.data(categories)'
-    h += '.enter().append("g")'
-    h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(${i * 100},0)`);' + "\n" # Arrange horizontally
-
-    h += 'legendItem.append("rect")'
-    h += '.attr("width", 18)'
-    h += '.attr("height", 18)'
-    h += '.attr("fill", d => color(d));'
-
-    h += 'legendItem.append("text")'
-    h += '.attr("x", 24)'
-    h += '.attr("y", 9)'
-    h += '.attr("dy", "0.35em")'
-    h += '.text(d => d);'
-    
-    h += 'console.log("SortedStackedData:", sortedStackedData);'
-    h += 'console.log("Stacked Data:", stack(sortedStackedData));'
     h += "</script>"
     h += '</div>' + "\n"
     return h
