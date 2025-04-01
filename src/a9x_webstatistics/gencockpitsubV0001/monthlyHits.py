@@ -71,21 +71,25 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const transformedData = dates.map(d => {'
     h += 'let entry = { d };'
     h += 'let values = groupedData.get(d) || {};'  # Ensure it's always an object
-    h += 'categories.forEach(c => entry[c] = values[c] ?? 0);'  # Use Nullish coalescing to handle undefined
-    h += 'return entry;'
+    h += 'return categories.slice().sort((a, b) => (values[a] || 0) - (values[b] || 0));'
     h += '});'
 
     # Sort the categories within each date by count in ascending order (smallest in the bottom):
-    h += 'transformedData.forEach(entry => {'
-    h += 'const sortedCategories = categories.slice().sort((a, b) => entry[b] - entry[a]);'
-    h += 'const sortedEntry = {};'
-    h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
+    #h += 'transformedData.forEach(entry => {'
+    #h += 'const sortedCategories = categories.slice().sort((a, b) => entry[b] - entry[a]);'
+    #h += 'const sortedEntry = {};'
+    #h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
+    #h += 'Object.assign(entry, sortedEntry);'
+
+    h += 'transformedData.forEach((entry, index) => {'
+    h += 'let sortedEntry = {};'
+    h += 'sortedCategories[index].forEach(c => sortedEntry[c] = entry[c]);'
     h += 'Object.assign(entry, sortedEntry);'
-    h += '});'
+    h += '});' + "\n"
 
     # Stack generator
-    h += 'const stack = d3.stack().keys(categories);'
-    h += 'const series = stack(transformedData);'
+    h += 'const stack = d3.stack().keys(categories).order(d3.stackOrderNone).offset(d3.stackOffsetNone);'
+    h += 'const series = stack(transformedData);' + "\n"
     
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
