@@ -86,8 +86,24 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Stack generator
     h += 'const stack = d3.stack().keys(categories);'  + "\n"
-    h += 'const series = stack(transformedData);'  + "\n"
     
+    # // Manually generate stack series with per-bar sorting
+    #   const series = stack(transformedData);'  + "\n"
+    h += 'const series = categories.map(c => ({ key: c, values: [] }));'
+    h += 'for (let i = 0; i < transformedData.length; i++) {'
+    h += 'const entry = transformedData[i];'
+    h += 'const sortedKeys = categories.slice().sort((a, b) => entry[a] - entry[b]);'
+    h += 'let y0 = 0;'
+    h += 'sortedKeys.forEach(key => {'
+    h += 'const value = entry[key];'
+    h += 'const y1 = y0 + value;' 
+    # Find the matching series object and add this datum
+    h += 'const s = series.find(s => s.key === key);'
+    h += 's.values[i] = [y0, y1, entry, key];' # store additional info for tooltip
+    h += 'y0 = y1;'
+    h += '});'
+    h += '}' + "\n"
+        
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
     h += 'd3.max(series, d => d3.max(d, d => d[1])),'
