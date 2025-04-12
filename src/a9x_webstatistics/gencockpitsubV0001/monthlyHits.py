@@ -244,8 +244,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.text(d);'
     h += '});'  + "\n" 
     
-    h += 'console.log("Transformed Data:", transformedData);'
-    h += 'console.log("Stacked Data:", stack(transformedData));'
+    h += 'console.log("monthlyHits->Transformed Data:", transformedData);'
+    h += 'console.log("monthlyHits->Stacked Data:", stack(transformedData));'
 
     h += "</script>"
     h += '</div>' + "\n"
