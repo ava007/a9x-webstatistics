@@ -108,7 +108,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
         
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
-    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    #h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    h += 'd3.max(series, s => d3.max(s.values, v => v[1])),'
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
     h += ');' + "\n"
