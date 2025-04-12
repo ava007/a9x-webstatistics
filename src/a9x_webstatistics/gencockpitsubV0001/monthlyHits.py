@@ -224,7 +224,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     # Add legend
     h += 'const legend = svg.append("g")'
     # Position the legend in the upper left corner:
-    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top - 6})`);'
+    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
 
     h += 'legend.selectAll(".legend-item")'
     h += '.data(categories)'
