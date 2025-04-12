@@ -146,9 +146,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.join("g")'
     h += '.attr("fill", d => color(d.key))'
     h += '.selectAll("rect")'
-    h += '.data(d => d)'
+    h += '.data(d => d.values)'
     h += '.join("rect")'
-    h += '.attr("x", d => x(d.data.d))'
+    h += '.attr("x", d => x(d[2].d))'
     h += '.attr("y", d => y(Math.max(1, isNaN(d[1]) ? 1 : d[1])))'
     h += '.attr("height", d => Math.max(0, Math.abs(y(d[0]) - y(d[1]))))'
     h += '.attr("width", x.bandwidth());' + "\n"
