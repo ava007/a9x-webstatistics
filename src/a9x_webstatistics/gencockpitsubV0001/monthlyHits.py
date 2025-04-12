@@ -88,7 +88,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const stack = d3.stack().keys(categories);'  + "\n"
     
     # // Manually generate stack series with per-bar sorting
-    #   const series = stack(transformedData);'  + "\n"
+    h += 'const series0 = stack(transformedData);'  + "\n"
     h += 'const series = categories.map(c => ({ key: c, values: [] }));'
     h += 'for (let i = 0; i < transformedData.length; i++) {'
     h += 'const entry = transformedData[i];'
@@ -103,6 +103,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'y0 = y1;'
     h += '});'
     h += '}' + "\n"
+    h += 'console.log("monthlyHits->series0:", series0);'
+    h += 'console.log("monthlyHits->series:", series);'
         
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
@@ -230,9 +232,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'svg.selectAll("rect")'
     h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible"); })'
     h += '.on("mousemove", (event, d) => {'
-    h += 'tooltip.html(`Date: ${d.data.d}<br>Category: ${d3.select(event.target.parentNode).datum().key}<br>Count: ${d[1] - d[0]}`)'
-    h += '.style("top", `${event.pageY - 10}px`)'
-    h += '.style("left", `${event.pageX + 10}px`);'
+    h += 'tooltip.html(`Date: ${d[2].d}<br>Category: ${d[3]}<br>Count: ${d[1] - d[0]}`)'
+    h += '.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);'
     h += '})'
     h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
 
