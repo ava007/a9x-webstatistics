@@ -221,7 +221,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     # Create a tooltip div
     h += 'const tooltip = d3.select("#dhvchart-container").append("div")'
     h += '.attr("class", "custom-tooltip")'
-    h += 'style("background", "rgba(255, 255, 255, 0.95)")'
+    h += '.style("position", "absolute")'
+    h += '.style("background", "rgba(255, 255, 255, 0.95)")'
     h += '.style("box-shadow", "0 2px 8px rgba(0,0,0,0.15)")'
     h += '.style("padding", "8px 12px")'
     h += '.style("border-radius", "6px")'
