@@ -230,7 +230,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.data(categories)'
     h += '.enter().append("g")'
     h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(0, ${i * 20})`)'
+    h += '.attr("transform", (d, i) => `translate(${i * 100}, 0)`)'
     h += '.each(function(d, i) {'
     h += 'const item = d3.select(this);'
     h += 'item.append("rect")'
