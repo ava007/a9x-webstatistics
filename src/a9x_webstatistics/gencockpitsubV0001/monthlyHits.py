@@ -219,15 +219,16 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     #h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
 
     # Create a tooltip div
-    h += 'const tooltip = d3.select("#dhvchart-container")'
-    h += '.append("div")'
-    h += '.style("position", "absolute")'
-    h += '.style("background", "white")'
-    h += '.style("padding", "5px")'
-    h += '.style("border", "1px solid black")'
-    h += '.style("border-radius", "5px")'
-    h += '.style("visibility", "hidden")'
-    h += '.style("pointer-events", "none");' + "\n"
+    h += 'const tooltip = d3.select("#dhvchart-container").append("div")'
+    h += '.attr("class", "custom-tooltip")'
+    h += 'style("background", "rgba(255, 255, 255, 0.95)")'
+    h += '.style("box-shadow", "0 2px 8px rgba(0,0,0,0.15)")'
+    h += '.style("padding", "8px 12px")'
+    h += '.style("border-radius", "6px")'
+    h += '.style("font-size", "12px")'
+    h += '.style("pointer-events", "none")'
+    h += '.style("transition", "opacity 0.3s ease")'
+    h += '.style("opacity", 0);'  + "\n"
 
     # Add tooltip functionality to bars
     h += 'svg.selectAll("rect")'
@@ -264,6 +265,36 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     
     h += 'console.log("monthlyHits->Transformed Data:", transformedData);'
     h += 'console.log("monthlyHits->Stacked Data:", stack(transformedData));'
+
+    h += 'function addPoints(data, color, label) {'
+    h += 'svg.selectAll(`.point-${color}`)'
+    h += '.data(data)'
+    h += '.enter()'
+    h += '.append("circle")'
+    h += '.attr("class", `point-${color}`)'
+    h += '.attr("cx", d => x(d.d) + x.bandwidth() / 2)'
+    h += '.attr("cy", d => y(d.c))'
+    h += '.attr("r", 4)'
+    h += '.attr("fill", color)'
+    h += '.attr("stroke", "white")'
+    h += '.attr("stroke-width", 1)'
+    h += '.on("mouseover", (event, d) => {'
+    h += 'tooltip.style("opacity", 1);'
+    h += '})'
+    h += '.on("mousemove", (event, d) => {'
+    h += '  tooltip.html(`'
+    h += '   <strong>${label}</strong><br>'
+    h += '    <strong>Date:</strong> ${d.d}<br>'
+    h += '    <strong>Count:</strong> ${d3.format(",")(d.c)}'
+    h += '`)'
+    h += '  .style("top", `${event.pageY - 40}px`)'
+    h += '.style("left", `${event.pageX + 15}px`);'
+    h += '})'
+    h += '.on("mouseleave", () => {tooltip.style("opacity", 0); });'
+    h += '}' + "\n"
+
+    h += 'addPoints(vdata, "red", "Visits");'  + "\n"
+    h += 'addPoints(rdata, "lightgrey", "Requests");'  + "\n"
 
     h += "</script>"
     h += '</div>' + "\n"
