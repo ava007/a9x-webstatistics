@@ -156,6 +156,8 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         actYearMonth = lastDate[0:6]
+
+        firstDate = list(d['v0001']['days'].keys())[0]
         
         # row for top domains and urls:
         h += '<div class="row pt-4">'
@@ -173,15 +175,26 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         # top external landings (friends):
         #h += '<div class="row pt-4">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
 
-        h += '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
         
-        h += '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
-        h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
-        
-        h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
-        h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
+        d1 = datetime.strptime(firstDate, "%Y%m%d")
+        d2 = datetime.strptime(lastDate, "%Y%m%d")
 
-        h += '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
+        # difference between dates in timedelta
+        deltaInDays = d2 - d1
+        print(f'Difference is {delta.days} days')
+
+        # show long term not on first runs:
+        if deltaInDays > 32:
+
+            h += '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
+        
+            h += '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
+            h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
+        
+            h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
+            h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
+
+            h += '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
