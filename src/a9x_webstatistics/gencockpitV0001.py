@@ -182,10 +182,10 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         # difference between dates in timedelta
         deltaInDays = d2 - d1
-        print(f'Difference is {delta.days} days')
+        print(f'Difference is {deltaInDays.days} days')
 
         # show long term not on first runs:
-        if deltaInDays > 32:
+        if deltaInDays.days > 32:
 
             h += '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
         
