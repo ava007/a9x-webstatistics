@@ -175,7 +175,8 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         # top external landings (friends):
         #h += '<div class="row pt-4">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
 
-        
+        if len(firstDate) == 6:
+            firstDate += '01'   # add day to YYYYMM
         d1 = datetime.strptime(firstDate, "%Y%m%d")
         d2 = datetime.strptime(lastDate, "%Y%m%d")
 
