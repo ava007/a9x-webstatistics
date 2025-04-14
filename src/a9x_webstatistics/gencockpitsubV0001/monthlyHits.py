@@ -192,7 +192,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.style("stroke-opacity", 0.5);'  + "\n"
 
     # Create a tooltip div
-    h += 'const tooltip = d3.select("#dhvchart-container").append("div")'
+    h += 'const tooltip = d3.select("#mhvchart").append("div")'
     h += '.attr("class", "custom-tooltip")'
     h += '.style("position", "absolute")'
     h += '.style("background", "rgba(255, 255, 255, 0.95)")'
@@ -206,12 +206,12 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 
     # Add tooltip functionality to bars
     h += 'svg.selectAll("rect")'
-    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible"); })'
+    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible").style("opacity", 1); })'
     h += '.on("mousemove", (event, d) => {'
     h += 'tooltip.html(`Date: ${d[2].d}<br>Category: ${d[3]}<br>Count: ${d[1] - d[0]}`)'
     h += '.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);'
     h += '})'
-    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
+    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden").style("opacity", 0); });' + "\n"
 
     # Add legend
     h += 'const legend = svg.append("g")'
