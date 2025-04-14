@@ -81,7 +81,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const sortedEntry = {};'
     h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
     h += 'Object.assign(entry, sortedEntry);'
-    #h += 'console.log("sortedEntry: ", sortedEntry, entry);'
     h += '});'  + "\n"
 
     # Stack generator
@@ -103,8 +102,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'y0 = y1;'
     h += '});'
     h += '}' + "\n"
-    h += 'console.log("monthlyHits->series0:", series0);'
-    h += 'console.log("monthlyHits->series:", series);'
         
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
@@ -121,10 +118,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
     h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'  + "\n"
     
-    #h += 'const y = d3.scaleLinear()'
-    #h += '.domain([0, yMax])'
-    #h += '.range([height - margins.bottom, margins.top]);'
-
     h += 'const y = d3.scaleSymlog()'
     h += '.domain([0.1, yMax])'   # Log scale cannot have 0
     h += '.range([height - margins.bottom, margins.top])'
@@ -197,8 +190,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.selectAll("line")'
     h += '.style("stroke", "lightgrey")'  # Set gridline color
     h += '.style("stroke-opacity", 0.5);'  + "\n"
-    #h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
-    #h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
 
     # Create a tooltip div
     h += 'const tooltip = d3.select("#dhvchart-container").append("div")'
@@ -245,8 +236,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '.text(d);'
     h += '});'  + "\n" 
     
-    h += 'console.log("monthlyHits->Transformed Data:", transformedData);'
-    h += 'console.log("monthlyHits->Stacked Data:", stack(transformedData));'
+    #h += 'console.log("monthlyHits->Transformed Data:", transformedData);'
+    #h += 'console.log("monthlyHits->Stacked Data:", stack(transformedData));'
 
     h += 'function addPoints(data, color, label) {'
     h += 'svg.selectAll(`.point-${color}`)'
