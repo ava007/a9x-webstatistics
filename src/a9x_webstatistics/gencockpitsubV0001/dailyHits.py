@@ -204,7 +204,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.style("opacity", 0);'  + "\n"
 
     # Add tooltip functionality to bars
-     h += 'svg.selectAll("rect")'
+    h += 'svg.selectAll("rect")'
     h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible").style("opacity", 1); })'
     h += '.on("mousemove", (event, d) => {'
     h += 'tooltip.html(`Date: ${d[2].d}<br>Category: ${d[3]}<br>Count: ${d[1] - d[0]}`)'
