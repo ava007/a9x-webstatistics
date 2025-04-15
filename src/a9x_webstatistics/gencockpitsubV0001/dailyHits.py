@@ -17,7 +17,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         # omit months or years:
         if len(k) <= 6:
             continue
-        if days >= 31:
+        if days >= 30:
             break
         days += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
@@ -51,8 +51,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         if endPeriod is None:
             endPeriod = k
         
-    #https://stackoverflow.com/questions/36435384/d3-js-combining-bar-and-line-chart#36435663
-   
+    
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
@@ -64,11 +63,11 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const vdata = ' + str(vdata) + ';' + "\n"
     h += 'const rdata = ' + str(rdata) + ';' + "\n"
 
-    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);'
+    h += 'const groupedData = d3.rollup(sdata, v => Object.fromEntries(v.map(d => [d.t, d.c])),d => d.d);' + "\n"
 
     # Convert to array with missing categories filled as 0
-    h += 'const dates = Array.from(groupedData.keys()).sort();'
-    h += 'const categories = ["desktop", "mobile", "tablet"];'
+    h += 'const dates = Array.from(groupedData.keys()).sort();' + "\n"
+    h += 'const categories = ["desktop", "mobile", "tablet"];' + "\n"
 
     h += 'const transformedData = dates.map(d => {'
     h += 'let entry = { d };'
@@ -83,16 +82,31 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const sortedEntry = {};'
     h += 'sortedCategories.forEach(c => sortedEntry[c] = entry[c]);'
     h += 'Object.assign(entry, sortedEntry);'
-    #h += 'console.log("sortedEntry: ", sortedEntry, entry);'
     h += '});'
 
     # Stack generator
     h += 'const stack = d3.stack().keys(categories);'
-    h += 'const series = stack(transformedData);'
     
+    # Manually generate stack series with per-bar sorting
+    #h += 'const series0 = stack(transformedData);'  + "\n"
+    h += 'const series = categories.map(c => ({ key: c, values: [] }));'
+    h += 'for (let i = 0; i < transformedData.length; i++) {'
+    h += 'const entry = transformedData[i];'
+    h += 'const sortedKeys = categories.slice().sort((a, b) => entry[a] - entry[b]);'
+    h += 'let y0 = 0;'
+    h += 'sortedKeys.forEach(key => {'
+    h += 'const value = entry[key];'
+    h += 'const y1 = y0 + value;' 
+    # Find the matching series object and add this datum
+    h += 'const s = series.find(s => s.key === key);'
+    h += 's.values[i] = [y0, y1, entry, key];' # store additional info for tooltip
+    h += 'y0 = y1;'
+    h += '});'
+    h += '}' + "\n"
+     
     # getting max from series,vdata and sdata:
     h += 'const yMax = Math.max('
-    h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    h += 'd3.max(series, s => d3.max(s.values, v => v[1])),'
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
     h += ');' + "\n"
@@ -103,10 +117,6 @@ def dailyHitsVisitsChart(d, owndomain, omit):
 
     h += 'const margins = { top: 20, right: 20, bottom: 50, left: 40 };'
     h += 'const x = d3.scaleBand().domain(dates).range([margins.left, width - margins.right]).padding(0.1);'  + "\n"
-    
-    #h += 'const y = d3.scaleLinear()'
-    #h += '.domain([0, yMax])'
-    #h += '.range([height - margins.bottom, margins.top]);'
 
     h += 'const y = d3.scaleSymlog()'
     h += '.domain([0.1, yMax])'   # Log scale cannot have 0
