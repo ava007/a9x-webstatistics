@@ -166,24 +166,6 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("stroke-width", 2)'
     h += '.attr("d", visitline);' + "\n"
 
-    # Function to add points to a line
-    h += 'function addPoints(data, color) {'
-    h += 'svg.selectAll(`.point-${color}`)'
-    h += '.data(data)'
-    h += '.enter()'
-    h += '.append("circle")'
-    h += '.attr("cx", d => x(d.d) + x.bandwidth() / 2)'
-    h += '.attr("cy", d => y(d.c))'
-    h += '.attr("r", 4)' # Adjust size of the points
-    h += '.attr("fill", color)'
-    h += '.attr("stroke", "white")'
-    h += '.attr("stroke-width", 1);'
-    h += '}'
-
-    # Add points to the red and grey lines
-    h += 'addPoints(vdata, "red");'
-    h += 'addPoints(rdata, "lightgrey");'
-
     # X-Axis
     h += 'svg.append("g")'
     h += '.attr("transform", `translate(0,${height - margins.bottom})`)'
@@ -208,41 +190,37 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.selectAll("line")'
     h += '.style("stroke", "lightgrey")'  # Set gridline color
     h += '.style("stroke-opacity", 0.5);'  + "\n"
-    #h += '.call(d3.axisLeft(y).ticks(5));' + "\n"
-    #h += '.call(yAxis);' + "\n"   # Use the custom yAxis configuration
 
     # Create a tooltip div
-    h += 'const tooltip = d3.select("#dhvchart-container")'
-    h += '.append("div")'
+    h += 'const tooltip = d3.select("#dhvchart-container").append("div")'
     h += '.style("position", "absolute")'
-    h += '.style("background", "white")'
-    h += '.style("padding", "5px")'
-    h += '.style("border", "1px solid black")'
-    h += '.style("border-radius", "5px")'
-    h += '.style("visibility", "hidden")'
-    h += '.style("pointer-events", "none");' + "\n"
+    h += '.style("background", "rgba(255, 255, 255, 0.95)")'
+    h += '.style("box-shadow", "0 2px 8px rgba(0,0,0,0.15)")'
+    h += '.style("padding", "8px 12px")'
+    h += '.style("border-radius", "6px")'
+    h += '.style("font-size", "12px")'
+    h += '.style("pointer-events", "none")'
+    h += '.style("transition", "opacity 0.3s ease")'
+    h += '.style("opacity", 0);'  + "\n"
 
     # Add tooltip functionality to bars
-    h += 'svg.selectAll("rect")'
-    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible"); })'
+     h += 'svg.selectAll("rect")'
+    h += '.on("mouseover", (event, d) => { tooltip.style("visibility", "visible").style("opacity", 1); })'
     h += '.on("mousemove", (event, d) => {'
-    h += 'tooltip.html(`Date: ${d.data.d}<br>Category: ${d3.select(event.target.parentNode).datum().key}<br>Count: ${d[1] - d[0]}`)'
-    h += '.style("top", `${event.pageY - 10}px`)'
-    h += '.style("left", `${event.pageX + 10}px`);'
+    h += 'tooltip.html(`Date: ${d[2].d}<br>Category: ${d[3]}<br>Count: ${d[1] - d[0]}`)'
+    h += '.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);'
     h += '})'
-    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden"); });' + "\n"
+    h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden").style("opacity", 0); });' + "\n"
 
-
-    # Add legend
+    # Position the legend in the upper left corner:
     h += 'const legend = svg.append("g")'
-    h += '.attr("transform", `translate(${width - margins.right - 120}, ${margins.top})`);'
-
+    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
+    
     h += 'legend.selectAll(".legend-item")'
     h += '.data(categories)'
-    h += '.enter()'
-    h += '.append("g")'
+    h += '.enter().append("g")'
     h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(0, ${i * 20})`)'
+    h += '.attr("transform", (d, i) => `translate(${i * 100},0 )`)'
     h += '.each(function(d, i) {'
     h += 'const item = d3.select(this);'
     h += 'item.append("rect")'
@@ -255,16 +233,45 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("dy", "0.35em")'
     h += '.text(d);'
     h += '});'  + "\n" 
-    
-    #h += 'console.log("Transformed Data:", transformedData);'
-    #h += 'console.log("Stacked Data:", stack(transformedData));'
+
+    h += 'function addPoints(data, color, label) {'
+    h += 'svg.selectAll(`.point-${color}`)'
+    h += '.data(data).enter()'
+    h += '.append("circle")'
+    h += '.attr("class", `point-${color}`)'
+    h += '.attr("cx", d => x(d.d) + x.bandwidth() / 2)'
+    h += '.attr("cy", d => y(d.c))'
+    h += '.attr("r", 4)'
+    h += '.attr("fill", color)'
+    h += '.attr("stroke", "white")'
+    h += '.attr("stroke-width", 1)'
+    h += '.on("mouseover", (event, d) => { tooltip.style("opacity", 1).style("visibility","visible"); })'
+    h += '.on("mousemove", (event, d) => {'
+    h += 'const date = d.d;'
+    h += 'const vdataItem = vdata.find(item => item.d === date);'
+    h += 'const rdataItem = rdata.find(item => item.d === date);'
+    h += 'tooltip.html(`'
+    h += '   <strong>${label}</strong><br>'
+    h += '   <strong>Count: ${d3.format(",")(d.c)}</strong><br>'
+    h += '   Date: ${date}<br>'
+    h += '   Visits: ${vdataItem ? vdataItem.c : "N/A"}<br>'
+    h += '   Requests: ${rdataItem ? rdataItem.c : "N/A"}'
+    h += '`)'
+    h += '.style("top",  `${event.pageY - 40}px`)'
+    h += '.style("left", `${event.pageX + 15}px`);'
+    h += '})'
+    h += '.on("mouseleave", () => {tooltip.style("opacity", 0); });'
+    h += '}' + "\n"
+
+    h += 'addPoints(vdata, "red", "Visits");'  + "\n"
+    h += 'addPoints(rdata, "lightgrey", "Requests");'  + "\n"
     h += "</script>"
     h += '</div>' + "\n"
     return h
     
-def is_valid_ip(address):
-    try: 
-        x = ipaddress.ip_address(address)
-        return True
-    except:
-        return False
+#def is_valid_ip(address):
+#    try: 
+#        x = ipaddress.ip_address(address)
+#        return True
+#    except:
+#        return False
