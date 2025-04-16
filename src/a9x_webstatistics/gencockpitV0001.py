@@ -149,7 +149,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += '</script>'
         h += '</div></div>' + "\n\n"  # end of col and row
 
-        if efeature == '20':
+        if '20' in efeature:
             h += '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
 
         h += '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
@@ -182,7 +182,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         # difference between dates in timedelta
         deltaInDays = d2 - d1
-        print(f'Difference is {deltaInDays.days} days')
+        #print(f'Difference is {deltaInDays.days} days')
 
         # show long term not on first runs:
         if deltaInDays.days > 32:
@@ -291,4 +291,4 @@ if __name__ == "__main__":
     if args.omit is None:
         args.omit = []        
 
-    runGenCockpitV0001(infile=args.infile, outfile=args.outfile, verbosity=args.verbose, domain=args.domain, omit=args.omit)
+    runGenCockpitV0001(infile=args.infile, outfile=args.outfile, verbosity=args.verbose, domain=args.domain, omit=args.omit, efeature=args.efeature)
