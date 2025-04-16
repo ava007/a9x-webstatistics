@@ -55,7 +55,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>User Hits and Visits - Long Term</h3>'
-    h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
+    #h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
+    h += "<p>User hits and visits on " + owndomain + " from <script>document.write(DT2Locale('" + startPeriod + "'));</script> to <script>document.write(DT2Locale('" + endPeriod + "'));</script>:</p>"
     h += '<div id="mhvchart"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
@@ -104,12 +105,14 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += '}' + "\n"
         
     # getting max from series,vdata and sdata:
-    h += 'const yMax = Math.max('
-    #h += 'd3.max(series, d => d3.max(d, d => d[1])),'
+    h += 'let yMax = Math.max('
     h += 'd3.max(series, s => d3.max(s.values, v => v[1])),'
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
-    h += ');' + "\n"
+    h += ');' 
+    # round up
+    h += "rm = yMax % 1000;"
+    h += "yMax += 1000 - rm;" + "\n"
     
     h += 'const container = document.getElementById("mhvchart");'
     h += 'const { width } = container.getBoundingClientRect();'
