@@ -58,7 +58,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     #h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
     
     h += "<p>User hits and visits on " + owndomain + " from <script>document.write(DT2Locale('" + startPeriod + "01'));</script> to "
-    h += "<script>document.write(DT2Locale('" + endPeriod + "+ daysInMonth('" + endPeriod[0:4] + "','" + endPeriod[5:6] + "'));</script>:</p>"
+    h += "<script>document.write(DT2Locale('" + endPeriod + "'+ daysInMonth('" + endPeriod[0:3] + "','" + endPeriod[4:5] + "')));</script>:</p>"
     h += '<div id="mhvchart"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
