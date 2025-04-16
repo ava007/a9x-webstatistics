@@ -7,9 +7,9 @@ This package produces web statistics and analytical output based on nginx access
 [![Downloads](https://img.shields.io/pypi/dm/a9x-webstatistics)](https://pypistats.org/packages/a9x-webstatistics)
 [![Python](https://img.shields.io/pypi/pyversions/a9x-webstatistics)](https://pypi.org/project/a9x-webstatistics)
 
-## Live Example
+## Live Examples
 
-Visit the live example on [logikfabrik.com](https://www.logikfabrik.com/webstatsLF24.html).
+Visit the live examples on [logikfabrik.com](https://www.logikfabrik.com/aboutwebstats.html).
 
 <img src="https://github.com/ava007/a9x-webstatistics/blob/main/a9x-webstatistics_20241123.png">
 
