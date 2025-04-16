@@ -56,7 +56,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>Daily User Hits and Visits</h3>'
-    h += '<p>User hits and visits on ' + owndomain + ' from ' + startPeriod + ' to ' + endPeriod + ':</p>'
+    h += "<p>User hits and visits on " + owndomain + " from <script>document.write(DT2Locale('" + startPeriod + "'));</script> to <script>document.write(DT2Locale('" + endPeriod + "'));</script>:</p>"
     h += '<div id="dhvchart-container"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
