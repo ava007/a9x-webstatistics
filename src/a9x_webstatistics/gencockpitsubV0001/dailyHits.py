@@ -105,14 +105,14 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '}' + "\n"
      
     # getting max from series,vdata and sdata:
-    h += 'const yMax = Math.max('
+    h += 'let yMax = Math.max('
     h += 'd3.max(series, s => d3.max(s.values, v => v[1])),'
     h += 'd3.max(vdata, d => d.c),'
     h += 'd3.max(rdata, d => d.c)'
     h += ');' 
     # round up
-    h += "rm = yMax % 10;"
-    h += "yMax += 10 - rm + 10;" + "\n"
+    h += "rm = yMax % 1000;"
+    h += "yMax += 1000 - rm;" + "\n"
 
     
     h += 'const container = document.getElementById("dhvchart-container");'
