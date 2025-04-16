@@ -29,6 +29,10 @@ def genHeader(domain):
     h += 'var x = document.getElementById(eid);'
     h += 'if (x.style.display == "none") { x.style.display = "block"; } else { x.style.display = "none"; }'
     h += '}'
+    # get max number of days for a specific month:
+    h += 'function daysInMonth (month, year) {'
+    h += 'return new Date(year, month, 0).getDate();'
+    h += '}'
     
     h += '</script>'
     h += '</head>' + "\n"
