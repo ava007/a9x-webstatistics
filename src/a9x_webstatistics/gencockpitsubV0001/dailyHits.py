@@ -111,7 +111,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'd3.max(rdata, d => d.c)'
     h += ');' 
     # round up
-    h += "rm = yMax % 1000;"
+    h += "const rm = yMax % 1000;"
     h += "yMax += 1000 - rm;" + "\n"
 
     
