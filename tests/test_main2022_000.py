@@ -3,9 +3,6 @@ from pathlib import Path
 
 from a9x_webstatistics.main import *
 from a9x_webstatistics.updatestatistics import upd
-#from a9x_webstatistics.migrateV0001.migrateV0001sub0001 import *
-#from a9x_webstatistics.migrateV0001.migrateV0001sub0001 import migv0001sub0001
-#from a9x_webstatistics.migV0001 import migrateV0001sub0001
 from a9x_webstatistics.migV0001.migrateV0001sub0001 import *
 from subprocess import run
 
@@ -18,7 +15,7 @@ class TestMain(unittest.TestCase):
         #print(cmddata.stderr) 
 
         # calling runws expecting return 0
-        assert runws(statfile="webstat.json", infile="nginx_access0.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
+        assert runws(statfile="webstat.json", infile="nginx_access2022_00.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
         file = Path("webstat.json")  
         with open(file) as f:  
             file_data = f.read()  
@@ -26,7 +23,7 @@ class TestMain(unittest.TestCase):
         contents = json.loads(file_data)
 
         # check with nginx_access0.log
-        assert '20230923165725' in contents['timelastrec']
+        assert '20220923165725' in contents['timelastrec']
 
 if __name__ == '__main__':
     unittest.main()
