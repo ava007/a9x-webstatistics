@@ -48,6 +48,18 @@ def sumMonth2YearV0001(d, statfile):
         if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
             d['v0001']['days'][recYear]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
 
+        if 'countryHits' in dtmp['v0001']['days'][x]['user']:
+            for ck, cv in sorted(dtmp['v0001']['days'][x]['user']['countryHits'].items(), key=itemgetter(1), reverse=True):
+                if ck in d['v0001']['days'][recYear]['user']['countryHits']:
+                    d['v0001']['days'][recYear]['user']['countryHits'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['user']['countryHits'][ck] = cv
+
+        if 'deviceHits' in  dtmp['v0001']['days'][x]['user']:   
+            d['v0001']['days'][recYear]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
+            d['v0001']['days'][recYear]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
+            d['v0001']['days'][recYear]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
+
     return d
 
 
