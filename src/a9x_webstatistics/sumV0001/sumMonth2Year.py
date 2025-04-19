@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from operator import itemgetter
 import json
 
-def sumYearV0001(d, statfile):
+def sumMonth2YearV0001(d, statfile):
     
     # accumulate months to year:
     # if lasttimerec is 2025xxxx then summup to (inkl) 202212
@@ -27,15 +27,27 @@ def sumYearV0001(d, statfile):
             
         # here onward: sum up
         recYear = x[0:4]  # [start:end] index 0 to index 4 (end not inclusive)
-        d['v0001']['days'][recYear] = {}
-        d['v0001']['days'][recYear]['user'] = {}
-        d['v0001']['days'][recYear]['user']['visits'] = 0;
-        d['v0001']['days'][recYear]['user']['bytesSent']   = 0;
-        d['v0001']['days'][recYear]['user']['countryHits'] = {}
-        d['v0001']['days'][recYear]['user']['deviceHits'] = {}
-        d['v0001']['days'][recYear]['user']['deviceHits']['mobile']  = 0 
-        d['v0001']['days'][recYear]['user']['deviceHits']['tablet']  = 0 
-        d['v0001']['days'][recYear]['user']['deviceHits']['desktop'] = 0 
+        if recYear not in d['v0001']['days']:
+            d['v0001']['days'][recYear] = {}
+            d['v0001']['days'][recYear]['user'] = {}
+            d['v0001']['days'][recYear]['user']['visits'] = 0;
+            d['v0001']['days'][recYear]['user']['bytesSent']   = 0;
+            d['v0001']['days'][recYear]['user']['countryHits'] = {}
+            d['v0001']['days'][recYear]['user']['deviceHits'] = {}
+            d['v0001']['days'][recYear]['user']['deviceHits']['mobile']  = 0 
+            d['v0001']['days'][recYear]['user']['deviceHits']['tablet']  = 0 
+            d['v0001']['days'][recYear]['user']['deviceHits']['desktop'] = 0 
+            d['v0001']['days'][recYear]['user']['serverResponseCode'] = {}
+            d['v0001']['days'][recYear]['user']['topUrl'] = {}
+            d['v0001']['days'][recYear]['user']['language'] = {}
+            d['v0001']['days'][recYear]['robot']['bytesSent']   = 0;
+            d['v0001']['days'][recYear]['robot']['robotHits'] = {}
+
+        if 'visits' in dtmp['v0001']['days'][x]['user']:
+            d['v0001']['days'][recYear]['user']['visits'] += dtmp['v0001']['days'][x]['user']['visits']
+        if 'bytesSent' in dtmp['v0001']['days'][x]['user']:
+            d['v0001']['days'][recYear]['user']['bytesSent']  += int(dtmp['v0001']['days'][x]['user']['bytesSent'])
+
     return d
 
 
