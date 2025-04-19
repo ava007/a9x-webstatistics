@@ -14,7 +14,7 @@ def sumMonth2YearV0001(d, statfile):
     sumUntilMonth = str(yearInt) + '12'
    
     lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
-    print("sumYear:  sumup inkl: " + sumUntilMonth + " " + lasttimerecobj: " + str(lasttimerecobj))
+    print("sumMonth2Year:  sumup inkl: " + sumUntilMonth + " " + lasttimerecobj: " + d['timelastrec'])
 
     dtmp = deepcopy(d)
     for x in dtmp['v0001']['days']:
