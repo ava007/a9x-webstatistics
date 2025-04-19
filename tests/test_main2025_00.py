@@ -9,7 +9,7 @@ class TestMain030(unittest.TestCase):
 
     def test_main030(self):
         # calling runws expecting return 0
-        assert runws(statfile="webstat.json", infile="nginx_access3.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
+        assert runws(statfile="webstat.json", infile="nginx_access2025_00.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
         file = Path("webstat.json")  
         with open(file) as f:  
             file_data = f.read()  
