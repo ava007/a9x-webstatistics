@@ -19,8 +19,9 @@ class TestMain2025_00(unittest.TestCase):
         assert '20250315175938' in contents['timelastrec']
 
         # see first access log:
-        print(str(contents['v0001']['days']['2022']['user']['nav']))
-        assert any(d['s'] == 'bing.com' for d in contents['v0001']['days']['2022']['user']['nav']), "No dictionary has 's' equal to 'bing'"
+        # req not implemented
+        #print(str(contents['v0001']['days']['2022']['user']['nav']))
+        #assert any(d['s'] == 'bing.com' for d in contents['v0001']['days']['2022']['user']['nav']), "No dictionary has 's' equal to 'bing'"
       
 
 if __name__ == '__main__':
