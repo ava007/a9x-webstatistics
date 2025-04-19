@@ -59,6 +59,16 @@ def sumMonth2YearV0001(d, statfile):
             d['v0001']['days'][recYear]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
             d['v0001']['days'][recYear]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
             d['v0001']['days'][recYear]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
+        
+        # Server Response Code:
+        if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
+            for ck,cv in dtmp['v0001']['days'][x]['user']['serverResponseCode'].items():
+                print("sumMonth2Year:  Responsecode: " + ck + ": " + str(cv) )
+                print("sumMonth2Year responseCode: " + str(d['v0001']['days'][recYear]['user']['serverResponseCode']))
+                if ck in d['v0001']['days'][recYear]['user']['serverResponseCode']:
+                    d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv;
 
     return d
 
