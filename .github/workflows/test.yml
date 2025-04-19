@@ -53,8 +53,8 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2022_00.log -o nginx_access2022_00.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2023_00.log -o nginx_access2023_00.log
-          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month02.log -o nginx_access2.log
-          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month03_2025.log -o nginx_access3.log
+          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2024_00.log -o nginx_access2024_00.log
+          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2025_00.log -o nginx_access2025_00.log
           curl -L -o GeoIP2-Country.mmdb https://github.com/maxmind/MaxMind-DB/raw/main/test-data/GeoIP2-Country-Test.mmdb 
           tox -e py
         # .github/workflows/ci-cd.yml
