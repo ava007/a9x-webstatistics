@@ -19,7 +19,7 @@ def sumMonth2YearV0001(d, statfile):
     dtmp = deepcopy(d)
     for x in dtmp['v0001']['days']:
         # skip days, years
-        if len(x) =! 6:  
+        if len(x) != 6:  
             continue
         # skip young month:
         if x > sumUntilMonth:
