@@ -6,6 +6,7 @@ from importlib.metadata import version
 from datetime import datetime, timedelta
 from a9x_webstatistics import __version__
 from .gencockpitsubV0001 import *
+from .sumV0001 import *
     
 def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
