@@ -48,7 +48,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
         # record start / end period to be displayed on chart:
         if startPeriod is None or k < startPeriod:
             startPeriod = k
-        if endPeriod is None:
+        if endPeriod is None or k > endPeriod:
             endPeriod = k
         
     
