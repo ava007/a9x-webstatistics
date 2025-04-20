@@ -13,7 +13,9 @@ class TestMain010(unittest.TestCase):
         file = Path("webstat.json")  
         with open(file) as f:  
             file_data = f.read()  
+        print("statfile end of 2024:")
         print(str(file_data))
+        
         contents = json.loads(file_data)
         assert '20240227151514' in contents['timelastrec']
 
