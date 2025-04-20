@@ -8,7 +8,7 @@ def sumMonth2YearV0001(d, statfile):
     # accumulate months to year:
     # if lasttimerec is 2025xxxx then summup to (inkl) 202212
 
-    yearInt = int(d['timelastrec'][0:3])
+    yearInt = int(d['timelastrec'][0:4])
     yearInt =- 3
 
     sumUntilMonth = str(yearInt) + '12'
