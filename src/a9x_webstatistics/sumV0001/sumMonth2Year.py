@@ -95,7 +95,7 @@ def sumMonth2YearV0001(d, statfile):
                     d['v0001']['days'][recYear]['user']['topUrl'][ck] += cv
                 else:
                     d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv
-            print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl'])
+            print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl']))
                     
         # delete obsolete data:
         del d['v0001']['days'][x]
