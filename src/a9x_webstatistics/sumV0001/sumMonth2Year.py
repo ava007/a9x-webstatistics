@@ -72,6 +72,9 @@ def sumMonth2YearV0001(d, statfile):
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] += cv
                 else:
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv;
+                    
+        # delete obsolete data:
+        del d['v0001']['days'][x]
 
     return d
 
