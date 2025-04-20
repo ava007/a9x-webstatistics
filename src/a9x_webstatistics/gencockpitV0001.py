@@ -55,6 +55,8 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         if len(firstDate) == 6:
             firstDate += '01'   # add day to YYYYMM
+        if len(firstDate) == 4:
+            firstDate += '0101'   # add dayMonth to YYYY
         d1 = datetime.strptime(firstDate, "%Y%m%d")
         d2 = datetime.strptime(lastDate, "%Y%m%d")
 
