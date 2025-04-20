@@ -66,12 +66,13 @@ def sumMonth2YearV0001(d, statfile):
         # Server Response Code:
         if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
             for ck,cv in dtmp['v0001']['days'][x]['user']['serverResponseCode'].items():
-                print("sumMonth2Year:  Responsecode: " + ck + ": " + str(cv) )
-                print("sumMonth2Year responseCode: " + str(d['v0001']['days'][recYear]['user']['serverResponseCode']))
+                print("sumMonth2Year:  Responsecode  In: " + ck + ": " + str(cv) )
+          
                 if ck in d['v0001']['days'][recYear]['user']['serverResponseCode']:
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] += cv
                 else:
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv;
+                print("sumMonth2Year responseCode Out: " + str(d['v0001']['days'][recYear]['user']['serverResponseCode']))
                     
         # delete obsolete data:
         del d['v0001']['days'][x]
