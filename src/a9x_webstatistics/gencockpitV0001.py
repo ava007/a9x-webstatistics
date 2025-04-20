@@ -33,7 +33,10 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
         
         lastDate = list(d['v0001']['days'].keys())[-1]
-        actYearMonth = lastDate[0:6]
+        if len(lastDate) >= 6:
+            actYearMonth = lastDate[0:6]
+        else:
+            actYearMonth = lastDate[0:4] + '1231'
 
         firstDate = list(d['v0001']['days'].keys())[0]
         
