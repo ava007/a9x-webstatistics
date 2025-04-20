@@ -160,11 +160,10 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
     d = sumNavDayV0001(d)
     
     # summarize previous months
-    #d = summonth(d)
     d = sumMonthV0001(d, statfile)
 
     # sum Months to Years:
-    d = sumMonth2YearV0001(d, statfile):
+    d = sumMonth2YearV0001(d, statfile)
 
     d = cleanupQualityV0001(d)
      
