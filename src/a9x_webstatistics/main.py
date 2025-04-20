@@ -14,6 +14,7 @@ from .parseRecJsonV0001 import parseRecJsonV0001
 from .sumNavDayV0001 import sumNavDayV0001
 from importlib.metadata import version
 import geoip2.database
+from .sumV0001 import *
 
 def parseRec(rec, log_pattern, j, georeader):
     r = {}
