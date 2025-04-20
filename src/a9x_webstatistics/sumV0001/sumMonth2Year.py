@@ -109,7 +109,7 @@ def sumMonth2YearV0001(d, statfile):
 
         # Robots
         if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
-            d['v0001']['days'][recYear]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robit']['robotHits']
+            d['v0001']['days'][recYear]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
         if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
             d['v0001']['days'][recYear]['robot']['bytesSent']  += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
 
