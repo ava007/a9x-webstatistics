@@ -12,7 +12,8 @@ class TestMain2025_00(unittest.TestCase):
         assert runws(statfile="webstat.json", infile="nginx_access2025_00.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
         file = Path("webstat.json")  
         with open(file) as f:  
-            file_data = f.read()  
+            file_data = f.read() 
+        print("statfile end of 2025:")
         print(str(file_data))
         contents = json.loads(file_data)
         print(str(contents))
