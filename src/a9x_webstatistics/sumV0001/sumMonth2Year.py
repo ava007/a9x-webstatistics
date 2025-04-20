@@ -96,6 +96,33 @@ def sumMonth2YearV0001(d, statfile):
                 else:
                     d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv
             print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl']))
+
+        # languages:
+        if 'language' in dtmp['v0001']['days'][x]['user']:
+            for ck,cv in dtmp['v0001']['days'][x]['user']['language'].items():
+                print("sumMonth2Year In: " + str(x) + " language: " + ck + ": " + str(cv) )
+                if ck in d['v0001']['days'][recYear]['user']['language']:
+                    d['v0001']['days'][recYear]['user']['language'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['user']['language'][ck] = cv
+            print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['language']))
+
+        # Robots
+        if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
+            d['v0001']['days'][recYear]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robit']['robotHits']
+        if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
+            d['v0001']['days'][recYear]['robot']['bytesSent']  += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
+
+        # Robot Server Response Code:
+        if 'serverResponseCode' in dtmp['v0001']['days'][x]['robot']:
+            for ck,cv in dtmp['v0001']['days'][x]['robot']['serverResponseCode'].items():
+                print("sumMonth2Year:  Responsecode  In Robot: " + ck + ": " + str(cv) )
+                if ck in d['v0001']['days'][recYear]['robot']['serverResponseCode']:
+                    d['v0001']['days'][recYear]['robot']['serverResponseCode'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['robot']['serverResponseCode'][ck] = cv
+                print("sumMonth2Year responseCode Out Robot: " + str(d['v0001']['days'][recYear]['robot']['serverResponseCode']))
+
                     
         # delete obsolete data:
         del d['v0001']['days'][x]
