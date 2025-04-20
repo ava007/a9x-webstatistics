@@ -40,11 +40,13 @@ def sumMonth2YearV0001(d, statfile):
             d['v0001']['days'][recYear]['user']['deviceHits']['tablet']  = 0 
             d['v0001']['days'][recYear]['user']['deviceHits']['desktop'] = 0 
             d['v0001']['days'][recYear]['user']['serverResponseCode'] = {}
+            d['v0001']['days'][recYear]['user']['countryHits'] = {}
             d['v0001']['days'][recYear]['user']['topUrl'] = {}
             d['v0001']['days'][recYear]['user']['language'] = {}
             d['v0001']['days'][recYear]['robot'] = {};
             d['v0001']['days'][recYear]['robot']['bytesSent']   = 0;
             d['v0001']['days'][recYear]['robot']['robotHits'] = {}
+            d['v0001']['days'][recYear]['robot']['serverResponseCode'] = {}
 
         if 'visits' in dtmp['v0001']['days'][x]['user']:
             d['v0001']['days'][recYear]['user']['visits'] += dtmp['v0001']['days'][x]['user']['visits']
@@ -73,6 +75,27 @@ def sumMonth2YearV0001(d, statfile):
                 else:
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv;
                 print("sumMonth2Year responseCode Out: " + str(d['v0001']['days'][recYear]['user']['serverResponseCode']))
+        
+        # Country Hits
+        if 'countryHits' in dtmp['v0001']['days'][x]['user']:
+            for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
+                print("sumMonth2Year In: " + str(x) + " country: " + ck + ": " + str(cv) )
+                if ck in d['v0001']['days'][recYear]['user']['countryHits']:
+                    d['v0001']['days'][recYear]['user']['countryHits'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['user']['countryHits'][ck] = cv;
+                print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['countryHits']) )
+
+
+        # Top URLs:
+        if 'topUrl' in dtmp['v0001']['days'][x]['user']:
+            for ck,cv in dtmp['v0001']['days'][x]['user']['topUrl'].items():
+                print("sumMonth2Year In: " + str(x) + " topurl: " + ck + ": " + str(cv) )
+                if ck in d['v0001']['days'][recYear]['user']['topUrl']:
+                    d['v0001']['days'][recYear]['user']['topUrl'][ck] += cv
+                else:
+                    d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv;
+                print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl'])
                     
         # delete obsolete data:
         del d['v0001']['days'][x]
