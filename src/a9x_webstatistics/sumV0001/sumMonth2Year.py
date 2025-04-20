@@ -42,6 +42,7 @@ def sumMonth2YearV0001(d, statfile):
             d['v0001']['days'][recYear]['user']['serverResponseCode'] = {}
             d['v0001']['days'][recYear]['user']['topUrl'] = {}
             d['v0001']['days'][recYear]['user']['language'] = {}
+            d['v0001']['days'][recYear]['robot'] = {};
             d['v0001']['days'][recYear]['robot']['bytesSent']   = 0;
             d['v0001']['days'][recYear]['robot']['robotHits'] = {}
 
