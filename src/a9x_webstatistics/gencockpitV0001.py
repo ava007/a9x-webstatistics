@@ -36,7 +36,10 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         if len(lastDate) >= 6:
             actYearMonth = lastDate[0:6]
         else:
-            actYearMonth = lastDate[0:4] + '1231'
+            actYearMonth = lastDate[0:4] + '12'
+            lastDate = lastDate[0:4] + '1231'
+
+        
 
         firstDate = list(d['v0001']['days'].keys())[0]
         
