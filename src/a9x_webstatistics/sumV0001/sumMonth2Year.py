@@ -73,7 +73,7 @@ def sumMonth2YearV0001(d, statfile):
                 if ck in d['v0001']['days'][recYear]['user']['serverResponseCode']:
                     d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] += cv
                 else:
-                    d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv;
+                    d['v0001']['days'][recYear]['user']['serverResponseCode'][ck] = cv
                 print("sumMonth2Year responseCode Out: " + str(d['v0001']['days'][recYear]['user']['serverResponseCode']))
         
         # Country Hits
@@ -83,8 +83,8 @@ def sumMonth2YearV0001(d, statfile):
                 if ck in d['v0001']['days'][recYear]['user']['countryHits']:
                     d['v0001']['days'][recYear]['user']['countryHits'][ck] += cv
                 else:
-                    d['v0001']['days'][recYear]['user']['countryHits'][ck] = cv;
-                print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['countryHits']) )
+                    d['v0001']['days'][recYear]['user']['countryHits'][ck] = cv
+            print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['countryHits']) )
 
 
         # Top URLs:
@@ -94,8 +94,8 @@ def sumMonth2YearV0001(d, statfile):
                 if ck in d['v0001']['days'][recYear]['user']['topUrl']:
                     d['v0001']['days'][recYear]['user']['topUrl'][ck] += cv
                 else:
-                    d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv;
-                print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl'])
+                    d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv
+            print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl'])
                     
         # delete obsolete data:
         del d['v0001']['days'][x]
