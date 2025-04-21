@@ -52,6 +52,7 @@ jobs:
       # Run tox using the version of Python in `PATH`
         run: |
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2022_00.log -o nginx_access2022_00.log
+          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2022_01.log -o nginx_access2022_01.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2023_00.log -o nginx_access2023_00.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2024_00.log -o nginx_access2024_00.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_month2025_00.log -o nginx_access2025_00.log
