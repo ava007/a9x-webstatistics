@@ -25,5 +25,17 @@ class TestMain(unittest.TestCase):
         # check with nginx_access0.log
         assert '20220923165725' in contents['timelastrec']
 
+       # calling runws expecting return 0
+        assert runws(statfile="webstat.json", infile="nginx_access2022_01.log", geoip="GeoIP2-Country.mmdb", verbosity="0", domain="http://logikfabrik.com") == 0
+        file = Path("webstat.json")  
+        with open(file) as f:  
+            file_data = f.read()  
+        print(str(file_data))
+        contents = json.loads(file_data)
+
+        # check with nginx_access0.log  [21/Dec/2022:15:19:03]
+        assert '20221221151903' in contents['timelastrec']
+
+
 if __name__ == '__main__':
     unittest.main()
