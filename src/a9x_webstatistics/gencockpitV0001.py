@@ -62,8 +62,16 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         if len(firstDate) == 6:
             firstDate += '01'   # add day to YYYYMM
         if len(firstDate) == 4:
-            firstDate += '0101'   # add dayMonth to YYYY
+            firstDate += '0101'   # add MonthDay to YYYY
         d1 = datetime.strptime(firstDate, "%Y%m%d")
+        
+        if len(lastDate) == 6:
+            if lastDate[4:6] == '02'
+                lateDate += '28'   # add day to YYYYMM
+            else:
+                lateDate += '30'   # add day to YYYYMM
+        if len(lastDate) == 4:
+            lastDate += '1231'   # add MonthDay to YYYY
         d2 = datetime.strptime(lastDate, "%Y%m%d")
 
         # difference between dates in timedelta
