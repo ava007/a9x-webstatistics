@@ -67,9 +67,9 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         
         if len(lastDate) == 6:
             if lastDate[4:6] == '02':
-                lateDate += '28'   # add day to YYYYMM
+                lastDate += '28'   # add day to YYYYMM
             else:
-                lateDate += '30'   # add day to YYYYMM
+                lastDate += '30'   # add day to YYYYMM
         if len(lastDate) == 4:
             lastDate += '1231'   # add MonthDay to YYYY
         d2 = datetime.strptime(lastDate, "%Y%m%d")
