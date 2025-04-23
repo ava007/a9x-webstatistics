@@ -20,8 +20,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
         h += '<a href="#hdDay" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Monthly Statistics</a>'
-        h += '<a href="#hdYear" class="btn btn-primary" role="button" data-bs-toggle="button">Yearly Statistics</a>'
+        h += '<a href="#hdMonth" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Monthly/Yearly Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row pt-4"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
@@ -38,8 +37,6 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         else:
             actYearMonth = lastDate[0:4] + '12'
             lastDate = lastDate[0:4] + '1231'
-
-        
 
         firstDate = list(d['v0001']['days'].keys())[0]
         
