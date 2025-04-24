@@ -54,6 +54,9 @@ def navChord(d, owndomain, omit):
         days += 1
         if days >= 31:
             break
+
+    if len(data) == 0:
+        return ''
    
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
