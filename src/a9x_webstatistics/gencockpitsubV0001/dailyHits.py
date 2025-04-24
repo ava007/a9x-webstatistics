@@ -50,7 +50,10 @@ def dailyHitsVisitsChart(d, owndomain, omit):
             startPeriod = k
         if endPeriod is None or k > endPeriod:
             endPeriod = k
-        
+
+    # if no daily data is available:
+    if len(sdata) == 0:
+        return ''
     
     # d3js horizontal bubble char in case results are available
     h = "\n\n"
@@ -114,7 +117,6 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     # round up
     h += "const rm = yMax % 1000;"
     h += "yMax += 1000 - rm;" + "\n"
-
     
     h += 'const container = document.getElementById("dhvchart-container");'
     h += 'const { width } = container.getBoundingClientRect();'
@@ -273,10 +275,3 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += "</script>"
     h += '</div>' + "\n"
     return h
-    
-#def is_valid_ip(address):
-#    try: 
-#        x = ipaddress.ip_address(address)
-#        return True
-#    except:
-#        return False
