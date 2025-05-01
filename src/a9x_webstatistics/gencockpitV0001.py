@@ -39,7 +39,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             lastDate = lastDate[0:4] + '1231'
 
         firstDate = list(d['v0001']['days'].keys())[0]
-        if verbosity == 99:
+        if verbosity == '99':
             print("gencockpit: firstDate:" + str(firstDate) + " lastDate: " + str(lastDate) )
         
         # row for top domains and urls:
@@ -75,7 +75,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         # difference between dates in timedelta
         deltaInDays = d2 - d1
-        if verbosity == 99:
+        if verbosity == '99':
             print(f'Difference is {deltaInDays.days} days')
 
         # show long term not on first runs:
