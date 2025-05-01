@@ -39,25 +39,6 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             lastDate = lastDate[0:4] + '1231'
 
         firstDate = list(d['v0001']['days'].keys())[0]
-        if verbosity == '99':
-            print("gencockpit: firstDate:" + str(firstDate) + " lastDate: " + str(lastDate) )
-        
-        # row for top domains and urls:
-        h += '<div class="row pt-4">'
-        h += dailyTopDomains(d, owndomain, omit)
-        h += dailyTopUrl(d, owndomain, omit)
-        h += dailyTopCountries(d, owndomain, omit)
-        h += '</div>'
-
-        # accepted languages by browser:
-        h += '<div class="row pt-4">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
-
-        # cache, response_time:
-        h += '<div class="row pt-4">' + performance(d) + '</div>'
-       
-        # top external landings (friends):
-        #h += '<div class="row pt-4">' + externalFriends(d, owndomain, omit) + '</div>'  + "\n"
-
         if len(firstDate) == 6:
             firstDate += '01'   # add day to YYYYMM
         if len(firstDate) == 4:
@@ -76,7 +57,22 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         # difference between dates in timedelta
         deltaInDays = d2 - d1
         if verbosity == '99':
+            print("gencockpit: firstDate:" + str(firstDate) + " lastDate: " + str(lastDate) )
             print(f'Difference is {deltaInDays.days} days')
+
+        # row for top domains and urls:
+        h += '<div class="row pt-4">'
+        h += dailyTopDomains(d, owndomain, omit)
+        h += dailyTopUrl(d, owndomain, omit)
+        h += dailyTopCountries(d, owndomain, omit)
+        h += '</div>'
+
+        # accepted languages by browser:
+        h += '<div class="row pt-4">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
+
+        # cache, response_time:
+        h += '<div class="row pt-4">' + performance(d) + '</div>'
+        
 
         # show long term not on first runs:
         if deltaInDays.days > 32:
