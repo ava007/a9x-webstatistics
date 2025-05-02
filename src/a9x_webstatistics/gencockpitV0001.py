@@ -27,9 +27,9 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += "<p><small>Last record included in statistic: <script>document.write(DT2Locale('" + d['timelastrec'] + "'));</script></small></p>"
         h += '</div></div>'
 
-        h += '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
+        h += "\n" + '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
 
-        h += '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
+        h += "\n" + '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
         
         lastDate = list(d['v0001']['days'].keys())[-1]
         if len(lastDate) >= 6:
@@ -61,31 +61,31 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             print(f'Difference is {deltaInDays.days} days')
 
         # row for top domains and urls:
-        h += '<div class="row pt-4">'
+        h += "\n" + '<div class="row pt-4">'
         h += dailyTopDomains(d, owndomain, omit)
         h += dailyTopUrl(d, owndomain, omit)
         h += dailyTopCountries(d, owndomain, omit)
         h += '</div>'
 
         # accepted languages by browser:
-        h += '<div class="row pt-4">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
+        h += "\n" + '<div class="row pt-4">' + cockpitLanguages(d, owndomain) + '</div>' + "\n"
 
         # cache, response_time:
-        h += '<div class="row pt-4">' + performance(d) + '</div>'
+        h += "\n" + '<div class="row pt-4">' + performance(d) + '</div>'
         
 
         # show long term not on first runs:
         if deltaInDays.days > 32:
 
-            h += '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
+            h += "\n" + '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
         
-            h += '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
+            h += "\n" + '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
             h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
         
-            h += '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
+            h += "\n" + '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
             h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
 
-            h += '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
+            h += "\n" + '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
 
         tquality = {}   # nested dictionary!
         for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
@@ -105,7 +105,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
                             tquality[sk]['count']  += 1
 
         if len(tquality) > 0:
-            h += '<div class="row pt-4">' 
+            h += "\n" + '<div class="row pt-4">' 
             h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
             h += '<div class="card mt-2"><div class="card-body">'
             h += '<h3 class="card-title">Quality Improvements</h3>'
@@ -124,9 +124,9 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
                 if i == 10:
                     break
             h += '</table>'
-            h += '</div></div></div></div>' + "\n\n"   # end of card and col
+            h += '</div></div></div></div>'   # end of card and col
  
-        h += '<footer class="row bg-light py-4 mt-4">'
+        h += "\n" + '<footer class="row bg-light py-4 mt-4">'
         h += '<div class="col"><h2>About</h2>'
         h += '<ul class="nav flex-column">'
         h += '<li class="nav-item mb-2"><a href="https://github.com/ava007/a9x-webstatistics" class="nav-link p-0 text-body-secondary">© 2024-2025 a9x-webstatistics</a></li>'
