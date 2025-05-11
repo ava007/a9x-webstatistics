@@ -17,7 +17,7 @@ def sumNavDayV0001(d, verbosity ):
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
             if "99" in verbosity:
-                print("sumNavDayV0001: lastDay of Month is: " + str(lastDay) )
+                print("sumNavDayV0001: lastDay of Month is: " + str(lastDay) + " " + str(k))
 
         # do not process lastDay!
         if str(lastDay) == str(k):
