@@ -157,7 +157,7 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
             print("main: last recparsed:" + str(recparsed) )
  
     # sum navigation
-    d = sumNavDayV0001(d)
+    d = sumNavDayV0001(d, verbosity)
     
     # summarize previous months
     d = sumMonthV0001(d, statfile)
