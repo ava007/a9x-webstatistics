@@ -12,9 +12,8 @@ def sumDay2MonthV0001(d, statfile, verbosity):
 
     # take timelastrec as based for sum - reason: regression tests   
     sumUntilDay = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S") - timedelta(days=62)
-    #sumUntilDay = datetime.now() - timedelta(days=62)
     sumTill = sumUntilDay.strftime("%Y%m")
-    print("sumMonthV0001: accumulate including month: "  + sumTill)   # 202312
+    print("sumDay2MonthV0001: accumulate including month: "  + sumTill)   # 202312
     
     # iterate over days to accumulate months:
     dtmp = deepcopy(d)
@@ -23,9 +22,9 @@ def sumDay2MonthV0001(d, statfile, verbosity):
         if len(x) > 6:
             recMonth = x[0:6]
             if recMonth <= sumTill:
-                #print("sumMonthV0001: recMonth : " + recMonth + "  day x: " + x)
+                if verbosity == "99":
+                    print("sumDay2MonthV0001: recMonth : " + recMonth + ",  day is: " + x)
                 if recMonth not in d['v0001']['days']:
-                            
                     d['v0001']['days'][recMonth] = {}
                     d['v0001']['days'][recMonth]['user'] = {}
                     d['v0001']['days'][recMonth]['user']['visits'] = 0;
@@ -36,7 +35,6 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  = 0 
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] = 0 
 
-                    #d['v0001']['days'][recMonth]['user']['externalFriendsHits'] = {}
                     d['v0001']['days'][recMonth]['user']['topUrl'] = {}
                     d['v0001']['days'][recMonth]['user']['serverResponseCode'] = {}
                     d['v0001']['days'][recMonth]['robot'] = {}
@@ -52,8 +50,9 @@ def sumDay2MonthV0001(d, statfile, verbosity):
 
                 if 'countryHits' in dtmp['v0001']['days'][x]['user']:
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
-                        #print("sum: country: " + ck + ": " + str(cv) )
-                        #print("sum: countries" + str(dtmp['v0001']['days'][recMonth]['user']['countryHits']))
+                        if verbosity == "99":
+                            print("sumDay2Month: country: " + ck + ": " + str(cv) )
+                            print("sumDay2Month: countries" + str(dtmp['v0001']['days'][recMonth]['user']['countryHits']))
                         if ck in d['v0001']['days'][recMonth]['user']['countryHits']:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
@@ -64,26 +63,11 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     d['v0001']['days'][recMonth]['user']['deviceHits']['tablet']  += dtmp['v0001']['days'][x]['user']['deviceHits']['tablet']
                     d['v0001']['days'][recMonth]['user']['deviceHits']['desktop'] += dtmp['v0001']['days'][x]['user']['deviceHits']['desktop']
                 
-                # external sources:
-                if 'externalFriendsHits' in dtmp['v0001']['days'][x]['user']:
-                    for ck,cv in dtmp['v0001']['days'][x]['user']['externalFriendsHits'].items():
-                        print("sum: externalFriendsHits: ck: " + ck + " cv: " + str(cv) )
-
-                        #print("sum externalFriendsHits: " + str(d['v0001']['days'][recMonth]['user']['externalFriendsHits']))
-                        if ck not in d['v0001']['days'][recMonth]['user']['externalFriendsHits']:
-                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck] = {'cnt': 0, 'target': {} };
-                        for ct, cc in cv['target'].items():
-                            if ct not in d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target']:
-                               d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] = 0
-                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['target'][ct] += cc
-                            d['v0001']['days'][recMonth]['user']['externalFriendsHits'][ck]['cnt'] += cc
-                
                 if 'robot' in dtmp['v0001']['days'][x]:
                     if 'robotHits' in dtmp['v0001']['days'][x]['robot']:
                         d['v0001']['days'][recMonth]['robot']['robotHits'] += dtmp['v0001']['days'][x]['robot']['robotHits']
                     if 'bytesSent' in dtmp['v0001']['days'][x]['robot']:
                         d['v0001']['days'][recMonth]['robot']['bytesSent'] += int(dtmp['v0001']['days'][x]['robot']['bytesSent'])
-
 
                 # Server Response Code:
                 if 'serverResponseCode' in dtmp['v0001']['days'][x]['user']:
@@ -128,7 +112,8 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
                         if 'p' not in e or e['p'] != 'e':  # not external nav
                             continue
-                        print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
+                        if verbosity = "99":
+                            print('summDay2MonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
                         cnt += 1
                         if cnt > 20:
@@ -139,7 +124,8 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
                         if 'p' in e and e['p'] == 'e':  # omit external
                             continue
-                        print('summarizemonthV0001: nav: ' + str(x) + ': ' + str(e))
+                        if verbosity = "99":
+                            print('summDay2MonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
                         cnt += 1
                         if cnt > 50:
