@@ -124,7 +124,7 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
                         if 'p' in e and e['p'] == 'e':  # omit external
                             continue
-                        if verbosity = "99":
+                        if verbosity == "99":
                             print('summDay2MonthV0001: nav: ' + str(x) + ': ' + str(e))
                         d['v0001']['days'][recMonth]['user']['nav'].append(e)
                         cnt += 1
