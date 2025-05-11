@@ -6,8 +6,8 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
-from .summarizemonth import summonth
-from .summarizemonthV0001 import sumMonthV0001
+#from .summarizemonth import summonth
+#from .summarizemonthV0001 import sumMonthV0001
 from .migV0001 import migv0001sub0001
 from .cleanupV0001 import cleanupQualityV0001
 from .parseRecJsonV0001 import parseRecJsonV0001
@@ -160,7 +160,7 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
     d = sumNavDayV0001(d, verbosity)
     
     # summarize previous months
-    d = sumMonthV0001(d, statfile)
+    d = sumDay2MonthV0001(d, statfile, verbosity)
 
     # sum Months to Years:
     d = sumMonth2YearV0001(d, statfile)
