@@ -2,7 +2,7 @@ from copy import deepcopy
 from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
-def sumNavDayV0001(d):
+def sumNavDayV0001(d, verbosity ):
     
     # nav: accumulate nav on the last day of month:
     dtmp = deepcopy(d)
@@ -16,7 +16,8 @@ def sumNavDayV0001(d):
         if (lastDay is None 
                 or lastDay[0:6] != k[0:6]):
             lastDay = k
-        #    print("sumNavDay: lastDay is: " + str(lastDay) )
+            if "99" in verbosity:
+                print("sumNavDayV0001: lastDay of Month is: " + str(lastDay) )
 
         # do not process lastDay!
         if str(lastDay) == str(k):
