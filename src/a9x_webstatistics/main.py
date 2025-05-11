@@ -190,5 +190,5 @@ if __name__ == "__main__":
     parser.add_argument("-ef", "--efeature", help="use experimentalfeature number, 0=none, 1-99=feature", default="0")
     args, unknown = parser.parse_known_args()
     
-    migv0001sub0001(args.statfile)
+    #migv0001sub0001(args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, efeature=args.efeature)
