@@ -153,10 +153,9 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
                 continue
             d, visitIP = updV0001(d, recparsed, visitIP, domain)
             j['records_processed_for_statistic'] += 1
-        if verbosity == 99:
+        if verbosity == "99":
             print("main: last recparsed:" + str(recparsed) )
-            
-
+ 
     # sum navigation
     d = sumNavDayV0001(d)
     
@@ -190,8 +189,6 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", help="domain https://logikfabrik.com on which the access log file runs", default="https://logikfabrik.com")
     parser.add_argument("-ef", "--efeature", help="use experimentalfeature number, 0=none, 1-99=feature", default="0")
     args, unknown = parser.parse_known_args()
-
-    #migv0001(statfile=args.statfile)
+    
     migv0001sub0001(args.statfile)
     runws(statfile=args.statfile, infile=args.infile, geoip=args.geoip, verbosity=args.verbose, domain=args.domain, efeature=args.efeature)
-    #delv0000(statfile=args.statfile)
