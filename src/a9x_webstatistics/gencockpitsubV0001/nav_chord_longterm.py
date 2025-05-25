@@ -9,13 +9,14 @@ def navChordLongterm(d, owndomain, omit):
     data = []
 
     days = 0
+    cnt_ext = 0
+    cnt_int = 0
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
         # omit days:
         if len(k) > 6:
             continue
         days += 1
         if 'nav' in d['v0001']['days'][k]['user']:
-            cnt = 0
             # entries only
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' not in e:
@@ -34,8 +35,8 @@ def navChordLongterm(d, owndomain, omit):
                 if ':' in e['s']:    # hack for IPv6 addresses/ports
                     continue
 
-                data,cnt = addLinkChord(data, e, cnt, owndomain)
-                if cnt > 30:  # top 30 entry domains
+                data,cnt_ext = addLinkChord(data, e, cnt_ext, owndomain)
+                if cnt_ext > 30:  # top 30 entry domains
                     break
 
              # internal traffic only
@@ -47,8 +48,8 @@ def navChordLongterm(d, owndomain, omit):
                 if any(e['t'].startswith(om) for om in omit):  # omit parts of url
                     continue
 
-                data,cnt = addLinkChord(data, e, cnt, owndomain)
-                if cnt > 30:  # consider only top 30 entries for internal traffic
+                data,cnt_int = addLinkChord(data, e, cnt_int, owndomain)
+                if cnt_int > 30:  # consider only top 30 entries for internal traffic
                     break
                     
         days += 1
