@@ -52,11 +52,12 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     for ck,cv in dtmp['v0001']['days'][x]['user']['countryHits'].items():
                         if verbosity == "99":
                             print("sumDay2Month: country: " + ck + ": " + str(cv) )
-                            print("sumDay2Month: countries" + str(dtmp['v0001']['days'][recMonth]['user']['countryHits']))
                         if ck in d['v0001']['days'][recMonth]['user']['countryHits']:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] += cv
                         else:
                             d['v0001']['days'][recMonth]['user']['countryHits'][ck] = cv;
+                    if verbosity == "99":
+                        print("sumDay2Month: countries (accum)" + str(d['v0001']['days'][recMonth]['user']['countryHits']))
                 
                 if 'deviceHits' in  dtmp['v0001']['days'][x]['user']:   
                     d['v0001']['days'][recMonth]['user']['deviceHits']['mobile']  += dtmp['v0001']['days'][x]['user']['deviceHits']['mobile']
