@@ -15,7 +15,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
             lastPeriod = k[0:6]    # YYYYMMM
 
         if len(k) > 6:             # skip current month
-            if lastPeriod <= k[0:6]:
+            if lastPeriod >= k[0:6]:
                 continue
             kx = k[0:6]
         elif len(k) == 6:
@@ -23,20 +23,15 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         else:
             continue
 
-        # todo: update sdata
-        
-        # omit days:
-        #if len(k) > 6:
-        #    continue
         if mcount > 31:
             break
         mcount += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            addHitData(sdata,  kx, 'desktop' ,d['v0001']['days'][k]['user']['deviceHits']['desktop'])
-            sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
+            addHitData(sdata,  kx, 'desktop', d['v0001']['days'][k]['user']['deviceHits']['desktop'])
+            #sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
-            addHitData(sdata,  kx, 'desktop' , 0)
-            sdata.append({'d': k, 't': 'desktop', 'c': 0})
+            addHitData(sdata, kx, 'desktop', 0)
+            #sdata.append({'d': k, 't': 'desktop', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'mobile', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         else:
