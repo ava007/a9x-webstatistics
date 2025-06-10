@@ -18,6 +18,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             if lastPeriod <= k[0:6]:
                 continue
             kx = k[0:6]
+        elif len(k) == 6:
+            kx = k
+        else:
+            continue
 
         # todo: update sdata
         
@@ -28,6 +32,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             break
         mcount += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
+            addHitData(sdata,  kx, 'desktop' ,d['v0001']['days'][k]['user']['deviceHits']['desktop']):
             sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
             sdata.append({'d': k, 't': 'desktop', 'c': 0})
@@ -294,4 +299,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 # todo:
 def addHitData(arr,  kdate, ktype ,kcount):
     for e in arr:
-        x = 1
+        print( str(e) )
+        if e['d'] == kdate & e['t'] == ktype:
+            e['c'] += kcount
+            return
+    arr.append({'d': kdate, 't': ktype, 'c': kcount})
+    
