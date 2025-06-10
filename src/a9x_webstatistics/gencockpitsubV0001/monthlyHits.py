@@ -26,8 +26,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         # todo: update sdata
         
         # omit days:
-        if len(k) > 6:
-            continue
+        #if len(k) > 6:
+        #    continue
         if mcount > 31:
             break
         mcount += 1
