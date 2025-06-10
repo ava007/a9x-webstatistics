@@ -9,7 +9,18 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     mcount = 0
     startPeriod = None
     endPeriod = None
+    lastPeriod = None    # Format YYYYMM. Entries must be before that period
     for k, v in sorted(d['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+        if lastPeriod is None:
+            lastPeriod = k[0:6]    # YYYYMMM
+
+        if len(k) > 6:             # skip current month
+            lastPeriod <= k[0:6]:
+                continue
+            kx = k[0:6]
+
+        # todo: update sdata
+        
         # omit days:
         if len(k) > 6:
             continue
