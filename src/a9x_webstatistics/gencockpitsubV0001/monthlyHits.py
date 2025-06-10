@@ -298,11 +298,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     h += '</div>' + "\n"
     return h
 
-# todo:
-def addHitData(arr,  kdate, ktype ,kcount):
+def addHitData(arr, kdate, ktype ,kcount):
     for e in arr:
         print('monthlyHits.py: ' + str(e) )
-        if e['d'] == kdate & e['t'] == ktype:
+        if e['d'] == kdate and e['t'] == ktype:
             e['c'] += kcount
             return
     arr.append({'d': kdate, 't': ktype, 'c': kcount})
