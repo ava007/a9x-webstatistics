@@ -79,7 +79,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
             h += "\n" + '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
         
-            h += "\n" + '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit) +  "\n"
+            h += "\n" + '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit, verbosity) +  "\n"
             h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
         
             h += "\n" + '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
