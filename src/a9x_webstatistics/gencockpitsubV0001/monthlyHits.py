@@ -15,7 +15,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             lastPeriod = k[0:6]    # YYYYMMM
 
         if len(k) > 6:             # skip current month
-            lastPeriod <= k[0:6]:
+            if lastPeriod <= k[0:6]:
                 continue
             kx = k[0:6]
 
