@@ -32,9 +32,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
             break
         mcount += 1
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
-            addHitData(sdata,  kx, 'desktop' ,d['v0001']['days'][k]['user']['deviceHits']['desktop']):
+            addHitData(sdata,  kx, 'desktop' ,d['v0001']['days'][k]['user']['deviceHits']['desktop'])
             sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
+            addHitData(sdata,  kx, 'desktop' , 0)
             sdata.append({'d': k, 't': 'desktop', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             sdata.append({'d': k, 't': 'mobile', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
