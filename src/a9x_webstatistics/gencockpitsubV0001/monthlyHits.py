@@ -2,7 +2,7 @@
 from operator import itemgetter
 import ipaddress
 
-def monthlyHitsVisitsChart(d, owndomain, omit):
+def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     rdata = []
     sdata = []
     vdata = []
@@ -300,7 +300,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
 # todo:
 def addHitData(arr,  kdate, ktype ,kcount):
     for e in arr:
-        print( str(e) )
+        if verbosity == '99':
+            print('monthlyHits.py: ' + str(e) )
         if e['d'] == kdate & e['t'] == ktype:
             e['c'] += kcount
             return
