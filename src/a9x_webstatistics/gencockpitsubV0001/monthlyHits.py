@@ -290,3 +290,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit):
     h += "</script>"
     h += '</div>' + "\n"
     return h
+
+# todo:
+def addHitData(arr,  kdate, ktype ,kcount):
+    for e in arr:
+        x = 1
