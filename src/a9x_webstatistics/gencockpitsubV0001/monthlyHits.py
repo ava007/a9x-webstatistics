@@ -15,9 +15,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
             lastPeriod = k[0:6]    # YYYYMMM
 
         if len(k) > 6:             # days
-            if lastPeriod >= k[0:6]:
+            if k[0:6] < lastPeriod:
+                kx = k[0:6]
+            else:
                 continue
-            kx = k[0:6]
         elif len(k) == 6:         # month summarized
             kx = k
         else:                     # years
@@ -300,7 +301,7 @@ def addHitData(arr, kdate, ktype ,kcount):
             print('monthlyHits.py: ' + str(e) + " " + str(arr) )
             return
     arr.append({'d': kdate, 't': ktype, 'c': kcount})
-    print('monthlyHits.py: NEW:' + str(e) + " " + str(arr) )
+    print('monthlyHits.py: NEW:' + str(arr) )
 
     
     
