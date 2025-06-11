@@ -69,7 +69,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         if endPeriod is None:
             endPeriod = k
 
-    print(str(sdata))
     # first run / first day:
     if len(sdata) == 0:
         return ''
@@ -306,10 +305,8 @@ def addHitData(arr, kdate, ktype ,kcount):
     for e in arr:
         if e['d'] == kdate and e['t'] == ktype:
             e['c'] += kcount
-            print('monthlyHits.py: ' + str(e) + " " + str(arr) )
             return
     arr.append({'d': kdate, 't': ktype, 'c': kcount})
-    print('monthlyHits.py: NEW:' + str(arr) )
 
     
     
