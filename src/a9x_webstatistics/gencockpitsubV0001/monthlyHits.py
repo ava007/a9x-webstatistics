@@ -6,7 +6,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     rdata = []
     sdata = []
     vdata = []
-    mcount = 0
     startPeriod = None
     endPeriod = None
     lastPeriod = None    # Format YYYYMM. Entries must be before that period
@@ -24,9 +23,10 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         else:                     # years
             continue
 
-        if mcount > 31:
+        # consider max. 31 months
+        if len(sdata) > 31:
             break
-        mcount += 1
+
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
             addHitData(sdata,  kx, 'desktop', d['v0001']['days'][k]['user']['deviceHits']['desktop'])
             #sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
