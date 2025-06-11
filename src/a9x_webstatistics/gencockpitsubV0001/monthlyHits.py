@@ -24,7 +24,8 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
             continue
 
         # consider max. 31 months
-        if len(sdata) > 31:
+        desktop_count = sum(1 for item in sdata if item['t'] == 'desktop')
+        if desktop_count > 31:
             break
 
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
