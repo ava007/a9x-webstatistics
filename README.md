@@ -11,7 +11,7 @@ This package produces web statistics and analytical output based on nginx access
 
 Visit the live examples on [logikfabrik.com](https://www.logikfabrik.com/aboutwebstats.html).
 
-<img src="https://github.com/ava007/a9x-webstatistics/blob/main/a9x-webstatistics_20241123.png">
+<img src="[https://github.com/ava007/a9x-webstatistics/blob/main/a9x-webstatistics_20241123.png](https://github.com/ava007/a9x-webstatistics/blob/main/a9x_webstats_20250612.png)">
 
 ## Installation
 
