@@ -10,8 +10,6 @@ def sumMonth2YearV0001(d, statfile):
 
     yearInt = int(d['timelastrec'][0:4])
     yearInt = yearInt - 3
-    print("sumMonth2Year:  year of last rec: " + str(yearInt) + ",  accumulate till (including): " + str(yearInt))
-
     sumUntilMonth = str(yearInt) + '12'
    
     lasttimerecobj = datetime.strptime(d['timelastrec'],"%Y%m%d%H%M%S")
