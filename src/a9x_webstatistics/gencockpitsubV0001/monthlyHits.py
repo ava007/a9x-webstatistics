@@ -21,7 +21,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         elif len(k) == 6:         # month summarized
             kx = k
         else:                     # years
-            continue
+            kx = k
 
         # consider max. 31 months
         desktop_count = sum(1 for item in sdata if item['t'] == 'desktop')
@@ -30,38 +30,28 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
 
         if 'desktop' in d['v0001']['days'][k]['user']['deviceHits']:
             addHitData(sdata,  kx, 'desktop', d['v0001']['days'][k]['user']['deviceHits']['desktop'])
-            #sdata.append({'d': k, 't': 'desktop', 'c': d['v0001']['days'][k]['user']['deviceHits']['desktop']})
         else:
             addHitData(sdata, kx, 'desktop', 0)
-            #sdata.append({'d': k, 't': 'desktop', 'c': 0})
         if 'mobile' in d['v0001']['days'][k]['user']['deviceHits']:
             addHitData(sdata,  kx, 'mobile', d['v0001']['days'][k]['user']['deviceHits']['mobile'])
-            #sdata.append({'d': k, 't': 'mobile', 'c': d['v0001']['days'][k]['user']['deviceHits']['mobile']})
         else:
             addHitData(sdata,  kx, 'mobile', 0)
-            #sdata.append({'d': k, 't': 'mobile', 'c': 0})
         if 'tablet' in d['v0001']['days'][k]['user']['deviceHits']:
             addHitData(sdata,  kx, 'tablet', d['v0001']['days'][k]['user']['deviceHits']['tablet'])
-            #sdata.append({'d': k, 't': 'tablet', 'c': d['v0001']['days'][k]['user']['deviceHits']['tablet']})
         else:
             addHitData(sdata,  kx, 'tablet', 0)
-            #sdata.append({'d': k, 't': 'tablet', 'c': 0})
 
         # visits:
         if 'visits' in d['v0001']['days'][k]['user']:
             addHitData(vdata,  kx, 'visits', d['v0001']['days'][k]['user']['visits'])
-            #vdata.append({'d': k, 'c': d['v0001']['days'][k]['user']['visits']})
         else:
             addHitData(vdata,  kx, 'visits', 0)
-            #vdata.append({'d': k, 'c': 0})
 
         # robots
         if 'robotHits' in d['v0001']['days'][k]['robot']:
             addHitData(rdata,  kx, 'robotHits', d['v0001']['days'][k]['robot']['robotHits'])
-            #rdata.append({'d': k, 'c': d['v0001']['days'][k]['robot']['robotHits']})
         else:
             addHitData(rdata,  kx, 'robotHits', 0)
-            #rdata.append({'d': k, 'c': 0})
 
         # record start / end period to be displayed on chart:
         if startPeriod is None or k < startPeriod:
