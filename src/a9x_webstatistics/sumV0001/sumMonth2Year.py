@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from operator import itemgetter
 import json
 
-def sumMonth2YearV0001(d, statfile):
+def sumMonth2YearV0001(d, statfile, verbosity):
     
     # accumulate months to year:
     # if lasttimerec is 2025xxxx then summup to (inkl) 202212
