@@ -23,7 +23,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
         else:                     # years
             kx = k
 
-        # consider max. 31 months
+        # count desktop month/years:  consider max. 31 months
         desktop_count = sum(1 for item in sdata if item['t'] == 'desktop')
         if desktop_count > 31:
             break
@@ -58,6 +58,9 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
             startPeriod = k
         if endPeriod is None:
             endPeriod = k
+
+    if verbosity == "99":
+        print("monthly Hits accumulated: sdata : " + str(sdata))
 
     # first run / first day:
     if len(sdata) == 0:
