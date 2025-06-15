@@ -51,7 +51,7 @@ def cockpitLanguages(d, owndomain):
         h += 'const svg = d3.select("#svglng")'
         h += '  .attr("width", width + margin.left + margin.right)'
         h += '  .attr("height", height + margin.top + margin.bottom)'
-        h += '  .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; height: intrinsic;")'
+        h += '  .attr("style", "max-width: 100%; height: auto; font: 12px sans-serif; height: intrinsic;")'
         h += '  .append("g")'
         h += '  .attr("transform", `translate(${margin.left}, ${margin.top})`);'
 
