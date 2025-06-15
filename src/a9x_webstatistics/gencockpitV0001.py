@@ -32,6 +32,8 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += "\n" + '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
         
         lastDate = list(d['v0001']['days'].keys())[-1]
+        if verbosity == '99':
+            print("gencockpit: lastDate from json:" + str(lastDate) )
         if len(lastDate) >= 6:
             actYearMonth = lastDate[0:6]
         else:
@@ -39,6 +41,8 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             lastDate = lastDate[0:4] + '1231'
 
         firstDate = list(d['v0001']['days'].keys())[0]
+        if verbosity == '99':
+            print("gencockpit: firstDate from json:" + str(firstDate) )
         if len(firstDate) == 6:
             firstDate += '01'   # add day to YYYYMM
         if len(firstDate) == 4:
