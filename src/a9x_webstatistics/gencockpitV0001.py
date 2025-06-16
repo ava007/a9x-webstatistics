@@ -30,19 +30,24 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += "\n" + '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
 
         h += "\n" + '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
-        
-        lastDate = list(d['v0001']['days'].keys())[-1]
+
+        #lastDate = list(d['v0001']['days'].keys())[-1]
+        # lastDate is the youngest date in the json
+        # firstDate is the oldest date in the json
+
+        lastDate = next(reversed(days)) 
         if verbosity == '99':
-            print("gencockpit: lastDate from json:" + str(lastDate) )
+            print("gencockpit: lastDate (youngest) from json:" + str(lastDate) )
         if len(lastDate) >= 6:
             actYearMonth = lastDate[0:6]
         else:
             actYearMonth = lastDate[0:4] + '12'
             lastDate = lastDate[0:4] + '1231'
 
-        firstDate = list(d['v0001']['days'].keys())[0]
+        #firstDate = list(d['v0001']['days'].keys())[0]
+        firstDate = next(iter(days))
         if verbosity == '99':
-            print("gencockpit: firstDate from json:" + str(firstDate) )
+            print("gencockpit: firstDate (oldest) from json:" + str(firstDate) )
         if len(firstDate) == 6:
             firstDate += '01'   # add day to YYYYMM
         if len(firstDate) == 4:
