@@ -35,6 +35,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         # lastDate is the youngest date in the json
         # firstDate is the oldest date in the json
 
+        days = data["v0001"]["days"]
         lastDate = next(reversed(days)) 
         if verbosity == '99':
             print("gencockpit: lastDate (youngest) from json:" + str(lastDate) )
