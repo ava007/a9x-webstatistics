@@ -31,11 +31,10 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         h += "\n" + '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
 
-        #lastDate = list(d['v0001']['days'].keys())[-1]
         # lastDate is the youngest date in the json
         # firstDate is the oldest date in the json
 
-        days = data["v0001"]["days"]
+        days = d["v0001"]["days"]
         lastDate = next(reversed(days)) 
         if verbosity == '99':
             print("gencockpit: lastDate (youngest) from json:" + str(lastDate) )
@@ -45,7 +44,6 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             actYearMonth = lastDate[0:4] + '12'
             lastDate = lastDate[0:4] + '1231'
 
-        #firstDate = list(d['v0001']['days'].keys())[0]
         firstDate = next(iter(days))
         if verbosity == '99':
             print("gencockpit: firstDate (oldest) from json:" + str(firstDate) )
