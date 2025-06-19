@@ -94,6 +94,34 @@ def sumMonth2YearV0001(d, statfile, verbosity):
                     d['v0001']['days'][recYear]['user']['topUrl'][ck] = cv
             print("sumMonth2Year Out: " + str(recYear) + ": " + str(d['v0001']['days'][recYear]['user']['topUrl']))
 
+        # nav   - nav is stored on the last day of month
+        if 'nav' in dtmp['v0001']['days'][x]['user']:
+            if 'nav' not in d['v0001']['days'][recYear]['user']:
+                d['v0001']['days'][recMonth]['user']['nav'] = []
+                # take to top 20 external:
+                cnt = 0
+                for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+                    if 'p' not in e or e['p'] != 'e':  # not external nav
+                        continue
+                    if verbosity == "99":
+                        print('summMonth2Year: nav: ' + str(x) + ': ' + str(e))
+                    d['v0001']['days'][recYear]['user']['nav'].append(e)
+                    cnt += 1
+                    if cnt > 20:
+                        break
+
+                # take up to top 50 internal:
+                cnt = 0
+                for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+                    if 'p' in e and e['p'] == 'e':  # omit external
+                        continue
+                    if verbosity == "99":
+                        print('summMonth2YearV0001: nav: ' + str(x) + ': ' + str(e))
+                    d['v0001']['days'][recYear]['user']['nav'].append(e)
+                    cnt += 1
+                    if cnt > 50:
+                        break
+        
         # languages:
         if 'language' in dtmp['v0001']['days'][x]['user']:
             for ck,cv in dtmp['v0001']['days'][x]['user']['language'].items():
