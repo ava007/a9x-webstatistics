@@ -117,8 +117,7 @@ def sumMonth2YearV0001(d, statfile, verbosity):
                     d['v0001']['days'][recYear]['user']['nav'].append(e)
                     cnt += 1
                     if verbosity == "99":
-                        print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " appended" - external)
-
+                        print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " appended - external")
                 if cnt > 20:
                     break
 
