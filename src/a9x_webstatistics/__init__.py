@@ -1,4 +1,4 @@
-__version__ = "1.7.9-beta.1"
+__version__ = "1.7.9"
 
 from .module1 import *
 from .updatestatistics import upd
