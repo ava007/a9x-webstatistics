@@ -100,11 +100,9 @@ def sumMonth2YearV0001(d, statfile, verbosity):
                 d['v0001']['days'][recYear]['user']['nav'] = []
             # take to top 20 external:
             cnt = 0
-            for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+            for e in sorted(dtmp['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' not in e or e['p'] != 'e':  # not external nav
                     continue
-                if verbosity == "99":
-                    print('summMonth2Year: nav: ' + str(x) + ': ' + str(e))
                 # if source/target exists: increment count, else append:
                 found = False
                 for f in d['v0001']['days'][recYear]['user']['nav']:            
@@ -112,20 +110,25 @@ def sumMonth2YearV0001(d, statfile, verbosity):
                         and e['t'] == f['t']):
                         f['c'] += e['c']
                         found = True
+                        if verbosity == "99":
+                            print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " added to existing - external")
                         break
                 if found == False:
                     d['v0001']['days'][recYear]['user']['nav'].append(e)
                     cnt += 1
+                    if verbosity == "99":
+                        print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " appended" - external)
+
                 if cnt > 20:
                     break
 
             # take up to top 50 internal:
             cnt = 0
-            for e in sorted(d['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
+            for e in sorted(dtmp['v0001']['days'][x]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' in e and e['p'] == 'e':  # omit external
                     continue
                 if verbosity == "99":
-                    print('summMonth2YearV0001: nav: ' + str(x) + ': ' + str(e))
+                    print('sumMonth2YearV0001: nav: ' + str(x) + ': ' + str(e))
                 # if source/target exists: increment count, else append:
                 found = False
                 for f in d['v0001']['days'][recYear]['user']['nav']:            
@@ -133,10 +136,14 @@ def sumMonth2YearV0001(d, statfile, verbosity):
                         and e['t'] == f['t']):
                         f['c'] += e['c']
                         found = True
+                        if verbosity == "99":
+                            print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " added to existing - internal")
                         break
                 if found == False:
                     d['v0001']['days'][recYear]['user']['nav'].append(e)
                     cnt += 1
+                    if verbosity == "99":
+                        print('sumMonth2Year: nav: ' + str(x) + ': ' + str(e) + " appended - internal")
                 if cnt > 50:
                     break
         
