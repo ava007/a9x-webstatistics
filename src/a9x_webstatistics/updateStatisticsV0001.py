@@ -109,7 +109,7 @@ def updV0001(
                     and is_valid_ip(rdomain) == False):
                     rdomain_ar = rdomain.split('.')
                     rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
-                tmpnav['s'] = rdomain   # Source
+                tmpnav['s'] = rdomain.lower()   # source always in lowercase to avoid duplicates
                 tmpnav['p'] = 'e'  # type: e=external source, i=internal source
             
             # internal nav
@@ -129,29 +129,6 @@ def updV0001(
                 if found == False:
                     d['v0001']['days'][dt]['user']['nav'].append(tmpnav)
 
-            
-        # update friends:
-        #if i['status'] == '200' and len(i['referer']) > 1 and i['referer'][0:4] == 'http' and owndomain not in i['referer']:
-        #    refurl = urlparse(i['referer']).netloc
-        #    rdomain = refurl.removeprefix('www.')
-        #    rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
-            # omit subdomains:
-        #    if (rdomain.count('.') > 1 
-        #            and is_valid_ip(rdomain) == False):
-        #        rdomain_ar = rdomain.split('.')
-        #        rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
-                
-        #    if (is_valid_ip(rdomain) == False 
-        #            and '[' not in rdomain):  # to suppress ip; ip is not a domain anyway
-        #        if 'externalFriendsHits' not in d['v0001']['days'][dt]['user']:
-        #            d['v0001']['days'][dt]['user']['externalFriendsHits'] = {}
-        #        if rdomain not in d['v0001']['days'][dt]['user']['externalFriendsHits']:
-        #            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain] = {'cnt': 0, 'target': {} }
-        #        if i['request'] not in d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target']:
-        #            d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] = 0
-        #        d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['target'][req.path] += 1
-        #        d['v0001']['days'][dt]['user']['externalFriendsHits'][rdomain]['cnt'] += 1
-         
     # update statistics for ROBOTS:
     if devCla not in ('desktop','mobile','tablet'):
         d['v0001']['days'][dt]['robot']['bytesSent'] += int(i['bytes_sent'])
@@ -204,28 +181,7 @@ def updV0001(
             d['v0001']['days'][dt]['quality'][i['request']]['comment'] = 'internal not found'
         else:
             d['v0001']['days'][dt]['quality'][i['request']]['count'] += 1
-
-    # accumulate user navigation 
-    #if (len(i['referer']) > 1 
-    #        and i['status'] == '200'
-    #        and devCla in ('desktop','mobile','tablet')):
-    #    oref = urlparse(i['referer'])   # remove query string...
-    #    oreq = urlparse(i['request'])   # remove query string...
-            
-    #    if 'navigation' not in d['v0001']['days'][dt]['user']:
-    #       d['v0001']['days'][dt]['user']['navigation'] = {}
-    #    nkey = oref.path + '(())' + oreq.path
-    #    if nkey not in d['v0001']['days'][dt]['user']['navigation']:
-    #       d['v0001']['days'][dt]['user']['navigation'][nkey] = 0
-    #    d['v0001']['days'][dt]['user']['navigation'][nkey] += 1
-
-        # cleanup: delete entry from long tail...
-        #z = 1
-        #for ck,cv in sorted(d['v0001']['days'][dt01]['user']['navigation'].items(), key=itemgetter(1), reverse=True):
-        #   z += 1
-        #   if z > 100 and cv == 1:
-        #      #print("nav: " + str(ck) + " " + str(cv) +  " --> deleted")
-        #      del d['v0001']['days'][dt01]['user']['navigation'][ck]
+ 
 
     # cache status for all successful requests:
     if ('cache_status' in i 
