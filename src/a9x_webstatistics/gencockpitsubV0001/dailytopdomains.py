@@ -42,7 +42,7 @@ def dailyTopDomains(d, owndomain, omit):
     h += '<thead><tr><th scope="col" style="text-align: left">Rank</th><th scope="col" style="text-align: left">Domain</th><th scope="col" style="text-align: right">Hits</th></tr></thead>'
     i = 1
     for k, v in sorted(tsource.items(), key=itemgetter(1), reverse=True):
-        if owndomain in k:
+        if owndomain in k.lower():
             continue
         # prevent IP or domains with special characters:
         if any( x in k for x in {'[', ']', ':'} ):
