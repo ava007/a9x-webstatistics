@@ -42,4 +42,21 @@ def sumNavDayV0001(d, verbosity ):
                 if found == False:
                     d['v0001']['days'][lastDay]['user']['nav'].append(e)
             del d['v0001']['days'][k]['user']['nav']
+
+        # take max 40 TopUrl per Day:
+        for k, v in sorted(dtmp['v0001']['days'].items(), key=itemgetter(0), reverse=True):
+            # consider only days:
+            if len(k) < 8:
+                continue
+            if 'topUrl' in dtmp['v0001']['days'][k]['user']:
+                c = 0
+                for t, u in sorted(dtmp['v0001']['days'][k]['user']['topUrl'].items(), key=itemgetter(1), reverse=True):
+                    c = c + 1
+                    if c > 40:
+                         #del d['v0001']['days'][k]['user']['topUrl']['t']
+                         print("sumdayV0001: " +  str(c) + " " + d['v0001']['days'][k]['user']['nav'] + " count: " + str(u)
+                
+        # consider only days:
+        if len(k) < 8:
+            continue
     return d
