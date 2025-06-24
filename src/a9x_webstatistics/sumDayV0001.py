@@ -2,7 +2,8 @@ from copy import deepcopy
 from operator import itemgetter
 
 # accumulate navigation to the last processed day of the month
-def sumNavDayV0001(d, verbosity ):
+# and compress topUrl to 40 entries
+def sumDayV0001(d, verbosity ):
     
     # nav: accumulate nav on the last day of month:
     dtmp = deepcopy(d)
