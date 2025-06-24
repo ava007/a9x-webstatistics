@@ -11,7 +11,7 @@ from .updateStatisticsV0001 import updV0001
 from .migV0001 import migv0001sub0001
 from .cleanupV0001 import cleanupQualityV0001
 from .parseRecJsonV0001 import parseRecJsonV0001
-from .sumNavDayV0001 import sumNavDayV0001
+from .sumDayV0001 import sumDayV0001
 from importlib.metadata import version
 import geoip2.database
 from .sumV0001 import *
@@ -157,7 +157,7 @@ def runws(statfile, infile, geoip, verbosity, domain, efeature = 0):
             print("main: last recparsed:" + str(recparsed) )
  
     # sum navigation
-    d = sumNavDayV0001(d, verbosity)
+    d = sumDayV0001(d, verbosity)
     
     # summarize previous months
     d = sumDay2MonthV0001(d, statfile, verbosity)
