@@ -55,7 +55,7 @@ def sumDayV0001(d, verbosity ):
                 for t, u in sorted(dtmp['v0001']['days'][k]['user']['topUrl'].items(), key=itemgetter(1), reverse=True):
                     c = c + 1
                     if c > 140:
-                         #del d['v0001']['days'][k]['user']['topUrl']['t']
-                         print("sumDayV0001: " +  str(c) + " del: " + str(k) + " " + str(t) + " count: " + str(u) )
+                         del d['v0001']['days'][k]['user']['topUrl']['t']
+                         #print("sumDayV0001: " +  str(c) + " del: " + str(k) + " " + str(t) + " count: " + str(u) )
                 
     return d
