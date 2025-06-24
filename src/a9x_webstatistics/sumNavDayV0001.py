@@ -55,6 +55,6 @@ def sumNavDayV0001(d, verbosity ):
                     c = c + 1
                     if c > 40:
                          #del d['v0001']['days'][k]['user']['topUrl']['t']
-                         print("sumdayV0001: " +  str(c) + " del: " + d['v0001']['days'][k]['user']['nav'] + " count: " + str(u)
+                         print("sumdayV0001: " +  str(c) + " del: " + d['v0001']['days'][k]['user']['nav'] + " count: " + str(u) )
                 
     return d
