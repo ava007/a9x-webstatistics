@@ -20,7 +20,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         h += "\n" + '<div class="row pt-3"><div class="col-12">'
         h += '<h1>Webstatistics for ' + owndomain + '</h1>'
         h += '<a href="#hdDay" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Daily Statistics</a>'
-        h += '<a href="#hdMonth" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Monthly/Yearly Statistics</a>'
+        h += '<a href="#hdLongTherm" class="btn btn-primary me-3" role="button" data-bs-toggle="button">Long Therm Statistics</a>'
         h += '</div></div>'
         h += "\n" + '<div class="row pt-4"><div class="col-12">'
         h += '<h2 id="hdDay">Daily statistics for ' + owndomain + '</h2>'
@@ -84,7 +84,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
         # show long term not on first runs:
         if deltaInDays.days > 32:
 
-            h += "\n" + '<h2 id="LongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
+            h += "\n" + '<h2 id="hdLongTerm" class="pt-4">Long Term Statistics for ' + owndomain + '</h2>'
         
             h += "\n" + '<div class="row pt-4">' + monthlyHitsVisitsChart(d, owndomain, omit, verbosity) +  "\n"
             h +=  monthlyTopDomains(d, owndomain, omit) + '</div>' + "\n"
