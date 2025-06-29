@@ -202,11 +202,11 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                         break
                     d['v0001']['days'][x]['user']['navigation'][k] = v
                 del tmpNav
+            
+            # quality: absolete on monthly level:
+            if 'quality' in d['v0001']['days'][x]:
+                del d['v0001']['days'][x]['quality']
     
-    #try:
-    #    print("\nsummarizemonthV0001 20250223->user: " + "\n " + str(d['v0001']['days']['20250223']['user']) )
-    #except KeyError:
-    #    pass   # do nothing
     return d
 
 def compMonthV0001(d):
