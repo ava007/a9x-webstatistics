@@ -40,7 +40,7 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                     d['v0001']['days'][recMonth]['robot'] = {}
                     d['v0001']['days'][recMonth]['robot']['bytesSent']   = 0;
                     d['v0001']['days'][recMonth]['robot']['robotHits']   = 0;
-                    d['v0001']['days'][recMonth]['quality'] = {}
+                    # d['v0001']['days'][recMonth]['quality'] = {}  quality won't be consolidated on month level
 
                 # always check, if structure exists as we might start within the month (not on the first day of month)
                 if 'visits' in dtmp['v0001']['days'][x]['user']:
@@ -97,12 +97,12 @@ def sumDay2MonthV0001(d, statfile, verbosity):
                             d['v0001']['days'][recMonth]['user']['topUrl'][ck] = cv;
                             
                 # quality:
-                if 'quality' in dtmp['v0001']['days'][x]:
-                    for ck,cv in dtmp['v0001']['days'][x]['quality'].items():
-                        if ck in d['v0001']['days'][recMonth]['quality']:
-                            d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
-                        else:
-                            d['v0001']['days'][recMonth]['quality'][ck] = cv
+                #if 'quality' in dtmp['v0001']['days'][x]:
+                #    for ck,cv in dtmp['v0001']['days'][x]['quality'].items():
+                #        if ck in d['v0001']['days'][recMonth]['quality']:
+                #            d['v0001']['days'][recMonth]['quality'][ck]['count'] += 1
+                #        else:
+                #            d['v0001']['days'][recMonth]['quality'][ck] = cv
 
                 # nav   - nav is stored on the last day of month
                 if 'nav' in dtmp['v0001']['days'][x]['user']:
