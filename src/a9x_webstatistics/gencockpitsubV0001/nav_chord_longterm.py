@@ -93,10 +93,22 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("height", height)'
     h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
     h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
+
+    # Add CSS styles for hover effects
+    h += 'svg.append("style").text(`'
+    h += '.chord-arc { opacity: 1;  }'
+    h += '.chord-arc.fade { opacity: 0.2; }'
+    h += '.chord-arc:hover { opacity: 0.9; }'
+    h += '.chord-ribbon { opacity: 0.8; mix-blend-mode: ${isDarkMode ? 'lighten' : 'multiply'}; }'
+    h += '.chord-ribbon.fade { opacity: 0.1; }'
+    h += '.chord-ribbon.filtered { display: none; }'
+    h += 'text { fill: ${textColor}; font-weight: bold; }'
+    h += '.tick-text { fill: ${fadedTextColor}; font-weight: normal; }'
+    h += '`);' + "\n"
     h += 'const chords = chord(matrix);'
 
     h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");' + "\n"
-    h += 'group.append("path")
+    h += 'group.append("path")'
     h += '.attr("class", "chord-arc")'
     h += '.attr("fill", d => colors[d.index])'
     h += '.attr("d", arc)'
