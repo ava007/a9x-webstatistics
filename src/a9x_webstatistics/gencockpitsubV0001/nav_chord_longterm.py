@@ -72,6 +72,12 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
     h += 'const outerRadius = innerRadius + 10;' + "\n"
 
+    # Dark mode configuration
+    h += 'const isDarkMode = darkMode === "dark";'
+    h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
+    h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
+    h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
+
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
     h += 'const index = new Map(names.map((name, i) => [name, i]));'
