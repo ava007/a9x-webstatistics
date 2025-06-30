@@ -172,7 +172,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →'
     h += '${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);' + "\n"
 
-    h += 'svg.append("g")'
+    h += 'const ribbons = svg.append("g")'
     h += '.attr("fill-opacity", 0.75)'
     h += '.selectAll()'
     h += '.data(chords)'
@@ -183,6 +183,25 @@ def navChordLongterm(d, owndomain, omit):
     h += '.append("title")'
     h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
     h += '}' + "\n"
+
+    h += 'ribbons.on("mouseenter", function(event, d) {'
+    # Fade all chords and arcs
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", true);'
+          
+    # Keep only this chord visible
+    h += 'd3.select(this).classed("fade", false);'
+          
+    # Keep only connected arcs visible
+    h += 'const sourceArc = svg.select(`#arc-${d.source.index}`);'
+    h += 'const targetArc = svg.select(`#arc-${d.target.index}`);'
+    h += 'sourceArc.classed("fade", false);'
+    h += 'targetArc.classed("fade", false);'
+    h += '})'
+    h += '.on("mouseleave", function() {'
+    # Reset all elements to normal state
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", false);'
+    h += '});'  + "\n"
+    
     h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
     h += '</div>' + "\n"
