@@ -99,7 +99,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '.chord-arc { opacity: 1;  }'
     h += '.chord-arc.fade { opacity: 0.2; }'
     h += '.chord-arc:hover { opacity: 0.9; }'
-    h += '.chord-ribbon { opacity: 0.8; mix-blend-mode: ${isDarkMode ? 'lighten' : 'multiply'}; }'
+    h += '.chord-ribbon { opacity: 0.8; mix-blend-mode: ${isDarkMode ? "lighten" : "multiply"}; }'
     h += '.chord-ribbon.fade { opacity: 0.1; }'
     h += '.chord-ribbon.filtered { display: none; }'
     h += 'text { fill: ${textColor}; font-weight: bold; }'
