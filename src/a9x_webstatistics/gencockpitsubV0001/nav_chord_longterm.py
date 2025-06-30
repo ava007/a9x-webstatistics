@@ -95,8 +95,48 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
     h += 'const chords = chord(matrix);'
 
-    h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");'
-    h += 'group.append("path").attr("fill", d => colors[d.index]).attr("d", arc);' + "\n"
+    h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");' + "\n"
+    h += 'group.append("path")
+    h += '.attr("class", "chord-arc")'
+    h += '.attr("fill", d => colors[d.index])'
+    h += '.attr("d", arc)'
+    h += '.attr("id", d => `arc-${d.index}`)'
+    h += '.on("mouseenter", function(event, d) {'
+    # Fade all chords and arcs
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
+    h += '.classed("fade", true);'
+        
+    # Build array of connected indices
+    h += 'const connectedIndices = new Set();'
+        
+    # First identify all direct connections through ribbons
+    h += 'svg.selectAll(`.chord-ribbon.source-${d.index}, .chord-ribbon.target-${d.index}`)'
+    h += '.each(function(ribbonData) {'
+    # Only consider visible (not filtered) ribbons
+    h += 'if (!d3.select(this).classed("filtered")) {'
+    # Only add the connected index (not this arc's index)
+    h += 'if (ribbonData.source.index === d.index) {'
+    h += 'connectedIndices.add(ribbonData.target.index);'
+    h += '} else {'
+    h += 'connectedIndices.add(ribbonData.source.index);'
+    h += '}'
+    h += '}'
+    h += '})'
+    h += '.classed("fade", false);'
+        
+    # Add the current arc index
+    h += 'connectedIndices.add(d.index);'
+        
+    # Unfade only directly connected arcs and current arc
+    h += 'connectedIndices.forEach(index => {'
+    h += 'svg.select(`#arc-${index}`).classed("fade", false);'
+    h += '});'
+    h += '})'  + "\n"
+    h += '.on("mouseleave", function() {'
+    # Reset all elements to normal state
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
+    h += '.classed("fade", false);'
+    h += '});' + "\n"
 
     h += 'group.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
