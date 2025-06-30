@@ -179,10 +179,54 @@ def navChordLongterm(d, owndomain, omit):
     h += '.join("path")'
     h += '.style("mix-blend-mode", "multiply")'
     h += '.attr("fill", d => colors[d.target.index])'
-    h += '.attr("d", ribbon)'
-    h += '.append("title")'
-    h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
-    h += '}' + "\n"
+    h += '.attr("d", ribbon);'
+    #h += '.append("title")'
+    #h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
+
+    h += 'ribbons.append("title")'
+    h += '.text(function(d) {'
+    # Get the names of source and target
+    h += 'let sourceName = sortedNames[d.source.index];'
+    h += 'let targetName = sortedNames[d.target.index];'
+      
+    # If the ribbon is filtered (hidden), don't show any tooltip
+    h += 'if (d3.select(this).classed("filtered")) { return ""; }'
+      
+    # Create keys for both directions
+    h += 'const sourceToTargetKey = `${sourceName}_${targetName}`;'
+    h += 'const targetToSourceKey = `${targetName}_${sourceName}`;'
+      
+    # CHANGED: Handle source-target values based on category filter
+    h += 'let sourceToTargetValue, targetToSourceValue;'
+    h += 'let lineTitle = "";'
+      
+    h += 'if (categoryFilter !== "all") {'
+    # Try to get category-specific values from categories CSV
+    h += 'const sourceOrigKey = `${sourceName}_${targetName}`;'
+    h += 'const targetOrigKey = `${targetName}_${sourceName}`;'
+        
+    h += 'sourceToTargetValue = categorySpecificValues[sourceOrigKey];'
+    h += 'targetToSourceValue = categorySpecificValues[targetOrigKey];'
+    h += '} else {'
+    # Use total values for "All Categories"
+    h += 'sourceToTargetValue = categoryFilteredValues[sourceToTargetKey];'
+    h += 'targetToSourceValue = categoryFilteredValues[targetToSourceKey];'
+    h += '}'
+      
+    # Build tooltip text
+    h += 'if (sourceToTargetValue) {'
+    h += 'let fromSourceToTargetValue = formatBigNumber(sourceToTargetValue);'
+    h += 'lineTitle += `${fromSourceToTargetValue} ${sourceName} → ${targetName}`;'
+    h += '}'
+             
+    h += 'if (targetToSourceValue && d.source.index !== d.target.index) {'
+    h += 'let fromTargetToSourceValue = formatBigNumber(targetToSourceValue);'
+    h += 'lineTitle += `\n${fromTargetToSourceValue} ${targetName} → ${sourceName}`;'
+    h += '}'
+      
+    h += 'return lineTitle;'
+    h += '});'
+
 
     h += 'ribbons.on("mouseenter", function(event, d) {'
     # Fade all chords and arcs
@@ -201,6 +245,7 @@ def navChordLongterm(d, owndomain, omit):
     # Reset all elements to normal state
     h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", false);'
     h += '});'  + "\n"
+    h += '}' + "\n"   # end of function renderChart
     
     h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
