@@ -73,7 +73,7 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const outerRadius = innerRadius + 10;' + "\n"
 
     # Dark mode configuration
-    h += 'const isDarkMode = darkMode === "dark";'
+    h += "const isDarkMode = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;"
     h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
     h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
     h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
