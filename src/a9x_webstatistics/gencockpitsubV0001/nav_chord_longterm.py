@@ -135,15 +135,13 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("id", d => `arc-${d.index}`)'
     h += '.on("mouseenter", function(event, d) {'
     # Fade all chords and arcs
-    h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
-    h += '.classed("fade", true);'
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", true);'
         
     # Build array of connected indices
     h += 'const connectedIndices = new Set();'
         
     # First identify all direct connections through ribbons
-    h += 'svg.selectAll(`.chord-ribbon.source-${d.index}, .chord-ribbon.target-${d.index}`)'
-    h += '.each(function(ribbonData) {'
+    h += 'svg.selectAll(`.chord-ribbon.source-${d.index}, .chord-ribbon.target-${d.index}`).each(function(ribbonData) {'
     # Only consider visible (not filtered) ribbons
     h += 'if (!d3.select(this).classed("filtered")) {'
     # Only add the connected index (not this arc's index)
@@ -192,6 +190,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '.data(chords)'
     h += '.join("path")'
     h += '.style("mix-blend-mode", "multiply")'
+    h += '.attr("class", d => `chord-ribbon source-${d.source.index} target-${d.target.index}`)'
     h += '.attr("fill", d => colors[d.target.index])'
     h += '.attr("d", ribbon);'
     #h += '.append("title")'
@@ -205,42 +204,13 @@ def navChordLongterm(d, owndomain, omit):
       
     # If the ribbon is filtered (hidden), don't show any tooltip
     h += 'if (d3.select(this).classed("filtered")) { return ""; }'
-      
-    # Create keys for both directions
-    h += 'const sourceToTargetKey = `${sourceName}_${targetName}`;'
-    h += 'const targetToSourceKey = `${targetName}_${sourceName}`;'
-      
-    # CHANGED: Handle source-target values based on category filter
-    h += 'let sourceToTargetValue, targetToSourceValue;'
-    h += 'let lineTitle = "";'
-      
-    h += 'if (categoryFilter !== "all") {'
-    # Try to get category-specific values from categories CSV
-    h += 'const sourceOrigKey = `${sourceName}_${targetName}`;'
-    h += 'const targetOrigKey = `${targetName}_${sourceName}`;'
-        
-    h += 'sourceToTargetValue = categorySpecificValues[sourceOrigKey];'
-    h += 'targetToSourceValue = categorySpecificValues[targetOrigKey];'
-    h += '} else {'
-    # Use total values for "All Categories"
-    h += 'sourceToTargetValue = categoryFilteredValues[sourceToTargetKey];'
-    h += 'targetToSourceValue = categoryFilteredValues[targetToSourceKey];'
+    
+    h += 'let lineTitle = = `${d.source.value} ${sourceName} → ${targetName}`;'
+    h += 'if (d.source.index !== d.target.index) {'
+    h += 'lineTitle += `\n${d.target.value} ${targetName} → ${sourceName}`;'
     h += '}'
-      
-    # Build tooltip text
-    h += 'if (sourceToTargetValue) {'
-    h += 'let fromSourceToTargetValue = formatBigNumber(sourceToTargetValue);'
-    h += 'lineTitle += `${fromSourceToTargetValue} ${sourceName} → ${targetName}`;'
-    h += '}'
-             
-    h += 'if (targetToSourceValue && d.source.index !== d.target.index) {'
-    h += 'let fromTargetToSourceValue = formatBigNumber(targetToSourceValue);'
-    h += 'lineTitle += `\n${fromTargetToSourceValue} ${targetName} → ${sourceName}`;'
-    h += '}'
-      
     h += 'return lineTitle;'
     h += '});'
-
 
     h += 'ribbons.on("mouseenter", function(event, d) {'
     # Fade all chords and arcs
