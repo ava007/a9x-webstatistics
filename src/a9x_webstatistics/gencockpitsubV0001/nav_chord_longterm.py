@@ -78,6 +78,13 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
     h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
 
+    # Create sorted order: largest first, "Other" last
+    h += 'const sortedNames = [...names].sort((a, b) => {'
+    h += 'if (a === "Other") return 1;'
+    h += 'if (b === "Other") return -1;'
+    h += 'return volumeByName[b] - volumeByName[a];'
+    h += '});'  + "\n"
+
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
     h += 'const index = new Map(names.map((name, i) => [name, i]));'
