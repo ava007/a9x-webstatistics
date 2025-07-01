@@ -60,7 +60,8 @@ def navChordLongterm(d, owndomain, omit):
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>User Navigation - Long Term</h3>'
-    h += '<p>This chart shows the user navigation on ' + owndomain + ':</p>'
+    h += '<p>This chart shows the user navigation on ' + owndomain + '.'
+    h += 'Put the mouse pointer on the edge to get further details.</p>'
     h += '<div id="navchart-lt-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
