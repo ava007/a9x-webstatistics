@@ -71,26 +71,12 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const height = Math.round(width*0.9);'
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
     h += 'const outerRadius = innerRadius + 10;' + "\n"
-    #h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;' + "\n"
-    
+        
     # Dark mode configuration
     h += "const isDarkMode = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;"
     h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
     h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
     h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
-
-    # Pre-sort data and names for consistent ordering
-    #h += 'const volumeByName = {};'
-    #h += 'names.forEach((name, i) => {'
-    #h += 'volumeByName[name] = d3.sum(data[i]);'
-    #h += '});' + "\n"
-
-    # Create sorted order: largest first, "Other" last
-    #h += 'const sortedNames = [...names].sort((a, b) => {'
-    #h += 'if (a === "Other") return 1;'
-    #h += 'if (b === "Other") return -1;'
-    #h += 'return volumeByName[b] - volumeByName[a];'
-    #h += '});'  + "\n"
 
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
@@ -181,8 +167,8 @@ def navChordLongterm(d, owndomain, omit):
 
     h += 'group.append("title")'
     h += '.text(d => `${names[d.index]}'
-    h += '${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →'
-    h += '${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);' + "\n"
+    h += ' ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←'
+    h += ' ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →`);' + "\n"
 
     h += 'const ribbons = svg.append("g")'
     h += '.attr("fill-opacity", 0.75)'
@@ -193,8 +179,6 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("class", d => `chord-ribbon source-${d.source.index} target-${d.target.index}`)'
     h += '.attr("fill", d => colors[d.target.index])'
     h += '.attr("d", ribbon);'
-    #h += '.append("title")'
-    #h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
 
     h += 'ribbons.append("title")'
     h += '.text(function(d) {'
@@ -205,9 +189,9 @@ def navChordLongterm(d, owndomain, omit):
     # If the ribbon is filtered (hidden), don't show any tooltip
     h += 'if (d3.select(this).classed("filtered")) { return ""; }'
     
-    h += 'let lineTitle = = `${d.source.value} ${sourceName} → ${targetName}`;'
+    h += 'let lineTitle = `${d.source.value} ${sourceName} → ${targetName}`;'
     h += 'if (d.source.index !== d.target.index) {'
-    h += 'lineTitle += `\n${d.target.value} ${targetName} → ${sourceName}`;'
+    h += 'lineTitle += `${d.target.value} ${targetName} → ${sourceName}`;'
     h += '}'
     h += 'return lineTitle;'
     h += '});'
