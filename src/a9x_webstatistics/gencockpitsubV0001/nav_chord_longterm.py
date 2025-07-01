@@ -64,6 +64,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '<div id="navchart-lt-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
+    h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;'
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("navchart-lt-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
@@ -77,6 +78,12 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
     h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
     h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
+
+    # Pre-sort data and names for consistent ordering
+    h += 'const volumeByName = {};'
+    h += 'names.forEach((name, i) => {'
+    h += 'volumeByName[name] = d3.sum(data[i]);'
+    h += '});' + "\n"
 
     # Create sorted order: largest first, "Other" last
     h += 'const sortedNames = [...names].sort((a, b) => {'
