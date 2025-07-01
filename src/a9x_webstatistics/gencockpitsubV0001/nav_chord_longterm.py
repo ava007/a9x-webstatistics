@@ -71,7 +71,7 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const height = Math.round(width*0.9);'
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
     h += 'const outerRadius = innerRadius + 10;' + "\n"
-    h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;' + "\n"
+    #h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;' + "\n"
     
     # Dark mode configuration
     h += "const isDarkMode = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;"
@@ -80,17 +80,17 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
 
     # Pre-sort data and names for consistent ordering
-    h += 'const volumeByName = {};'
-    h += 'names.forEach((name, i) => {'
-    h += 'volumeByName[name] = d3.sum(data[i]);'
-    h += '});' + "\n"
+    #h += 'const volumeByName = {};'
+    #h += 'names.forEach((name, i) => {'
+    #h += 'volumeByName[name] = d3.sum(data[i]);'
+    #h += '});' + "\n"
 
     # Create sorted order: largest first, "Other" last
-    h += 'const sortedNames = [...names].sort((a, b) => {'
-    h += 'if (a === "Other") return 1;'
-    h += 'if (b === "Other") return -1;'
-    h += 'return volumeByName[b] - volumeByName[a];'
-    h += '});'  + "\n"
+    #h += 'const sortedNames = [...names].sort((a, b) => {'
+    #h += 'if (a === "Other") return 1;'
+    #h += 'if (b === "Other") return -1;'
+    #h += 'return volumeByName[b] - volumeByName[a];'
+    #h += '});'  + "\n"
 
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
@@ -125,8 +125,8 @@ def navChordLongterm(d, owndomain, omit):
     h += 'text { fill: ${textColor}; font-weight: bold; }'
     h += '.tick-text { fill: ${fadedTextColor}; font-weight: normal; }'
     h += '`);' + "\n"
-    h += 'const chords = chord(matrix);'
-
+    h += 'const chords = chord(matrix);'  + "\n"
+    
     h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");' + "\n"
     h += 'group.append("path")'
     h += '.attr("class", "chord-arc")'
@@ -254,8 +254,7 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const targetArc = svg.select(`#arc-${d.target.index}`);'
     h += 'sourceArc.classed("fade", false);'
     h += 'targetArc.classed("fade", false);'
-    h += '})'
-    h += '.on("mouseleave", function() {'
+    h += '}).on("mouseleave", function() {'
     # Reset all elements to normal state
     h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", false);'
     h += '});'  + "\n"
