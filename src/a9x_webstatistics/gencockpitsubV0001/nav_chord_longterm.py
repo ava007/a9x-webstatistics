@@ -64,7 +64,6 @@ def navChordLongterm(d, owndomain, omit):
     h += '<div id="navchart-lt-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
-    h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;'
     h += 'function renderChart(data, options = {}) {'
     h += 'const rect = document.getElementById("navchart-lt-container").getBoundingClientRect();'
     h += 'const margins = { top: 20, right: 20, bottom: 40, left: 20 };'
@@ -72,7 +71,8 @@ def navChordLongterm(d, owndomain, omit):
     h += 'const height = Math.round(width*0.9);'
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
     h += 'const outerRadius = innerRadius + 10;' + "\n"
-
+    h += 'const {names, linkValues, categoryFilteredValues, categorySpecificValues, countryToContinent, categoryFilter, categoryPairsMap} = data;' + "\n"
+    
     # Dark mode configuration
     h += "const isDarkMode = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;"
     h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
