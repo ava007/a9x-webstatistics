@@ -104,12 +104,10 @@ def navChord(d, owndomain, omit):
     h += 'group.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
     h += '.attr("dy", "0.35em")'
-    h += '.attr("transform", d => `'
-    h += 'rotate(${(d.angle * 180 / Math.PI - 90)})'
-    h += 'translate(${outerRadius + 5})'
-    h += '${d.angle > Math.PI ? "rotate(180)" : ""}'
-    h += '`)'
+    h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
+    h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""}'  `)'
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
+    h += '.attr("fill", "black")'
     h += '.text(d => names[d.index]);'  + "\n"
 
     h += 'group.append("title")'
