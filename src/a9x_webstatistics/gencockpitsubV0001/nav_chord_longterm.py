@@ -158,12 +158,10 @@ def navChordLongterm(d, owndomain, omit):
     h += 'group.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
     h += '.attr("dy", "0.35em")'
-    h += '.attr("transform", d => `'
-    h += 'rotate(${(d.angle * 180 / Math.PI - 90)})'
-    h += 'translate(${outerRadius + 5})'
-    h += '${d.angle > Math.PI ? "rotate(180)" : ""}'
-    h += '`)'
+    h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
+    h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""} `)'
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
+    h += '.attr("fill", "black")'
     h += '.text(d => names[d.index]);'  + "\n"
 
     h += 'group.append("title")'
@@ -179,7 +177,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '.style("mix-blend-mode", "multiply")'
     h += '.attr("class", d => `chord-ribbon source-${d.source.index} target-${d.target.index}`)'
     h += '.attr("fill", d => colors[d.target.index])'
-    h += '.attr("d", ribbon);'
+    h += '.attr("d", ribbon);' + "\n"
 
     h += 'ribbons.append("title")'
     h += '.text(function(d) {'
@@ -195,7 +193,7 @@ def navChordLongterm(d, owndomain, omit):
     h += 'lineTitle += `${d.target.value} ${targetName} → ${sourceName}`;'
     h += '}'
     h += 'return lineTitle;'
-    h += '});'
+    h += '});' + "\n"
 
     h += 'ribbons.on("mouseenter", function(event, d) {'
     # Fade all chords and arcs
