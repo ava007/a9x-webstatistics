@@ -76,6 +76,12 @@ def navChord(d, owndomain, omit):
     h += 'const innerRadius = Math.min(width, height) * 0.5 - 90;'
     h += 'const outerRadius = innerRadius + 10;' + "\n"
 
+    # Dark mode configuration
+    h += "const isDarkMode = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;"
+    h += 'const backgroundColor = isDarkMode ? "#1a1a1a" : "#ffffff";'
+    h += 'const textColor = isDarkMode ? "#ffffff" : "#000000";'
+    h += 'const fadedTextColor = isDarkMode ? "#cccccc" : "#666666";' + "\n"
+
     # Compute a dense matrix from the weighted links in data.
     h += 'const names = d3.sort(d3.union(data.map(d => d.source), data.map(d => d.target)));'
     h += 'const index = new Map(names.map((name, i) => [name, i]));'
@@ -181,8 +187,8 @@ def navChord(d, owndomain, omit):
     h += 'ribbons.append("title")'
     h += '.text(function(d) {'
     # Get the names of source and target
-    h += 'let sourceName = sortedNames[d.source.index];'
-    h += 'let targetName = sortedNames[d.target.index];'
+    h += 'let sourceName = names[d.source.index];'
+    h += 'let targetName = names[d.target.index];'
       
     # If the ribbon is filtered (hidden), don't show any tooltip
     h += 'if (d3.select(this).classed("filtered")) { return ""; }'
