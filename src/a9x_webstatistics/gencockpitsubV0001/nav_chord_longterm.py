@@ -109,7 +109,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '.chord-ribbon { opacity: 0.8; mix-blend-mode: ${isDarkMode ? "lighten" : "multiply"}; }'
     h += '.chord-ribbon.fade { opacity: 0.1; }'
     h += '.chord-ribbon.filtered { display: none; }'
-    h += 'text { fill: ${textColor}; font-weight: bold; }'
+    h += 'text { font-weight: bold; }'
     h += '.tick-text { fill: ${fadedTextColor}; font-weight: normal; }'
     h += '`);' + "\n"
     h += 'const chords = chord(matrix);'  + "\n"
