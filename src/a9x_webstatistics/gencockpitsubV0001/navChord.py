@@ -17,7 +17,7 @@ def navChord(d, owndomain, omit):
             continue
         days += 1
         if 'nav' in d['v0001']['days'][k]['user']:
-            # entries only
+            # external traffic only: top 30
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' not in e:
                     continue
@@ -39,7 +39,7 @@ def navChord(d, owndomain, omit):
                 if cnt_ext > 30:  # top 30 entries
                     break
 
-             # internal traffic only
+             # internal traffic only: top 30
             for e in sorted(d['v0001']['days'][k]['user']['nav'], key=itemgetter('c'), reverse=True):
                 if 'p' in e:
                     continue
@@ -63,7 +63,8 @@ def navChord(d, owndomain, omit):
     h = "\n\n"
     h += '<div class="col-md-12 col-lg-12 col-xxl-12 pt-4">'
     h += '<h3>Daily User Navigation</h3>'
-    h += '<p>Chord diagram showing user navigation for the last ' + str(days) + ' days on ' + owndomain + ':</p>'
+    h += '<p>Chord diagram showing user navigation for the last ' + str(days) + ' days on ' + owndomain + '. '
+    h += 'Put the mouse pointer on the edge to get further details.</p>'
     h += '<div id="navchart-chord-container"></div>'
     h += '<script type="module">' + "\n"
     h += 'const data = ' + str(data) + ';' + "\n"
@@ -96,11 +97,63 @@ def navChord(d, owndomain, omit):
     h += '.attr("height", height)'
     h += '.attr("viewBox", [-width / 2, -height / 2, width, height])'
     h += '.attr("style", "width: 100%; height: auto; font: 10px sans-serif;");'  + "\n"
+
+    # Add CSS styles for hover effects
+    h += 'svg.append("style").text(`'
+    h += '.chord-arc { opacity: 1;  }'
+    h += '.chord-arc.fade { opacity: 0.2; }'
+    h += '.chord-arc:hover { opacity: 0.9; }'
+    h += '.chord-ribbon { opacity: 0.8; mix-blend-mode: ${isDarkMode ? "lighten" : "multiply"}; }'
+    h += '.chord-ribbon.fade { opacity: 0.1; }'
+    h += '.chord-ribbon.filtered { display: none; }'
+    h += 'text { font-weight: bold; }'
+    h += '.tick-text { fill: ${fadedTextColor}; font-weight: normal; }'
+    h += '`);' + "\n"
+    
     h += 'const chords = chord(matrix);'
 
-    h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");'
-    h += 'group.append("path").attr("fill", d => colors[d.index]).attr("d", arc);' + "\n"
+    h += 'const group = svg.append("g").selectAll().data(chords.groups).join("g");' + "\n"
+    h += 'group.append("path")'
+    h += '.attr("class", "chord-arc")'
+    h += '.attr("fill", d => colors[d.index])'
+    h += '.attr("d", arc)'
+    h += '.attr("id", d => `arc-${d.index}`)'
+    h += '.on("mouseenter", function(event, d) {'
+    # Fade all chords and arcs
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", true);'
+        
+    # Build array of connected indices
+    h += 'const connectedIndices = new Set();'
+        
+    # First identify all direct connections through ribbons
+    h += 'svg.selectAll(`.chord-ribbon.source-${d.index}, .chord-ribbon.target-${d.index}`).each(function(ribbonData) {'
+    # Only consider visible (not filtered) ribbons
+    h += 'if (!d3.select(this).classed("filtered")) {'
+    # Only add the connected index (not this arc's index)
+    h += 'if (ribbonData.source.index === d.index) {'
+    h += 'connectedIndices.add(ribbonData.target.index);'
+    h += '} else {'
+    h += 'connectedIndices.add(ribbonData.source.index);'
+    h += '}'
+    h += '}'
+    h += '})'
+    h += '.classed("fade", false);'
+        
+    # Add the current arc index
+    h += 'connectedIndices.add(d.index);'
+        
+    # Unfade only directly connected arcs and current arc
+    h += 'connectedIndices.forEach(index => {'
+    h += 'svg.select(`#arc-${index}`).classed("fade", false);'
+    h += '});'
+    h += '})'  + "\n"
+    h += '.on("mouseleave", function() {'
+    # Reset all elements to normal state
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
+    h += '.classed("fade", false);'
+    h += '});' + "\n"
 
+  
     h += 'group.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
     h += '.attr("dy", "0.35em")'
@@ -112,20 +165,54 @@ def navChord(d, owndomain, omit):
 
     h += 'group.append("title")'
     h += '.text(d => `${names[d.index]}'
-    h += '${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →'
-    h += '${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);' + "\n"
+    h += 'outgoing: ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} '
+    h += 'incoming: ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)}`);' + "\n"
 
-    h += 'svg.append("g")'
+    h += 'const ribbons = svg.append("g")'
     h += '.attr("fill-opacity", 0.75)'
     h += '.selectAll()'
     h += '.data(chords)'
     h += '.join("path")'
     h += '.style("mix-blend-mode", "multiply")'
+    h += '.attr("class", d => `chord-ribbon source-${d.source.index} target-${d.target.index}`)'
     h += '.attr("fill", d => colors[d.target.index])'
-    h += '.attr("d", ribbon)'
-    h += '.append("title")'
-    h += '.text(d => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);'
-    h += '}' + "\n"
+    h += '.attr("d", ribbon);' + "\n"
+
+    h += 'ribbons.append("title")'
+    h += '.text(function(d) {'
+    # Get the names of source and target
+    h += 'let sourceName = sortedNames[d.source.index];'
+    h += 'let targetName = sortedNames[d.target.index];'
+      
+    # If the ribbon is filtered (hidden), don't show any tooltip
+    h += 'if (d3.select(this).classed("filtered")) { return ""; }'
+    
+    h += 'let lineTitle = `${d.source.value} ${sourceName} → ${targetName}`;'
+    h += 'if (d.source.index !== d.target.index) {'
+    h += 'lineTitle += `${d.target.value} ${targetName} → ${sourceName}`;'
+    h += '}'
+    h += 'return lineTitle;'
+    h += '});' + "\n"
+
+    h += 'ribbons.on("mouseenter", function(event, d) {'
+    # Fade all chords and arcs
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", true);'
+          
+    # Keep only this chord visible
+    h += 'd3.select(this).classed("fade", false);'
+          
+    # Keep only connected arcs visible
+    h += 'const sourceArc = svg.select(`#arc-${d.source.index}`);'
+    h += 'const targetArc = svg.select(`#arc-${d.target.index}`);'
+    h += 'sourceArc.classed("fade", false);'
+    h += 'targetArc.classed("fade", false);'
+    h += '}).on("mouseleave", function() {'
+    # Reset all elements to normal state
+    h += 'svg.selectAll(".chord-ribbon, .chord-arc").classed("fade", false);'
+    h += '});'  + "\n"
+    h += '}' + "\n"   # end of function renderChart
+
+
     h += 'renderChart(data, { backgroundColor: "#f8f8f8" });' + "\n"
     h += "</script>"
     h += '</div>' + "\n"
