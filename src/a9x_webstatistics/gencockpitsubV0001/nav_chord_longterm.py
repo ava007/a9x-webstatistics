@@ -165,9 +165,10 @@ def navChordLongterm(d, owndomain, omit):
     h += '.text(d => names[d.index]);'  + "\n"
 
     h += 'group.append("title")'
-    h += '.text(d => `${names[d.index]}'
-    h += ' ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←'
-    h += ' ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →`);' + "\n"
+    #h += '.text(d => `${names[d.index]}'
+    h += '.text(d => `'
+    h += ' incoming: ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)}'
+    h += ' outgoing: ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)}`);' + "\n"
 
     h += 'const ribbons = svg.append("g")'
     h += '.attr("fill-opacity", 0.75)'
@@ -182,8 +183,8 @@ def navChordLongterm(d, owndomain, omit):
     h += 'ribbons.append("title")'
     h += '.text(function(d) {'
     # Get the names of source and target
-    h += 'let sourceName = sortedNames[d.source.index];'
-    h += 'let targetName = sortedNames[d.target.index];'
+    h += 'let sourceName = names[d.source.index];'
+    h += 'let targetName = names[d.target.index];'
       
     # If the ribbon is filtered (hidden), don't show any tooltip
     h += 'if (d3.select(this).classed("filtered")) { return ""; }'
