@@ -155,8 +155,8 @@ def updV0001(
     # update quality: internal permanently redirects: 301
     if (len(i['referer']) > 1
             and i['status'] == '301'
-            and devCla in ('desktop','mobile','tablet'))
-            and owndomain in i['referer']:   # internal only
+            and devCla in ('desktop','mobile','tablet')
+            and owndomain in i['referer']):   # internal only
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
@@ -171,8 +171,8 @@ def updV0001(
     # update quality: internal not found    
     if (len(i['referer']) > 1 
             and i['status'] == '404'
-            and devCla in ('desktop','mobile','tablet'))
-            and owndomain in i['referer']:   # internal only
+            and devCla in ('desktop','mobile','tablet')
+            and owndomain in i['referer']):   # internal only
         if 'quality' not in d['v0001']['days'][dt]:
             d['v0001']['days'][dt]['quality'] = {}
         if i['request'] not in d['v0001']['days'][dt]['quality']:
