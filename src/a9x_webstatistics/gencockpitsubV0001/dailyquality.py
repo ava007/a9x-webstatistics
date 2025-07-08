@@ -20,7 +20,7 @@ def dailyQuality(d, owndomain, omit, verbosity):
                         tquality[sk]['prio'] = 'A'
                     elif sv['status'][0:1] == '4':
                         tquality[sk]['prio'] = 'B'
-                    else
+                    else:
                         tquality[sk]['prio'] = 'Z'
                     tquality[sk]['from'] = sv['from']
                     tquality[sk]['comment'] = sv['comment']
