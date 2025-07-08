@@ -3,6 +3,7 @@ from .dailyHits import dailyHitsVisitsChart
 from .dailytopdomains import dailyTopDomains
 from .dailytopcountries import dailyTopCountries
 from .dailytopurl import dailyTopUrl
+from .dailyquality import dailyQuality
 from .monthlyHits import monthlyHitsVisitsChart
 from .externalfriends import externalFriends
 from .genheader import genHeader
