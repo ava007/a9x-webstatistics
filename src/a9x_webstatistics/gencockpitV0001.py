@@ -79,6 +79,9 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         # cache, response_time:
         h += "\n" + '<div class="row pt-4">' + performance(d) + '</div>'
+
+        # quality:
+        h += "\n" + '<div class="row pt-4">' + dailyQuality(d, owndomain, omit, verbosity) + '</div>'
         
 
         # show long term not on first runs:
@@ -93,9 +96,6 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
 
             h += "\n" + '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
-
-        # quality:
-        h += "\n" + '<div class="row pt-4">' + dailyQuality(d, owndomain, omit, verbosity) + '</div>'
  
         h += "\n" + '<footer class="row bg-light py-4 mt-4">'
         h += '<div class="col"><h2>About</h2>'
