@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from operator import itemgetter
 
-def dailyQuality(d, owndomain, omit):
+def dailyQuality(d, owndomain, omit, verbosity):
     tquality = {}   # nested dictionary!
     daycount = 0
     h = ''
@@ -29,7 +29,6 @@ def dailyQuality(d, owndomain, omit):
                     tquality[sk]['count']  += 1
 
     if len(tquality) > 0:
-        h += "\n" + '<div class="row pt-4">' 
         h += '<div class="col-md-12 col-lg-12 col-xxl-12">'
         h += '<h3>Quality Improvements</h3>'
         h += '<p class="card-text">Quality improvements that should be implemented:</p>'
@@ -47,6 +46,6 @@ def dailyQuality(d, owndomain, omit):
             if i == 10:
                 break
         h += '</table>'
-        h += '</div></div>'   # end of card and col
+        h += '</div>'   # end of card and col
  
     return h
