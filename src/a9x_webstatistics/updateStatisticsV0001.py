@@ -23,6 +23,7 @@ def updV0001(
     owndomain = domain.replace('http://','')
     owndomain = owndomain.replace('https://','')
     owndomain = owndomain.replace('www.','')
+    owndomain = owndomain.lower()   # ensure that domain name is always in lowercase
         
     dt = i['ymd']
     req = urlparse(i['request'])
