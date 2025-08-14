@@ -34,10 +34,11 @@ def sumDayV0001(d, verbosity ):
         if 'nav' in dtmp['v0001']['days'][k]['user']:
             for e in dtmp['v0001']['days'][k]['user']['nav']:
                 found = False
+                e['s'].lower()   # ensure domains are always in lower
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
-                    if (e['s'] == f['s']
-                        and e['t'] == f['t']):
-                        f['c'] += e['c']
+                    if (e['s'] == f['s']        # source exists
+                        and e['t'] == f['t']):  # target exists
+                        f['c'] += e['c']        # increase count
                         found = True
                         break
                 if found == False:
