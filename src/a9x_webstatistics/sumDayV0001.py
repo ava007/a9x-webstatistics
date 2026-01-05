@@ -34,7 +34,7 @@ def sumDayV0001(d, verbosity ):
         if 'nav' in dtmp['v0001']['days'][k]['user']:
             for e in dtmp['v0001']['days'][k]['user']['nav']:
                 found = False
-                e['s'].lower()   # ensure domains are always in lower
+                e['s'] = e['s'].lower()   # ensure domains are always in lower
                 for f in d['v0001']['days'][lastDay]['user']['nav']:            
                     if (e['s'] == f['s']        # source exists
                         and e['t'] == f['t']):  # target exists
@@ -52,15 +52,10 @@ def sumDayV0001(d, verbosity ):
             if len(k) < 8:
                 continue
             if 'topUrl' in dtmp['v0001']['days'][k]['user']:
-                c = 0
-                for t, u in sorted(dtmp['v0001']['days'][k]['user']['topUrl'].items(), key=lambda x: x[1], reverse=True):
-                    c = c + 1
-                    if "99" in verbosity:
-                        print("sumDayV0001 TopUrl processing key " +  str(t) +  " for date " + str(k) + " with count " + str(u) )
-                    if c > 40:
-                         try:
-                           del d['v0001']['days'][k]['user']['topUrl'][t]
-                         except KeyError:
-                           print("sumDayV0001 key error: " +  str(t) +  " day:" + str(k) + " count: " + str(u) )
-                
+                top_urls = dtmp['v0001']['days'][k]['user']['topUrl']
+                sorted_urls = sorted(top_urls.items(), key=lambda x: x[1], reverse=True)
+                for c, (url, count) in enumerate(sorted_urls):
+                if c >= 40:
+                    del d['v0001']['days'][k]['user']['topUrl'][url]
+                                
     return d
