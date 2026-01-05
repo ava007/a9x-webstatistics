@@ -55,7 +55,7 @@ def sumDayV0001(d, verbosity ):
                 top_urls = dtmp['v0001']['days'][k]['user']['topUrl']
                 sorted_urls = sorted(top_urls.items(), key=lambda x: x[1], reverse=True)
                 for c, (url, count) in enumerate(sorted_urls):
-                    if c >= 40:
+                    if c >= 40 and url in d['v0001']['days'][k]['user']['topUrl']:
                         del d['v0001']['days'][k]['user']['topUrl'][url]
                                 
     return d
