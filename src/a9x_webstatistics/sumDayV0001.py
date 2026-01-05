@@ -55,6 +55,8 @@ def sumDayV0001(d, verbosity ):
                 c = 0
                 for t, u in sorted(dtmp['v0001']['days'][k]['user']['topUrl'].items(), key=lambda x: x[1], reverse=True):
                     c = c + 1
+                    if "99" in verbosity:
+                        print("sumDayV0001 TopUrl processing key " +  str(t) +  " for date " + str(k) + " with count " + str(u) )
                     if c > 40:
                          try:
                            del d['v0001']['days'][k]['user']['topUrl'][t]
