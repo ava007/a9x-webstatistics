@@ -182,9 +182,12 @@ def navChord(d, owndomain, omit):
     h += '.text(d => names[d.index])'
     h += '.on("click", function(event, d) {'
     h += 'const url = names[d.index];'
+    h += 'if (url && !url.startsWith('/')) {'
+    h += '    if (!url.startsWith('http://') && !url.startsWith('https://')) {'
+    h += 'url = 'https://' + url;'
+    h += '} }'
     h += 'if (url) window.open(url, "_blank");'
-    h += '});' + "\n"
-    #h += '.text(d => names[d.index]);'  + "\n"
+    h += '});' + "\n\n"
 
     h += 'group.append("title")'
     h += '.text(d => `${names[d.index]}'
@@ -199,7 +202,7 @@ def navChord(d, owndomain, omit):
     h += '.style("mix-blend-mode", "multiply")'
     h += '.attr("class", d => `chord-ribbon source-${d.source.index} target-${d.target.index}`)'
     h += '.attr("fill", d => colors[d.target.index])'
-    h += '.attr("d", ribbon);' + "\n"
+    h += '.attr("d", ribbon);' + "\n\n"
 
     h += 'ribbons.append("title")'
     h += '.text(function(d) {'
