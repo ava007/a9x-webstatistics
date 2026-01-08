@@ -177,7 +177,7 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("fill", "black")'
     h += '.text(d => names[d.index])'
     h += '.on("click", function(event, d) {'
-    h += 'const url = names[d.index];'
+    h += 'let url = names[d.index];'
     h += 'if (url && !url.startsWith("/")) {'
     h += '    if (!url.startsWith("http://") && !url.startsWith("https://")) {'
     h += 'url = "https://" + url;'
@@ -186,7 +186,6 @@ def navChordLongterm(d, owndomain, omit):
     h += '});' + "\n\n"
 
     h += 'group.append("title")'
-    #h += '.text(d => `${names[d.index]}'
     h += '.text(d => `'
     h += ' incoming: ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)}'
     h += ' outgoing: ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)}`);' + "\n"
