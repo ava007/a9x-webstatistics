@@ -159,16 +159,7 @@ def navChord(d, owndomain, omit):
     h += '.classed("fade", false);'
     h += '});' + "\n"
 
-  
-    #h += 'group.append("text")'
-    #h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
-    #h += '.attr("dy", "0.35em")'
-    #h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
-    #h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""} `)'
-    #h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
-    #h += '.attr("fill", "black")'
-    #h += '.text(d => names[d.index]);'  + "\n"
-
+    # append links to ribbon
     h += 'group.append("a")'
     h += '.attr("xlink:href", d => names[d.index] ) '
     h += '.attr("target", "_blank") '
