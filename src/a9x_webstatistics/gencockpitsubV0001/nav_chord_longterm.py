@@ -155,14 +155,35 @@ def navChordLongterm(d, owndomain, omit):
     h += '.classed("fade", false);'
     h += '});' + "\n"
 
-    h += 'group.append("text")'
+    #h += 'group.append("text")'
+    #h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
+    #h += '.attr("dy", "0.35em")'
+    #h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
+    #h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""} `)'
+    #h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
+    #h += '.attr("fill", "black")'
+    #h += '.text(d => names[d.index]);'  + "\n"
+
+    # append links to ribbon
+    h += 'group.append("a")'
+    h += '.attr("xlink:href", d => names[d.index] ) '
+    h += '.attr("target", "_blank") '
+    h += '.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
     h += '.attr("dy", "0.35em")'
     h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
     h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""} `)'
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
     h += '.attr("fill", "black")'
-    h += '.text(d => names[d.index]);'  + "\n"
+    h += '.text(d => names[d.index])'
+    h += '.on("click", function(event, d) {'
+    h += 'const url = names[d.index];'
+    h += 'if (url && !url.startsWith('/')) {'
+    h += '    if (!url.startsWith('http://') && !url.startsWith('https://')) {'
+    h += 'url = 'https://' + url;'
+    h += '} }'
+    h += 'if (url) window.open(url, "_blank");'
+    h += '});' + "\n\n"
 
     h += 'group.append("title")'
     #h += '.text(d => `${names[d.index]}'
