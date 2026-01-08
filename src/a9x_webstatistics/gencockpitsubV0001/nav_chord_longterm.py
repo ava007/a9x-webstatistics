@@ -178,9 +178,9 @@ def navChordLongterm(d, owndomain, omit):
     h += '.text(d => names[d.index])'
     h += '.on("click", function(event, d) {'
     h += 'const url = names[d.index];'
-    h += 'if (url && !url.startsWith('/')) {'
-    h += '    if (!url.startsWith('http://') && !url.startsWith('https://')) {'
-    h += 'url = 'https://' + url;'
+    h += 'if (url && !url.startsWith("/")) {'
+    h += '    if (!url.startsWith("http://") && !url.startsWith("https://")) {'
+    h += 'url = "https://" + url;'
     h += '} }'
     h += 'if (url) window.open(url, "_blank");'
     h += '});' + "\n\n"
