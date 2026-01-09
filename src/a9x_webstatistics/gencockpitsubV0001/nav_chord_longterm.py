@@ -5,7 +5,7 @@ from .validip import is_valid_ip
 # navigation chart in chord-dependency diagram:
 # https://observablehq.com/@d3/chord-dependency-diagram/2
 
-def navChordLongterm(d, owndomain, omit):
+def navChordLongterm(d, domain, owndomain, omit):
     data = []
 
     days = 0
@@ -153,20 +153,16 @@ def navChordLongterm(d, owndomain, omit):
     # Reset all elements to normal state
     h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
     h += '.classed("fade", false);'
-    h += '});' + "\n"
-
-    #h += 'group.append("text")'
-    #h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
-    #h += '.attr("dy", "0.35em")'
-    #h += '.attr("transform", d => `rotate(${(d.angle * 180 / Math.PI - 90)})'
-    #h += 'translate(${outerRadius + 5}) ${d.angle > Math.PI ? "rotate(180)" : ""} `)'
-    #h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
-    #h += '.attr("fill", "black")'
-    #h += '.text(d => names[d.index]);'  + "\n"
+    h += '});' + "\n\n"
 
     # append links to ribbon
     h += 'group.append("a")'
-    h += '.attr("xlink:href", d => names[d.index] ) '
+    h += '.attr("xlink:href", d => { '
+    h += 'const name = names[d.index];'
+    h += 'if (name.startsWith("/")) return "' + domain + '" + name;'
+    h += 'if (name.startsWith("http://") || name.startsWith("https://")) return name;'
+    h += 'return `https://${name}`;'
+    h += '})'
     h += '.attr("target", "_blank") '
     h += '.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
@@ -176,17 +172,10 @@ def navChordLongterm(d, owndomain, omit):
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
     h += '.attr("fill", "black")'
     h += '.text(d => names[d.index])'
-    h += '.on("click", function(event, d) {'
-    h += 'let url = names[d.index];'
-    h += 'if (url && !url.startsWith("/")) {'
-    h += '    if (!url.startsWith("http://") && !url.startsWith("https://")) {'
-    h += 'url = "https://" + url;'
-    h += '} }'
-    h += 'if (url) window.open(url, "_blank");'
-    h += '});' + "\n\n"
+    h += ';' + "\n\n"
 
     h += 'group.append("title")'
-    h += '.text(d => `'
+    h += '.text(d => `${names[d.index]} '
     h += ' incoming: ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)}'
     h += ' outgoing: ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)}`);' + "\n"
 
