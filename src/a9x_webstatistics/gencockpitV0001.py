@@ -95,7 +95,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
             h += "\n" + '<div class="row pt-4">' + monthlyTopUrl(d, owndomain, omit, verbosity) + "\n"
             h += monthlyTopCountries(d, owndomain, omit) + '</div>' + "\n"
 
-            h += "\n" + '<div class="row pt-4">' + navChordLongterm(d, owndomain, omit) + '</div>' + "\n"
+            h += "\n" + '<div class="row pt-4">' + navChordLongterm(d, domain, owndomain, omit) + '</div>' + "\n"
  
         h += "\n" + '<footer class="row bg-light py-4 mt-4">'
         h += '<div class="col"><h2>About</h2>'
