@@ -5,7 +5,7 @@ import ipaddress
 # navigation chart in chord-dependency diagram:
 # https://observablehq.com/@d3/chord-dependency-diagram/2
 
-def navChord(d, owndomain, omit):
+def navChord(d, domain, owndomain, omit):
     data = []
 
     days = 0
@@ -163,7 +163,7 @@ def navChord(d, owndomain, omit):
     h += 'group.append("a")'
     h += '.attr("xlink:href", d => { '
     h += 'const name = names[d.index];'
-    h += 'if (name.startsWith("/")) return name;'
+    h += 'if (name.startsWith("/")) return "' + domain + '" + name;'
     h += 'if (name.startsWith("http://") || name.startsWith("https://")) return name;'
     h += 'return `https://${name}`;'
     h += '})'
