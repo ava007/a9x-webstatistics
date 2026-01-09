@@ -107,7 +107,9 @@ def updV0001(
                 rdomain = rdomain.removesuffix(':80')    # to avoid duplicates: with or without ports
                 # omit subdomains:
                 if (rdomain.count('.') > 1 
-                    and is_valid_ip(rdomain) == False):
+                    and is_valid_ip(rdomain) == False
+                    and '.co.uk' not in rdomain
+                    and '.com.au' not in rdomain):
                     rdomain_ar = rdomain.split('.')
                     rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
                 tmpnav['s'] = rdomain.lower()   # source always in lowercase to avoid duplicates
