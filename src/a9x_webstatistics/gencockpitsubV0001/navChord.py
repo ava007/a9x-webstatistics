@@ -181,7 +181,7 @@ def navChord(d, owndomain, omit):
     h += '});' + "\n\n"
 
     h += 'group.append("title")'
-    h += '.text(d => `${names[d.index]}'
+    h += '.text(d => `${names[d.index]} '
     h += 'outgoing: ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} '
     h += 'incoming: ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)}`);' + "\n"
 
