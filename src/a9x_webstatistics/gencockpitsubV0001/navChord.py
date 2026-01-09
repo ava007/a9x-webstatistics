@@ -157,11 +157,16 @@ def navChord(d, owndomain, omit):
     # Reset all elements to normal state
     h += 'svg.selectAll(".chord-ribbon, .chord-arc")'
     h += '.classed("fade", false);'
-    h += '});' + "\n"
+    h += '});' + "\n\n"
 
     # append links to ribbon
     h += 'group.append("a")'
-    h += '.attr("xlink:href", d => names[d.index] ) '
+    h += '.attr("xlink:href", d => { '
+    h += 'const name = names[d.index];'
+    h += 'if (name.startsWith("/")) return name;'
+    h += 'if (name.startsWith("http://") || name.startsWith("https://")) return name;'
+    h += 'return `https://${name}`;'
+    h += '})'
     h += '.attr("target", "_blank") '
     h += '.append("text")'
     h += '.each(d => (d.angle = (d.startAngle + d.endAngle) / 2))'
@@ -171,14 +176,7 @@ def navChord(d, owndomain, omit):
     h += '.attr("text-anchor", d => d.angle > Math.PI ? "end" : null)'
     h += '.attr("fill", "black")'
     h += '.text(d => names[d.index])'
-    h += '.on("click", function(event, d) {'
-    h += 'let url = names[d.index];'
-    h += 'if (url && !url.startsWith("/")) {'
-    h += '    if (!url.startsWith("http://") && !url.startsWith("https://")) {'
-    h += 'url = "https://" + url;'
-    h += '} }'
-    h += 'if (url) window.open(url, "_blank");'
-    h += '});' + "\n\n"
+    h += ';' + "\n\n"
 
     h += 'group.append("title")'
     h += '.text(d => `${names[d.index]} '
