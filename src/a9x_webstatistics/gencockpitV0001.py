@@ -29,7 +29,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         h += "\n" + '<div class="row pt-4">' + dailyHitsVisitsChart(d, owndomain, omit) + '</div>' + "\n"
 
-        h += "\n" + '<div class="row pt-4">' + navChord(d, owndomain, omit) + '</div>' + "\n"
+        h += "\n" + '<div class="row pt-4">' + navChord(d, domain, owndomain, omit) + '</div>' + "\n"
 
         # lastDate is the youngest date in the json
         # firstDate is the oldest date in the json
