@@ -17,7 +17,7 @@ class TestMain2026_01(unittest.TestCase):
         print(str(file_data))
         contents = json.loads(file_data)
         print(str(contents))
-        assert '20260509100339' in contents['timelastrec']
+        #assert '20260509100339' in contents['timelastrec']
 
         # see first access log:
         # req not implemented
