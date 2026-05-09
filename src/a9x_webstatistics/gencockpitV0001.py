@@ -107,7 +107,7 @@ def runGenCockpitV0001(infile, outfile, verbosity, domain, omit, efeature):
 
         h += '<div class="col"><h2>Sponsored by</h2>'
         h += '<ul class="nav flex-column">'
-        h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com" class="nav-link p-0 text-body-secondary">LogikFabrik.com - Knowledge Management</a></li>'
+        h += '<li class="nav-item mb-2"><a href="https://www.41max.com/c2605/" class="nav-link p-0 text-body-secondary">41max.com - Digital Art</a></li>'
         h += '<li class="nav-item mb-2"><a href="https://www.logikfabrik.com/aboutwebstats.html" class="nav-link p-0 text-body-secondary">Live Examples</a></li>'
         h += '</ul></div>' + "\n"
           
