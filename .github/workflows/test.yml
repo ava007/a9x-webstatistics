@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.13']
+        python-version: ['3.10', '3.14']
 
     steps:
       - uses: actions/checkout@v4
@@ -56,6 +56,7 @@ jobs:
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_2023_00.log -o nginx_access2023_00.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_2024_00.log -o nginx_access2024_00.log
           curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_2025_00.log -o nginx_access2025_00.log
+          curl https://raw.githubusercontent.com/ava007/a9x-webstatistics/main/tests/test_access_2026_01.log -o nginx_access2026_01.log
           curl -L -o GeoIP2-Country.mmdb https://github.com/maxmind/MaxMind-DB/raw/main/test-data/GeoIP2-Country-Test.mmdb 
           tox -e py
         # .github/workflows/ci-cd.yml
