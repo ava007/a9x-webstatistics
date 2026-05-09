@@ -222,7 +222,8 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     # Position the legend in the upper left corner:
     h += 'const legend = svg.append("g")'
     h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
-    
+
+    # legend for stacked bars:
     h += 'legend.selectAll(".legend-item")'
     h += '.data(categories)'
     h += '.enter().append("g")'
@@ -239,6 +240,17 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("y", 9)'
     h += '.attr("dy", "0.35em")'
     h += '.text(d);'
+    h += '});'  + "\n" 
+
+    # legend for lines:
+    h += 'const lineLegend = ['
+    h += '{ label: "Visits", color: "red" },'
+    h += '{ label: "Robots", color: "lightgrey" }'
+    h += '];'  + "\n" 
+    h += 'legend.selectAll(".legend-item-line").data(lineLegend).enter().append("g").attr("class", "legend-item-line").attr("transform", (d, i) => `translate(${i * 100 + categories.length * 100},0 )`).each(function(d, i) {'
+    h += 'const item = d3.select(this);'
+    h += 'item.append("line").attr("x1", 0).attr("y1", 9).attr("x2", 18).attr("y2", 9).attr("stroke", d.color).attr("stroke-width", 2);'
+    h += 'item.append("text").attr("x", 24).attr("y", 9).attr("dy", "0.35em").text(d.label);'
     h += '});'  + "\n" 
 
     h += 'function addPoints(data, color, label) {'
