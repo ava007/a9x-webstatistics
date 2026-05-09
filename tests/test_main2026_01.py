@@ -17,12 +17,18 @@ class TestMain2026_01(unittest.TestCase):
         print(str(file_data))
         contents = json.loads(file_data)
         print(str(contents))
-        #assert '20260509100339' in contents['timelastrec']
+        assert '20260509100339' in contents['timelastrec']
 
         # see first access log:
-        # req not implemented
-        print(str(contents['v0001']['days']['2026']['user']['nav']))
-        #assert any(d['s'] == 'co.uk' for d in contents['v0001']['days']['2026']['user']['nav']), "No dictionary has 's' equal to 'bing'"
+        # date moves...
+        if '2026' in contents['v0001']['days']:
+          vdt = '2026'
+        elif '202605' in contents['v0001']['days']:
+          vdt = '202605'
+        else:
+          vdt = '20260509'
+        print(str(contents['v0001']['days'][vdt]['user']['nav']))
+        assert any(d['s'] == 'co.uk' for d in contents['v0001']['days'][vdt]['user']['nav']), "No dictionary has 's' equal to 'co.uk'"
       
 
 if __name__ == '__main__':
