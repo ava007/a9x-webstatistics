@@ -28,7 +28,7 @@ class TestMain2026_01(unittest.TestCase):
         else:
           vdt = '20260509'
         print(str(contents['v0001']['days'][vdt]['user']['nav']))
-        assert any(d['s'] == 'co.uk' for d in contents['v0001']['days'][vdt]['user']['nav']), "No dictionary has 's' equal to 'co.uk'"
+        assert any(d['s'] == 'bbc.co.uk' for d in contents['v0001']['days'][vdt]['user']['nav']), "No dictionary has 's' equal to 'co.uk'"
       
 
 if __name__ == '__main__':
