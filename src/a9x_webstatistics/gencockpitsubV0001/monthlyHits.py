@@ -103,7 +103,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     # Stack generator
     h += 'const stack = d3.stack().keys(categories);'  + "\n"
     
-    # // Manually generate stack series with per-bar sorting
+    # Manually generate stack series with per-bar sorting
     h += 'const series0 = stack(transformedData);'  + "\n"
     h += 'const series = categories.map(c => ({ key: c, values: [] }));'
     h += 'for (let i = 0; i < transformedData.length; i++) {'
@@ -237,6 +237,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     # Position the legend in the upper left corner:
     h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
 
+    # Legend for bars:
     h += 'legend.selectAll(".legend-item")'
     h += '.data(categories)'
     h += '.enter().append("g")'
@@ -254,10 +255,18 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     h += '.attr("dy", "0.35em")'
     h += '.text(d);'
     h += '});'  + "\n" 
-    
-    #h += 'console.log("monthlyHits->Transformed Data:", transformedData);'
-    #h += 'console.log("monthlyHits->Stacked Data:", stack(transformedData));'
 
+    # Legend for lines:
+    h += 'const lineLegend = ['
+    h += '{ label: "User Visits", color: "red" },'
+    h += '{ label: "Robots Hits", color: "lightgrey" }'
+    h += '];'  + "\n" 
+    h += 'legend.selectAll(".legend-item-line").data(lineLegend).enter().append("g").attr("class", "legend-item-line").attr("transform", (d, i) => `translate(${i * 100 + categories.length * 100},0 )`).each(function(d, i) {'
+    h += 'const item = d3.select(this);'
+    h += 'item.append("line").attr("x1", 0).attr("y1", 9).attr("x2", 18).attr("y2", 9).attr("stroke", d.color).attr("stroke-width", 2);'
+    h += 'item.append("text").attr("x", 24).attr("y", 9).attr("dy", "0.35em").text(d.label);'
+    h += '});'  + "\n" 
+        
     h += 'function addPoints(data, color, label) {'
     h += 'svg.selectAll(`.point-${color}`)'
     h += '.data(data).enter()'
@@ -299,7 +308,5 @@ def addHitData(arr, kdate, ktype ,kcount):
         if e['d'] == kdate and e['t'] == ktype:
             e['c'] += kcount
             return
-    arr.append({'d': kdate, 't': ktype, 'c': kcount})
-
-    
+    arr.append({'d': kdate, 't': ktype, 'c': kcount})   
     
