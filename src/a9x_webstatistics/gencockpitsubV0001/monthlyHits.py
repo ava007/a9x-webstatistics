@@ -270,7 +270,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     h += '.append("svg")'
     h += '.attr("width", width)'
     h += '.attr("height", 40)'
-    h += '.attr("viewBox", [0, 0, width, height])'
+    h += '.attr("viewBox", [0, 0, width, 40])'
     h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
 
     # Add legend and position the legend in the upper left corner:
