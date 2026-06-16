@@ -61,6 +61,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '<h3>Daily User Hits and Visits</h3>'
     h += "<p>User hits and visits on " + owndomain + " from "
     h += "<script>document.write(DT2Locale('" + str(startPeriod) + "'));</script> to <script>document.write(DT2Locale('" + str(endPeriod) + "'));</script>:</p>"
+    h += '<div id="dhvchart-legend"></div>' + "\n"
     h += '<div id="dhvchart-container"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
@@ -219,9 +220,15 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '})'
     h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden").style("opacity", 0); });' + "\n"
 
-    # Position the legend in the upper left corner:
+    # append legend in separate svg and position the legend in the upper left corner:
+    h += 'const svgl = d3.select("#dhvchart-legend")'
+    h += '.append("svg")'
+    h += '.attr("width", width)'
+    h += '.attr("height", 40)'
+    h += '.attr("viewBox", [0, 0, width, 40])'
+    h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
     h += 'const legend = svg.append("g")'
-    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
+    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);' + "\n"
 
     # legend for stacked bars:
     h += 'legend.selectAll(".legend-item")'
