@@ -73,6 +73,7 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     
     h += "<p>User hits and visits on " + owndomain + " from <script>document.write(DT2Locale('" + startPeriod + "01'));</script> to "
     h += "<script>document.write(DT2Locale('" + endPeriod + "'+ daysInMonth('" + endPeriod[0:3] + "','" + endPeriod[4:5] + "')));</script>:</p>"
+    h += '<div id="mhvchart-legend"></div>' + "\n"
     h += '<div id="mhvchart"></div>' + "\n"
     h += '<script type="module">' + "\n"
     h += 'const sdata = ' + str(sdata) + ';' + "\n"
@@ -231,41 +232,6 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     h += '.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);'
     h += '})'
     h += '.on("mouseleave", () => { tooltip.style("visibility", "hidden").style("opacity", 0); });' + "\n"
-
-    # Add legend
-    h += 'const legend = svg.append("g")'
-    # Position the legend in the upper left corner:
-    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
-
-    # Legend for bars:
-    h += 'legend.selectAll(".legend-item")'
-    h += '.data(categories)'
-    h += '.enter().append("g")'
-    h += '.attr("class", "legend-item")'
-    h += '.attr("transform", (d, i) => `translate(${i * 100}, 0)`)'
-    h += '.each(function(d, i) {'
-    h += 'const item = d3.select(this);'
-    h += 'item.append("rect")'
-    h += '.attr("width", 18)'
-    h += '.attr("height", 18)'
-    h += '.attr("fill", color(d));'
-    h += 'item.append("text")'
-    h += '.attr("x", 24)'
-    h += '.attr("y", 9)'
-    h += '.attr("dy", "0.35em")'
-    h += '.text(d);'
-    h += '});'  + "\n" 
-
-    # Legend for lines:
-    h += 'const lineLegend = ['
-    h += '{ label: "User Visits", color: "red" },'
-    h += '{ label: "Robots Hits", color: "lightgrey" }'
-    h += '];'  + "\n" 
-    h += 'legend.selectAll(".legend-item-line").data(lineLegend).enter().append("g").attr("class", "legend-item-line").attr("transform", (d, i) => `translate(${i * 100 + categories.length * 100},0 )`).each(function(d, i) {'
-    h += 'const item = d3.select(this);'
-    h += 'item.append("line").attr("x1", 0).attr("y1", 9).attr("x2", 18).attr("y2", 9).attr("stroke", d.color).attr("stroke-width", 2);'
-    h += 'item.append("text").attr("x", 24).attr("y", 9).attr("dy", "0.35em").text(d.label);'
-    h += '});'  + "\n" 
         
     h += 'function addPoints(data, color, label) {'
     h += 'svg.selectAll(`.point-${color}`)'
@@ -298,6 +264,48 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
 
     h += 'addPoints(vdata, "red", "Visits");'  + "\n"
     h += 'addPoints(rdata, "lightgrey", "Requests");'  + "\n"
+
+    # chart legend in separate svg:
+    h += 'const svgl = d3.select("#mhvchart-legend")'
+    h += '.append("svg")'
+    h += '.attr("width", width)'
+    h += '.attr("height", 40px)'
+    h += '.attr("viewBox", [0, 0, width, height])'
+    h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
+
+    # Add legend and position the legend in the upper left corner:
+    h += 'const legend = svgl.append("g")'
+    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
+
+    # Legend for bars:
+    h += 'legend.selectAll(".legend-item")'
+    h += '.data(categories)'
+    h += '.enter().append("g")'
+    h += '.attr("class", "legend-item")'
+    h += '.attr("transform", (d, i) => `translate(${i * 100}, 0)`)'
+    h += '.each(function(d, i) {'
+    h += 'const item = d3.select(this);'
+    h += 'item.append("rect")'
+    h += '.attr("width", 18)'
+    h += '.attr("height", 18)'
+    h += '.attr("fill", color(d));'
+    h += 'item.append("text")'
+    h += '.attr("x", 24)'
+    h += '.attr("y", 9)'
+    h += '.attr("dy", "0.35em")'
+    h += '.text(d);'
+    h += '});'  + "\n" 
+
+    # Legend for lines:
+    h += 'const lineLegend = ['
+    h += '{ label: "User Visits", color: "red" },'
+    h += '{ label: "Robots Hits", color: "lightgrey" }'
+    h += '];'  + "\n" 
+    h += 'legend.selectAll(".legend-item-line").data(lineLegend).enter().append("g").attr("class", "legend-item-line").attr("transform", (d, i) => `translate(${i * 100 + categories.length * 100},0 )`).each(function(d, i) {'
+    h += 'const item = d3.select(this);'
+    h += 'item.append("line").attr("x1", 0).attr("y1", 9).attr("x2", 18).attr("y2", 9).attr("stroke", d.color).attr("stroke-width", 2);'
+    h += 'item.append("text").attr("x", 24).attr("y", 9).attr("dy", "0.35em").text(d.label);'
+    h += '});'  + "\n" 
 
     h += "</script>"
     h += '</div>' + "\n"
