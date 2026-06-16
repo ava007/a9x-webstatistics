@@ -93,7 +93,6 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += 'const stack = d3.stack().keys(categories);'
     
     # Manually generate stack series with per-bar sorting
-    #h += 'const series0 = stack(transformedData);'  + "\n"
     h += 'const series = categories.map(c => ({ key: c, values: [] }));'
     h += 'for (let i = 0; i < transformedData.length; i++) {'
     h += 'const entry = transformedData[i];'
@@ -227,7 +226,7 @@ def dailyHitsVisitsChart(d, owndomain, omit):
     h += '.attr("height", 40)'
     h += '.attr("viewBox", [0, 0, width, 40])'
     h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
-    h += 'const legend = svg.append("g")'
+    h += 'const legend = svgl.append("g")'
     h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);' + "\n"
 
     # legend for stacked bars:
