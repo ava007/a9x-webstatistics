@@ -269,13 +269,13 @@ def monthlyHitsVisitsChart(d, owndomain, omit, verbosity):
     h += 'const svgl = d3.select("#mhvchart-legend")'
     h += '.append("svg")'
     h += '.attr("width", width)'
-    h += '.attr("height", 40px)'
+    h += '.attr("height", 40)'
     h += '.attr("viewBox", [0, 0, width, height])'
     h += '.attr("style", "font: 10px sans-serif;");'  + "\n"
 
     # Add legend and position the legend in the upper left corner:
     h += 'const legend = svgl.append("g")'
-    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);'
+    h += '.attr("transform", `translate(${margins.left + 6}, ${margins.top + 6})`);' + "\n"
 
     # Legend for bars:
     h += 'legend.selectAll(".legend-item")'
