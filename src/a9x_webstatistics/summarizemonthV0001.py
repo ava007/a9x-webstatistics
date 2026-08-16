@@ -175,6 +175,19 @@ def sumMonthV0001(d, statfile):
                                 d['v0001']['days'][recMonth]['performance']['response_time'][nk] += nv
                             else:
                                 d['v0001']['days'][recMonth]['performance']['response_time'][nk] = nv
+                                
+                    if 'topSlow' in dtmp['v0001']['days'][x]['performance']:
+                        d['v0001']['days'][recMonth]['performance']['topSlow'] = {}
+                        for nk, nv in sorted(dtmp['v0001']['days'][x]['performance']['topSlow'].items(), key=itemgetter(1), reverse=True):
+                            if nk not in d['v0001']['days'][recMonth]['performance']['topSlow']:
+                                d['v0001']['days'][recMonth]['performance']['topSlow'][nk] = nv
+
+                    if 'topFast' in dtmp['v0001']['days'][x]['performance']:
+                        d['v0001']['days'][recMonth]['performance']['topFast'] = {}
+                        for nk, nv in sorted(dtmp['v0001']['days'][x]['performance']['topFast'].items(), key=itemgetter(1), reverse=True):
+                            if nk not in d['v0001']['days'][recMonth]['performance']['topFast']:
+                                d['v0001']['days'][recMonth]['performance']['topFast'][nk] = nv
+
                 
                 del d['v0001']['days'][x]
 
