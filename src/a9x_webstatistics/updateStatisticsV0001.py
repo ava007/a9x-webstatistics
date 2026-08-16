@@ -204,7 +204,8 @@ def updV0001(
 
     # response time:
     if ('response_time' in i 
-            and len(i['response_time']) > 0):
+            and len(i['response_time']) > 0
+            and i['status'] == '200'):
         tmp_rtime = float(i['response_time'])
         if tmp_rtime > 0:
             if 'performance' not in d['v0001']['days'][dt]:
