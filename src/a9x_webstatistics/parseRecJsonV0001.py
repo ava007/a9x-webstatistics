@@ -68,7 +68,7 @@ def parseRecJsonV0001(rec, georeader):
         ret['request_time'] = r['request_time']
 
     if 'upstream_response_time' in r and len(r['upstream_response_time']) > 0:
-        ret['response_time'] = r['upstream_respone_time']
+        ret['response_time'] = r['upstream_response_time']
     if 'rt' in r and len(r['rt']) > 0:
         ret['response_time'] = r['rt']
     
