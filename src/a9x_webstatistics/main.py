@@ -6,8 +6,6 @@ import sys
 from datetime import datetime
 from .updatestatistics import upd
 from .updateStatisticsV0001 import updV0001
-#from .summarizemonth import summonth
-#from .summarizemonthV0001 import sumMonthV0001
 from .migV0001 import migv0001sub0001
 from .cleanupV0001 import cleanupQualityV0001
 from .parseRecJsonV0001 import parseRecJsonV0001
