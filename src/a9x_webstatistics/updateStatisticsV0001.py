@@ -291,13 +291,15 @@ def detectDeviceClass(ua):
   if (ua.lower().find('python') > 0):        # python-requests
      return 'bots'
   if (ua.lower().find('mediapartner') > 0):
-     return 'others'
+     return 'bots'
   if (ua.lower().find('feedly') > 0):        # Feedly
      return 'bots'
   if (ua.lower().find('validator') > 0):     # validator
      return 'bots'
+  if (ua.lower().find('watch') > 0):
+     return 'bots'
   if (ua.lower().find('curl') > 0):
-     return 'others'
+     return 'bots'
   if (ua.lower().find('ipad') > 0):
      return 'tablet'
   if (ua.lower().find('mobile') > 0):
