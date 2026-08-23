@@ -279,7 +279,7 @@ def updV0001(
 
 def detectDeviceClass(ua):
   if ua is None:
-     return 'others'
+     return 'bots'
   if (ua.lower().find('bot') > 0):
      return 'bots'
   if (ua.lower().find('externalhit') > 0):    # facebook
@@ -287,7 +287,7 @@ def detectDeviceClass(ua):
   if (ua.lower().find('spider') > 0):        # bytedance
      return 'bots'
   if (ua.lower().find('crawler') > 0):
-     return 'others'
+     return 'bots'
   if (ua.lower().find('python') > 0):        # python-requests
      return 'bots'
   if (ua.lower().find('mediapartner') > 0):
