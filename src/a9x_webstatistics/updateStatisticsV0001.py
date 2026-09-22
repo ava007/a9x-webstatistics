@@ -108,8 +108,8 @@ def updV0001(
                 # omit subdomains:
                 if (rdomain.count('.') > 1 
                     and is_valid_ip(rdomain) == False
-                    and '.co.uk' not in rdomain
-                    and '.com.au' not in rdomain):
+                    and '.co.' not in rdomain   # .co.in   .co.uk
+                    and '.com.' not in rdomain):   # .com.au 
                     rdomain_ar = rdomain.split('.')
                     rdomain = rdomain_ar[-2] + '.' + rdomain_ar[-1]
                 tmpnav['s'] = rdomain.lower()   # source always in lowercase to avoid duplicates
@@ -117,7 +117,6 @@ def updV0001(
             
             # internal nav
             else:
-                #tmpnav['p'] = 'i'  # type: e=external source, i=internal source
                 tmpnav['s'] = req.path   # Source
 
             if (tmpnav['s'] is not None 
